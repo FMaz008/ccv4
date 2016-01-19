@@ -1,0 +1,128 @@
+<script>
+imgpreviewgo = function(){
+		frames['imgpreview'].location.href = "<?=SITE_VIRTUAL_PATH;?>tpl/_common/items/" + document.getElementById("db_img").value;
+}
+
+var nbr_action_ajout=0;
+AjouterAction = function(){
+	var myAjax = new Ajax.Request(
+		'?mj=Item_AddActionpage&popup=1', 
+		{
+			method: 'post', 
+			parameters: 'divid='+ (nbr_action_ajout+1) + '&db_id=<?=$ITEM['db_id'];?>',
+			onComplete: AjouterAction_completed
+		});
+}
+
+AjouterAction_completed = function(originalRequest){
+	var rval= originalRequest.responseText;
+	$('add_action_'+nbr_action_ajout).innerHTML = rval;
+	nbr_action_ajout++; //Augmenter le total en cas de plusieurs ajouts
+	$('total_action_add').value = nbr_action_ajout;
+	
+}
+</script>
+
+<form method="post" action="?mj=Item_Clef<?=$SUBMITNAME;?>">
+	
+	<table class="center">
+	<tr>
+		<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> une clé</td>
+	</tr>
+	
+	<? if( $SHOWID == true ){ ?>
+	<tr>
+		<td class="name">ID l'item</td>
+		<td class="value"><input type="hidden" name="db_id" value="<?=$ITEM['db_id'];?>" /><?=$ITEM['db_id'];?></td>
+	</tr>
+	<? } ?>
+	
+	<tr>
+		<td class="name">Nom de l'item</td>
+		<td class="value"><input type="text" class="text" name="db_nom" value="<?=$ITEM['db_nom'];?>" /></td>
+	</tr>
+	
+	<tr>
+		<td class="name">Description</td>
+		<td class="value"><textarea name="db_desc"><?=$ITEM['db_desc'];?></textarea></td>
+	</tr>
+	
+	<tr>
+		<td class="name">Valeur</td>
+		<td class="value"><input type="text" class="text" name="db_valeur" value="<?=$ITEM['db_valeur'];?>" size="6" /><?=GAME_DEVISE;?></td>
+	</tr>
+	
+	<tr>
+		<td class="name">
+			Image<br />
+			<iframe src="<?=SITE_VIRTUAL_PATH;?>tpl/_common/items/<?=$ITEM['db_img'];?>" name="imgpreview" style="width:80px;height:120px;" scrolling="no"></iframe>
+		</td>
+		<td class="value">
+			<select name="db_img" id="db_img" onchange="imgpreviewgo();">
+				<? foreach($IMGS as $IMG){ ?>
+					<option value="<?=$IMG;?>" <?if($IMG==$ITEM['db_img']){?> SELECTED <? } ?>><?=$IMG;?></option>
+				<? } ?>
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="name">PR</td>
+		<td class="value"><input type="text" class="text" name="db_pr" value="<?=$ITEM['db_pr'];?>" size="6" /></td>
+	</tr>
+		
+	<tr>
+		<td class="name">Résistance Maximum</td>
+		<td class="value"><input type="text" class="text" name="db_resistance" value="<?=$ITEM['db_resistance'];?>" size="3" maxlength="3" /></td>
+	</tr>
+	
+	<tr>
+		<td class="name">Action(s) liée(s):</td>
+		<td class="value">
+			<table>
+			<tr>
+				<td class="name">DEL</td>
+				<td class="name">Module</td>
+				<td class="name">Titre menu</td>
+			</tr>
+			<?
+			if(isset($ACTIONS)){
+				foreach($ACTIONS as $action){
+					?>
+					<tr>
+						<td class="value">
+							<input type="checkbox" name="delAction_<?=$action['id'];?>" value="true" />
+						</td>
+						<td class="name">
+							<?=$action['url'];?>
+						</td>
+						<td class="value">
+							<input type="text" class="text" name="<?=$action['id'];?>_actioncaption" value="<?=$action['caption'];?>" />
+						</td>
+					</tr>
+					<?
+				}
+			}
+			?>
+			</table>
+			
+			<input type="hidden" name="total_action_add" id="total_action_add" value="0" />
+			<input type="button" class="button" name="preadd" onclick="AjouterAction();" value="Ajouter une action" />
+			<div id="add_action_0"></div>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="name">Note MJ</td>
+		<td class="value"><textarea name="db_notemj"><?=$ITEM['db_notemj'];?></textarea></td>
+	</tr>
+	
+	
+	<tr>
+		<td class="send" colspan="2">
+			<input type="submit" class="button" name="save" value="Enregistrer" />
+		</td>
+	</tr>
+	</table>
+
+</form>

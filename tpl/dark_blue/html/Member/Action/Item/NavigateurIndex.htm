@@ -1,0 +1,27 @@
+<table class="tbl_center">
+<tr>
+	<td class="title">
+		Index du site
+		<? if(isset($canPost)){ ?>
+			[<a href="#" onclick="goTo('dom.net/addpage?<?=$site->getUrl();?>');">Nouvelle page</a>]
+		<? } ?>
+		<? if(isset($admin)){ ?>
+			[<a href="#" onclick="goTo('dom.net/modsite?<?=$site->getUrl();?>');">Modifier Site</a>]
+			[<a href="#" onclick="goTo('dom.net/modacces?<?=$site->getUrl();?>');">Gestion des acc&egrave;s</a>]
+		<? } ?>
+	</td>
+</tr>
+<tr>
+	<td class="value">
+		<?
+		if (isset($arrPages)){
+			foreach($arrPages as $page){
+			?>
+				<a href="#" onclick="goTo('<?=$site->getUrl();?>/<?=$page->getId();?>');" style="display:block;"><?=$page->getTitre();?></a>
+			<? 
+			}
+		} 
+		?>
+	</td>
+</tr>
+</table>

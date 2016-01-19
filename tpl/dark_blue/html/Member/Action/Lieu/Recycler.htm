@@ -1,0 +1,37 @@
+<form id="action_recycler" action="?popup=1&m=Action_Lieu_Recycler2" method="post" onsubmit="return ajaxSubmitForm(this);">
+	<table class="center" style="width:750px;">
+		<tr>
+			<td class="title" colspan="5">
+				Recycler un Item. L'item sera vendu entre 60% et 70% de son prix.
+			</td>
+		</tr>
+		<tr>
+		<tr>
+			<td class="name">Qte</td>
+			<td class="name">Type</td>
+			<td class="name">Nom</td>
+			<td class="name">Prix</td>
+		</tr>
+<?php
+$i=0;
+foreach($OBJETS as $item)
+{
+?>
+		<tr>
+			<td class="value">
+				<input type="text" name="<?=$item->getInvId();?>_qte" value="0" size="2" />
+				/<?=$item->getQte();?>
+			</td>
+			<td class="value"><?=$item->getType();?></td>
+			<td class="value"><?=$item->getNom();?></td>
+			<td class="value"><?=$item->getDbPrix();?></td>			
+		</tr>
+<?
+$i++;
+}
+?>
+<tr>
+	<td class="send" colspan="5"><input type="submit" class="button" value="Vendre" /></td>
+</tr>
+</table>
+</form>

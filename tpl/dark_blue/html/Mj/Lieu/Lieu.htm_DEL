@@ -1,0 +1,37 @@
+<script>
+function confirmdel(){
+	answer = confirm ("Effacer l'item?");
+	if (answer) {
+		return true;
+	}else{
+		return false;
+	}
+}
+</script>
+
+<form method="post" name="form1" action="?mj=site_index&p=site_lieux">
+<table align="center">
+	<tr>
+		<td class="name"></td>
+		<td class="name">Nom Technique</td>
+		<td class="name">Nom Affiché</td>
+	</tr>
+	<? foreach($PAGE_LIEUX as $lieu) { ?>
+		<tr>
+			<td class="value1">
+				<input type="radio" name="id" value="<?=$lieu["id"];?>" />
+			</td>
+			<td class="value2" style="text-align:left;"><?=$lieu["nom_tech"];?></td>
+			<td class="value1"><?=$lieu["nom_show"];?></td>
+		</tr>
+	<? } ?>
+	<tr>
+		<td colspan="4" class="send">
+			<input type="submit" class="button" name="add" value="Ajouter" />
+			<input type="submit" class="button" name="edit" value="Propriété" />
+			<input type="submit" class="button" name="lien" value="Liens" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="return confirmdel();" />
+		</td>
+	</tr>
+</table>
+</form>

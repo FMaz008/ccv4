@@ -1,0 +1,37 @@
+<form name="form1" action="" method="post">
+	<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+<table class="center">
+	<tr>
+		<td class="title" colspan="5">Gestion des casiers du lieu <?=$LIEU_TECH;?></td>	
+	</tr>
+	
+	<tr>
+		<td class="name"></td>
+		<td class="name">ID</td>
+		<td class="name">Nom du casier</td>
+		<td class="name">Nbr d'items</td>
+		<td class="name">Capacité</td>
+	</tr>
+	
+	<? foreach($CASIERS as $casier){ ?>
+		<tr>
+			<td class="name" style="width:10px;">
+				<input type="radio" name="id_casier" value="<?=$casier['id_casier'];?>" />
+			</td>
+			<td class="value"><?=$casier['id_casier'];?></td>
+			<td class="value"><a href="?mj=Lieu_Inventaire&id=<?=$_GET['id'];?>&cid=<?=$casier['id_casier'];?>"><?=$casier['nom_casier'];?></a></td>
+			<td class="value"><?=$casier['nbr_items'];?></td>
+			<td class="value"><?=$casier['items_pr'];?> / <?=$casier['capacite_casier'];?></td>
+		</tr>
+	<? } ?>
+	
+	<tr>
+		<td colspan="5" class="send">
+			<input type="submit" class="button" name="add" value="Ajouter"  onClick="document.forms['form1'].action='?mj=Lieu_CasierAdd';"/>
+			<input type="submit" class="button" name="mod" value="Modifier"  onClick="document.forms['form1'].action='?mj=Lieu_CasierMod';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_CasierDel';return confirm('Voulez-vous vraiment supprimer la sélection ?');" />
+		</td>
+	</tr>
+</table>
+
+</form>

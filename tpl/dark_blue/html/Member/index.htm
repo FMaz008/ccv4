@@ -1,0 +1,163 @@
+<script type="text/javascript" src="./js/m_main.js"></script>
+<script type="text/javascript" src="./js/m_inv.js"></script>
+<script type="text/javascript" src="./js/m_inv_actions.js"></script>
+<script type="text/javascript" src="./js/m_inv_draganddrop.js"></script>
+
+<!-- Affichage du top menu-->
+<div class="name member_index_topmenu">
+	<div class="menuTab member_index_topmenu_options">
+		<span id="menu_optionGen" class="fakelink" onmousemove="hovermenu(this, event, 0,15);">Options générales</span>
+		<div id="hm_menu_optionGen" class="hovermenu">
+			<div class="member_index_topmenu_options_menu">
+				<div class="title">Menu des options</div>
+				<a href="#" onclick="actionLink('Config_Compte');">Compte</a>
+				<a href="#" onclick="actionLink('Config_Perso');">Personnage</a>
+			</div>
+		</div>
+	</div>
+	<div class="menuTab member_index_topmenu_action_menu">
+		<span id="menu_actionPJ" class="fakelink" onmousemove="hovermenu(this, event, 0,15);">Menu de contrôle PJ</span>
+		<div id="hm_menu_actionPJ" class="hovermenu">
+			<div class="menu_action_panel">
+				<!-- Affichage du menu des actions-->
+				<?=$PAGE_MENU_ACTIONS;?>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+<!-- Panneau d'information -->
+<table class="infopj">
+	<tr>
+		<td colspan="6" class="title">Info PJ</td>
+	</tr>
+	<tr>
+		<td class="name">Nom</td>
+		<td class="value"><?=$nom;?></td>
+
+		<td class="name"><abbr title="Points d'Action">PA</abbr></td>
+		<td class="value">
+			<span class="<?=$PA_COLORCLASS;?>" id="perso_pa"><?=$pa;?></span>/<?=$paMax;?>
+		</td>
+
+		<td class="name"><abbr title="Points de Nutrition">PN</abbr></td>
+		<td class="value">
+			<span class="<?=$PN_COLORCLASS;?>" id="perso_pn"><?=$pn;?></span>/99
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Lieu</td>
+		<td class="value"><?=$lieu;?></td>
+
+		<td class="name"><abbr title="Points de Vie">PV</abbr></td>
+		<td class="value">
+			<span class="<?=$PA_COLORCLASS;?>" id="perso_pv"><?=$pv;?></span>/<?=$pvMax;?>
+		</td>
+
+		<td class="name" rowspan="2" style="vertical-align:top;">Membre</td>
+		<td class="value" rowspan="2" style="vertical-align:top;">
+			<?=$membre;?>
+			<br /> (<a href="?m=Mp_Index">+ détails</a>)
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Argent</td>
+		<td class="value">
+			<span class="txtStyle_valeur"><span id="perso_cash"><?=$argent;?></span><?=$GAME_DEVISE;?></span>
+		</td>
+
+		<td class="name"><abbr title="Points de Rangement">PR</abbr></td>
+		<td class="value">
+			<span class="<?=$PR_COLORCLASS;?>" id="perso_pr"><?=$pr;?></span>/<?=$prmax;?>
+		</td>
+
+		
+	</tr>
+	
+	<!-- Action immédiate -->
+	<form id="formActionImmediate" method="post" action="">
+		<tr><td colspan="6" class="title">Action immédiate</td></tr>
+		<tr><td colspan="6" class="value">
+			<textarea name="actionImmediate" style="width:90%;height:50px;"><?=$actionImmediate;?></textarea>
+		</td></tr>
+		<tr><td colspan="6" class="name">
+			<center>
+				<input type="submit" class="button" name="saveActionImmediate" value="Changer l'action" />
+			</center>
+		</td></tr>
+	</form>
+</table>
+
+
+
+
+<?
+if(isset($SHOW_PUB))
+{
+	?>
+	<div class="pubMp" id="publicite">
+		<div style="font-size:7pt;">
+			<span class="fakelink" onclick="document.getElementById('publicite').style.display='none';">Masquer la publicité</span>
+		</div>
+		<script type="text/javascript"><!--
+		google_ad_client = "pub-0517878001677918";
+		google_ad_width = 468;
+		google_ad_height = 60;
+		google_ad_format = "468x60_as";
+		google_ad_channel ="2357391770";
+		google_color_border = "555599";
+		google_color_bg = "111111";
+		google_color_link = "FFFFFF";
+		google_color_url = "999999";
+		google_color_text = "CCCCCC";
+		//--></script>
+		<script type="text/javascript"
+		  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+		<a href="?m=Mp_Index" class="infobulle" style="font-size:7pt;">
+			<br />Jouer sans publicité?
+			<div class="infobulle" style="margin-left:400px;">
+				<div class="title">Membre Plus (cliquez pour les détails)</div>
+				Enlever automatiquement cette publicité?<br/>
+				Encouragez le jeu en devenant Membre PLUS !<br/>
+			</div>
+		</a>
+	</div>
+	<?
+}
+?>
+
+
+
+<!-- Affichage du panneau d'action -->
+<div id="actionPanel" class="panel member_index_panel">
+	<div class="title">
+		<div class="member_index_panel_title">
+			Panneau d'action
+		</div>
+		<div class="member_index_panel_button">
+			[<a href="#" onclick="toggleActionPanel();">&lt;&gt;</a>]
+		</div>
+		<div class="clearboth"></div>
+	</div>
+	
+	<div class="member_index_panel_content" id="actionPanelContent"></div>
+</div>
+
+
+<!-- Affichage du HE-->
+<a id="haut"></a>
+
+<form id="he" method="post" action="?m=He_Delete">
+	<?=$PAGE_HE_HEADER;?>
+	<?=$PAGE_HE_MESSAGES;?>
+</form>
+
+<a id="bas"></a>

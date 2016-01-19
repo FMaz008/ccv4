@@ -1,0 +1,30 @@
+
+<table class="center">
+<tr>
+	<td class="title" colspan="3">Perso reliés au compte</td>
+</tr>
+<tr>
+	<td class="name"></td>
+	<td class="name">Nom</td>
+	<td class="name">Argent</td>
+</tr>
+
+<?if (!isset($PERSO)){?>
+	<tr><td colspan="3"><i>- aucun perso -</i></td></tr>
+<?}else{
+	foreach($PERSO as $p){?>
+		<tr>
+			<td class="value"><input type="radio" name="persoid" value="<?=$p['id'];?>" /></td>
+			<td class="value"><?=$p['nom'];?></td>
+			<td class="value"><?=$p['cash'];?></td>
+		</tr>
+	<? }
+}?>
+
+<tr>
+	<td class="name" colspan="3">
+		<input type="button" name="mod" value="Modifier" />
+		<input type="button" name="mod" value="Supprimer" />
+	</td>
+</tr>
+</table>

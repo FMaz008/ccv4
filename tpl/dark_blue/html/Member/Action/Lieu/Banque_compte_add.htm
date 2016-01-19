@@ -1,0 +1,36 @@
+<script type="text/javascript">
+//<!--
+	$('perso_pa').innerHTML="<?=$PA;?>";
+	$('perso_cash').innerHTML="<?=$CASH;?>";
+//-->
+</script>
+<br />
+<form id="action_bank" method="post" action="?popup=1&m=Action_Lieu_BanqueCompteAdd2" onsubmit="return ajaxSubmitForm(this);">
+<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="2">
+			Banque (<?=$BANQUE->getNom();?>)
+		</td>
+	</tr>
+	<tr>
+		<td class="value">
+			<strong>Bienvenu &agrave; la <?=$BANQUE->getNom();?>!</strong><br />
+			<br />
+			D&eacute;sirez-vous ouvrir un compte bancaire &agrave; notre institution?<br />
+			Les frais d'ouverture d'un compte sont de <?=$BANQUE->getFraisOuverture();?><?=GAME_DEVISE;?>.<br />
+			<br />
+			&agrave; quel nom doit-on ouvrir le compte ?
+			<input type="text" class="text" name="nom" value="<?=$BANK_ACCOUNT_NAME;?>" size="20" maxlength="50" /><br />
+			<br />
+			quel nip doit-on définir pour ce nouveau compte ?
+			<input type="text" class="text" name="nip" size="5" maxlength="5" />
+			(5 chiffres maximum)
+			<br />
+			<br />
+			<input type="submit" name="openaccount" class="button" value="Ouvrir un compte" />
+		</td>
+	</tr>
+</table>
+</form>
+<span class="fakelink" onclick="actionLink('Action_Lieu_Banque');">&lt;&lt; Retour</span>
+<br />

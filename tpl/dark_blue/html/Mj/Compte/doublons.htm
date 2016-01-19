@@ -1,0 +1,37 @@
+<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="2">Liste des doublons ip</td>
+	</tr>
+	<tr>
+		<td class="name">Nom de compte</td>
+		<td class="name">Date de connexion</td>
+	</tr>
+	<?
+	if (empty($DOUBLONS)) {
+	?>
+		<tr><td class="value" colspan="2">Pas de doublon détecté</td></tr>
+	<?
+	}
+	else {
+		$currentIp = '';
+		foreach ($DOUBLONS as $doublon)
+		{
+			if ($doublon['ip'] != $currentIp)
+			{
+				$currentIp = $doublon['ip'];
+				?>
+				<tr><td class="name" colspan="2"> IP : <?=$currentIp;?></td></tr>
+				<?
+			}
+			?>
+			<tr>
+				<td class="value"><?=$doublon['user'];?></td>
+				<td class="value"><?=  fctToGameTime($doublon['timestamp']);?></td>
+			</tr>
+			<?
+		}
+	}
+	?>
+
+
+</table>

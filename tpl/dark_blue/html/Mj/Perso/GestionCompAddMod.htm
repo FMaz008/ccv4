@@ -1,0 +1,50 @@
+<form name="form1" method="post" action="?mj=Perso_GestionComp<?=$ADDMOD;?>">
+<?
+if(isset($COMP['id']) && !empty($COMP['id']))
+{
+	?>
+	<input type="hidden" name="id" value="<?=$COMP['id'];?>" />
+	<?
+}
+?>
+<table>
+
+	<tr>
+		<td colspan="2" class="title"><?=$ADDMOD_TXT;?> d'une compétence</td>
+	</tr>
+
+	<tr>
+		<td class="name">Nom</td>
+		<td class="value">
+			<input type="text" class="text" name="nom" value="<?=$COMP['nom'];?>" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Abbréviation<br />(4 caractères)</td>
+		<td class="value">
+			<input type="text" class="text" name="abbr" value="<?=$COMP['abbr'];?>" size="3" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Description<br />(256 caractères max)</td>
+		<td class="value">
+			<textarea name="description" style="width:300px;" onkeyup="$('chrCount').innerHTML=this.value.length;"><?=$COMP['description'];?></textarea>
+			<br />
+			<span id="chrCount">0</span> caractères
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Afficher à l'inscription</td>
+		<td class="value">
+			<input type="radio" name="inscription" value="0" <? if ($COMP['inscription']=='0') { echo ' checked="checked"'; } ?>/> Non
+			<br />
+			<input type="radio" name="inscription" value="1" <? if ($COMP['inscription']=='1') { echo ' checked="checked"'; } ?>/> Oui
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" value="name">
+			<input type="submit" class="button" name="save" value="<?=$ADDMOD_TXT;?>" />
+		</td>
+	</tr>
+</table>
+</form>

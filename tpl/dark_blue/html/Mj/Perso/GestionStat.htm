@@ -1,0 +1,44 @@
+<script type="text/javascript">
+//<!--
+ confirmdel = function()
+{
+	return confirm ('Effacer cette statistique (elle sera retirée de tous les joueurs ce qui provoquera un débalancement des stats) ?');
+}
+
+//-->
+</script>
+<form name="form1" method="post" action="">
+<table>
+	<tr>
+		<td colspan="3" value="name" style="text-align:center;">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Perso_GestionStatAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Perso_GestionStatMod';" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Perso_GestionStatDel';return confirmdel();" />
+		</td>
+	</tr>	
+<?
+foreach($STAT as $stat){ 
+	?>
+		<tr>
+			<td class="name">
+				<input type="radio" name="id" value="<?=$stat['id'];?>" />
+			</td>
+			<td class="value">
+				<?=$stat['nom'];?>
+			</td>
+			<td class="value">
+				<?=$stat['desc'];?>
+			</td>
+		</tr>
+	<?
+}
+?>
+	<tr>
+		<td colspan="3" value="name" style="text-align:center;">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Perso_GestionStatAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Perso_GestionStatMod';" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Perso_GestionStatDel';return confirmdel();" />
+		</td>
+	</tr>
+</table>
+</form>

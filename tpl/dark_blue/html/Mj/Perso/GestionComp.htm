@@ -1,0 +1,63 @@
+<script type="text/javascript">
+//<!--
+confirmdel = function(){
+	return confirm ('Effacer cette compétence (elle sera retirée de tous les joueurs) ?');
+}
+
+//-->
+</script>
+<form name="form1" method="post" action="">
+<table>
+	<tr>
+		<td colspan="4" value="name" style="text-align:center;">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Perso_GestionCompAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Perso_GestionCompMod';" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Perso_GestionCompDel';return confirmdel();" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">Nom</td>
+		<td class="name">Modifié par</td>
+		<td class="name">Inscription</td>
+	</tr>
+<?
+foreach($COMP as $comp){ 
+	?>
+		
+		<tr>
+			<td class="name">
+				<input type="radio" name="id" value="<?=$comp['id'];?>" />
+			</td>
+			<td class="value">
+				<?=$comp['nom'];?>
+			</td>
+			<td class="value">
+				<a href="?mj=Perso_GestionCompModStat&amp;id=<?=$comp['id'];?>">
+					<? if(!empty($comp['stats'])){ ?>
+						<?=$comp['stats'];?>
+					<? }else{ ?>
+						<i>- aucune -</i>
+					<? } ?>
+				</a>
+			</td>
+			<td class="value">
+				<? if ($comp['inscription']=='1') { ?>
+					Oui
+				<? }else{ ?>
+					<i>Non</i>
+				<? } ?>
+			</td>
+		</tr>
+	<?
+}
+?>
+	<tr>
+		<td colspan="4" value="name" style="text-align:center;">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Perso_GestionCompAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Perso_GestionCompMod';" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Perso_GestionCompDel';return confirmdel();" />
+		</td>
+	</tr>
+</table>
+</form>

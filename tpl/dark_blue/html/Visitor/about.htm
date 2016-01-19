@@ -1,0 +1,151 @@
+<script type="text/javascript">
+	//<!--
+	function generateEmail(prefix, suffix){
+		alert ("Vous pouvez contacter cette personne à l'adresse suivante:\n" + prefix + "@" + suffix);
+	}
+	//-->
+</script>
+<br />
+<br />
+<div class="panel about">
+	<div class="title">
+		CyberCity 2034 est rendu possible grace à
+	</div>
+
+	<div class="about_categorie">Graphisme</div>
+		<div class="about_poste value">Thème Dark Blue</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('admin','cybercity2034.com');">Mazerolle, Francois</a></div>
+			<div class="clearboth"></div>
+		
+		<div class="about_poste value">Thème Cyber Rust</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('lelarge.antoine','gmail.com');">Lelarge, Antoine</a></div>
+			<div class="clearboth"></div>
+		
+		<div class="about_poste value">Thème CTholus</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('kellhog','hotmail.com');">Pinet, Maxime</a></div>
+			<div class="clearboth"></div>
+		
+		<div class="about_poste value">Items &amp; Lieux</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('ronin_arcadia','hotmail.fr');">Balussou, François</a></div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value"><a href="#" onclick="generateEmail('lelarge.antoine','gmail.com');">Lelarge, Antoine</a></div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value">&laquo; Snake &raquo;</div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value">&laquo; Vinny &raquo;</div>
+			<div class="clearboth"></div>
+		
+
+	
+	<div class="about_categorie">Maîtres de Jeu</div>
+	
+<?
+foreach($MJ as $mj)
+{
+	if(!empty($mj))
+	{
+		?>
+		<div class="about_poste value">
+			<?=$mj['poste'];?>
+			<?=$mj['present'];?>
+		</div>
+		<div class="about_nom value">
+			&laquo; <a href="#" onclick="generateEmail('<?=$mj['email_prefix'];?>','<?=$mj['email_suffix']?>');"><?=$mj['nom'];?></a> &raquo;
+		</div>
+		<div class="clearboth"></div>
+		<?
+	}
+}
+?>
+
+	<div class="about_categorie">Programmation</div>
+		<div class="about_poste value">Programmeur en chef</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('admin','cybercity2034.com');">Mazerolle, Francois</a></div>
+			<div class="clearboth"></div>
+		
+		<div class="about_poste value">Programmeur</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('quentinvirol','cegetel.net');">Virol, Quentin</a></div>
+			<div class="clearboth"></div>
+	
+	
+	<div class="about_categorie">Textes</div>
+		<div class="about_poste value">Univers</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('admin','cybercity2034.com');">Mazerolle, Francois</a></div>
+			<div class="clearboth"></div>
+
+		<div class="about_poste value">Histoire</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('admin','cybercity2034.com');">Mazerolle, Francois</a></div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value">&laquo; Rochel &raquo;</div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value"><a href="#" onclick="generateEmail('DarkKillercow','hotmail.fr');">Muzard, Romuald</a></div>
+			<div class="clearboth"></div>
+
+		<div class="about_poste value">Accueil</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('ronin_arcadia','hotmail.fr');">Balussou, François</a></div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value"><a href="#" onclick="generateEmail('admin','cybercity2034.com');">Mazerolle, Francois</a></div>
+			<div class="clearboth"></div>
+
+			<div class="about_nom value"><a href="#" onclick="generateEmail('DarkKillercow','hotmail.fr');">Muzard, Romuald</a></div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value">&laquo; Rochel &raquo;</div>
+			<div class="clearboth"></div>
+		
+		<div class="about_poste value">Descriptions</div>
+			<div class="about_nom value">&laquo; Ebola &raquo;</div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value">&laquo; Esperanza &raquo;</div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value">&laquo; Rochel &raquo;</div>
+			<div class="clearboth"></div>
+		
+	<div class="about_categorie">Hébergement</div>
+		<div class="about_poste value">Administrateur système</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('jean.raby','gmail.com');">Raby, Jean</a></div>
+			<div class="clearboth"></div>
+
+			<div class="about_poste value">Technicien réseau</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('admin','cybercity2034.com');">Mazerolle, Francois</a></div>
+			<div class="clearboth"></div>
+
+	
+	<div class="about_categorie">Remerciements spéciaux</div>
+		<div class="about_poste value">Gestion</div>
+			<div class="about_nom value">&laquo; Babydoll &raquo;</div>
+			<div class="clearboth"></div>
+
+		<div class="about_poste value">Programmation</div>
+			<div class="about_nom value"><a href="#" onclick="generateEmail('anthony','derendinger.com');">Derendinger, Anthony</a></div>
+			<div class="clearboth"></div>
+			
+			<div class="about_nom value"><a href="#" onclick="generateEmail('jeanclaudesecond','hotmail.com');">Second, Jean-Claude</a></div>
+			<div class="clearboth"></div>
+
+			<div class="about_nom value">&laquo; Holiday &raquo;</div>
+			<div class="clearboth"></div>
+
+	<div class="about_categorie">Donateurs</div>
+
+<?
+foreach($DONATS as $donator)
+{
+		?>
+		<div class="about_nom value">
+			<?=$donator['user'];?>
+		</div>
+		<div class="clearboth"></div>
+		<?
+}
+?>
+
+</div>

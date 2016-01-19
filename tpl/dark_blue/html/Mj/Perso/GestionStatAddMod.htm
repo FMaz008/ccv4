@@ -1,0 +1,42 @@
+<form name="form1" method="post" action="?mj=Perso_GestionStat<?=$ADDMOD;?>">
+<?
+if(isset($STAT['id']) && !empty($STAT['id']))
+{
+	?>
+	<input type="hidden" name="id" value="<?=$STAT['id'];?>" />
+	<?
+}
+?>
+<table>
+
+	<tr>
+		<td colspan="2" class="title"><?=$ADDMOD_TXT;?> d'une statistique</td>
+	</tr>
+
+	<tr>
+		<td class="name">Nom</td>
+		<td class="value">
+			<input type="text" class="text" name="nom" value="<?=$STAT['nom'];?>" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Abbréviation<br />(3 caractères)</td>
+		<td class="value">
+			<input type="text" class="text" name="abbr" value="<?=$STAT['abbr'];?>" size="3" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Description<br />(256 caractères max)</td>
+		<td class="value">
+			<textarea name="description" style="width:300px;" onkeyup="$('chrCount').innerHTML=this.value.length;"><?=$STAT['description'];?></textarea>
+			<br />
+			<span id="chrCount">0</span> caractères
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" value="name">
+			<input type="submit" class="button" name="save" value="<?=$ADDMOD_TXT;?>" />
+		</td>
+	</tr>
+</table>
+</form>

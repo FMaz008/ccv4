@@ -1,0 +1,76 @@
+<script type="text/javascript">
+var nbr_ajout=0;
+AjouterIncompatible = function(){
+	var myAjax = new Ajax.Request(
+		'?mj=Perso_GestionCaractIncompatible&popup=1', 
+		{
+			method: 'post', 
+			parameters: 'divid='+ (nbr_ajout+1),
+			onComplete: AjouterIncompatible_completed
+		});
+}
+
+AjouterIncompatible_completed = function(originalRequest){
+	var rval= originalRequest.responseText;
+	$('add_incompatible_'+nbr_ajout).innerHTML = rval;
+	nbr_ajout++; //Augmenter le total en cas de plusieurs ajouts
+	$('total_incompatible_add').value = nbr_ajout;
+	
+}
+</script>
+<form name="form1" method="post" action="?mj=Perso_GestionCaractAdd">
+<table>
+
+<tr>
+	<td colspan="2" class="title">Ajout d'une caractéristique</td>
+</tr>
+
+<tr>
+	<td class="name">Nom</td>
+	<td class="value">
+		<input type="text" class="text" name="nom" value="" />
+	</td>
+</tr>
+<tr>
+	<td class="name">Catégorie</td>
+	<td class="value">
+		<select name="catId">
+			<option value="0">Est une catégorie</option>
+		<?
+		foreach($CAT as $cat){
+			?>
+			<option value="<?=$cat['id'];?>"><?=$cat['nom'];?></option>
+			<?
+		}
+		?>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="name">Description</td>
+	<td class="value">
+		<textarea name="desc"></textarea>
+	</td>
+</tr>
+<tr>
+	<td class="name">Type</td>
+	<td class="value">
+		<input type="text" class="text" name="type" value="System" />
+	</td>
+</tr>
+<tr>
+	<td class="name">Incompatible avec</td>
+	<td class="value">
+		<input type="hidden" name="total_incompatible_add" id="total_incompatible_add" value="0" />
+		<input type="button" class="button" name="preadd" onclick="AjouterIncompatible();" value="Ajouter une incompatibilité" />
+		<div id="add_incompatible_0"></div>
+	</td>
+</tr>
+
+	<tr>
+		<td colspan="2" value="name">
+			<input type="submit" class="button" name="save" value="Save" />
+		</td>
+	</tr>
+</table>
+</form>

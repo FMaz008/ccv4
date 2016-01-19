@@ -1,0 +1,15 @@
+<script type="text/javascript">
+	goTo = function(url){
+		$('header_url').value = url;
+		ajaxSubmitForm($('action_navigateurHeader'));
+	}
+	var tmp = "<?=$url_param;?>";
+	var url_param = (tmp == "") ? false : "<?=$url_param;?>";
+</script>
+
+<form id="action_navigateurHeader" method="post" action="?popup=1&m=Action_Item_Navigateur" onsubmit="return ajaxSubmitForm(this);">
+	URL: <input type="text" class="text" maxlength="150" size="60" id="header_url" name="url" value="<?=$URL;?>" /><br />
+	&nbsp;&nbsp;Utilisateur: <input type="text" class="text" maxlength="20" size="20" id="header_user" name="user" value="<?=$USER;?>" />
+	&nbsp;&nbsp;Mot de passe: <input type="text" class="text" maxlength="20" size="20" id="header_pass" name="pass" value="<?=$PASS;?>" />
+	&nbsp;&nbsp;<input type="submit" class="button" name="go" value="Go" />
+</form>

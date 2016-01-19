@@ -1,0 +1,58 @@
+﻿<form name="form1" action="" method="post">
+<table class="center">
+	<tr>
+		<td class="title" colspan="3">Liste des médias actifs</td>	
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">Type</td>
+		<td class="name">canal</td>
+	</tr>
+	
+	<?
+	if(isset($MEDIA_LIST)){
+		$id = 0;
+		foreach($MEDIA_LIST as $media){
+			$id++;
+			?>
+			<tr>
+				<td class="name">
+					<input type="radio" name="id" value="<?=$id;?>" />
+				</td>
+				<td class="value"><input type="hidden" name=<?=$id . '_mediaType';?> value=<?=$media['mediaType'];?> /><?=$media['mediaTypeAff'];?></td>
+				<td class="value"><input type="hidden" name=<?=$id . '_canalId';?> value=<?=$media['canalId'];?> /><?=$media['canalId'];?></td>
+			</tr>
+			<?
+		}
+	}else{
+		?>
+		<tr>
+			<td class="value" colspan="3">
+				<i><strong>Aucun média actif</strong></i>
+			</td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class="title" colspan="3">Autre média</td>
+	</tr>
+	<tr>
+		<td class="name">
+			<input type="radio" name="id" value="new" />
+		</td>
+		<td class="value">
+			<select name="new_mediaType">
+				<option value="tele">Télé</option>
+				<option value="radio">Radio</option>
+			</select>
+		</td>
+		<td class="value"><input type="text" name="new_canalId" /></td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<center><input type="submit" class="button" name="mod" value="Voir" onClick="document.forms['form1'].action='?mj=Lieu_MediasMod';" /></center>
+		</td>
+	</tr>
+</table>
+</form>

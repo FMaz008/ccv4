@@ -1,0 +1,24 @@
+<script type="text/javascript">
+//<!--
+	de_brasser = function ()
+	{
+		var taille = $F('de_taille');
+		var reussite = $F('de_reussite');
+		var resultat = Math.floor((Math.random()*taille+1));
+		
+		$('de_resultat').value = resultat;
+		$('de_resultat').style.backgroundColor = (resultat>=reussite) ? '#006600' : '#660000';
+	}
+//-->
+</script>
+
+
+<fieldset class="containerDe">
+	<legend>Brasser un dé</legend>
+	<div>
+		Taille: <input type="text" class="text" id="de_taille" value="100" size="3" /><br />
+		Taux Réussite: <input type="text" class="text" id="de_reussite" value="75" size="3" /><br />
+		Résultat: <input type="text" class="text" id="de_resultat" value="" size="3" DISABLED />
+	</div>
+</fieldset>
+<input type="button" class="button" onclick="de_brasser();" value="Brasser" />

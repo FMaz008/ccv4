@@ -1,0 +1,43 @@
+<br />
+<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="2">Guichet</td>
+	</tr>
+	<tr>
+		<td class="value">
+			<form id="action_guichet1" method="post" action="?popup=1&m=Action_Lieu_Guichet2" onsubmit="return ajaxSubmitForm(this);">
+				<input type="hidden" name="nextstep" value="asknip" />
+				<table class="subcenter">
+					<tr><td class="title">Ins&eacute;rez votre carte</td></tr>
+					<?
+					if (isset($LIST_CARTE)){
+						foreach($LIST_CARTE as $carte){
+						?>
+							<tr>
+								<td>
+									<input type="radio" name="carteid" value="<?=$carte->getNoCarte();?>" />
+									<?=$carte->getNoBanque();?>-<?=$carte->getNoCompte();?>-<?=$carte->getNoCarte();?> <?=$carte->getNote();?>
+								</td>
+							</tr>
+						<?
+						}
+					}else{
+					?>
+						<tr>
+							<td>
+								<i>Vous n'avez pas de carte de guichet</i>
+							</td>
+						</tr>
+					<?
+					}
+					?>
+					<tr>
+						<td class="send">
+							<input type="submit" class="button" name="inserer_carte" value="Ins&eacute;rer la carte" />
+						</td>
+					</tr>
+				</table>
+			</form>
+		</td>
+	</tr>
+</table>

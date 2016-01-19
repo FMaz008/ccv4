@@ -1,0 +1,113 @@
+<script type="text/javascript">
+//<!--
+	function Changer_Lieu(){
+		var lieu=prompt('Dans quel lieu souhaitez-vous ajouter le casier ? (Nom technique)','');
+		if(lieu!=""){
+			var myAjax = new Ajax.Updater(
+				'div_lieu', 
+				'?mj=Search&popup=1', 
+				{
+					method: 'post', 
+					parameters: 'searchWhat=p_modifier_lieu&search='+lieu
+				});
+		}
+	}
+	function Changer_Lieu2(lieu){
+		$('div_lieu').innerHTML = lieu+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="lieuId" value="'+lieu+'" />';
+	}
+	
+	function protection(obj){
+		if($F(obj) == "0"){
+			$('pass').style.display= "none";
+		}else{
+			$('pass').style.display= "table-row";
+			if ($F(obj) == 'pass')
+				$('pass_txt').innerHTML="Code d'accès";
+			else
+				$('pass_txt').innerHTML="Code de clé";
+		}
+	}
+//-->
+</script>
+
+<br />
+
+<? if(isset($LIEU_ID)) { ?>
+	<a href="?mj=Lieu_Casiers&id=<?=$LIEU_ID;?>">&lt;&lt; Retour à la liste des casiers</a><br />
+<? } ?>
+
+<form method="post" name="form1" action="?mj=Lieu_Casier<?=$SUBMITNAME;?>">
+	<? if(isset($CASIER['lieuId'])) { ?>
+		<input type="hidden" name="LIEU_ID" value="<?=$CASIER['lieuId'];?>" />
+	<? } ?>
+	<table align="center">
+		<tr>
+			<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> un casier</td>
+		</tr>
+		<? if( $SHOWID == true ){ ?>
+		<tr>
+			<td class="name">ID/# du casier</td>
+			<td class="value"><input type="hidden" name="id_casier" value="<?=$CASIER['id_casier'];?>" /><?=$CASIER['id_casier'];?></td>
+		</tr>
+		<? } ?>
+		
+		<tr>
+			<td class="name">Casier dans le lieu<br />(Nom technique)</td>
+			<td class="value">
+				<div id="div_lieu" style="height:6em;overflow:auto;">
+					<?=$CASIER["lieuTech"];?> (<a href="#" onclick="Changer_Lieu();">Changer</a>)
+					<input type="hidden" name="lieu_id" value="<?=$CASIER["lieuId"];?>" />
+				</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="name">Nom</td>
+			<td class="value">
+				<input type="text" class="text" name="nom_casier" value="<?=$CASIER["nom_casier"];?>" maxlength="150" />
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="name">Capacité</td>
+			<td class="value">
+				<input type="text" class="text" name="capacite_casier" value="<?=$CASIER["capacite_casier"];?>" maxlength="4" /> Pr
+			</td>
+		</tr>
+				
+		<tr>
+			<td class="name">Resistance</td>
+			<td class="value">
+				<input type="text" class="text" name="resistance_casier" value="<?=$CASIER["resistance_casier"];?>" maxlength="4" /> Pv
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="name">Protection</td>
+			<td class="value">
+				<select name="protection_casier" id="protection_casier" onChange="protection('protection_casier');">
+					<option value="0" <? if(empty($CASIER['protection_casier'])){ echo 'SELECTED'; } ?>>Aucune</option>
+					<option value="pass" <? if($CASIER['protection_casier']=='pass'){ echo 'SELECTED'; } ?>>Pass</option>
+					<option value="clef" <? if($CASIER['protection_casier']=='clef'){ echo 'SELECTED'; } ?>>Clé</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr id="pass">
+			<td class="name" id="pass_txt">Pass/code clé</td>
+			<td class="value">
+				<input type="text" class="text" name="pass_casier" value="<?=$CASIER["pass_casier"];?>" maxlength="150" />
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" class="send">
+				<input type="submit" class="button" name="save" value="Enregistrer" />
+			</td>
+		</tr>
+	</table>
+</form>
+<br />
+<br />
+
+<script type="text/javascript">protection('protection_casier');</script>

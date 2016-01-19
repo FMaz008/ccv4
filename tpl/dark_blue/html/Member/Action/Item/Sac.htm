@@ -1,0 +1,153 @@
+<script type="text/javascript">
+//<!--
+	var arrTabs = new Array();
+	showInv = function(id){
+		for(var i=0;i<arrTabs.length;i++){
+			$("tab_" + arrTabs[i]).style.display = arrTabs[i] == id ? "block" : "none" ;
+			$(""+arrTabs[i]).className = "member_action_sac_link" + (arrTabs[i] == id ? "on" : "off");
+			$("sacId").value = id;
+		}
+	}
+	
+	//Mettre a jour les infos
+	$('perso_pr').innerHTML="<?=$PERSO_PR;?>";
+	$('perso_pa').innerHTML="<?=$PERSO_PA;?>";
+//-->
+</script>
+
+
+
+<br />
+<form id="form_sac"  method="post" action="" onsubmit="return ajaxSubmitForm(this);">
+<input type="hidden" name="sacId" id="sacId" value="" />
+
+<div class="panel member_action_panel">
+	<div class="title">Sac</div>
+	<div class="member_action_sac_middle">
+	
+	
+	<div class="member_action_sac_left">
+		<div class="name">Ouvrir le sac:</div>
+		<?
+		if (isset($SACS)){
+		
+			//Liste des sacs
+			foreach($SACS as $sac){
+				?>
+				<script type="text/javascript">
+				//<!--
+					arrTabs[arrTabs.length] = <?=$sac['sac']->getInvId();?>;
+				//-->
+				</script>
+				<div class="member_action_sac_linkoff" id="<?=$sac['sac']->getInvId();?>" onclick="showInv(this.id);">
+					<span class="fakelink"><?=$sac['sac']->getNom();?></span>
+					(<?=$sac['sac']->getInvPr();?>/<?=$sac['sac']->getCapaciteMax();?> PR)
+				</div>
+				<?
+			}
+			
+			//Liste des items dans les sacs
+			foreach($SACS as $sac){
+				?>
+				<div id="tab_<?=$sac['sac']->getInvId();?>" class="member_action_sac_itemContainer" style="display:none;">
+					<table>
+						<tr>
+							<td class="name" style="width:60px;">Qte</td>
+							<td class="name" style="width:170px;">Nom</td>
+							<td class="name" style="width:10px;">PR</td>
+						</tr>
+					<?
+					if(isset($sac['inv'])){
+						foreach($sac['inv'] as $item){
+							?>
+							<tr>
+								<td class="value">
+									<input type="text" class="text" name="<?=$item->getInvId();?>_qte" value="0" style="width:25px;" /> /<?=$item->getQte();?>
+								</td>
+								<td class="value"><?=$item->getNom();?></td>
+								<td class="value"><?=$item->getPr();?></td>
+							</tr>
+							<?
+						}
+					}else{
+						?>
+						<td colspan="4">
+							<i>- Ce sac est vide -</i>
+						</td>
+						<?
+
+					}
+					?>
+					</table>
+				</div>
+				<?
+			}
+		}else{
+		?>
+			<i>- Vous ne possédez aucun sac -</i>
+		<?
+		}
+		?>
+	</div>
+	
+	<div class="member_action_sac_right">
+		<div class="name">Inventaire du perso (<?=$PERSO_PR;?>/<?=$PERSO_PR_MAX;?> PR):</div>
+		<table>
+		<tr>
+			<td class="name" style="width:60px;">Qte</td>
+			<td class="name" style="width:170px;">Nom</td>
+			<td class="name" style="width:10px;">PR</td>
+		</tr>
+		<? if (isset($INV_PERSO)){
+			foreach($INV_PERSO as $elem){
+				$item = &$elem['item'];
+				$grayed = $elem['class'];
+				?>
+				<tr>
+					<td class="value <?=$grayed;?>">
+						<? if($grayed==''){ ?>
+							<input type="text" class="text" name="<?=$item->getInvId();?>_qte" value="0" style="width:25px;" /> /<?=$item->getQte();?>
+						<? } ?>
+						<? if($item->isEquip()){ ?>
+							<div style="width:100%;text-align:center;">
+								[Équipé]
+							</div>
+						<? } ?>
+					</td>
+					<td class="value <?=$grayed;?>"><?=$item->getNom();?></td>
+					<td class="value <?=$grayed;?>"><?=$item->getPr();?></td>
+				</tr>
+			<? } 
+		}else{
+			?>
+			<tr>
+				<td colspan="3">
+					<i>-Vous n'avez rien en inventaire-</i>
+				</td>
+			</tr>
+			<?
+		}
+		?>
+		</table>
+	</div>
+		
+		<div style="width:25px;padding-top:50px;margin-left:300px;">
+			<input type="submit" class="button" value="|>>" style="width:25px;" onclick="$('form_sac').action='?popup=1&m=Action_Item_SacSacVersPerso';" />
+			<input type="submit" class="button" value="<<|" style="width:25px;" onclick="$('form_sac').action='?popup=1&m=Action_Item_SacPersoVersSac';" />
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+</div>
+
+</form>
+<?
+if(isset($SHOW_SAC_ID)){
+	?>
+	<script type="text/javascript">
+	//<!--
+		showInv(<?=$SHOW_SAC_ID;?>);
+	//-->
+	</script>
+	<?
+}
+?>

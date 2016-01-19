@@ -1,0 +1,95 @@
+
+
+
+<table class="center">
+  <tr>
+    <td class="title" colspan="2">Description de <?=$SHOW_LIEU;?></td>
+  </tr>
+  <tr>
+	<?
+	if (isset($SHOW_LIEU_IMG)){
+	?>
+		<td class="value">
+		<img src="<?=SITEPATH_WEB_TEMPLATE;?>_commun/lieux/<?=$SHOW_LIEU_IMG;?>" style="border:0px;" />
+		</td>
+	<?
+	}
+	?>
+    <td class="value" style="text-align:left;">
+		<?=$SHOW_LIEU_DESC;?>
+	</td>
+  </tr>
+</table>
+
+<br />
+
+<table class="center">
+  <tr>
+    <td class="title" colspan="6">
+      Perso présent dans <?=$SHOW_LIEU;?>
+    </td>
+  </tr>
+  <tr>
+    <td class="name" colspan="2">Info</td>
+    <td class="name" style="width:80%;">Descriptifs</td>
+  </tr>
+
+<?
+if (!isset($PERSO_LIST)){?>
+	<tr><td colspan="3"><i>- Personne -</i></td></tr>
+<? }else{
+	foreach ($PERSO_LIST as $perso) {?>
+		<tr>
+			<td class="name" style="height:10px;">Nom</td>
+			<td class="name">
+				<?=$perso["nom"];?>
+			</td>
+			<td class="value" rowspan="6" style="text-align:left;vertical-align:top;padding:0px;margin:0px;">
+				<table style="width:100%;border:0px;margin:0px;padding:0px;">
+				<tr><td class="name" style="margin-top:0px;">Description physique:</td></tr>
+				<tr><td class="value">
+					<?=$perso["description"];?>
+				</td></tr>
+				<?
+				if($perso["current_action"] != ''){
+				?>
+					<tr><td class="name">Action en ce moment:</td></tr>
+					<tr><td class="value">
+						<?=$perso["current_action"];?>
+					</td></tr>
+				<?
+				}
+				?>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td class="name" style="height:10px;">Taille</td>
+			<td class="value"><?=$perso["taille"];?></td>
+		</tr>
+		<tr>
+			<td class="name" style="height:10px;">Age</td>
+			<td class="value"><?=$perso["age"]; ?></td>
+		</tr>
+		<tr>
+			<td class="name" style="height:10px;">Arme</td>
+			<td class="value"><?=$perso["arme"]; ?></td>
+		</tr>
+		<tr>
+			<td class="name" style="height:10px;">Etat</td>
+			<td class="value"><?=$perso["pv"].'/'.$perso["pvmax"]; ?></td>
+		</tr>
+		<tr><td class="name">&nbsp;</td></tr>
+		<tr><td colspan="3"><hr></td></tr>
+	<?}
+}?>
+
+</table>
+<br />
+
+
+
+<div id="pjinfo" class="panel_infos-finances" style="position:absolute;top:50px;left:10px;width:760px;height:430px;visibility:hidden;">
+	<iframe id="pjinfoifrm" src="?popup=1&pj=a_empty" style="width:758px;height:400px;"></iframe><br />
+	<center><a href="#" onclick="hideinfo();">-- Fermer --</a></center>
+</div>

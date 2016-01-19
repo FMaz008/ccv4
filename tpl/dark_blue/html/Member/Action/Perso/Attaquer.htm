@@ -1,0 +1,151 @@
+<script type="text/javascript">
+	showHideTypeAttaque = function(show_what){
+		$('att_tours').style.display='none';
+		$('att_cible').style.display='none';
+		$('type_att_tours').checked = 'unchecked';
+		$('type_att_cible').checked = 'unchecked';
+		$(show_what).style.display='block';
+		$('type_'+show_what).checked = 'checked';
+		$(show_what+'_tours1').checked='checked';
+	}
+</script>
+<br />
+<form id="form_att" method="post" action="?popup=1&m=Action_Perso_Attaquer2" onsubmit="return ajaxSubmitForm(this);">
+<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="3">Attaquer</td>
+	</tr>
+	<tr>
+		<td class="name">Arme équipée</td>
+		<td class="name">Type d'attaque</td>
+		<td class="name">Options</td>
+	</tr>
+	<tr>
+		<td class="value">
+			<?=$ARME_NOM;?><br />
+			<br />
+			<div style="text-align:left;width:100%;">
+				<strong>Portée&nbsp;:</strong><br />
+			</div>
+			<select name="portee">
+				<? foreach($PORTEE as $portee) { ?>
+					<option value="<?=$portee['code'];?>"><?=$portee['txt'];?></option>
+				<? } ?>
+			</select>
+			
+		</td>
+		<td class="value" style="text-align:left;" rowspan="3">
+			<table style="width:100%;">
+			<tr>
+				<td class="name">
+					<input type="radio" name="type_att" id="type_att_tours" value="tours" onclick="showHideTypeAttaque('att_tours');" CHECKED />
+					<a href="#" onclick="showHideTypeAttaque('att_tours');">par tours</a>
+				</td>
+				<td class="name">
+					<input type="radio" name="type_att" id="type_att_cible" value="cible" onclick="showHideTypeAttaque('att_cible');" />
+					<a href="#" onclick="showHideTypeAttaque('att_cible');">ciblée</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="value" colspan="2">
+					
+					<!-- Attaque de par tours -->
+					<div id="att_tours" style="width:100%;">
+						<table style="width:100%;">
+						<tr>
+							<td class="name">Attaque par tours&nbsp;:</td>
+						</tr>
+						<tr>
+							<td class="value">
+								<? foreach ($TOURS as $tour) {?>
+									<input type="radio" name="tours" id="att_tours_tours<?=$tour['no'];?>" value="<?=$tour['no'];?>" <?=$tour['statut'];?> <? if($tour['no']==1) {echo 'CHECKED';} ?> />
+									<?=$tour['no'];?> tour(s): <?=$tour['pa'];?> PA
+									<br />
+								<? } ?>
+							</td>
+						</tr>
+						</table>
+					</div>
+					
+					<!-- Attaque ciblée -->
+					<div id="att_cible" style="display:none;width:100%;">
+						<table style="width:100%;">
+						<tr>
+							<td class="name">Attaque ciblée&nbsp;:</td>
+						</tr>
+						<tr>
+							<td class="value">
+								<input type="radio" name="tours" id="att_cible_tours1" value="1" <?=$TOURS[0]['statut'];?> />
+								1 tour: <?=$tour_cible['pa'];?> PA<br />
+								<br />
+								<strong>Zone ciblée:</strong><br />
+								<? foreach ($ZONES as $zone) {?>
+									<input type="radio" name="zones" value="<?=$zone['tech'];?>" />
+									<?=$zone['nom'];?>
+									<br />
+								<? } ?>
+							</td>
+						</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			</table>
+		</td>
+		<td class="value" rowspan="3" style="text-align:left;vertical-align:top;">
+			<strong>Essayer d'arrêter l'attaque lorsque la victime&nbsp;:</strong>
+			<br /><input type="radio" name="att_stop" value="normal" /> sera blessée.
+			<br /><input type="radio" name="att_stop" value="autonome" /> sera blessée gravement.
+			<br /><input type="radio" name="att_stop" value="conscient" /> sera inconsciente.
+			<br /><input type="radio" name="att_stop" value="jamais" checked="checked" /> Ne pas arrêter l'attaque.
+			<br />
+			<br /><input type="checkbox" name="furtif" value="true" /> Tenter une approche furtive (+15 PA)
+		</td>
+	</tr>
+	<tr>
+		<td class="name" style="height:10px;">Qui&nbsp;?</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="value" align="left" valign="top" style="width:150px;height:100%;">
+		<div style="">
+			<? if (!isset($PERSOS)){?>
+				<i>Il n'y a personne dans ce lieu.</i>
+			<? }else{?>
+				<? foreach ($PERSOS as $perso) {?>
+					<input type="radio" name="perso_id" value="<?=$perso['perso']->getId();?>" <?=$perso['disabled'];?> />
+					<?if ($perso['perso']->getSexe()=='m'){?>
+						<span id="perso_<?=$perso['perso']->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+					<?}else{?>
+						<span id="perso_<?=$perso['perso']->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+					<?}?>
+						<?=$perso['perso']->getNom();?>
+					</span>
+					<div id="ib_perso_<?=$perso['perso']->getId();?>" class="infobulle" style="width:300px;">
+						<div class="title">Infos</div>
+						<?if ($perso['perso']->getAvatar()!='') {?>
+							<img class="imgbg" align="left" src="<?=$perso['perso']->getAvatar();?>" />
+						<? } ?>
+						<strong>État&nbsp;:</strong> <?=$perso['etat'];?> <br />
+						<strong>Arme&nbsp;:</strong> <?=$perso['arme'];?> <br />
+						<strong>Description&nbsp;:</strong><br />
+						<?=$perso['perso']->getDescription();?>
+					</div>
+					<br />
+				<?
+				}
+			}
+			?>
+		</div>
+		</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="send" colspan="3">
+			<input class="button" type="submit" name="save" value="Attaquer" />
+		</td>
+	</tr>
+</table>
+</form>

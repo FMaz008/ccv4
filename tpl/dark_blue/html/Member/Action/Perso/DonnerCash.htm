@@ -1,0 +1,52 @@
+<script type="text/javascript">
+	$('perso_pa').innerHTML="<?=$PA;?>";
+	$('perso_cash').innerHTML="<?=$CASH;?>";
+</script>
+<br />
+<form id="action_donnerCash" method="post" action="?popup=1&m=Action_Perso_Donnercash2" onsubmit="return ajaxSubmitForm(this);">
+<table class="tbl_center">
+<tr>
+	<td class="title" style="width:50%;">Inventaire personnel</td>
+	<td class="title">Donner &agrave;</td>
+</tr>
+<tr>
+	<td class="value">
+		Montant &agrave; donner:<br />
+		<input type="text" name="cash" class="text" value="0" /><?=GAME_DEVISE;?>
+	</td>
+	<td class="value" style="text-align:left;">
+		<?
+		if (isset($LIST_PERSO)){
+			foreach($LIST_PERSO as $perso){ ?>
+				<input type="radio" name="toPersoId" value="<?=$perso->getId();?>" />
+				<?if ($perso->getSexe()=='m'){?>
+					<span id="perso_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+				<?}else{?>
+					<span id="perso_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+				<?}?>
+					<?=$perso->getNom();?>
+				</span>
+				<div id="ib_perso_<?=$perso->getId();?>" class="infobulle" style="width:300px;">
+					<div class="title">Infos</div>
+					<?if ($perso->getAvatar()!='') {?>
+						<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
+					<? } ?>
+					<?=$perso->getDescription();?>
+				</div>
+				<br />
+		<?
+			}
+		}else{
+		?>
+			<i>-personne-</i>
+		<?
+		}
+		?>
+	</td>
+</tr>
+<tr>
+	<td class="send" colspan="2" style="width:30px;">
+		<input type="submit" class="button" value="Donner" />
+	</td>
+</tr>
+</table>

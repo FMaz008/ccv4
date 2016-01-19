@@ -1,0 +1,238 @@
+<script type="text/javascript">
+//<!--
+	$('perso_pa').innerHTML="<?=$PA;?>";
+	$('perso_cash').innerHTML="<?=$CASH;?>";
+	
+	//Fonction generales
+	fail = function(){
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML="La requête &agrave; &eacute;chou&eacute;e, veuillez r&eacute;-essayer plus tard.";
+	}
+
+	showplzwait = function(){
+		$('plzwait1').style.display="block";
+		$('plzwait2').style.display="block";
+		$('request_msgtxt').innerHTML="Veuillez patienter...";
+		$('request_msg').style.display="none";
+	}
+	hideplzwait = function(){
+		$('plzwait1').style.display="none";
+		$('plzwait2').style.display="none";
+	}
+
+
+
+	//Retrait
+	operation_retrait = function(id){
+		showplzwait();
+		
+		var myAjax = new Ajax.Request(
+				'?popup=1&m=Action_Lieu_BanqueRetrait', 
+				{
+					method: 'post', 
+					parameters: 'id='+id+'&montant='+$('o_montant'+id).value, 
+					onComplete: operation_confirm,
+					onFailure: fail
+				});
+	}
+	
+	//Depot
+	operation_depot = function(id){
+		showplzwait();
+		
+		var myAjax = new Ajax.Request(
+				'?popup=1&m=Action_Lieu_BanqueDepot', 
+				{
+					method: 'post', 
+					parameters: 'id='+id+'&montant='+$('o_montant'+id).value, 
+					onComplete: operation_confirm,
+					onFailure: fail
+				});
+	}
+	
+	//Transfert
+	operation_transfert = function(id){
+		showplzwait();
+		
+		var myAjax = new Ajax.Request(
+				'?popup=1&m=Action_Lieu_BanqueTransfert', 
+				{
+					method: 'post', 
+					parameters: 'id='+id+'&montant='+$('t_montant'+id).value+'&compte='+$('t_compte'+id).value, 
+					onComplete: operation_confirm,
+					onFailure: fail
+				});
+	}
+	
+	
+	operation_confirm = function(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		
+		if (params[1]=="OK"){
+			$('cash'+params[0]).innerHTML = params[2];
+			$('perso_cash').innerHTML=params[3];
+			$('perso_pa').innerHTML=params[4];
+			
+			hideplzwait();
+		}else{
+			$('request_msg').style.display="block";
+			$('request_msgtxt').innerHTML=params[1];
+		}
+	}
+	
+	goTo = function(cptid, url) {
+		var theForm = $('action_redirect'+cptid);
+		
+		theForm.action = url;
+		ajaxSubmitForm(theForm);
+	}
+//-->
+</script>
+<!-- Zone ombragée -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Veuillez patienter...</div>
+			<div id="request_msg" style="display:none;text-align:center;"><br /><a href="#" onclick="hideplzwait();">- Fermer -</a></div>
+		</td>
+		</tr>
+	</tr>
+	</table>
+</div>
+
+
+
+
+
+
+<br />
+<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="2">
+			Banque <?=$BANQUE->getNom();?>
+		</td>
+	</tr>
+	<?
+	foreach($BANK_ACCOUNTS as $account){
+	?>
+		<tr><td class="title" colspan="2">
+			Compte: <?=$account->getNoBanque();?>-<?=$account->getNoCompte();?> au nom de <?=$account->getNom();?>.<br />
+			<?
+			if (!$BANQUE->canRetrait()){
+			?>
+				(compte pour d&eacute;pot uniquement)<br />
+			<?
+			}
+			?>
+		</td></tr>
+		<tr>
+			<td class="value" colspan="2">
+				<form id="action_redirect<?=$account->getId();?>" method="post" action="">
+					<input type="hidden" name="compte" id="compte" value="<?=$account->getNoBanque();?>-<?=$account->getNoCompte();?>" />
+				</form>
+				[<span class="fakelink" onclick="goTo('<?=$account->getId();?>','?popup=1&m=Action_Lieu_BanqueCarte');">Gestion des cartes de guichet</span>]
+				[<span class="fakelink" onclick="goTo('<?=$account->getId();?>','?popup=1&m=Action_Lieu_BanqueHistorique');">Relev&eacute; des transactions</span>]
+				<?if($account->authAutoTransactions()){?>
+					[<span class="fakelink" onclick="goTo('<?=$account->getId();?>','?popup=1&m=Action_Lieu_BanqueTransactionAuto');">Gestion des transactions automatiques</span>]
+				<?}?>
+			</td>
+		</tr>
+		<tr>
+			<td class="name" style="width:50%;">D&eacute;pot/Retrait</td>
+			<td class="name" style="width:50%;">Transfert</td>
+		</tr>
+		<tr>
+			<td class="value">
+				<table>
+					<tr>
+						<td class="name">Solde du compte:</td>
+						<td class="valeur"><span id="cash<?=$account->getId();?>"><?=($account->getCash() != -1)? $account->getCash() . GAME_DEVISE : 'illimité';?></td>
+					</tr>
+					<tr>
+						<td class="name">Montant de la transaction:</td>
+						<td class="value"><input type="text" class="text" id="o_montant<?=$account->getId();?>" value="0" size="6" maxlength="12" /><?=GAME_DEVISE;?></td>
+					</tr>
+					<tr>
+						<td class="name">Type de transaction:</td>
+						<td class="value">
+							<?
+							//if (!isset($BANK_VIA_ITEM)){
+							?>
+								<input type="button" class="button" name="depot" value="D&eacute;pot" onclick="operation_depot(<?=$account->getId();?>);" />
+							<?
+							//}
+							if($BANQUE->canRetrait()){
+							?>
+								<input type="button" class="button" name="retrait" value="Retrait" onclick="operation_retrait(<?=$account->getId();?>);" />
+							<?
+							}
+							?>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td class="value">
+				<table>
+					<tr>
+						<td class="name">Verser dans le compte #:</td>
+						<td class="value"><input type="text" class="text" id="t_compte<?=$account->getId();?>" value="" size="19" maxlength="19" /></td>
+					</tr>
+					<tr>
+						<td class="name">Montant de la transaction:</td>
+						<td class="value"><input type="text" class="text" id="t_montant<?=$account->getId();?>" value="0" size="6" maxlength="12" /><?=GAME_DEVISE;?></td>
+					</tr>
+						<td class="name">Type de transaction:</td>
+						<td class="value">
+							<?
+							if ($BANQUE->canRetrait()){
+							?>
+								<input type="button" class="button" name="transfert" value="Transfert" onclick="operation_transfert(<?=$account->getId();?>);" />
+							<?
+							}
+							else
+							{
+							?>
+							<i>- Ceci n'est pas un compte autorisant les opérations banquaires -</i>
+							<?
+							}
+							?>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td class="value" colspan="2">
+				<form id="action_bank_nip<?=$account->getId();?>" method="post" action="?popup=1&m=Action_Lieu_Banque" onsubmit="return ajaxSubmitForm(this);">
+					<input type="hidden" name="compte_id" value="<?=$account->getId();?>" />
+					NIP : <input type="text" class="text" name="nip" size="5" maxlength="5" value="<?=$account->getNip();?>" />
+					<input type="submit" name="changeNIP" class="button" value="Changer" />
+				</form>
+				<br />
+				<form id="action_bank_close<?=$account->getId();?>" method="post" action="?popup=1&m=Action_Lieu_Banque" onsubmit="return ajaxSubmitForm(this);">
+					<input type="hidden" name="compte_id" value="<?=$account->getId();?>" />
+					<input type="checkbox" name="c_check" value="checked" />Je d&eacute;sire fermer ce compte.<br />
+					<input type="submit" name="close" class="button" style="width:200px;" value="Fermer ce compte maintenant" onclick="return confirm('Fermer ce compte ?');" />
+				</form>
+			</td>
+		</tr>
+		<?
+	}
+	?>
+</table>
+
+	
+<table class="tbl_center">
+<tr><td class="send" colspan="2">
+<br />
+<form id="action_bank_open" method="post" action="?popup=1&m=Action_Lieu_BanqueCompteAdd" onsubmit="return ajaxSubmitForm(this);">
+	<input type="submit" name="newaccount" class="button" style="width:200px;" value="Ouvrir un nouveau compte" />
+</form>
+</td></tr>
+</table>
+

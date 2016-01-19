@@ -1,0 +1,179 @@
+<script type="text/javascript">
+//<!--
+	chgFreq = function(id){
+		showplzwait(); //m_inv_actions.js
+		var myAjax = new Ajax.Request(
+			'?popup=1&m=Action_Item_RadioMajFrequence', 
+			{
+				method: 'post', 
+				parameters: 'idradio='+id, 
+				onComplete: chgFreq_confirm,
+				onFailure: fail
+			});
+	}
+	chgFreq_confirm = function(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML=rval;
+	}
+	
+	saveFreq = function(pars){
+		var myAjax = new Ajax.Request(
+			'?popup=1&m=Action_Item_RadioMajFrequence2', 
+			{
+				method: 'post', 
+				parameters: pars, 
+				onComplete: saveFreq_confirm,
+				onFailure: fail
+			});
+	}
+	saveFreq_confirm = function(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		
+		if (params.length > 1){
+			if(params[1]==0){
+				$("freq_" + params[0]).innerHTML = "<font color=\"red\">aucune</font>";
+				$("ecoute_" + params[0]).innerHTML = "- écoute seulement";
+				$("radio_" + params[0]).disabled=true;
+			}else{
+				$("freq_" + params[0]).innerHTML = params[1];
+				$("ecoute_" + params[0]).innerHTML = "";
+				$("radio_" + params[0]).disabled=false;
+			}
+			hideplzwait(); //m_inv_actions.js
+		}else{
+			$('request_msgtxt').innerHTML=rval;
+		}
+	}
+
+	
+	
+	
+	chgClef = function(id){
+		showplzwait(); //m_inv_actions.js
+		var myAjax = new Ajax.Request(
+			'?popup=1&m=Action_Item_RadioMajClef', 
+			{
+				method: 'post', 
+				parameters: 'idradio='+id, 
+				onComplete: chgClef_confirm,
+				onFailure: fail
+			});
+	}
+	chgClef_confirm = function(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML=rval;
+	}
+	
+	saveClef = function(pars){
+		var myAjax = new Ajax.Request(
+			'?popup=1&m=Action_Item_RadioMajClef2', 
+			{
+				method: 'post', 
+				parameters: pars, 
+				onComplete: saveClef_confirm,
+				onFailure: fail
+			});
+	}
+	saveClef_confirm = function(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		
+		if (params.length > 1){
+			hideplzwait(); //m_inv_actions.js
+		}else{
+			$('request_msgtxt').innerHTML=rval;
+		}
+	}
+//-->
+</script>
+<form id="action_radio" action="?popup=1&m=Action_Item_Radios2" method="post" onsubmit="return ajaxSubmitForm(this);">
+
+	<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="2">Utiliser une Radio</td>
+	</tr>
+	<tr>
+		<td class="name">
+			Utiliser la radio:
+		</td>
+		<td class="value" style="text-align:left;">
+			<?
+			if (!isset($LIST_RADIOS)){
+				?>
+				<i> - Vous ne poss&egrave;dez aucun Talkie walkie- </i>
+				<?
+			}else{
+				foreach ($LIST_RADIOS as $talk){
+					?>
+					<input type="radio" id="radio_<?=$talk->getInvId();?>" value="<?=$talk->getInvId();?>" name="radio" <?if($talk->getCanTalk()=== false){ echo 'DISABLED '; }?>/>
+					<?=$talk->getNom();?> 
+					
+					[Fr&eacute;quence.:
+					<a href="#" onclick="chgFreq(<?=$talk->getInvId();?>)" id="freq_<?=$talk->getInvId();?>">
+					<?
+					if($talk->getCanTalk()){
+						echo $talk->getFrequence();
+					}else{
+						?>
+						<font color="red">aucune</font><?
+					}
+					?></a>
+					<span id="ecoute_<?=$talk->getInvId();?>" style="font-style:italic;">
+					<?if($talk->getCanTalk()=== false){?>
+						 - écoute seulement
+					<? } ?>
+					</span>
+					]
+					
+					<?
+					if($talk->getCryptCapable() == 1){
+						?>
+						| <a href="#" onclick="chgClef(<?=$talk->getInvId();?>)">Clef de cryptage</a>
+						<?
+					}
+					?>
+					<br />
+				<?
+				}
+			}
+			?>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" style="text-align:center;">
+			<textarea class="text" name="message" cols="130" rows="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="send">
+			<input type="submit" class="button" name="save" value="Parler" />
+		</td>
+	</tr>
+</table>
+</form>
+
+
+
+
+<!-- Zone ombrag�e -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Chargement en cours, veuillez patienter...</div>
+			<div id="request_msg" style="display:none;text-align:center;"><br /><a href="#" onclick="hideplzwait();">- Fermer -</a></div>
+		</td>
+		</tr>
+	</tr>
+	</table>
+</div>

@@ -1,0 +1,36 @@
+<form name="form1" action="" method="post">
+	<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+<table class="center">
+	<tr>
+		<td class="title" colspan="5">Gestion des livres accessibles dans le lieu <?=$LIEU_TECH;?> (via le module de bibliothèque)</td>	
+	</tr>
+	
+	<tr>
+		<td class="name"></td>
+		<td class="name">ID</td>
+		<td class="name">Titre</td>
+		<td class="name">Auteur</td>
+		<td class="name">Taille</td>
+	</tr>
+	
+	<? foreach($LIVRES as $livre){ ?>
+		<tr>
+			<td class="name" style="width:10px;">
+				<input type="radio" name="id_livre" value="<?=$LIEU_ID;?>;<?=$livre->getDbId();?>" />
+			</td>
+			<td class="value"><?=$livre->getDbId();?></td>
+			<td class="value"><a href="?mj=Item_LivreMod&id=<?=$livre->getDbId();?>&rpage=Lieu_Biblio&rid=<?=$LIEU_ID;?>"><?=$livre->getTitre();?></a></td>
+			<td class="value"><?=$livre->getAuteur();?></td>
+			<td class="value"><?=$livre->getTaille();?> Kb</td>
+		</tr>
+	<? } ?>
+	
+	<tr>
+		<td colspan="5" class="send">
+			<input type="submit" class="button" name="add" value="Ajouter"  onClick="document.forms['form1'].action='?mj=Lieu_BiblioAdd';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_BiblioDel';return confirm('Voulez-vous vraiment supprimer la sélection ?');" />
+		</td>
+	</tr>
+</table>
+
+</form>

@@ -1,0 +1,380 @@
+
+
+<form id="redir_form" method="post" action="" onsubmit="return ajaxSubmitForm(this);">
+	<input type="hidden" id="redir_id" name="id" value="" />
+</form>
+
+
+<br />
+<form id="INVENTAIRE" method="post" action="?popup=1&m=Action_Perso_Inventaire" onsubmit="return ajaxSubmitForm(this);">
+<table class="center" style="width:750px;">
+	<tr>
+		<td class="title" colspan="2">
+			Inventaire
+		</td>
+	</tr>
+	<tr>
+		<td class="value" style="width:400px;vertical-align:top;padding-top:10px;">
+				<table class="center" style="width:400px;">
+					<tr>
+					<?
+					$CurrentType='';
+					$ItemCounter=0;
+					$maxcol=3;
+					if(isset($INVENTAIRE))
+					{
+					foreach($INVENTAIRE as $item)
+					{
+						$ItemCounter++;
+						if($CurrentType!=$item->getGroup())
+						{
+							$CurrentType=$item->getGroup();
+							
+							for($i=$ItemCounter;$i<=$maxcol;$i++){
+								echo "<td style='width:33%;'></td>";
+							}
+							
+							?>
+							</tr>
+							<tr><td class="name" colspan="<?=$maxcol;?>"><?=$item->getGroup();?></td></tr>
+							<tr>
+							<?
+							$ItemCounter=1;
+						}
+						if($ItemCounter>$maxcol)
+						{
+							$ItemCounter=1;
+							?>
+							</tr>
+							<tr>
+							<?
+						}
+						$itemHeight = '60';
+						$itemAction='';
+						$itemType=substr($item->getTypeTech(),0,1);
+						if($itemType=='a'){
+							$itemHeight = '120';
+							$itemAction = "ranger('".$item->getTypeTech()."')";
+						}elseif($itemType=='f'){
+							$itemAction = "ranger('".$item->getTypeTech()."')";
+						}
+						?>
+							<td class="value" style='width:33%;text-align:center;'>
+								<div id="dz_<?=$item->getInvId();?>"
+									class="dropable_off"
+									style="width:60px;
+										height:<?=$itemHeight;?>px;
+										background-image:url('<?=$SKIN_VIRTUAL_PATH;?>../_common/items/<?=$item->getImage();?>');
+										background-repeat:no-repeat;
+										opacity:0.15;"></div>
+								<div id="dg_<?=$item->getInvId();?>"
+									class="dragable"
+									style="width:60px;
+											height:<?=$itemHeight;?>px;
+											background-image:url('<?=$SKIN_VIRTUAL_PATH;?>../_common/items/<?=$item->getImage();?>');
+											background-repeat:no-repeat;"></div>
+								
+								
+								<div id="fiche_<?=$item->getInvId();?>" class="inv_fiche" style="position:absolute;display:none;overflow:hidden;">
+									<table id="table_<?=$item->getInvId();?>">
+									<tr>
+										<td class="value" id="tableimg_<?=$item->getInvId();?>" style="width:60px;">
+											<!--Espace réservée pour l'image-->
+										</td>
+										<td style="text-align:left;vertical-align:top;">
+											<div id="fiche_<?=$item->getInvId();?>_actions"><!--Espace réservée pour les actions--></div><br />
+											<div id="fiche_<?=$item->getInvId();?>_specs"><!--Espace réservé pour les spec--></div>
+										</td>
+									</tr>
+										<td style="text-align:left;vertical-align:top;" colspan="2">
+											<strong><div id="fiche_<?=$item->getInvId();?>_nom"><!--Espace réservé pour le nom--></div></strong><br />
+											<div id="fiche_<?=$item->getInvId();?>_description"><!--Espace réservé pour la description--></div>
+										</td>
+									</tr>
+									</table>
+								</div>
+								
+								
+								<br />
+							</td>
+					<?
+					}
+					}
+					?>
+					</tr>
+				</table>
+		
+		
+		
+		</td>
+		<td class="value" style="vertical-align:top;">
+		
+		
+		
+			<table class="center" style="width:350px;background-image:url('<?=$SKIN_VIRTUAL_PATH;?>/img/<?=$SILOUHET_IMG;?>.png');background-repeat:no-repeat;">
+				<tr style="height:1%;">
+				
+				
+				
+					<td style="vertical-align:top;">
+					
+						<table class="center" style="width:90px;margin-top:20px;">
+							<tr>
+								<td class="name" style="font-size:8pt;text-align:center;height:20px;">Torse</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="dz_torse" class="dropable_off" style="width:60px;height:60px;"></div>
+								</td>
+							</tr>
+						</table>
+						
+						<table class="center" style="width:90px;margin-top:20px;">
+							<tr>
+								<td class="name" style="font-size:8pt;text-align:center;height:20px;">Bras</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="dz_bras" class="dropable_off" style="width:60px;height:60px;"></div>
+								</td>
+							</tr>
+						</table>
+						
+						<table class="center" style="width:90px;margin-top:20px;">
+							<tr>
+								<td class="name" style="font-size:8pt;text-align:center;height:20px;">Mains</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="dz_main" class="dropable_off" style="width:60px;height:60px;"></div>
+								</td>
+							</tr>
+						</table>
+						
+						<table class="center" style="width:90px;margin-top:20px;">
+							<tr>
+								<td class="name" style="font-size:8pt;text-align:center;height:20px;">Jambes</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="dz_jambe" class="dropable_off" style="width:60px;height:60px;"></div>
+								</td>
+							</tr>
+						</table>
+					
+					</td>
+					
+					
+					
+					<td style="width:200px;vertical-align:top;">
+						<div id="dz_consommer" class="dropable_off" style="width:140px;height:200px;"></div>
+					</td>
+					
+					
+					
+					<td style="vertical-align:top;">
+					
+						<table class="center" style="width:90px;margin-top:10px;">
+							<tr>
+								<td class="name" style="font-size:8pt;text-align:center;height:20px;">Tête</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="dz_tete" class="dropable_off" style="width:60px;height:60px;"></div>
+								</td>
+							</tr>
+						</table>
+						
+						<table class="center" style="width:90px;margin-top:10px;">
+							<tr>
+								<td class="name" style="font-size:8pt;text-align:center;height:20px;">Dos</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="dz_dos" class="dropable_off" style="width:60px;height:60px;"></div>
+								</td>
+							</tr>
+						</table>
+						
+						<table class="center" style="width:90px;margin-top:10px;">
+							<tr>
+								<td class="name" style="font-size:8pt;text-align:center;height:20px;">Arme</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="dz_arme" class="dropable_off" style="width:60px;height:120px;"></div>
+								</td>
+							</tr>
+						</table>
+						
+						<table class="center" style="width:90px;margin-top:5px;">
+							<tr>
+								<td class="name" style="font-size:8pt;text-align:center;height:20px;">Pieds</td>
+							</tr>
+							<tr>
+								<td>
+									<div id="dz_pied" class="dropable_off" style="width:60px;height:60px;"></div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<div id="dz_jeter" class="dropable_off" style="width:350px;height:30px;"></div>
+		</td>
+	</tr>
+</table>
+</form>
+
+<div id="debug" style="background-color:#333333;font-size:6pt;">
+	<div id="invVer1"></div>
+	<div id="invVer2"></div>
+	<div id="invVer3"></div>
+	<script type="text/javascript">
+	//<!--
+		$("invVer1").innerHTML = "inventaire_version=" + inventaire_version;
+		$("invVer2").innerHTML = "inventaire_action_version=" + inventaire_actions_version;
+		$("invVer3").innerHTML = "draganddrop_version="+draganddrop_version;
+	//-->
+	</script>
+</div>
+
+
+
+<!-- Zone ombragée -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Chargement en cours, veuillez patienter...</div>
+			<div id="request_msg" style="display:none;text-align:center;"></div>
+			<div id="request_close" style="text-align:center;"><a href="#" onclick="hideplzwait();">- Fermer -</a></div>
+		</td>
+		</tr>
+	</tr>
+	</table>
+</div>
+
+
+<script type="text/javascript">
+//<!--
+	showplzwait();
+	
+	PlacerItems = function(){
+		//Ré-initialiser tout les tableaux
+		animationEnCours	= 0;
+		arrTimer		= Array();
+		arrItems		= Array();
+		arrItemFiches	= Array();
+		arrDz		= Array();
+
+		//Créer les tableau
+		arrDz[arrDz.length] = new Dz('arme');
+		arrDz[arrDz.length] = new Dz('tete');
+		arrDz[arrDz.length] = new Dz('torse');
+		arrDz[arrDz.length] = new Dz('bras');
+		arrDz[arrDz.length] = new Dz('main');
+		arrDz[arrDz.length] = new Dz('jambe');
+		arrDz[arrDz.length] = new Dz('pied');
+		arrDz[arrDz.length] = new Dz('dos');
+		arrDz[arrDz.length] = new Dz('jeter');
+		arrDz[arrDz.length] = new Dz('consommer');
+	<?
+	
+	if(isset($INVENTAIRE)){
+	foreach($INVENTAIRE as $item){
+		$arrActions = '';
+		
+		$baseDz = $item->getInvId();
+		$equipDz = null;
+		
+		if ($item->canEquip()){
+			switch($item->getTypeTech()){
+				case 'arme_feu':		$equipDz = 'arme';	break;
+				case 'arme_blanche':	$equipDz = 'arme';	break;
+				case 'arme_lancee':		$equipDz = 'arme';	break;
+				case 'arme_lancee':		$equipDz = 'arme';	break;
+				case 'arme_lourde':		$equipDz = 'arme';	break;
+				case 'arme_paralysante':	$equipDz = 'arme';	break;
+				case 'defense_tete':	$equipDz = 'tete';	break;
+				case 'defense_torse':	$equipDz = 'torse';	break;
+				case 'defense_bras':	$equipDz = 'bras';	break;
+				case 'defense_main':	$equipDz = 'main';	break;
+				case 'defense_jambe':	$equipDz = 'jambe';	break;
+				case 'defense_pied':	$equipDz = 'pied';	break;
+				case 'sac':				$equipDz = 'dos';	break;
+				default:		die("Erreur #1 [inventaire.htm]:" . $item->getTypeTech());	break;
+			}
+			
+			if ($item->isEquip())	{
+				$arrActions .= ($arrActions=='') ? "":",";
+				$arrActions .= "Array('Ranger', 'ranger')"; 
+				$baseDz = $equipDz;
+			}
+		}
+		
+		if ($item->canEquip() && !$item->isEquip()){
+			$arrActions .= ($arrActions=='') ? "":",";
+			$arrActions .= "Array('Équiper', 'equiper')";
+		}
+		
+		$qte = "-";
+		if ($item instanceof Member_ItemArmeFeu){
+			$arrActions .= ($arrActions=='') ? "":",";
+			$arrActions .= "Array('Charger', 'charger')";
+			$qte = $item->getMunition() . "/" . $item->getMunitionMax();
+		}
+		if ($item instanceof Member_ItemMunition || $item instanceof Member_ItemDrogue){
+			$qte = $item->getQte();
+		}
+		
+		if ($item instanceof Member_ItemNourriture || ($item instanceof Member_ItemDrogue && $item->getTypeTech()!='drogue_substance')){ //Nourriture et drogue
+			$arrActions .= ($arrActions=='') ? "":",";
+			$arrActions .= "Array('Consommer', 'conso')";
+			$qte = $item->getQte();
+		}
+		
+		if ($item instanceof Member_ItemLivre){ //Livre
+			$arrActions .= ($arrActions=='') ? "":",";
+			$arrActions .= "Array('Lire', 'lireLivre')";
+		}
+		
+		
+		$arrActions .= ($arrActions=='') ? "":",";
+		$arrActions .= "Array('Jeter au sol', 'jeter')";
+		
+		//Action cacher objet
+		$arrActions .= ($arrActions=='') ? "":",";
+		$arrActions .= "Array('Cacher dans le lieu', 'cacher')";
+		
+		
+		?>
+		arrDz[arrDz.length] = new Dz("<?=$item->getInvId();?>");
+		
+		arrItemFiches[arrItemFiches.length] = new FicheItem( 
+										<?=$item->getInvId();?>,
+										"<?=rawurlencode($item->getNom());?>",
+										"<?=rawurlencode($item->getDescription());?>",
+										Array(<?=$arrActions;?>),
+										"<?=$item->getPr();?>",
+										"<?=$qte;?>"
+									);
+		
+		arrItems[arrItems.length] = new Item( 
+										<?=$item->getInvId();?>,
+										"<?=$baseDz;?>",
+										"<?=$equipDz;?>"
+									);
+		
+		<?
+	}
+	}
+	?>
+	//Masquer la fenêtre "please wait"
+	hideplzwait();
+	}
+	setTimeout('PlacerItems()', 100);
+//-->
+</script>

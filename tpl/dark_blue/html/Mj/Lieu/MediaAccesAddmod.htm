@@ -1,0 +1,92 @@
+﻿<script type="text/javascript">
+//<!--
+	function Changer_Lieu(){
+		var lieu=prompt('Dans quel lieu souhaitez-vous ajouter l\'accès média ? (Nom technique)','');
+		if(lieu!=""){
+			var myAjax = new Ajax.Updater(
+				'div_lieu', 
+				'?mj=Search&popup=1', 
+				{
+					method: 'post', 
+					parameters: 'searchWhat=p_modifier_lieu&search='+lieu
+				});
+		}
+	}
+	function Changer_Lieu2(lieu){
+		$('div_lieu').innerHTML = lieu+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="lieuId" value="'+lieu+'" />';
+	}
+//-->
+</script>
+
+<br />
+
+<? if(isset($LIEU_ID)) { ?>
+	<a href="?mj=Lieu_MediaAcces&id=<?=$LIEU_ID;?>">&lt;&lt; Retour à la liste des accès média</a><br />
+<? } ?>
+
+<form method="post" name="form1" action="?mj=Lieu_MediaAcces<?=$SUBMITNAME;?>">
+		<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+	<table align="center">
+		<tr>
+			<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> un accès média</td>
+		</tr>
+		<? if( $SHOWID == true ){ ?>
+		<tr>
+			<td class="name">ID/# de l'accès média</td>
+			<td class="value"><input type="hidden" name="id_mediaAcces" value="<?=$MEDIA_ACCES->getId();?>" /><?=$MEDIA_ACCES->getId();?></td>
+		</tr>
+		<? } ?>
+		
+		<tr>
+			<td class="name">Accès média dans le lieu<br />(Nom technique)</td>
+			<td class="value">
+				<div id="div_lieu" style="height:6em;overflow:auto;">
+					<?=$LIEU_TECH;?> (<a href="#" onclick="Changer_Lieu();">Changer</a>)
+					<input type="hidden" name="lieuId" value="<?=$MEDIA_ACCES->getLieuId();?>" />
+				</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="name">Nom</td>
+			<td class="value">
+				<input type="text" class="text" name="nom" value="<?=$MEDIA_ACCES->getNom();?>" maxlength="150" />
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="name">Type</td>
+			<td class="value">
+				<select name="mediaType">
+					<option value='tele' <?if($MEDIA_ACCES->getMediaType() == 'tele') { echo ('SELECTED'); } ?>>Télé</option>
+					<option value='radio' <?if($MEDIA_ACCES->getMediaType() == 'radio') { echo ('SELECTED'); } ?>>Radio</option>
+				</select>
+			</td>
+		</tr>
+				
+		<tr>
+			<td class="name">Canal</td>
+			<td class="value">
+				<input type="text" class="text" name="channelId" value="<?=$MEDIA_ACCES->getChannelId();?>" maxlength="4" />
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="name">Sens d'accès</td>
+			<td class="value">
+				<select name="interactionType">
+					<option value="0" <? if($MEDIA_ACCES->isRecepteur()){ echo 'SELECTED '; } ?>>Réception</option>
+					<option value="1" <? if($MEDIA_ACCES->isEmetteur()){ echo 'SELECTED '; } ?>>Emission</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" class="send">
+				<input type="submit" class="button" name="save" value="Enregistrer" />
+			</td>
+		</tr>
+	</table>
+</form>
+<br />
+<br />

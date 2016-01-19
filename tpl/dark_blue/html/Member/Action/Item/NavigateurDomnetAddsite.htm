@@ -1,0 +1,129 @@
+<script type="text/javascript">
+//<!--
+	validate = function(){
+		
+		var re;
+		
+		re = new RegExp("^[A-Za-z0-9\\.-_]+$");
+		if (!$F('url').match(re)) {
+			alert("L'URL comporte des caractères invalide.");
+			return false;
+		}
+		
+		if($F('user') == "" || $F('pass') == "") {
+			alert("Vous devez compléter l'utilisateur et le mot de passe.");
+			return false;
+		}
+		
+		re = new RegExp("^([0-9]{4})-([0-9]{4}-[0-9]{4}-[0-9]{4})-([0-9]+)$");
+		if (!$F('carte').match(re)) {
+			alert("Le numéro de carte est invalide.");
+			return false;
+		}
+		
+		
+			
+		
+		//Requête AJAX pour valider le # de carte + NIP
+		showplzwait();
+		
+		var myAjax = new Ajax.Request(
+				'?popup=1&m=Action_Item_Siteadd', 
+				{
+					method: 'post', 
+					parameters: 'no='+$F('carte')+
+								'&nip='+$F('nip')+
+								'&url='+$F('url')+
+								'&user='+$F('user')+
+								'&pass='+$F('pass')+
+								'&titre='+$F('titre'), 
+					onComplete: operation_confirm,
+					onFailure: fail
+				});
+		return false;
+	}
+
+	//Fonction generales
+	fail = function(){
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML="La requête &agrave; &eacute;chou&eacute;e, veuillez r&eacute;-essayer plus tard.";
+	}
+
+	showplzwait = function(){
+		$('plzwait1').style.display="block";
+		$('plzwait2').style.display="block";
+		$('request_msgtxt').innerHTML="Veuillez patienter...";
+		$('request_msg').style.display="none";
+	}
+	hideplzwait = function(){
+		$('plzwait1').style.display="none";
+		$('plzwait2').style.display="none";
+	}
+	operation_confirm = function(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		
+		if (params[0]=="OK"){
+			hideplzwait();
+			$('perso_pa').innerHTML=params[1];
+			goTo(params[2]);
+		}else{
+			$('request_msg').style.display="block";
+			$('request_msgtxt').innerHTML=params[1];
+		}
+	}
+//-->
+</script>
+<!-- Zone ombragée -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Chargement en cours, veuillez patienter...</div>
+			<div id="request_msg" style="display:none;text-align:center;"><br /><a href="#" onclick="hideplzwait();">- Fermer -</a></div>
+		</td>
+		</tr>
+	</tr>
+	</table>
+</div>
+
+
+
+<form id="action_navigateurDomnetAddsite" method="post" action="?popup=1&m=Action_Item_Navigateur" onsubmit="return ajaxSubmitForm(this);">
+	
+	<center>
+		<strong>Cr&eacute;er un nouveau site</strong>
+	</center>
+	<br />
+	<p>
+		Vous êtes sur le point de cr&eacute;er un nouveau site. Avant de ce faire, nous devons collecter quelques informations. Veuillez noter qu'afin de pouvoir compl&eacute;ter votre demande d'ajout, vous devez avoir une carte bancaire afin de payer les frais d'ouverture.
+	</p>
+	
+	<p>
+		Votre site sera accessible en tappant une adresse URL dans le navigateur, quelle adresse d&eacute;sirez-vous obtenir ? (Caract&egrave;re A-Za-z0-9_.- uniquement)<br />
+		URL: <input type="text" class="text" id="url" name="url" value="" />
+	</p>
+	
+	<p>
+		Pour agr&eacute;menter la pr&eacute;sentation de votre site, vous pouvez lui attribuer un titre. <br />
+		Titre: <input type="text" class="text" id='titre' name="titre" value="" />
+	</p>
+	
+	<p>
+		Afin de pouvoir effectuer des modifications, vous devez cr&eacute;er un compte d'administration. <br />
+		Utilisateur: <input type="text" class="text" id="user" name="user" value="" /><br />
+		Mot de passe: <input type="text" class="text" id="pass" name="pass" value="" />
+		<span class="txtStyle_heHj">[HJ: Comme tout les mots de passe IJ, celui-ci n'est pas crypt&eacute;. D'autres personnes pourraient en prendre connaissance.]</span>
+	</p>
+	
+	<p>
+		Le coût d'ouverture d'un site est de <span class="txtStyle_valeur">7500<?=GAME_DEVISE;?></span>. Pour effectuer ce paiement en ligne, nous avons besoin d'un # de carte et de votre NIP.<br />
+		# de carte: <input type="text" class="text" id="carte" name="carte" maxlength="30" value="" /><br />
+		NIP: <input type="text" class="text" id="nip" name="nip" value="" />
+	</p>
+	
+	<input type="button" class="button" name="create" value="Cr&eacute;er mon site !" onclick="validate();" />
+</form>

@@ -1,0 +1,55 @@
+<script type="text/javascript">
+//<!--
+confirmdel = function (){
+	return confirm ('Effacer cette caractéristique et toutes celles contenu (dans le cas ou vous supprimez une catégorie) ? La caractéristique sera aussi retirée à tous les joueurs la possédant.');
+}
+
+//-->
+</script>
+<form name="form1" method="post" action="">
+<table>
+	<tr>
+		<td colspan="3" value="name" style="text-align:center;">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Perso_GestionCaractAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Perso_GestionCaractMod';" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Perso_GestionCaractDel';return confirmdel();" />
+		</td>
+	</tr>
+<?
+foreach($CAT as $cat){ 
+	?>
+	<tr>
+		<td class="title">
+			<input type="radio" name="id" value="<?=$cat['id'];?>" />
+		</td>
+		<td class="name" colspan="2">
+			<?=$cat['nom'];?>
+		</td>
+	</tr>
+	<?
+	foreach($CARACT as $caract){
+		if($caract['catid'] == $cat['id']){
+			?>			
+			<tr>
+				<td class="name">
+					<input type="radio" name="id" value="<?=$caract['id'];?>" />
+				</td>
+				<td class="value">
+					<?=$caract['nom'];?>
+				</td>
+				<td class="value">
+					<?=$caract['desc'];?>
+				</td>
+			</tr>
+	<? 	}
+	}
+} ?>
+	<tr>
+		<td colspan="3" value="name" style="text-align:center;">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Perso_GestionCaractAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Perso_GestionCaractMod';" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Perso_GestionCaractDel';return confirmdel();" />
+		</td>
+	</tr>
+</table>
+</form>

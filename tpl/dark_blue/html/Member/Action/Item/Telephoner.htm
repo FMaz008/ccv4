@@ -1,0 +1,153 @@
+<script type="text/javascript">
+//<!--
+	memoire = function(id){
+	
+		var myAjax = new Ajax.Updater( 
+		'memoire', 
+		'?popup=1&m=Action_Item_TelephonerMajMemoire', 
+		{ 
+		method: 'post', 
+		parameters: 'telephone=' + id
+		}); 
+		showhidediv('block');
+	}
+	
+	compte = function(id){
+	
+		var myAjax = new Ajax.Updater(
+		'memoire', 
+		'?popup=1&m=Action_Item_TelephonerMajCompte',
+		{
+			method: 'post',
+			parameters: 'telephone=' + id
+		});
+		showhidediv('block');
+	}
+	
+	SaveChange = function(pars)
+	{
+		var myAjax = new Ajax.Request(
+		'?popup=1&m=Action_Item_TelephonerMajMemoire2', 
+		{
+			method: 'post', 
+			parameters: pars,
+			onComplete: Save_confirm
+		});
+	}
+	
+	SaveChange2 = function(pars)
+	{
+		var myAjax = new Ajax.Request(
+		'?popup=1&m=Action_Item_TelephonerMajCompte2', 
+		{
+			method: 'post', 
+			parameters: pars,
+			onComplete: Save_confirm
+		});
+	}
+	
+	Save_confirm = function(originalRequest)
+	{
+		var rval= originalRequest.responseText;
+		if(rval=="OK")
+		{
+			showhidediv('none');
+		}
+		else
+		{
+			$('erreurMsg').innerHTML = rval;
+			$('erreurBox').style.display='block';
+		}
+	}
+	
+	
+	//Sur la selection d'un telephone, activer ou non les options d'anonymat
+	set_anonyme = function(valeur){
+		if (valeur!="0"){
+			$('ano_oui').disabled=false;
+		}else{
+			$('ano_oui').checked='unchecked';
+			$('ano_non').checked='checked';
+			$('ano_oui').disabled=true;
+		}
+	}
+	
+	showhidediv = function(display){
+		$('memoire').style.display=display;
+		if (display=="none"){
+			$('memoire').innerHTML='';
+		}
+	}
+//-->
+</script>
+
+
+<form id="action_Telephoner" action="?popup=1&m=Action_Item_Telephoner2" method="post" onsubmit="return ajaxSubmitForm(this);">
+	<table class="tbl_center">
+		<tr><td class="title" colspan="2">T&eacute;l&eacute;phoner</td></tr>
+		<tr>
+			<td class="name">T&eacute;l&eacute;phoner avec</td>
+			<td class="value" align="left">
+				<?
+				if (!isset($LIST_TELEPHONES))
+				{
+					?>
+					<i> - Vous ne poss&egrave;dez aucun t&eacute;l&eacute;phone - </i>
+					<?
+				}
+				else
+				{
+					foreach ($LIST_TELEPHONES as $tel)
+					{
+						echo $tel->getNom();
+							
+						if($tel->getCanCall())
+						{
+							?>
+							(bi-directionel)
+							<?
+						}
+						?>
+						<input type="radio" value="<?=$tel->getInvId();?>" name="telephone" onclick="set_anonyme(<?=$tel->getAnonymeCapable();?>);"<?if($tel->getCanCall()==0){ echo 'DISABLED '; }?>/>
+						<span class="txtStyle_valeur"><?=$tel->getPrixAppel();?><?=GAME_DEVISE;?></span>/appel,
+						
+						
+						No.: <?=$tel->getNotel();?>, 			
+						
+						<a href="#" onclick="memoire(<?=$tel->getInvId();?>);return false;">M&eacute;moire</a> |
+						<a href="#" onclick="compte(<?=$tel->getInvId();?>);return false;">Gestion Compte</a><br />
+						<?
+					}
+				}
+				?>
+			</td>
+		</tr>
+	
+		<tr>
+			<td class="name">T&eacute;l&eacute;phoner au #</td>
+			<td class="value" align="left">
+				<input type="text" name="numero_destinataire" id="numero_destinataire" class="text" maxlength="8"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Appel anonyme?</td>
+			<td class="value" style="text-align:left;">
+				<input type="radio" id="ano_oui" name="anonyme" value="1" DISABLED />Oui
+				&nbsp;<input type="radio" id="ano_non" name="anonyme" value="0" CHECKED />Non
+			</td>
+		</tr>
+	</table>
+	
+	
+	<table class="tbl_center">
+		<tr>
+			<td width="450px">
+				<div id="memoire" style="position:absolute;display:none;background-color:black;border:2px solid #CCCCCC;"></div>
+				<textarea class="text" name="message" cols="95" rows="20"></textarea>
+			</td>
+		</tr>
+		<tr><td>
+			<input type="submit" class="button" name="save" value="T&eacute;l&eacute;phoner" />
+		</td></tr>
+	</table>
+</form>

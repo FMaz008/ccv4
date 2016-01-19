@@ -1,0 +1,266 @@
+<?php
+	$statcolors = array("#FF0000","#CC3300","#996600","#669900","#33CC00","#00FF00","#33FF00","#66FF00","#99FF00","#CCFF00","#FFFF00");
+	
+?>
+<br />
+<table style="width:100%;">
+<tr>
+<td valign="top" align="center">
+
+	<table class="center" id="member_action_fichecomp" style="width:350px;">
+		<tr>
+			<td class="title" colspan="2">Comp&eacute;tences</td>
+		</tr>
+		<?
+		foreach($COMP as $comp)
+		{
+			if($comp["xp"]>0)
+			{
+				
+				if ($comp["totalXp"]==0) //Infini
+				{
+					$TotalXP = "&infin;";
+				}
+				else
+				{
+					$TotalXP = $comp["totalXp"];
+				}
+				?>
+				<tr>
+					<td class="name">
+						<?=$comp["nom"];?>
+						<br />
+						<span style="font-size:8pt;font-family:courier new;color: #EEEEDD;">
+							<abbr title="Progression d'XP avant de gagner un niveau.">
+								<?=$comp["currentXp"];?>/<?=$TotalXP;?>
+							</abbr>
+						</span>
+					</td>
+					<td class="value" style="text-align:center;">
+						<table style="width:240px;margin-left:auto;margin-right:auto;">
+						<tr>
+							<?
+							for($i=1;$i<=12;$i++)
+							{
+								$caption = $i;
+								if($i > $comp["lvl"] && $i <= $comp['reallvl'] && $comp['reallvl'] > $comp["lvl"])
+								{
+									$className = 'bonus';
+								}
+								elseif($i <= $comp["lvl"] && $i >= $comp['reallvl'] && $comp['reallvl'] < $comp["lvl"])
+								{
+									$className = 'malus';
+								}
+								elseif($i <= $comp["lvl"])
+								{
+									$className = 'normal';
+								}
+								else
+								{
+									$className = 'invisible';
+									$caption = '';
+								}
+								if($i == $comp["reallvl"])
+								{
+									$className .= ' current';
+								}
+								?>
+								<td class="name lvl <?=$className;?>"><?=$caption;?></td>
+								<?
+							}
+							?>
+						</tr>
+						<tr>
+							<td colspan="12">
+								<?
+								if (!is_numeric($TotalXP)) //Infini
+								{
+									$percent = 100;
+									$percent2= 0;
+								}
+								else
+								{
+									$percent = $comp["currentXp"]*100/$comp["totalXp"];
+									$percent2= 100-$percent;
+								}
+								?>
+								<table style="width:100%;background-color:#555599;padding:1px;" cellspacing="0">
+								<tr>
+									<td style="background-color:#999999;width:<?=$percent;?>%;"></td>
+									<td style="background-color:#001632;width:<?=$percent2;?>%;"></td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+			<?
+			}
+		}
+		?>
+	</table>
+
+</td>
+<td valign="top" align="center">
+	
+	<table class="center" style="width:350px;" id="member_action_fichestat">
+		<tr>
+			<td class="title" colspan="2">Statistiques</td>
+		</tr>
+		<?
+		foreach($STAT as $stat)
+		{
+		?>
+			<tr>
+				<td class="name">
+					<?=$stat["nom"];?>
+					<br /><span style="font-size:8pt;font-family:courier new;color: #EEEEDD;">XP: <?=$stat["xp"];?></span>
+					<br /><span style="font-size:8pt;font-family:courier new;color: #EEEEDD;">LVL: <?=$stat["lvl"];?></span>
+				</td>
+				<td class="value" style="text-align:center;">
+					<table style="margin-left:auto;margin-right:auto;">
+					<tr>
+						<?
+						//Afficher la barre des niveaux négatifs
+						for($i=-5;$i<0;$i++)
+						{
+							if($stat["lvl"]<=$i)
+							{
+								$bgcolor = $statcolors[$i+5];
+								?>
+								<td class="name lvl" style="background-color:<?=$bgcolor;?>;"></td>
+								<?
+							}
+							else
+							{
+								?>
+								<td class="name lvl"></td>
+								<?
+							}
+						}
+						?>
+						
+						<td class="name lvl" style="background-color:<?=$statcolors[5];?>;"></td>
+	
+						<?
+						//Afficher la barre des niveaux positifs
+						for($i=1;$i<6;$i++)
+						{
+							if($stat["lvl"]>=$i)
+							{
+								$bgcolor = $statcolors[$i+5];
+								?>
+								<td class="name lvl" style="background-color:<?=$bgcolor;?>;"></td>
+								<?
+							}
+							else
+							{
+								?>
+								<td class="name lvl"></td>
+								<?
+							}
+						}
+						?>
+					</tr>
+					<tr>
+						<td colspan="5">
+							<?
+							//Afficher la barre de progression vers le niveau précédent
+						
+							$TotalXP = $stat['prevBarMax'];
+							$CurrentXP = $stat['prevBarPos'];
+						
+							if ($TotalXP==0) //Infini
+							{
+								$TotalXP = "&infin;";
+								$percent = 100;
+								$percent2= 0;
+							}
+							else
+							{
+								$percent = $CurrentXP*100/$TotalXP;
+								$percent2= 100-$percent;
+							}
+							?>
+							<table style="width:100%;">
+							<tr>
+								<td style="width:<?=$percent2;?>%;"></td>
+								<td style="background-color:#FF0000;width:<?=$percent;?>%;"></td>
+							</tr>
+							</table>
+							<abbr title="Progression d'XP avant de perdre un niveau.">
+								<?=$CurrentXP;?>/<?=$TotalXP;?>
+							</abbr>
+						</td>
+					
+						<td></td>
+					
+						<td colspan="5">
+							<?
+							//Afficher la barre de progression vers le niveau suivant
+						
+							$TotalXP = $stat['nextBarMax'];
+							$CurrentXP = $stat['nextBarPos'];
+						
+							if ($TotalXP==0) //Infini
+							{
+								$TotalXP = "&infin;";
+								$percent = 100;
+								$percent2= 0;
+							}
+							else
+							{
+								$percent = $CurrentXP*100/$TotalXP;
+								$percent2= 100-$percent;
+							}
+							?>
+							<table style="width:100%;">
+							<tr>
+								<td style="background-color:#FFFF00;width:<?=$percent;?>%;"></td>
+								<td style="width:<?=$percent2;?>%;"></td>
+							</tr>
+							</table>
+							<abbr title="Progression d'XP avant de gagner un niveau.">
+								<?=$CurrentXP;?>/<?=$TotalXP;?>
+							</abbr>
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+		<?
+		}
+		?>
+	</table>
+
+</td>
+</tr>
+<tr><td colspan="2"><br /></td></tr>
+<tr>
+	<td colspan="2" valign="top" align="center">
+		<table class="center" id="member_action_fichetrait" style="width:100%;">
+			<tr>
+				<td class="title">Caractéristiques</td>
+			</tr>
+			<?
+			if(isset($CARACT)){
+				foreach($CARACT as $caract){ ?>
+					<tr>
+						<td class="name">
+							<?=$caract['nom'];?> <span style="font-style:italic;font-weight:normal;">(<?=$caract['cat'];?>)</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="value" style="text-align:left;padding-bottom:15px;">
+							<?=$caract['desc'];?>
+						</td>
+					</tr>
+				<?	}
+			} ?>
+		</table>
+	</td>
+</tr>
+</table>
+<br />
+

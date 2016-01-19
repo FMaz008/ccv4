@@ -1,0 +1,43 @@
+<form id="action_navigateurDomnetAcces" method="post" action="?popup=1&m=Action_Item_Navigateur" onsubmit="return ajaxSubmitForm(this);">
+	<input type="hidden" id="url" name="url" value="" />
+	<input type="hidden" id="user" name="user" value="" />
+	<input type="hidden" id="pass" name="pass" value="" />
+	<input type="hidden" id="action" name="action" value="" />
+	<center>
+		<strong>Gestion des acc&egrave;s</strong>
+	</center>
+	<br />
+	<table class="tbl_center">
+	<tr>
+		<td class="name">User</td>
+		<td class="name">Pass</td>
+		<td class="name">Acc&egrave;de</td>
+		<td class="name">Poste</td>
+		<td class="name">Modifier</td>
+		<td class="name">Admin</td>
+		<td class="name">Supprimer</td>
+	</tr>
+	
+	<? foreach($ACCES as $ax) { ?>
+		<tr>
+			<td class="value"><input type="text" class="text" name="ax_<?=$ax->getId();?>_user" value="<?=$ax->getUser();?>" /></td>
+			<td class="value"><input type="text" class="text" name="ax_<?=$ax->getId();?>_pass" value="<?=$ax->getPass();?>" /></td>
+			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_accede"	<? if($ax->canAccede())		{ echo 'CHECKED '; } ?>value="1" /></td>
+			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_poste"		<? if($ax->canPoste())		{ echo 'CHECKED '; } ?>value="1"/></td>
+			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_modifier"	<? if($ax->canModifier())	{ echo 'CHECKED '; } ?>value="1"/></td>
+			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_admin"		<? if($ax->isAdmin())		{ echo 'CHECKED '; } ?>value="1"/></td>
+			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_del" style="border:1px solid red;" /></td>
+		</tr>
+	<? } ?>
+	
+	</table>
+	<input type="submit" class="button" name="add" onclick="$('action').value=this.name;" value="Ajouter un acc&egrave;s !" />
+	<input type="submit" class="button" name="mod" onclick="$('action').value=this.name;" value="Enregistrer les modifications !" />
+</form>
+
+<script type="text/javascript">
+	//A la fin car si plac&eacute; au d&eacute;but, le formulaire n,est pas encore cr&eacute;&eacute;
+	$('url').value = $F('header_url');
+	$('user').value = $F('header_user');
+	$('pass').value = $F('header_pass');
+</script>

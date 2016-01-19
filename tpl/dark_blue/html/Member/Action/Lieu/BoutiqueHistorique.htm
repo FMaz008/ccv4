@@ -1,0 +1,23 @@
+<script type="text/javascript">
+//<!--
+//-->
+</script>
+
+<span class="fakelink" onclick="actionLink('Action_Lieu_BoutiqueAdmin');">
+	&lt;&lt; Retour
+</span>
+<br />
+
+<table class="tbl_center">
+<tr><td class="title">Historique des transactions</td></tr>
+<tr><td class="value">
+		<?if(isset($HISTORIQUE_LIST)){
+			foreach($HISTORIQUE_LIST as $historique){
+				echo($historique['details']);?><br />
+		<?	}
+		}
+		else{?>
+			<i>Pas de transaction répertoriée.</i>
+		<?}?>
+</td></tr>
+</table>

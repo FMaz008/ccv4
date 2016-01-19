@@ -1,0 +1,59 @@
+<br />
+<a href="?mj=Lieu_MairieQuestion">&lt;&lt; Retour à la liste des questions</a><br />
+
+<form method="post" name="form1" action="?mj=Lieu_MairieQuestion<?=$SUBMITNAME;?>">
+	<table align="center">
+		<tr>
+			<td class="title" colspan="3"><?=$ACTIONTYPETXT;?> une question</td>
+		</tr>
+		<? if( $SHOWID == true ){ ?>
+			<tr>
+				<td class="name">ID de la question</td>
+				<td class="value" colspan="2"><input type="hidden" name="questionId" value="<?=$QUESTION['id'];?>" /><?=$QUESTION['id'];?></td>
+			</tr>
+		<? } ?>
+		
+		
+		<tr>
+			<td class="name">Section</td>
+			<td class="value" colspan="2">
+				<? foreach($SECTIONS as $section){ ?>
+					<input type="radio" name="section" value="<?=$section['section'];?>"<? if($QUESTION['section']==$section['section']) { echo ' checked'; } ?>/> <?=$section['section'];?><br />
+				<? } ?>
+				<br />
+				Nouvelle Section:<br />
+				<input type="radio" name="section" value="new"<? if(empty($QUESTION['section'])) { echo ' checked'; } ?>/>
+				# de section: <input type="text" class="text" name="new_section" value="" maxlength="2" size="2" />
+				<br />
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="name">Question</td>
+			<td class="value" colspan="2">
+				<textarea name="question" style="width:400px;height;50px;"><?=$QUESTION['question'];?></textarea>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="name" colspan="3">Réponses</td>
+		</tr>
+		<?
+		foreach($QUESTION['reponses'] as $reponse){
+			?>
+			<tr>
+				<td class="name"><?=$reponse['reponse_tech'];?></td>
+				<td class="name" style="width:15px;"><input type="radio" name="reponse_tech" value="<?=$reponse['reponse_tech'];?>"<? if(strtolower($reponse['reponse_tech'])==$QUESTION['reponse_tech']){ echo ' CHECKED'; } ?> /></td>
+				<td class="value">
+					<textarea name="reponse_<?=$reponse['reponse_tech'];?>" style="width:375px;height;50px;"><?=$reponse['reponse'];?></textarea>
+				</td>
+			</tr>
+		<? } ?>
+		
+		<tr>
+			<td colspan="3" class="send">
+				<input type="submit" class="button" name="save" value="Enregistrer" />
+			</td>
+		</tr>
+	</table>
+</form>

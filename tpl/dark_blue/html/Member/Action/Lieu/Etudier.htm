@@ -1,0 +1,46 @@
+<form id="action_etudier" method="post" action="?popup=1&m=Action_Lieu_Etudier2" onsubmit="return ajaxSubmitForm(this);">
+<table class="center">
+	<tr>
+		<td class="title" colspan="2">&eacute;tudier</td>
+	</tr>
+	<tr>
+		<td class="name">Quelle mati&egrave;re&nbsp;?</td>
+		<td class="value">
+			<?
+			if (isset($COMPS)){
+				foreach($COMPS as $etude){
+					?>
+					<input type="radio" name="comp" value="<?=$etude['comp'];?>" />
+					<?=$etude['matiere'];?> (<?=$etude['cout_pa'];?>pa + <?=$etude['cout_cash'];?><?=GAME_DEVISE;?>)
+					<br />
+					<?
+				}
+			}else{
+			?>
+				<i>- aucune mati&egrave;re &agrave; &eacute;tudier dans ce lieu -</i>
+			<?
+			}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Pendant combien de temps ?</td>
+		<td class="value">
+			<input type="radio" name="tours" value="1" CHECKED />1 tour <br />
+			<input type="radio" name="tours" value="2" />2 tours <br />
+			<input type="radio" name="tours" value="3" />3 tours <br />
+			<input type="radio" name="tours" value="4" />4 tours <br />
+			<input type="radio" name="tours" value="5" />5 tours <br />
+			<input type="radio" name="tours" value="6" />6 tours <br />
+			<input type="radio" name="tours" value="7" />7 tours <br />
+			<input type="radio" name="tours" value="8" />8 tours <br />
+			<input type="radio" name="tours" value="9" />9 tours
+		</td>
+	</tr>
+	<tr>
+		<td class="send" colspan="2">
+			<input type="submit" class="button" name="save" value="&eacute;tudier" />
+		</td>
+	</tr>		
+</table>
+</form>

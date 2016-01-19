@@ -1,0 +1,32 @@
+<div class="panel login_wrong_error">
+	<div class="title">Accès refusé !</div>
+	<div id="raison"></div>
+</div>
+
+<script type="text/javascript">
+//<!--
+	switch(<?=$ERRORNO;?>){
+		case 1: // 1: Erreur dans la requête
+			$('raison').innerHTML="Erreur système (#1), merci de contacter un MJ Technique.";
+			break;
+		case 2: // 2: Mot de passe ou user incorrecte
+			$('raison').innerHTML="Lancer la procédure de ré-initialisation du mot de passe ?<br /><div style='float:right;'>[ <a href='?v=Passrecover'>Oui</a> / <a href='?v=Login'>Non</a> ]</div>";
+			break;
+		case 3: // 3: Doublon
+			$('raison').innerHTML="Désolé, un doublon à été détecté. Veuillez contacter un Maître de Jeu.";
+			break;
+		case 4: // 4: Normalement impossible
+			$('raison').innerHTML="Erreur système (#4), merci de contacter un MJ Technique.";
+			break;
+		case 5: // 5: Mot de passe ou user incorrecte
+			$('raison').innerHTML="Lancer la procédure de ré-initialisation du mot de passe ?<br /><div style='float:right;'>[ <a href='?v=Passrecover'>Oui</a> / <a href='?v=Login'>Non</a> ]</div>";
+			break;
+		case 6: // 6: Compte bloqué
+			$('raison').innerHTML="Votre compte à été bloqué.";
+			break;
+		case 7: // 7: Email non validé
+			$('raison').innerHTML="Votre adresse email n'a pas encore été validée. Vérifiez vos emails. Modifier les paramètres de votre compte ?<br /><div style='float:right;'>[ <a href='?m=Config_Compte'>Oui</a> / <a href='?v=Main'>Non</a> ]</div>";
+			break;
+	}
+//-->
+</script>

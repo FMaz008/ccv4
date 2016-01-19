@@ -1,0 +1,38 @@
+<form name="form1" method="post" action="?mj=Perso_GestionCompModStat&amp;id=<?=$COMP_ID;?>">
+<table>
+	<tr>
+		<td class="name">
+			Abbréviation
+		</td>
+		<td class="name">
+			Nom
+		</td>
+		<td class="name">
+			Influence
+		</td>
+	</tr>
+<?
+foreach($STAT as $stat)
+{ 
+	?>
+		<tr>
+			<td class="value">
+				<?=$stat['abbr'];?>
+			</td>
+			<td class="value">
+				<?=$stat['nom'];?>
+			</td>
+			<td class="value">
+				<input type="text" name="multi_<?=$stat['abbr'];?>" value="<?=$stat['stat_multi'];?>" size="3" maxlenght="1" />
+			</td>
+		</tr>
+	<?
+}
+?>
+	<tr>
+		<td colspan="2" value="name">
+			<input type="submit" class="button" name="save" value="Enregistrer" />
+		</td>
+	</tr>
+</table>
+</form>

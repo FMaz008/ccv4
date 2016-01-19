@@ -1,0 +1,50 @@
+<?php
+/** Gestion de la suppression des badges
+*
+* @package Mj
+*/
+class Mj_Item_BadgeDel
+{
+	public static function generatePage(&$tpl, &$session, &$account, &$mj)
+	{
+		$dbMgr = DbManager::getInstance(); //Instancier le gestionnaire
+		$db = $dbMgr->getConn('game'); //Demander la connexion existante
+		
+		if (!isset($_POST['db_id']))
+			return fctErrorMSG("Aucun item sélectionné.");
+		
+		if($_POST['db_id'] < 10)
+			return fctErrorMSG("Item système, suppression interdite.");
+		
+		$query = 'DELETE FROM `' . DB_PREFIX . 'item_db`'
+					. ' WHERE `db_id` = :db_id'
+					. ' LIMIT 1;';
+		$prep = $db->prepare($query);
+		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
+		$prep->execute($db, __FILE__,__LINE__);
+		$prep->closeCursor();
+		$prep = NULL;
+		
+		//Suppression de l'item en inventaire
+		$query = 'DELETE FROM `' . DB_PREFIX . 'item_inv`'
+					. ' WHERE `inv_dbid` = :db_id';
+		$prep = $db->prepare($query);
+		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
+		$prep->execute($db, __FILE__,__LINE__);
+		$prep->closeCursor();
+		$prep = NULL;
+
+		//Suppression des actions actuelles
+		$query = 'DELETE FROM `' . DB_PREFIX . 'item_menu`'
+					. ' WHERE `item_dbid` = :db_id';
+		$prep = $db->prepare($query);
+		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
+		$prep->execute($db, __FILE__,__LINE__);
+		$prep->closeCursor();
+		$prep = NULL;
+		
+		die('<script>location.href="?mj=Item_Badge";</script>');
+	}
+}
+
+

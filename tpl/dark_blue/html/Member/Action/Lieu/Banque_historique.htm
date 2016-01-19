@@ -1,0 +1,79 @@
+<script type="text/javascript">
+//<!--
+<? if(isset($NIP)){ ?>
+	goBack = function() {
+		$("action_redirect").action = "?popup=1&m=Action_Lieu_Guichet3";
+		ajaxSubmitForm($("action_redirect"));
+	}
+	goDetails = function(trsId) {
+		$('trsid').value = trsId;
+		$("action_redirect").action = "?popup=1&m=Action_Lieu_Guichet3historiquedetails";
+		ajaxSubmitForm($("action_redirect"));
+	}
+<? }else{ ?>
+	goBack = function() {
+		$("action_redirect").action = "?popup=1&m=Action_Lieu_Banque";
+		ajaxSubmitForm($("action_redirect"));
+	}
+	goDetails = function(trsId) {
+		$('trsid').value = trsId;
+		$("action_redirect").action = "?popup=1&m=Action_Lieu_BanqueHistoriqueDetails";
+		ajaxSubmitForm($("action_redirect"));
+	}
+<? } ?>
+//-->
+</script>
+<form id="action_redirect" method="post" action="">
+<? if(isset($NIP)){ ?>
+	<input type="hidden" name="carteid" value="<?=$CARD_ID;?>" />
+	<input type="hidden" name="nip" value="<?=$NIP;?>" />
+	<input type="hidden" name="trsid" id="trsid" value="" />
+<? }else{ ?>
+	<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+	<input type="hidden" name="trsid" id="trsid" value="" />
+<? } ?>
+</form>
+
+<br />
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="6">
+			Relev&eacute; du compte: <?=$COMPTE;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Date</td>
+		<td class="name">Code</td>
+		<td class="name">Retrait</td>
+		<td class="name">D&eacute;pôt</td>
+		<td class="name">Solde</td>
+		<td class="name"></td>
+	</tr>
+	<?
+	if(isset($HISTORIQUE)){
+		foreach($HISTORIQUE as $transaction){
+		?>
+			<tr>
+				<td class="value" style="width:150px;text-align:left;"><?=$transaction['date'];?></td>
+				<td class="value" style="width:100px;"><?=$transaction['code'];?></td>
+				<td class="value" style="width:75px;text-align:right;"><?=$transaction['retrait'];?></td>
+				<td class="value" style="width:75px;text-align:right;"><?=$transaction['depot'];?></td>
+				<td class="value" style="width:150px;text-align:right;"><?=$transaction['solde'];?></td>
+				<td class="value" style="width:50px;"><a href="#" onclick="goDetails(<?=$transaction['id'];?>);">details</a></td>
+			</tr>
+		<?
+		}
+	}else{
+	?>
+		<tr>
+			<td class="value" colspan="6">
+				<i>-aucune transaction effectu&eacute;e-</i>
+			</td>
+		</tr>
+	<?
+	}
+	?>
+</table>
+
+<span class="fakelink" onclick="goBack();">&lt;&lt; Retour</span>
+<br />

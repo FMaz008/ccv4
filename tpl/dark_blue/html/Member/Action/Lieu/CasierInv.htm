@@ -1,0 +1,86 @@
+<br />
+<form id="action_casierInv" method="post" action="" onsubmit="return ajaxSubmitForm(this);">
+	<input type="hidden" name="id_casier" value="<?=$ID_CASIER;?>" />
+	<? if(isset($PASS)){ ?>
+		<input type="hidden" name="pass" value="<?=$PASS;?>" />
+	<? } ?>
+	<? if(isset($CLEF)){ ?>
+		<input type="hidden" name="clef" value="<?=$CLEF;?>" />
+	<? } ?>
+
+
+
+
+	
+	
+	<table class="tbl_center">
+	<tr>
+		<td class="title">Inventaire personnel</td>
+		<td class="name" rowspan="2" style="width:30px;">
+			<input type="submit" class="button" value="|>>" style="width:25px;" onclick="$('action_casierInv').action='?popup=1&m=Action_Lieu_CasierPersoVersCasier';" /><br />
+			<input type="submit" class="button" value="<<|" style="width:25px;" onclick="$('action_casierInv').action='?popup=1&m=Action_Lieu_CasierCasierVersPerso';" />
+		</td>
+		<td class="title">Inventaire du casier</td>
+	</tr>
+	
+	<tr>
+		<td class="value" style="vertical-align:top;">
+			<table>
+				<tr>
+					<td class="name">Qte</td>
+					<td class="name" style="width:150px;">Nom</td>
+					<td class="name">Pr (/chq)</td>
+				</tr>
+			<? if (isset($INV_PERSO)){
+				foreach($INV_PERSO as $item){?>
+					<tr>
+						<td class="name">
+							<input type="text" class="text" name="qte_<?=$item->getInvId();?>" value="0" style="width:25px;" />
+							&nbsp;&nbsp;/ <?=$item->getQte();?>
+						</td>
+						<td class="value"><?=$item->getNom();?></td>
+						<td class="value"><?=$item->getPr();?></td>
+					</tr>
+				<? } 
+			}else{
+			?>
+				<tr><td class="send" colspan="3"><i>- aucun item en inventaire -</i></td></tr>
+			<?
+			}
+			?>
+			</table>
+		</td>
+		<td class="value" style="vertical-align:top;">
+			<table>
+				<tr>
+					<td class="name">Qte</td>
+					<td class="name" style="width:150px;">Nom</td>
+					<td class="name">Pr (/chq)</td>
+				</tr>
+		<?
+		if (isset($ITEMS)){
+			foreach($ITEMS as $item){
+			?>
+				<tr>
+					<td class="name" style="width:80px;">
+						<input type="text" class="text" name="qte_<?=$item->getInvId();?>" value="0" style="width:25px;" />
+						&nbsp;&nbsp;/ <?=$item->getQte();?>
+					</td>
+					<td class="value"><?=$item->getNom();?></td>
+					<td style="width:80px;"><?=$item->getPr();?></td>
+				</tr>
+			<?
+			} 
+		}else{
+		?>
+			<tr><td class="send" colspan="3"><i>- aucun item dans le casier -</i></td></tr>
+		<?
+		}
+		?>
+			</table>
+		</td>
+	</tr>
+	</table>
+</form>
+<br />
+<br />

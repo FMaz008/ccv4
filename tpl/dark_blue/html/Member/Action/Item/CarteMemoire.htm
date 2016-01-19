@@ -1,0 +1,76 @@
+<script type="text/javascript">
+//<!--
+	updateChr = function(tailleMax)
+	{
+		var size = $('txtData').textLength;
+		var sizeMax = <?=$CARTE_MEM_MAX;?>;
+		if (size > sizeMax){
+			alert ('La taille actuelle ex&egrave;de le maximum permis.');
+			$('txtData').value = $('txtData').value.substring(0,sizeMax);
+		}
+		$('chrLeft').innerHTML = sizeMax - size;
+		$('txtMem').innerHTML = size + " Octets";
+	}
+
+//-->
+</script>
+
+<span class="fakelink" onclick="actionLink('Action_Item_Ordinateur2&amp;id=<?=$PC_ID;?>');">
+	&lt;&lt; Retour
+</span>
+
+
+<?php
+if(isset($SAVED)){
+	?>
+	<div style="border:3px solid #339933;background-color:#336633;font-weight:bold;">
+		<?=$CARTE_MEM;?> octets sauvegardés.
+	</div>
+	<?php
+}
+?>
+
+<form id="action_ouvrirCarteMemoire" action="?popup=1&m=Action_Item_CarteMemoire" method="post" onsubmit="return ajaxSubmitForm(this);">
+	<input type="hidden" name="carteId" value="<?=$CARTE_ID;?>" />
+	<input type="hidden" name="ordiId" value="<?=$PC_ID;?>" />
+	<input type="hidden" name="<?=$CARTE_ID;?>_cle" value="<?=$CARTE_KEY;?>" />
+	<table class="tbl_center">
+	<tr>
+		<td class="title">Contenu de la carte m&eacute;moire</td>
+	</tr>
+	<tr>
+		<td class="name">
+			<?=$PC_NOM;?> -&gt; <?=$CARTE_NOM;?> #<?=$CARTE_ID;?>,
+			<br />Vous utilisez
+					<span id="txtMem" class="txtStyle_valeur"><?=$CARTE_MEM;?> Octets</span>
+					de m&eacute;moire
+					(<span id="chrLeft"><? echo ($CARTE_MEM_MAX-$CARTE_MEM); ?></span> restant)
+		</td>
+	</tr>
+	<tr>
+		<td class="value">
+			<?=$CARTE_PERM_DATA;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="value" align="center">
+			<textarea name="data" id="txtData" onkeyup="updateChr();" style="width:600px;height:300px;"><?=$CARTE_DATA;?></textarea>
+		</td>
+	</tr>
+
+	<? if($CAN_EDIT){?>
+		<tr>
+			<td class="value">
+				Clé <u>numérique</u> de cryptage: <input type="text" name="newCle" value="<?=$CARTE_KEY;?>" /> <i>Vide = non-crypté</i>
+			</td>
+		</tr>
+		<tr>
+			<td class="send">
+				<input type="submit" class="button" name="save" value="Enregistrer" />
+			</td>
+		</tr>
+		<?
+	}
+	?>
+	</table>
+</form>

@@ -1,0 +1,143 @@
+<br />
+<form id="f1"  method="post" action="?popup=1&m=Action_Item_Menotter2" onsubmit="return ajaxSubmitForm(this);">
+
+
+<div class="panel member_action_panel">
+	<div class="title">Menotter ou attacher un individu</div>
+	
+	<div class="member_action_menotter_left">
+		<div class="name">Cette personne:</div>
+		<div class="value member_action_persoContainer">
+			<?
+			if (isset($LIST_PERSO))
+			{
+				foreach($LIST_PERSO as $perso)
+				{
+					?>
+					<input type="radio" name="toPersoId" value="<?=$perso->getId();?>" />
+					<?if ($perso->getSexe()=='m'){?>
+						<a href="#" id="perso_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+					<?}else{?>
+						<a href="#" id="perso_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+					<?}?>
+						<?=$perso->getNom();?>
+					</a><br />
+					<div id="ib_perso_<?=$perso->getId();?>" class="infobulle">
+						<div class="title">Infos</div>
+						<?
+						if ($perso->getAvatar()!='')
+						{
+							?>
+							<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
+							<?
+						}
+						?>
+						<?=$perso->getDescription();?>
+					</div>
+					<?
+				}
+			}
+			else
+			{
+				?>
+				<i>-personne-</i>
+				<?
+			}
+			?>
+		</div>
+	</div>
+	
+	<div class="member_action_menotter_right">
+		<div class="name">À l'aide de:</div>
+		<div class="value">
+			<?
+			if (isset($ITEMS)){
+				foreach($ITEMS as $item){
+					?>
+					<input type="radio" name="inv_id" value="<?=$item->getInvId();?>" />
+					<?=$item->getNom();?>
+					<br />
+					<?
+				} 
+			}else{
+				?>
+				<span class="member_action_menotter_aucunItem">- aucun item trouv&eacute; sur le personnage -</span>
+				<?
+			}
+			?>
+		</div>
+	</div>
+	<div class="clearboth"></div>
+	
+	<div class="name">Message:</div>
+	<div class="send">
+		<textarea class="member_action_menotter_msg" name="msg"></textarea>
+	</div>
+	
+	<div class="send">
+		<input type="submit" class="button" value="Menotter" />
+	</div>
+</div>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+<form id="f2" method="post" action="?popup=1&m=Action_Item_MenotterDel" onsubmit="return ajaxSubmitForm(this);">
+
+
+<div class="panel member_action_panel">
+	<div class="title">Déttacher un individu</div>
+	
+	<div class="member_action_menotter_left">
+		<div class="name">Personnes que vous pouvez détacher:</div>
+		<div class="value member_action_persoContainer">
+			<?
+			if (isset($LIST_PERSO2)){
+				foreach($LIST_PERSO2 as $perso){ ?>
+					<input type="radio" name="toPersoId" value="<?=$perso->getId();?>" />
+					<?if ($perso->getSexe()=='m'){?>
+						<a href="#" id="toperso_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+					<?}else{?>
+						<a href="#" id="toperso_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+					<?}?>
+						<?=$perso->getNom();?>
+					</a><br />
+					<div id="ib_toperso_<?=$perso->getId();?>" class="infobulle">
+						<div class="title">Infos</div>
+						<?if ($perso->getAvatar()!='') {?>
+							<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
+						<? } ?>
+						<?=$perso->getDescription();?>
+					</div>
+					<?
+				}
+			}else{
+			?>
+				<i>-personne-</i>
+			<?
+			}
+			?>
+		</div>
+	</div>
+	<div class="clearboth"></div>
+	
+	<div class="send">
+		<input type="submit" class="button" value="Détacher" />
+	</div>
+</div>
+
+</form>

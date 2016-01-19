@@ -1,0 +1,105 @@
+
+<div class="he_item" style="<?=$MSG->getStyle();?>">
+	<div class="he_leftbar" id="gauche<?=$MSG->getId();?>">
+		<span class="member_he_item_de">
+			<input type='checkbox' name='del[]' value='<?=$MSG->getId();?>' />
+			De&nbsp;:
+		</span>
+		<div class="member_he_item_de_liste">
+		<?
+		foreach($MSG->getFrom() as $perso)
+		{
+			?>
+			<div id="updateZone_perso_<?=$MSG->getId();?>_<?=$perso['id'];?>">
+				<? if ($perso['sexe']=='m'){ ?>
+					<a onclick="renamePerso('perso_',<?=$MSG->getId();?>,<?=$perso['id'];?>,'<?=addslashes($perso['nom']);?>');"
+						id="perso_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_homme"
+						onmousemove="persoinfo(this, event);">
+				<? }elseif($perso['sexe']=='f'){ ?>
+					<a onclick="renamePerso('perso_',<?=$MSG->getId();?>,<?=$perso['id'];?>,'<?=addslashes($perso['nom']);?>');"
+						id="perso_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_femme"
+						onmousemove="persoinfo(this, event);">
+				<? }elseif($perso['sexe']=='s'){ ?>
+					<a id="perso_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_system">
+				<? }else{ ?>
+					<a id="perso_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_autre">
+				<? } ?>
+				<?=$perso['nom'];?>
+				</a>
+			</div>
+			<?
+			if($perso['id']!=0)
+			{
+				?>
+				<div class="infobulle" id="ib_perso_<?=$MSG->getId();?>_<?=$perso['id'];?>" style="width:600px;">
+					<div class="title">Infos - Cliquez pour nommer</div>
+					<div id="ibmsg_perso_<?=$MSG->getId();?>_<?=$perso['id'];?>"></div>
+					
+				</div>
+				<?
+			}
+		}
+		?>
+		</div>
+		
+		
+		<span class="member_he_item_a clearboth" style="margin-top:5px;">
+			A&nbsp;:
+		</span>
+		<div class="member_he_item_a_liste" style="margin-top:5px;<? if(count($MSG->getTo()) > 5) { echo 'height:75px;overflow-y:scroll;'; } ?>">
+		<?
+		foreach($MSG->getTo() as $perso){
+			//Zone qui est remplacée pour renommer
+			?>
+			<div id="updateZone_perso2_<?=$MSG->getId();?>_<?=$perso['id'];?>">
+				<?
+				if ($perso['sexe']=='m'){?>
+					<a onclick="renamePerso('perso2_',<?=$MSG->getId();?>,<?=$perso['id'];?>,'<?=addslashes($perso['nom']);?>');"
+						id="perso2_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_homme"
+						onmousemove="persoinfo(this, event);">
+				<?}elseif($perso['sexe']=='f'){?>
+					<a onclick="renamePerso('perso2_',<?=$MSG->getId();?>,<?=$perso['id'];?>,'<?=addslashes($perso['nom']);?>');"
+						id="perso2_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_femme"
+						onmousemove="persoinfo(this, event);">
+				<?}elseif($perso['sexe']=='s'){?>
+					<a id="perso2_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_system">
+				<?}else{?>
+					<a id="perso2_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_autre">
+				<?}?>
+					<?=$perso['nom'];?>
+				</a>
+			</div>
+			<?
+			if($perso['id']!=0)
+			{
+				?>
+				<div class="infobulle" id="ib_perso2_<?=$MSG->getId();?>_<?=$perso['id'];?>" style="width:600px;">
+					<div class="title">Infos - Cliquez pour nommer</div>
+					<div id="ibmsg_perso2_<?=$MSG->getId();?>_<?=$perso['id'];?>"></div>
+					
+				</div>
+				<?
+			}
+		}
+		?>
+		</div>
+		<br /><span class="color_date"><?=$MSG->getDateTxt();?></span>
+	</div>
+	<div class="he_rightbar he_type_<?=$MSG->getType();?>" id="droite<?=$MSG->getId();?>">
+		<div class="member_he_toplink">
+			<a href="#bas"><img style="border:0px" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/down.png" alt="Aller en bas de la page" /></a>
+			<a href="#haut"><img style="border:0px" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/up.png" alt="Aller en haut de la page" /></a>
+		</div>
+		<?=$MSG->getMsg();?>
+	</div>
+	<div class="clearboth"></div>
+</div>
+
+
+
+
+<script type="text/javascript">
+//<!--
+	heItemAutoHeight(<?=$MSG->getId();?>);
+//-->
+</script>

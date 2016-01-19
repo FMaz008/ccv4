@@ -1,0 +1,72 @@
+<form action="?mj=index" method="post">
+	<table class="center">
+		<tr>
+			<td class="title">Inscriptions en attente de validation</td>
+		</tr>
+		
+		<? if($INSCR != NULL){
+			foreach ($INSCR as $inscr) { ?>
+			<tr>
+				<td style="text-align:center;">
+					<table align="center" style="margin-bottom:20px;">
+						<tr>
+							<td class="name" colspan="4">&nbsp;</td>
+							<td class="name">N/A</td>
+							<td class="name">Accepter</td>
+							<td class="name">Refuser</td>
+							<td class="name">Supprimer</td>
+						</tr>
+						<tr>
+							<td class="name" style="text-align:right;">Compte:</td>
+							<td class="value"><a href="#gestion_compte" onclick="$('user_search').value='<?=$inscr['user'];?>';gosearch('compte');"><?=$inscr['user'];?></a></td>
+							<td class="name" style="text-align:right;">E-mail</td>
+							<td class="value"><?=$inscr['email'];?></td>
+							<td class="name" onclick="this.childNodes[0].checked=true;" rowspan="2" style="text-align:center;"><input type="radio" name="inscr_<?=$inscr['id'];?>" value="" CHECKED /></td>
+							<td class="name" onclick="this.childNodes[0].checked=true;" rowspan="2" style="text-align:center;background-color:#003300;"><input type="radio" name="inscr_<?=$inscr['id'];?>" value="ok" /></td>
+							<td class="name" onclick="this.childNodes[0].checked=true;" rowspan="2" style="text-align:center;background-color:#333300;"><input type="radio" name="inscr_<?=$inscr['id'];?>" value="mod" /></td>
+							<td class="name" onclick="this.childNodes[0].checked=true;" rowspan="2" style="text-align:center;background-color:#330000;"><input type="radio" name="inscr_<?=$inscr['id'];?>" value="suppr" /></td>
+						</tr>
+						<tr>
+							<td class="name" style="text-align:right;">Perso</td>
+							<td class="value"><a href="#gestion_perso" onclick="$('perso_search').value='<?=$inscr['nom'];?>';gosearch('perso');"><?=$inscr['nom'];?></a></td>
+							<td class="name" style="text-align:right;">Age</td>
+							<td class="value"><?=$inscr['age'];?></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="name" colspan="8">Commentaire:</td>
+						</tr>
+						<tr>
+							<td class="value" colspan="8">
+								<textarea name="inscr_commentaire_<?=$inscr['id'];?>" style="width:600px;height:50px;"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td class="name" colspan="4">Description Physique</td>
+							<td class="name" colspan="4">Background</td>
+						</tr>
+						<tr>
+							<td class="value" colspan="4" style="text-align:center;">
+								<div style="overflow:auto;width:300px;height:150px;text-align:justify;"><?=$inscr['description'];?></div>
+								<hr />
+							</td>
+							<td class="value" colspan="4" style="text-align:center;">
+								<div style="overflow:auto;width:300px;height:150px;text-align:justify;"><?=$inscr['background'];?></div>
+								<hr />
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		<? }
+		}else{ ?>
+			<tr><td colspan="5" style="font-style:italic;">- aucune pour le moment -</td></tr>
+		<? } ?>
+	</table>
+	
+	<input type="submit" class="button" name="inscr_save" value="Valider"/>
+
+</form>	

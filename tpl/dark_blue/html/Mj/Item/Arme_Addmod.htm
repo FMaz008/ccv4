@@ -1,0 +1,301 @@
+<script type="text/javascript">
+//<!--
+imgpreviewgo = function(){
+		frames['imgpreview'].location.href = "<?=SITE_VIRTUAL_PATH;?>tpl/_common/items/" + document.getElementById("db_img").value;
+}
+
+var nbr_action_ajout=0;
+AjouterAction = function(){
+	var myAjax = new Ajax.Request(
+		'?mj=Item_AddActionpage&popup=1', 
+		{
+			method: 'post', 
+			parameters: 'divid='+ (nbr_action_ajout+1) + '&db_id=<?=$ITEM['db_id'];?>',
+			onComplete: AjouterAction_completed
+		});
+}
+
+AjouterAction_completed = function(originalRequest){
+	var rval= originalRequest.responseText;
+	$('add_action_'+nbr_action_ajout).innerHTML = rval;
+	nbr_action_ajout++; //Augmenter le total en cas de plusieurs ajouts
+	$('total_action_add').value = nbr_action_ajout;
+	
+}
+
+changeType = function(){
+	
+	switch($('db_soustype').value){
+		case 'arme_feu':
+			showHideTR('precision', true);
+			showHideTR('tir_par_tour', true);
+			showHideTR('capacite', true);
+			showHideTR('munition', true);
+			showHideTR('portee', true);
+			break;
+		case 'arme_blanche':
+			showHideTR('precision', false);
+			showHideTR('tir_par_tour', false);
+			showHideTR('capacite', false);
+			showHideTR('munition', false);
+			showHideTR('portee', false);
+			break;
+			
+		case 'arme_lancee':
+			showHideTR('precision', true);
+			showHideTR('tir_par_tour', false);
+			showHideTR('capacite', false);
+			showHideTR('munition', false);
+			showHideTR('portee', true);
+			break;
+		case 'arme_lourde':
+			showHideTR('precision', true);
+			showHideTR('tir_par_tour', true);
+			showHideTR('capacite', true);
+			showHideTR('munition', true);
+			showHideTR('portee', true);
+			break;
+		case 'arme_paralysante':
+			showHideTR('precision', true);
+			showHideTR('tir_par_tour', false);
+			showHideTR('capacite', false);
+			showHideTR('munition', false);
+			showHideTR('portee', true);
+			break;
+		case 'arme_explosif':
+			showHideTR('precision', true);
+			showHideTR('tir_par_tour', false);
+			showHideTR('capacite', false);
+			showHideTR('munition', false);
+			showHideTR('portee', true);
+			break;
+	}
+}
+
+showHideTR = function(trId, showHide){
+	
+	if (showHide == true)
+	{
+		$(trId).style.display = "table-row";
+		if(trId=='precision')		$('db_' + trId).value="<?=$ITEM['db_precision'];?>";
+		if(trId=='tir_par_tour')	$('db_' + trId).value="<?=$ITEM['db_tir_par_tour'];?>";
+		if(trId=='capacite')		$('db_' + trId).value="<?=$ITEM['db_capacite'];?>";
+	}
+	else
+	{
+		$(trId).style.display = "none";
+		
+		if(trId=='precision')		$('db_' + trId).value="";
+		if(trId=='tir_par_tour')	$('db_' + trId).value="";
+		if(trId=='capacite')		$('db_' + trId).value="";
+		
+	}
+}
+
+var nbr_munition_ajout=0;
+AjouterMunition = function(){
+	var myAjax = new Ajax.Request(
+		'?mj=Item_MunitionAddAjax&popup=1', 
+		{
+			method: 'post', 
+			parameters: 'divid='+ (nbr_munition_ajout+1) + '&db_id=<?=$ITEM['db_id'];?>',
+			onComplete: AjouterMunition_completed
+		});
+}
+
+AjouterMunition_completed = function(originalRequest){
+	var rval= originalRequest.responseText;
+	$('add_munition_'+nbr_munition_ajout).innerHTML = rval;
+	nbr_munition_ajout++; //Augmenter le total en cas de plusieurs ajouts
+	$('total_munition_add').value = nbr_munition_ajout;
+	
+}
+//-->
+</script>
+<form method="post" action="?mj=Item_Arme<?=$SUBMITNAME;?>">
+	
+	<table class="center">
+	<tr>
+		<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> une arme</td>
+	</tr>
+	
+	<? if( $SHOWID == true ){ ?>
+	<tr>
+		<td class="name">ID l'item</td>
+		<td class="value"><input type="hidden" name="db_id" value="<?=$ITEM['db_id'];?>" /><?=$ITEM['db_id'];?></td>
+	</tr>
+	<? } ?>
+	
+	<tr>
+		<td class="name">Type</td>
+		<td class="value">
+			<select name="db_soustype" id="db_soustype" onchange="changeType();">
+				<option value="arme_feu" <?if($ITEM['db_soustype']=='arme_feu'){?> SELECTED <? } ?>>arme à feu</option>
+				<option value="arme_blanche" <?if($ITEM['db_soustype']=='arme_blanche'){?> SELECTED <? } ?>>arme_blanche</option>
+				<option value="arme_lancee" <?if($ITEM['db_soustype']=='arme_lancee'){?> SELECTED <? } ?>>arme_lancee</option>
+				<option value="arme_lourde" <?if($ITEM['db_soustype']=='arme_lourde'){?> SELECTED <? } ?>>arme_lourde</option>
+				<option value="arme_paralysante" <?if($ITEM['db_soustype']=='arme_paralysante'){?> SELECTED <? } ?>>arme_paralysante</option>
+				<option value="arme_explosif" <?if($ITEM['db_soustype']=='arme_explosif'){?> SELECTED <? } ?>>arme_explosif</option>
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="name">Nom de l'item</td>
+		<td class="value"><input type="text" class="text" name="db_nom" value="<?=$ITEM['db_nom'];?>" /></td>
+	</tr>
+	
+	<tr>
+		<td class="name">Description</td>
+		<td class="value"><textarea name="db_desc" style="width:300px;height:75px;"><?=$ITEM['db_desc'];?></textarea></td>
+	</tr>
+	
+	<tr>
+		<td class="name">Valeur</td>
+		<td class="value"><input type="text" class="text" name="db_valeur" value="<?=$ITEM['db_valeur'];?>" size="6" /><?=GAME_DEVISE;?></td>
+	</tr>
+	
+	<tr>
+		<td class="name">
+			Image<br />
+			<iframe src="<?=SITE_VIRTUAL_PATH;?>tpl/_common/items/<?=$ITEM['db_img'];?>" name="imgpreview" style="width:80px;height:120px;" scrolling="no"></iframe>
+		</td>
+		<td class="value">
+			<select name="db_img" id="db_img" onchange="imgpreviewgo();">
+				<? foreach($IMGS as $IMG){ ?>
+					<option value="<?=$IMG;?>" <?if($IMG==$ITEM['db_img']){?> SELECTED <? } ?>><?=$IMG;?></option>
+				<? } ?>
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="name">PR</td>
+		<td class="value"><input type="text" class="text" name="db_pr" value="<?=$ITEM['db_pr'];?>" size="6" /></td>
+	</tr>
+	
+	<tr>
+		<td class="name">Force</td>
+		<td class="value"><input type="text" class="text" name="db_force" value="<?=$ITEM['db_force'];?>" size="6" /></td>
+	</tr>
+	
+	<tr id="portee">
+		<td class="name">Portée</td>
+		<td class="value">
+			<select name="db_portee">
+				<option value="TC" <?if($ITEM['db_portee']=='TC'){?> SELECTED <? } ?>>TC: Très courte</option>
+				<option value="C" <?if($ITEM['db_portee']=='C'){?> SELECTED <? } ?>>C: Courte</option>
+				<option value="M" <?if($ITEM['db_portee']=='M'){?> SELECTED <? } ?>>M: Moyenne</option>
+				<option value="L" <?if($ITEM['db_portee']=='L'){?> SELECTED <? } ?>>L: Longue</option>
+				<option value="TL" <?if($ITEM['db_portee']=='TL'){?> SELECTED <? } ?>>TL: Très longue</option>
+			</select>
+		</td>
+	</tr>
+	
+
+	
+	<tr>
+		<td class="name">Fiabilité</td>
+		<td class="value"><input type="text" class="text" name="db_fiabilite" value="<?=$ITEM['db_fiabilite'];?>" size="6" /></td>
+	</tr>
+	
+	<tr>
+		<td class="name">Résistance Max</td>
+		<td class="value"><input type="text" class="text" name="db_resistance" value="<?=$ITEM['db_resistance'];?>" size="6" /></td>
+	</tr>
+	
+	<tr id="precision">
+		<td class="name">Précision</td>
+		<td class="value"><input type="text" class="text" id="db_precision" name="db_precision" value="<?=$ITEM['db_precision'];?>" size="6" /></td>
+	</tr>
+	
+	<tr id="tir_par_tour">
+		<td class="name">Tir par tour</td>
+		<td class="value"><input type="text" class="text" id="db_tir_par_tour" name="db_tir_par_tour" value="<?=$ITEM['db_tir_par_tour'];?>" size="6" /></td>
+	</tr>
+	
+	<tr id="capacite">
+		<td class="name">Capacite munitions</td>
+		<td class="value"><input type="text" class="text" id="db_capacite" name="db_capacite" value="<?=$ITEM['db_capacite'];?>" size="6" /></td>
+	</tr>
+	<tr id="munition">
+		<td class="name">Munitions compatibles:</td>
+		<td class="value">
+			<table>
+			<tr>
+				<td class="name">DEL</td>
+				<td class="name">Nom</td>
+			</tr>
+			<?
+			if(isset($MUNITIONS)){
+				foreach($MUNITIONS as $mun){
+					?>
+					<tr>
+						<td class="name"><input type="checkbox" name="munition[]" value="<?=$mun['id'];?>" /></td>
+						<td class="value"><?=$mun['db_nom'];?></td>
+					</tr>
+					<?	
+				}
+			}
+			?>
+			</table>
+			<input type="hidden" name="total_munition_add" id="total_munition_add" value="0" />
+			<input type="button" class="button" name="preadd" onclick="AjouterMunition();" value="Ajouter une munition" />
+			<div id="add_munition_0"></div>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="name">Action(s) liée(s):</td>
+		<td class="value">
+			<table>
+			<tr>
+				<td class="name">DEL</td>
+				<td class="name">Module</td>
+				<td class="name">Titre menu</td>
+			</tr>
+			<?
+			if(isset($ACTIONS)){
+				foreach($ACTIONS as $action){
+					?>
+					<tr>
+						<td class="value">
+							<input type="checkbox" name="delAction_<?=$action['id'];?>" value="true" />
+						</td>
+						<td class="name">
+							<?=$action['url'];?>
+						</td>
+						<td class="value">
+							<input type="text" class="text" name="<?=$action['id'];?>_actioncaption" value="<?=$action['caption'];?>" />
+						</td>
+					</tr>
+					<?
+				}
+			}
+			?>
+			</table>
+			
+			<input type="hidden" name="total_action_add" id="total_action_add" value="0" />
+			<input type="button" class="button" name="preadd" onclick="AjouterAction();" value="Ajouter une action" />
+			<div id="add_action_0"></div>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="name">Note MJ</td>
+		<td class="value"><textarea name="db_notemj" style="width:300px;height:75px;"><?=$ITEM['db_notemj'];?></textarea></td>
+	</tr>
+	
+	
+	<tr>
+		<td class="send" colspan="2">
+			<input type="submit" class="button" name="save" value="Enregistrer" />
+		</td>
+	</tr>
+	</table>
+
+</form>
+
+<script type="text/javascript">
+	changeType();
+</script>

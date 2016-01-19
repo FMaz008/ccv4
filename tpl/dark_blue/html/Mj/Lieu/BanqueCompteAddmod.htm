@@ -1,0 +1,90 @@
+<script type="text/javascript">
+function rand(min, max){
+	return Math.floor(Math.random()*(max-min))+1;
+}
+function BuildNoCompte(){
+	$('no_compte').innerHTML = $F('compte_banque') + "-" + $F('compte_compte');
+}
+</script>
+
+<br />
+<a href="?mj=Lieu_BanqueCompte&id=<?=$BANK_ID;?>">&lt;&lt; Retour à la liste des comptes</a><br />
+<form method="post" name="form1" action="?mj=Lieu_BanqueCompte<?=$SUBMITNAME;?>">
+	<table align="center">
+		<tr>
+			<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> un compte</td>
+		</tr>
+		<? if( $SHOWID == true ){ ?>
+			<tr>
+				<td class="name">ID du compte</td>
+				<td class="value">
+					<input type="hidden" name="id" value="<?=$COMPTE['compte_id'];?>" /><?=$COMPTE['compte_id'];?>
+					<input type="hidden" name="bankId" value="<?=$BANK_ID;?>" />
+				</td>
+			</tr>
+		<? } ?>
+		
+		
+		
+		<tr>
+			<td class="name">Numéro de la banque</td>
+			<td class="value">
+				<input type="text" class="text" id="compte_banque" name="compte_banque" onChange="BuildNoCompte();" value="<? if(isset($COMPTE['compte_banque'])) { echo $COMPTE['compte_banque']; } ?>" maxlength="4" size="4"/>
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Numéro de compte</td>
+			<td class="value">
+				<input type="text" class="text" id="compte_compte" onChange="BuildNoCompte();" name="compte_compte" value="<? if(isset($COMPTE['compte_compte'])) { echo $COMPTE['compte_compte']; } ?>" maxlength="14" size="14"/>
+				<input type="button" class="button" value="Générer" onclick="$('banque_no').value = rand(1,9) + '' + rand(0,9) + '' + rand(0,9) + '' + rand(0,9) + '-' + rand(1,9) + '' + rand(0,9) + '' + rand(0,9) + '' + rand(0,9) + '-' + rand(1,9) + '' + rand(0,9) + '' + rand(0,9) + '' + rand(0,9);" />
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Numéro complet</td>
+			<td class="value">
+				<div id="no_compte"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Associé au perso</td>
+			<td class="value">
+				<input type="text" class="text" name="compte_idperso" value="<? if(isset($COMPTE['compte_idperso'])) { echo $COMPTE['compte_idperso']; } ?>" />
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Compte au nom de</td>
+			<td class="value">
+				<input type="text" class="text" name="compte_nom" value="<? if(isset($COMPTE['compte_nom'])) { echo $COMPTE['compte_nom']; } ?>" />
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Solde</td>
+			<td class="value">
+				<input type="text" class="text" name="compte_cash" value="<? if(isset($COMPTE['compte_cash'])) { echo $COMPTE['compte_cash']; } ?>" size="5" /> <?=GAME_DEVISE;?> (-1 = illimité)
+			</td>
+		</tr>
+		<tr>
+			<td class="name">N.I.P.</td>
+			<td class="value">
+				<input type="text" class="text" name="compte_nip" value="<? if(isset($COMPTE['compte_nip'])) { echo $COMPTE['compte_nip']; } ?>" maxlength="5" size="5" />
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="name">Autorisation transactions automatiques</td>
+			<td class="value">
+				<input type="radio" name="compte_auth_auto_transaction" value="1" <? if($COMPTE['compte_auth_auto_transaction'] == '1'){ echo 'CHECKED'; } ?> /> Oui
+				<input type="radio" name="compte_auth_auto_transaction" value="0" <? if($COMPTE['compte_auth_auto_transaction'] == '0'){ echo 'CHECKED'; } ?> /> Non
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" class="send">
+				<input type="submit" class="button" name="save" value="Enregistrer" />
+			</td>
+		</tr>
+	</table>
+</form>
+<script type="text/javascript">
+	BuildNoCompte();
+</script>

@@ -1,0 +1,121 @@
+<script type="text/javascript">
+//<!--
+reverseCheck = function()
+{
+	void(d=document);
+	void(el=d.getElementsByName('to[]'));
+	for(i=0;i<el.length;i++){
+		if(el[i].checked){
+			void(el[i].checked=false);
+		}else{
+			void(el[i].checked=true);
+		}
+	}
+}
+
+validerCheck = function()
+{
+	var total_count = 0;
+	void(d=document);
+	void(el=d.getElementsByName('to[]'));
+	for(i=0;i<el.length;i++)
+		if(el[i].checked)
+			return ajaxSubmitForm($("parler"));
+	
+	var msg = "Vous n'avez coché aucun destinataire à votre message. Celui-ci sera ajouté à votre HE en tant que note accessible à vous seul.\nVoulez-vous continuer ?";
+	if (confirm (msg))
+		return ajaxSubmitForm($("parler"));
+	else
+		return false;
+}
+//-->
+</script>
+
+<?if(isset($PAGE_PV_WARNING)){ ?>
+	<font color="red">
+		<strong>
+			ATTENTION, n'oubliez pas que votre personnage est présentement inconscient, il n'est donc pas censé parler.
+		</strong>
+	</font><br />
+<? } ?>
+
+<form id="parler" method="post" action="?popup=1&m=Action_Perso_Parler2" onsubmit="return validerCheck();">
+<table class="tbl_center">
+	<tr><td class="title" colspan="2">Parler</td></tr>
+	<tr>
+		<td class="name">Parler à:</td>
+		<td class="name">Message:</td>
+	</tr>
+	<tr>
+		<td class="value" align="left" valign="top" style="width:150px;">
+			<div style="">
+			<?
+			if (isset($LIST_PERSO))
+			{
+				foreach($LIST_PERSO as $perso)
+				{
+					?>
+					<input type="checkbox" name="to[]" value="<?=$perso->getId();?>" id="chkbox" />
+					<?if ($perso->getSexe()=='m'){?>
+						<span id="perso_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+					<?}else{?>
+						<span id="perso_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+					<?}?>
+						<?=$perso->getNom();?>
+					</span>
+					<div id="ib_perso_<?=$perso->getId();?>" class="infobulle" style="width:600px;">
+							<div class="title">Infos</div>
+							<?if ($perso->getAvatar()!='') {?>
+								<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
+							<? } ?>
+							<?=$perso->getDescription();?>
+						</div>
+					<br />
+					<?
+				}
+			}
+			else
+			{
+				?>
+				<i>-personne-<br />
+				<br />
+				Un message envoyé à personne sera tout de même ajouté à votre Historique des Évènements,
+				vous pouvez donc utiliser cette fonction pour vous laisser des notes.</i>
+				<?
+			}
+			?>
+			</div>
+		</td>
+		<td class="value" valign="top">
+			<textarea name="msg" style="width:500px;height:400px;"></textarea><br />
+			<div style="margin-left:auto;margin-right:auto;width:300px;overflow:auto;height:60px;text-align:left;">
+				Montrer une carte:<br />
+				<input type="radio" name="badge" value="0" CHECKED /> aucun<br />
+				<?
+				if(isset($VISA_VERT))
+				{
+					?>
+					<input type="radio" name="badge" value="VISAVERT" /> Visa Vert<br />
+					<?
+				}
+				
+				if (isset($LIST_BADGE)){
+					foreach($LIST_BADGE as $badge){ ?>
+						<input type="radio" name="badge" value="<?=$badge->getInvId();?>" />
+						<?=$badge->getNom();?> : <?=$badge->getContenu();?><br />
+				<?	}
+				}
+				?>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="name" style="text-align:center;">
+			<input type="button" class="button" onclick="reverseCheck()" value="Inverser la sélection" />
+		</td>
+		<td class="send">
+			<input type="submit" class="button" name="save" value="Parler" />
+		</td>
+	</tr>
+</table>
+</form>

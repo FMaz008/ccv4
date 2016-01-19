@@ -1,0 +1,91 @@
+<script type="text/javascript" src="./js/mj_items.js"></script>
+
+<br />
+<form id="form1" method="post" action="">
+<table class="subcenter">
+	<tr>
+		<td class="title" colspan="9">Gestion des defenses</td>
+	</tr>
+	<tr>
+		<td colspan="9" value="name">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="return validate('Item_DefenseAdd', false, false);" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="return validate('Item_DefenseMod', true, false);" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="return validate('Item_DefenseDel', true, true);" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">
+			Id
+			<a href="?mj=Item_Defense&amp;par=id&amp;tri=DESC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/down.png" alt="Tri décroissant" /></a>
+			<a href="?mj=Item_Defense&amp;par=id&amp;tri=ASC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/up.png" alt="Tri croissant" /></a>
+		</td>
+		<td class="name">
+			Type
+			<a href="?mj=Item_Defense&amp;par=soustype&amp;tri=DESC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/down.png" alt="Tri décroissant" /></a>
+			<a href="?mj=Item_Defense&amp;par=soustype&amp;tri=ASC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/up.png" alt="Tri croissant" /></a>
+		</td>
+		<td class="name">
+			Nom
+			<a href="?mj=Item_Defense&amp;par=nom&amp;tri=DESC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/down.png" alt="Tri décroissant" /></a>
+			<a href="?mj=Item_Defense&amp;par=nom&amp;tri=ASC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/up.png" alt="Tri croissant" /></a>
+		</td>
+		<td class="name">
+			PR
+			<a href="?mj=Item_Defense&amp;par=pr&amp;tri=DESC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/down.png" alt="Tri décroissant" /></a>
+			<a href="?mj=Item_Defense&amp;par=pr&amp;tri=ASC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/up.png" alt="Tri croissant" /></a>
+		</td>
+		<td class="name">
+			Valeur
+			<a href="?mj=Item_Defense&amp;par=valeur&amp;tri=DESC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/down.png" alt="Tri décroissant" /></a>
+			<a href="?mj=Item_Defense&amp;par=valeur&amp;tri=ASC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/up.png" alt="Tri croissant" /></a>
+		</td>
+		<td class="name">
+			Seuil de rés.
+			<a href="?mj=Item_Defense&amp;par=seuilresistance&amp;tri=DESC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/down.png" alt="Tri décroissant" /></a>
+			<a href="?mj=Item_Defense&amp;par=seuilresistance&amp;tri=ASC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/up.png" alt="Tri croissant" /></a>
+		</td>
+		<td class="name">
+			Rés. totale
+			<a href="?mj=Item_Defense&amp;par=resistance&amp;tri=DESC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/down.png" alt="Tri décroissant" /></a>
+			<a href="?mj=Item_Defense&amp;par=resistance&amp;tri=ASC"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/up.png" alt="Tri croissant" /></a>
+		</td>
+		<td class="name">Qte en Circu.</td>
+	</tr>
+	<?
+	if (!isset($ITEMS))
+	{
+		?>
+		<tr><td class="value" colspan='9'><i>- Aucun items -</i></td></tr>
+		<?
+	}
+	else
+	{
+		foreach($ITEMS as $item)
+		{ 
+			?>
+			<tr>
+				<td class="value"><input type="radio" name="db_id" value="<?=$item['db_id'];?>" /></td>
+				<td class="value"><?=$item['db_id'];?></td>
+				<td class="value"><?=$item['db_soustype'];?></td>
+				<td class="value"><?=$item['db_nom'];?></td>
+				<td class="value"><?=$item['db_pr'];?></td>
+				<td class="value"><?=$item['db_valeur'];?></td>
+				<td class="value"><?=$item['db_seuilresistance'];?></td>
+				<td class="value"><?=$item['db_resistance'];?></td>
+				<td class="value"><a href="#" onclick="locate(<?=$item['db_id'];?>);"><?=$item['qte_circu'];?></a></td>
+			</tr>
+			<tr id="locateTr_<?=$item['db_id'];?>" style="display:none;"><td id="locateTd_<?=$item['db_id'];?>" class="value" colspan="8"></td></tr>
+			<?
+		}
+	}
+	?>
+	<tr>
+		<td colspan="9" value="name">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="return validate('Item_DefenseAdd', false, false);" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="return validate('Item_DefenseMod', true, false);" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="return validate('Item_DefenseDel', true, true);" />
+		</td>
+	</tr>
+</table>
+</form>

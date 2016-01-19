@@ -1,0 +1,6 @@
+<select name="<?=$IDX;?>_incompatible_add">
+	<? foreach($CARACT as $caract){ ?>
+		<option value="<?=$caract['id'];?>"><?=$caract['nom'];?></option>
+	<? } ?>
+</select>
+<div id="add_incompatible_<?=$IDX;?>"></div>

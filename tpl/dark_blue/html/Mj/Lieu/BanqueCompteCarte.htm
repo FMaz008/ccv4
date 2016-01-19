@@ -1,0 +1,57 @@
+<script type="text/javascript">
+function confirmdel(msg){
+	answer = confirm (msg);
+	if (answer) {
+		return true;
+	}else{
+		return false;
+	}
+}
+</script>
+<form name="form1" action="" method="post">
+<table class="center">
+	<tr>
+		<td class="title" colspan="7">Liste des carte du compte <?=$COMPTE;?></td>	
+	</tr>
+	<tr>
+		<td class="name" style="width:15px;"></td>
+		<td class="name">No carte</td>
+		<td class="name">Carte au nom de</td>
+		<td class="name">N.I.P.</td>
+		<td class="name">Valide</td>
+	</tr>
+	
+	<?
+	if(isset($CARTES)){
+		foreach($CARTES as $carte){
+			?>
+			<tr>
+				<td class="name">
+					<input type="radio" name="id" value="<?=$carte['id'];?>" />
+				</td>
+				<td class="value"><?=$carte['carte_no'];?></td>
+				<td class="value"><?=$carte['nom'];?></td>
+				<td class="value"><?=$carte['nip'];?></td>
+				<td class="value"><?=$carte['valide'];?></td>
+			</tr>
+			<?
+		}
+	}else{
+		?>
+		<tr>
+			<td class="value" colspan="5">
+				<i><strong>Le compte possède aucune carte</strong></i>
+			</td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td colspan="7" value="name">
+			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Lieu_BanqueCompteCarteAdd&id=<?=$_GET['id'];?>';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onClick="document.forms['form1'].action='?mj=Lieu_BanqueCompteCarteMod&id=<?=$_GET['id'];?>';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_BanqueCompteCarteDel';return confirmdel('Effacer le lieu ?\n\nCETTE ACTION SUPPRIMERA L\'ACCESS.');" />
+		</td>
+	</tr>
+</table>
+</form>

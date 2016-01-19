@@ -1,0 +1,174 @@
+<script type="text/javascript">
+//<!--
+	renamePerso = function(persoId, persoName){
+		
+		if (persoId == <?=$id;?>){
+			alert('Vous ne pouvez renommer votre propre personnage');
+			return false;
+		}
+		
+		var htmlContent = "<input	type=\"text\"";
+		htmlContent += 				" class=\"text\"";
+		htmlContent += 				" id=\"" +persoId+ "newName\"";
+		htmlContent += 				" value=\"\"";
+		htmlContent += 				" size=\"9\"";
+		htmlContent += 				" onkeypress=\"return renameCheckEnter(event,"+ persoId +", '" +persoId+ "newName');\" />";
+		$("updateZone_"+persoId).innerHTML = htmlContent;
+		$(persoId+ "newName").focus();
+		$(persoId+ "newName").value = persoName;
+		$(persoId+ "newName").observe('blur',  function(event){
+									renamePersoGo(persoId, persoId+"newName");
+								});
+	}
+	
+	renameCheckEnter = function(e, persoId, newName){
+		if (e.keyCode == 13){
+			renamePersoGo(persoId, newName);
+			return false;
+		}
+	}
+	
+	renamePersoGo = function(persoId, newName){
+		var myAjax = new Ajax.Request(
+			'?m=He_Rename', 
+			{
+				method: 'post',
+				encoding: 'UTF-8',
+				parameters: 'persoId='+persoId+'&newName='+encodeURI($(newName).value),
+				onComplete: renamePersoGo_confirm,
+			});
+	}
+	
+	renamePersoGo_confirm = function(originalRequest){
+		var rval= originalRequest.responseText;
+		if (rval=="OK")
+			actionLink("Action_Perso_Coupdoeil");
+	}
+</script>
+
+<br />
+<table class="tbl_center">
+  <tr>
+    <td class="title" colspan="2">Description de <?=$LIEU_NOM;?></td>
+  </tr>
+  <tr>
+	<?
+	if (!empty($LIEU_IMG)){
+	?>
+		<td class="value">
+		<img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/lieux/<?=$LIEU_IMG;?>" style="border:0px;" />
+		</td>
+	<?
+	}
+	?>
+    <td class="value" style="text-align:left;">
+		<?=$LIEU_DESC;?>
+	</td>
+  </tr>
+</table>
+
+<br />
+
+<table class="tbl_center">
+  <tr>
+    <td class="title" colspan="6">
+      Personnages pr&eacute;sents dans <?=$LIEU_NOM;?>
+    </td>
+  </tr>
+  <tr>
+    <td class="name" colspan="2">Info</td>
+    <td class="name" style="width:80%;">Descriptifs</td>
+  </tr>
+
+<?
+if (empty($PERSOS)){?>
+	<tr><td colspan="3"><i>- Personne -</i></td></tr>
+<? }else{
+	foreach ($PERSOS as $perso) {?>
+		<tr>
+			<td class="name" colspan="2" style="text-align:center;">
+				<?
+				if ($perso['perso']->getAvatar()!='') {
+					?>
+					<img class="imgbg" src="<?=$perso['perso']->getAvatar();?>" />
+					<?
+				}else{
+					?>
+					<span style="font-style:italic;font-weight:normal;">Aucun avatar</span>
+					<?
+				}
+				?>
+			</td>
+			<td class="value" rowspan="6" style="text-align:left;vertical-align:top;padding:0px;margin:0px;">
+				<table style="width:100%;border:0px;margin:0px;padding:0px;">
+				<tr><td class="name" style="margin-top:0px;">Description physique:</td></tr>
+				<tr><td class="value">
+					<?=BBCodes($perso['perso']->getDescription(),false,true);?>
+				</td></tr>
+				<?
+				if($perso['perso']->getCurrentAction()!=''){
+				?>
+					<tr><td class="name">Action en ce moment:</td></tr>
+					<tr><td class="value">
+						<?=BBCodes($perso['perso']->getCurrentAction(),false,true);?>
+					</td></tr>
+				<?
+				}
+				?>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td class="name" style="height:10px;">Nom</td>
+			<td class="name">
+				<div id="updateZone_<?=$perso['perso']->getId();?>" style="display:bloc;">
+					<?
+					if($perso['perso']->getSexe() == 'm'){
+						?>
+						<a onclick="renamePerso(<?=$perso['perso']->getId();?>,'<?addslashes($perso['perso']->getNom());?>');" class="txtStyle_homme">
+						<?
+					}elseif($perso['perso']->getSexe() == 'f'){
+						?>
+						<a onclick="renamePerso(<?=$perso['perso']->getId();?>,'<?=addslashes($perso['perso']->getNom());?>');" class="txtStyle_femme">
+						<?
+					}else{
+						die('ERREUR: F.:' . __FILE__ . ' L.:' . __LINE__ . ' Dump Sexe: ' . $perso['perso']->getSexe());
+					}
+					?>
+						
+						<?=$perso['perso']->getNom();?>
+						
+					</a>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="name" style="height:10px;">Taille</td>
+			<td class="value"><?=$perso['perso']->getTaille();?></td>
+		</tr>
+		<tr>
+			<td class="name" style="height:10px;">Age</td>
+			<td class="value"><?=$perso['perso']->getAge(); ?></td>
+		</tr>
+		<tr>
+			<td class="name" style="height:10px;">Arme</td>
+			<td class="value"><?=$perso['arme'];?></td>
+		</tr>
+		<tr>
+			<td class="name" style="height:10px;">Etat</td>
+			<td class="value"><?=$perso['etat']; ?></td>
+		</tr>
+		<tr><td class="name">&nbsp;</td></tr>
+		<tr><td colspan="3"><hr></td></tr>
+	<?}
+}?>
+
+</table>
+<br />
+
+
+
+<div id="pjinfo" class="panel_infos-finances" style="position:absolute;top:50px;left:10px;width:760px;height:430px;visibility:hidden;">
+	<iframe id="pjinfoifrm" src="?popup=1&pj=a_empty" style="width:758px;height:400px;"></iframe><br />
+	<center><a href="#" onclick="hideinfo();">-- Fermer --</a></center>
+</div>

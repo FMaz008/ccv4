@@ -1,0 +1,31 @@
+Page de test :<br />
+<br />
+<br />
+	aujourd'hui = <?=$TIMENOW;?> (<?=$TIMENOWAFF;?>)<br /><br />
+	dans un mois = <?=$TIMEFUTUR;?> (<?=$TIMEFUTURAFF;?>)
+	<br /><br /><br /><br />
+	Tableau : <br />
+	transaction_id = <?=$TRANSACTIONARRAY['transaction_id'];?>(10)<br />
+	transaction_compte_from = <?=$TRANSACTIONARRAY['transaction_compte_from'];?>(1111-1111)<br />
+	transaction_compte_to = <?=$TRANSACTIONARRAY['transaction_compte_to'];?>(2222-2222)<br />
+	transaction_valeur = <?=$TRANSACTIONARRAY['transaction_valeur'];?>(250)<br />
+	transaction_description = <?=$TRANSACTIONARRAY['transaction_description'];?>('description test')<br />
+	transaction_date = <?=$TRANSACTIONARRAY['transaction_date'];?>(<?=$TIMENOW;?>)<br />
+	<br /><br />
+	Objet transaction : <br />
+	id = <?=$TRANSACTION->getId();?><br />
+	compte_from = <?=$TRANSACTION->getCompteIdFrom();?><br />
+	compte_to = <?=$TRANSACTION->getCompteIdTo();?><br />
+	valeur = <?=$TRANSACTION->getValue();?><br />
+	description = <?=$TRANSACTION->getDescription();?><br />
+	date = <?=$TRANSACTION->getDate();?><br /><br />
+	Transaction2 = id compte_to = <?=$TRANSACTION2->getCompteIdTo();?>(94)<br />
+    <br /><br />
+    <?if(!empty($FOUILLE))
+    {?>
+        Demande de Fouille : <br />
+        Par : <?=$FOUILLE['fromid'];?><br />
+        pour : <?=$FOUILLE['toid'];?><br />
+        Expiration : <?=$FOUILLE['expiration'];?><br />
+        Réponse : <?=$FOUILLE['reponse'];?><br />
+    <?}?>

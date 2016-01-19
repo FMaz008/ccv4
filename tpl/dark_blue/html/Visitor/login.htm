@@ -1,0 +1,66 @@
+
+<form action="?v=Login2" method="post" onsubmit="valid_login.value='...';valid_login.disabled=true;">
+<div class="panel login_panel">
+	<div class="title">Identification</div>
+	<div class="content">
+		<div class="login_lineUser">
+			<div class="value login_col1User">User:</div>
+			<div class="value login_col2User">
+				<input class="text" type="text" name="u" id="u" style="width:150px;" maxlength="25" value="" />
+			</div>
+		</div>
+		<div class="login_linePass">
+			<div class="value login_col1Pass">Pass:</div>
+			<div class="value login_col2Pass">
+				<input type="password" class="text" id="p" name="p" style="width:150px;" maxlength="25" />
+			</div>
+		</div>
+		<div class="login_lineSubmit" style="text-align:right;">
+			<input class="button" type="submit" name="valid_login" value="Ok >>" style="width:50px;" />
+		</div>
+	</div>
+</div>
+</form>
+
+<div class="name login_note" style="visibility:hidden;">
+	Note: N'oubliez pas que vos cookies doivent être activés pour que le jeu fonctionne correctement.
+</div>
+
+
+
+<div id="plzwait1" class="plzwait_ombre" style="display:inline;">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content" style="display:inline;">
+	<div id="login_navs_pub" style="text-align:center;">
+		Ce site est développé selon les standards du
+		<a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/WWW/w3c_home_nb.png" style="border:0px" alt="W3C Logo" /></a>.
+		<br />Nous vous recommandons d'utiliser l'un des navigateurs suivant:
+		<div id="navs">
+			<div class="nav"><a href="http://www.mozilla-europe.org/fr/firefox/" onclick="window.open(this.href);"><img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/nav_firefox.gif" style="border:0px" alt="Firefox" /></a></div>
+			<div class="nav"><a href="http://www.opera.com/browser/" onclick="window.open(this.href);"><img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/nav_opera.gif" style="border:0px" alt="Opera" /></a></div>
+			<div class="nav"><a href="http://www.google.com/chrome?hl=fr" onclick="window.open(this.href);"><img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/nav_chrome.gif" style="border:0px" alt="Chrome" /></a></div>
+			<div class="nav"><a href="http://www.apple.com/fr/safari/download/" onclick="window.open(this.href);"><img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/nav_safari.gif" style="border:0px" alt="Safari" /></a></div>
+		</div>
+		<div class="clearboth" style="text-align:right;">
+			<span class="fakelink" style="color:#000;font-size:10pt;" onclick="showHide('none');">Poursuivre à mes risques et périls &gt; &gt;</span>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+//<!--
+	showHide = function(val)
+	{
+		$("plzwait1").style.display=val;
+		$("plzwait2").style.display=val;
+	}
+	var ua = navigator.userAgent.toLowerCase();
+	if (ua.indexOf('msie') == -1)
+	{
+		showHide("none");
+  	}
+  	
+	document.getElementById("u").select();
+	document.getElementById("u").focus();
+//-->
+</script>

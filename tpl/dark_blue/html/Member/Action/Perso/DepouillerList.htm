@@ -1,0 +1,68 @@
+<script type="text/javascript">
+//<!--
+	$('perso_pa').innerHTML="<?=$PA;?>";
+//-->
+</script>
+<br />
+<form id="action_depouillerList" method="post" action="?popup=1&m=Action_Perso_Depouiller2" onsubmit="return ajaxSubmitForm(this);">
+<input type="hidden" name="persoid" value="<?=$ID_VICTIME;?>" />
+
+<table class="tbl_center">
+<tr>
+	<td class="title" colspan="4">Argent liquide de la victime</td>
+</tr>
+<tr>
+	<td class="name">Vous trouvez</td>
+	<td class="value"><?=$CASH_VICTIME;?> <?=GAME_DEVISE;?></td>
+</tr>
+<tr>
+	<td class="name">Vous prenez</td>
+	<td class="value"><input type="text" name="cash" value="0" size="5" /> <?=GAME_DEVISE;?></td>
+</tr>
+</table>
+<br />
+<table class="tbl_center">
+<tr>
+	<td class="title" colspan="4">Inventaire de la victime</td>
+</tr>
+<tr>
+	<td class="name"></td>
+	<td class="name">Nom</td>
+	<td class="name">Qte</td>
+	<td class="name">PR</td>
+</tr>
+
+<?
+if (isset($INV_VICTIME)){
+	foreach($INV_VICTIME as $item){
+		?>
+		<tr>
+			<td class="name" style="width:10px;">
+				<input type="checkbox" name=<?="chk_items_" . $item->getInvId();?> />
+			</td>
+			<td class="value"><?=$item->getNom(); if($item->isEquip()){?> (&eacute;quip&eacute;(e))<?}?></td>
+			<td class="value"><input type="text" class="text" name="qte_<?=$item->getInvId();?>" value="1" style="width:25px;" /> /<?=$item->getQte();?></td>
+			<td class="value"><?=$item->getPr();?></td>
+		</tr>
+		<?
+	} 
+}else{
+	?>
+	<tr>
+		<td colspan="4">
+			<i>- aucun item trouv&eacute; sur le personnage -</i>
+		</td>
+	</tr>
+	<?
+}
+?>
+
+<tr>
+	<td colspan="4" style="text-align:center;">
+		(Calculez <?=$PA_COUT_ITEM;?>PA par item: attention de ne pas vous tromper!)<br />
+		<input type="submit" class="button" value="D&eacute;pouiller" />
+	</td>
+</tr>
+</table>
+
+</form>

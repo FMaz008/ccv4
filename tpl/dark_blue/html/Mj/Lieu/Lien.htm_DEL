@@ -1,0 +1,109 @@
+<br />
+<form method="post" name="form1" action="?mj=site_index&p=site_lieux">
+<table align="center">
+	<tr>
+		<td class="title" colspan="9">Gestion des liens inter-lieux pour <?=$LIEU_NOM;?></td>
+	</tr>
+	<tr>
+		<td class="name">Effacer</td>
+		<td class="name">De</td>
+		<td class="name">Vers</td>
+		<td class="name">Icone</td>
+		<td class="name">Pa</td>
+		<td class="name">Coût</td>
+		<td class="name">Protection</td>
+		<td class="name">Pass</td>
+		<td class="name">Bloquer</td>
+	</tr>
+	<?
+	if (isset($LIENS)){
+		foreach($LIENS as $lien){
+			if($lien["id"]!="separator"){
+			?>
+				<input type="hidden" name="id_<?=$lien["id"];?>" value="true" />
+				<tr>
+					<td class="value"><input type="checkbox" name="del_<?=$lien["id"];?>" /></td>
+					<td class="value" style="text-align:left;"><?=$lien["from"];?></td>
+					<td class="value" style="text-align:left;"><?=$lien["to"];?></td>
+					<td class="value">
+						<select name="icon_<?=$lien["id"];?>">
+							<option value=""<?if($lien["icon"]==""){?> SELECTED<?}?>>-aucune-</option>
+							<? foreach($ICONS as $icon){ ?>
+									<option value="<?=$icon;?>"<?if($icon==$lien["icon"]){?> SELECTED<?}?>><?=$icon;?></option>
+							<? } ?>
+						</select>
+					</td>
+					<td class="value"><input type="text" class="text" name="pa_<?=$lien["id"];?>" value="<?=$lien["pa"];?>" maxlength="2" size="2" /></td>
+					<td class="value"><input type="text" class="text" name="cout_<?=$lien["id"];?>" value="<?=$lien["cout"];?>" maxlength="5" size="5" style="text-align:right;" />€</td>
+					<td class="value">
+						<select name="protection_<?=$lien["id"];?>">
+							<option value="">Libre Access</option>
+							<option value="clef"<? if($lien["protection"]=="clef"){?> SELECTED<?}?>>Clé</option>
+							<option value="pass"<? if($lien["protection"]=="pass"){?> SELECTED<?}?>>Pass</option>
+						</select>
+					</td>
+					<td class="value"><input type="text" class="text" name="pass_<?=$lien["id"];?>" value="<?=$lien["pass"];?>" maxlength="15" size="5" /></td>
+					<td class="value"><input type="checkbox" name="block_<?=$lien["id"];?>" <? if(isset($lien["bloque"])){ ?>CHECKED<? } ?>/></td>
+				</tr>
+				<?	
+			}else{
+				?>
+				<tr>
+					<td class="value" colspan="9"><hr /></td>
+				</tr>
+				<?
+			}
+		}
+	}else{ ?>
+		<tr>
+			<td colspan="9">
+				<i>- aucun liens n'à été créer pour ce lieu -</i>
+			</td>
+		</tr>
+	<? } ?>
+	<tr>
+		<td colspan="9" class="send">
+			<input type="hidden" name="id" value="<?=$LIEU_ID;?>" />
+			<input type="submit" class="button" name="save_lien" value="Sauvegarder" />
+		</td>
+	</tr>
+</table>
+<br>
+<table align="center">
+	<tr>
+		<td class="title" colspan="3">
+			Créer un nouveau lien
+		</td>
+	</tr>
+	<tr>
+		<td class="name">De</td>
+		<td class="name">Vers</td>
+		<td class="name">Aller-Retour</td>
+	</tr>
+	<tr>
+		<td class="value">
+			<select name="from">
+				<? foreach($LIEUX as $lieu){ ?>
+					<option value="<?=$lieu;?>"<?if($lieu==$LIEU_NOM){?> SELECTED<?}?>><?=$lieu;?></option>
+				<? } ?>
+			</select>
+		</td>
+		<td class="value">
+			<select name="to">
+				<? foreach($LIEUX as $lieu){ ?>
+					<option value="<?=$lieu;?>"><?=$lieu;?></option>
+				<? } ?>
+			</select>
+		</td>
+		<td class="value">
+			<input type="checkbox" name="ar" value="" />
+		</td>
+	</tr>
+	<tr>
+		<td class="send" colspan="3">
+			<input type="submit" class="button" name="add_lien" value="Ajouter" />
+			<input type="submit" class="button" name="gen_lien" value="Créer les liens de base" />
+		</td>
+	</tr>
+</table>
+</form>

@@ -1,0 +1,39 @@
+<table class="center">
+	<tr>
+		<td class="title" colspan="6">
+			Relevé du compte: <?=$COMPTE;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Date</td>
+		<td class="name">Code</td>
+		<td class="name">(Vers)</td>
+		<td class="name">Retrait</td>
+		<td class="name">Dépôt</td>
+		<td class="name">Solde</td>
+	</tr>
+	<?
+	if(isset($HISTORIQUE)){
+		foreach($HISTORIQUE as $transaction){
+		?>
+			<tr>
+				<td class="value" style="width:150px;text-align:left;"><?=$transaction['date'];?></td>
+				<td class="value" style="width:100px;"><?=$transaction['code'];?></td>
+				<td class="value" style="width:150px;text-align:left;"><?=$transaction['vers'];?></td>
+				<td class="value" style="width:75px;text-align:right;"><?=$transaction['retrait'];?></td>
+				<td class="value" style="width:75px;text-align:right;"><?=$transaction['depot'];?></td>
+				<td class="value" style="width:150px;text-align:right;"><?=$transaction['solde'];?></td>
+			</tr>
+		<?
+		}
+	}else{
+	?>
+		<tr>
+			<td class="value" colspan="6">
+				<i>-aucune transaction effectuée-</i>
+			</td>
+		</tr>
+	<?
+	}
+	?>
+</table>

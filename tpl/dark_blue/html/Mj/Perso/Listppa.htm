@@ -1,0 +1,33 @@
+<table class="center">
+<tr>
+	<td class="title" colspan="5">Tickets ouvert par ce personnage</td>
+</tr>
+<tr>
+	<td class="name" style="width:100px;">Ouvert le</td>
+	<td class="name" style="width:100px;">Type</td>
+	<td class="name">Sujet</td>
+	<td class="name" style="width:100px;">Saisi par</td>
+	<td class="name" style="width:100px;">Statut</td>
+</tr>
+<? if(isset($PPA)){ 
+	foreach($PPA as $ppa){ ?>
+		<tr>
+			<td class="value"><?=$ppa['date'];?></td>
+			<td class="value"><?=$ppa['type'];?></td>
+			<td class="value">
+				<a href="?mj=Perso_Ppa&id=<?=$ppa['id'];?>">
+					<?=$ppa['titre'];?>
+				</a>
+			</td>
+			<td class="value"><?=$ppa['mjnom'];?></td>
+			<td class="value"><?=$ppa['statut'];?></td>
+		</tr>				
+	<? }
+}else{ ?>
+	<tr>
+		<td class="value" colspan="5">
+			<i>Aucun contact avec les MJ a été ouvert.</i>
+		</td>
+	</tr>
+<? } ?>
+</table>

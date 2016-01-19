@@ -1,0 +1,66 @@
+<script type="text/javascript">
+//<!--
+	confirmdel = function() {
+		if (confirm("Êtes-vous certain de vouloir effacer cette transaction ?")) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	redirect_form = function(url) {
+		$("action_redirect").action = url;
+		ajaxSubmitForm($("action_redirect"));
+	}
+//-->
+</script>
+<br />
+<form id="action_redirect" method="post" onsubmit="return ajaxSubmitForm(this)" action="?popup=1&m=Action_Lieu_BanqueTransactionAutoDel">
+<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="5">
+			Gestion des transactions automatiques pour le compte: <?=$COMPTE;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name" style="width:10px;"></td>
+		<td class="name">Compte récepteur</td>
+		<td class="name">Description</td>
+		<td class="name">Montant</td>
+		<td class="name">prochaine transaction</td>
+	</tr>
+	<?
+	if(isset($TRANSACTIONS)){
+		foreach($TRANSACTIONS as $transaction){
+		?>
+			<tr>
+				<td class="value" style="width:10px;"><input type="radio" name="tid" value="<?=$transaction->getId();?>" /></td>
+				<td class="value"><?=$transaction->getCompteNoTo();?></td>
+				<td class="value"><?=$transaction->getDescription();?></td>
+				<td class="value"><?=$transaction->getValue();?></td>
+				<td class="value"><?=$transaction->getDateTxt();?></td>
+			</tr>
+		<?
+		}
+	}else{
+	?>
+		<tr>
+			<td class="value" colspan="5">
+				<i>-aucune transaction-</i>
+			</td>
+		</tr>
+	<?
+	}
+	?>
+	<tr>
+		<td class="value" colspan="5">
+			<input type="button" class="button" name="new_transaction" value="Créer une transaction" onclick="redirect_form('?popup=1&m=Action_Lieu_BanqueTransactionAutoAdd');" />
+			<input type="button" class="button" name="mod_transaction" value="Modifier" onclick="redirect_form('?popup=1&m=Action_Lieu_BanqueTransactionAutoMod');" />
+			<input type="submit" class="button" name="del_transaction" value="Effacer la transaction" onclick="return confirmdel();" />
+		</td>
+	</tr>
+</table>
+</form>
+<span class="fakelink" onclick="actionLink('Action_Lieu_Banque');">&lt;&lt; Retour</span>
+<br />

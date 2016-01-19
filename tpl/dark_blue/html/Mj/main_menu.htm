@@ -1,0 +1,329 @@
+<script type="text/javascript">
+//<!--
+	var tmp_type;
+	gosearch = function (type)
+	{
+		tmp_type = type;
+		var myAjax = new Ajax.Request(
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat='+type+'&search='+document.forms[type].search.value,
+				onComplete: gosearch_confirm
+			}
+		);
+	}
+	
+	gosearch_confirm = function(originalRequest)
+	{
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		$(tmp_type+'_results').innerHTML = params[1];
+		
+		if (params[0] != 'MULTI')
+		{
+			if (tmp_type == 'compte')
+				setLinkAccount(params[0]);
+			else if (tmp_type == 'perso')
+				setLinkPerso(params[0]);
+			else if (tmp_type == 'lieu')
+				setLinkLieu(params[0]);
+		}
+	}
+	
+	setLinkPerso = function (id)
+	{
+		$('Perso_He').href				= "?mj=Perso_He&id=" + id;
+		$('Perso_Sendmsg').href			= "?mj=Perso_Sendmsg&id=" + id;
+		$('Perso_Connaissance').href	= "?mj=Perso_Connaissance&id=" + id;
+		$('Perso_Inventaire').href		= "?mj=Perso_Inventaire&id=" + id;
+		$('Perso_Modifier').href		= "?mj=Perso_Mod&id=" + id;
+		$('Perso_Supprimer').href		= "?mj=Perso_Del&id="+id;
+		$('Perso_Listppa').href			= "?mj=Perso_Listppa&id=" + id;
+	}
+	
+	setLinkAccount = function (id)
+	{
+		$('Account_Modifier').href		= "?mj=Compte_Mod&id=" + id;
+		$('Account_Supprimer').href		= "?mj=Compte_Del&id="+id;
+	}
+	
+	setLinkLieu = function (id)
+	{
+		$('Lieu_Ajouter').href			= "?mj=Lieu_Add&id=" + id;
+		$('Lieu_Modifier').href			= "?mj=Lieu_Mod&id=" + id;
+		$('Lieu_Supprimer').href		= "?mj=Lieu_Del&id="+id;
+		$('Lieu_Coupdoeil').href		= "?mj=Lieu_Coupdoeil&id=" + id;
+		$('Lieu_He').href				= "?mj=Lieu_He&id=" + id;
+		$('Lieu_Boutique').href			= "?mj=Lieu_Boutique&id=" + id;
+		$('Lieu_Inventaire').href		= "?mj=Lieu_Inventaire&id=" + id;
+		$('Lieu_Casiers').href			= "?mj=Lieu_Casiers&id=" + id;
+		$('Lieu_Biblio').href			= "?mj=Lieu_Biblio&id=" + id;
+		$('Lieu_Etude').href			= "?mj=Lieu_Etude&id=" + id;
+		$('Lieu_MediaAcces').href		= "?mj=Lieu_MediaAcces&id=" + id;
+	}
+	
+	
+	
+	var arrTabUrl	= Array("TabPPA",		"TabClosedPPA",			"TabInscr",		"TabDe",		"TabHe");
+	var arrTabId	= Array("PPAcontainer",	"CLOSEDPPAcontainer",	"INScontainer",	"DEcontainer",	"HEcontainer");
+	var currentTabId;
+	displayTab = function (tabId)
+	{
+		
+		if(tabId > arrTabUrl.length)
+			return false;
+		
+		arrTabId[tabId-1].innerHTML = "Chargement en cours ...";
+		
+		currentTabId = tabId;
+		var myAjax = new Ajax.Request(
+			'?mj=' + arrTabUrl[tabId-1], 
+			{
+				method: 'post', 
+				parameters: '',
+				onComplete: fillTab
+			}
+		);
+
+		for(var i=1; i<=5; i++)
+		{
+			$(arrTabId[i-1]).style.display	= tabId == i ? 'block':'none';
+			$("tab"+i).className			= tabId == i ? 'ongletOn' : 'ongletOff';
+		}
+	}
+	fillTab = function(originalRequest)
+	{
+		var rval= originalRequest.responseText;
+		var elem = $(arrTabId[currentTabId-1]);
+		elem.innerHTML = rval;
+		actionLoadScripts(elem);
+	}
+	
+	substr = function(start, length, str)
+	{
+	    var tmp = '';
+	    for(e=0;e<str.length;e++)
+	        if(e>=start && e<(start+length))
+	            tmp += str[e];
+	    return tmp;
+	}
+
+	
+	linkClick = function(url, confirmMsg)
+	{
+		if (url.substr(url.length-1, 1)=="#")
+		{
+			alert('Vous devez sélectionner un résultat.');
+			return false;
+		}
+			
+		if(confirmMsg!='')
+			return confirm(confirmMsg);
+		
+		return true;
+	}
+//-->
+</script>
+
+
+
+<div>
+	<div id="tab1" class="ongletOff" onclick="displayTab(1);">
+		<span>PPA</span> (<?=$COUNT_PPA_MJ;?> / <?=$COUNT_PPA;?>)
+	</div>
+	<div id="tab2" class="ongletOff" onclick="displayTab(2);">
+		<span>PPA Fermé</span>
+	</div>
+	<div id="tab3" class="ongletOff" onclick="displayTab(3);">
+		<span>Inscriptions</span> (<?=$COUNT_INSCR;?>)
+	</div>
+	<div id="tab4" class="ongletOff" onclick="displayTab(4);">
+		<span>Brasser un dé</span>
+	</div>
+	<div id="tab5" class="ongletOff" onclick="displayTab(5);">
+		<span>HE privé</span>
+	</div>
+	
+	<div class="clearboth"></div>
+</div>
+
+<div class="panel tabContainer">
+	<div id="PPAcontainer" style="display:none;"></div>
+	<div id="CLOSEDPPAcontainer" style="display:none;"></div>
+	<div id="INScontainer" style="display:none;"></div>
+	<div id="HEcontainer" style="display:none;"></div>
+	<div id="DEcontainer" style="display:none;"></div>
+</div>
+
+
+
+
+<hr class="clearboth mj_sep" />
+
+
+
+
+
+
+<div class="panel">
+	<div class="title">
+		Panneau de contrôle MJ
+		<form name="StatutMJ" method="post" action="?mj=index">
+		<input type="hidden" name="StatutMJ" value="<?=$STATUT_MJ;?>" />
+		[Vous êtes actuellement <a href="#" onclick="document.forms['StatutMJ'].submit();">
+			<?
+			if($STATUT_MJ){
+				?>
+				<span style="color:green;">Actif</span>
+				<?
+			}else{
+				?>
+				<span style="color:red;background-color:black;">/!\ Absent /!\</span>
+				<?
+			}
+			?>
+		</a>]
+		</form>
+	</div>
+	
+
+		
+		
+		
+		<fieldset class="mj_left">
+			<a name="gestion_compte"></a>
+			<? if($PAGE_HJ){ ?>
+			<legend>Gestion des comptes</legend>
+			
+			<form name="compte" method="post" onsubmit="gosearch('compte');return false;">
+				User/Id: <input type="text" class="text" id="user_search" name="search" style="width:100px;" />
+						<input type="button" class="button" onclick="gosearch('compte');" name="go" value="Go" style="width:25px;" />
+				<div id="compte_results" style="height:7em;overflow:auto;"></div>
+				
+				<br />- <a id="Account_Modifier"	href="#" onclick="return linkClick(this.href,'');">Modifier compte</a>
+				<br />- <a id="Account_Supprimer"	href="#"  onclick="return linkClick(this.href,'Voulez-vous vraiment supprimer ce compte ?');">Supprimer compte</a>
+				<br />- <a id="Account_Doublons"	href="?mj=Compte_Doublons">Liste des doublons</a>
+				<hr />
+				<? if($ACCESS_ADMIN){ ?>
+					<br />- <a id="Account_MjList"	href="?mj=Mj_List">Gestion MJ</a>
+					<br />- <a id="Account_LogMp"	href="?mj=Compte_LogMp">Log Abo M+</a>
+				<? } ?>
+			</form>
+			<? } ?>
+		</fieldset>
+		
+		
+		
+		<fieldset class="mj_right">
+			<a name="gestion_perso"></a>
+			<? if($PAGE_HJ){ ?>
+			<legend>Gestion des perso</legend>
+			
+			<form name="perso" method="post" onsubmit="gosearch('perso');return false;">
+				Nom/Id: <input type="text" class="text" id="perso_search" name="search" style="width:100px;" />
+						<input type="button" class="button" onclick="gosearch('perso');" name="go" value="Go" style="width:25px;" />
+				<div id="perso_results" style="height:7em;overflow:auto;"></div>
+				
+				<br />- <a id="Perso_He"			href="#" onclick="return linkClick(this.href,'');">Consulter HE</a>
+				<br />- <a id="Perso_Sendmsg"		href="#" onclick="return linkClick(this.href,'');">Envoyer un message</a>
+				<br />- <a id="Perso_Connaissance"	href="#" onclick="return linkClick(this.href,'');">Gestion des connaissances</a>
+				<br />- <a id="Perso_Inventaire"	href="#" onclick="return linkClick(this.href,'');">Gestion inventaire</a>
+				<br />- <a id="Perso_Modifier"		href="#" onclick="return linkClick(this.href,'');">Modifier perso</a>
+				<br />- <a id="Perso_Supprimer"		href="#"  onclick="return linkClick(this.href,'Voulez-vous vraiment supprimer ce perso ?');">Supprimer perso</a>
+				<br />- <a id="Perso_Listppa"		href="#" onclick="return linkClick(this.href,'');">Historique des PPA</a>
+				<hr />
+				<? if($ACCESS_ADMIN){ ?>
+				<br />- <a id="Perso_GestionCaract" href="?mj=Perso_GestionCaract">Gestion des caractéristiques</a>
+				<br />- <a id="Perso_GestionComp" href="?mj=Perso_GestionComp">Gestion des compétences</a>
+				<br />- <a id="Perso_GestionStat" href="?mj=Perso_GestionStat">Gestion des statistiques</a>
+				<? } ?>
+				<br />- <a id="Perso_LogMort"		href="?mj=Perso_LogMort">Log Perso morts</a>
+				<br />- <a id="Perso_LogSupression" href="?mj=Perso_LogSuppr">Log Suppression perso</a>
+			</form>
+			<? } ?>
+		</fieldset>
+		
+		
+		
+		<fieldset class="mj_left">
+			<? if($PAGE_EJ){ ?>
+			<legend>Gestion des lieux</legend>
+			<form name="lieu" method="post" onsubmit="gosearch('lieu');return false;">
+				N. tech.: <input type="text" class="text" name="search" style="width:100px;" />
+						<input type="submit" class="button" name="go" value="Go" style="width:25px;" />
+				<br />* vide = <a href="?mj=Lieu">tous les lieux</a>
+				<div id="lieu_results" style="height:7em;overflow:auto;"></div>
+				
+				<br />- <a id="Lieu_Ajouter"	href="?mj=Lieu_Add">Ajouter un lieu</a>
+				<br />- <a id="Lieu_Modifier"	href="#" onclick="return linkClick(this.href,'');">Modifier un lieu</a>
+				<br />- <a id="Lieu_Supprimer"	href="#" onclick="return linkClick(this.href, 'Voulez-vous vraiment supprimer ce lieu ?');">Supprimer un lieu</a>
+				<br />- <a id="Lieu_Coupdoeil"	href="#" onclick="return linkClick(this.href,'');">Jeter un coup d'oeil</a>
+				<br />- <a id="Lieu_He"			href="#" onclick="return linkClick(this.href,'');">Consulter HE</a>
+				<br />- <a id="Lieu_Boutique"	href="#" onclick="return linkClick(this.href,'');">Gestion boutique</a>
+				<br />- <a id="Lieu_Inventaire" href="#" onclick="return linkClick(this.href,'');">Gestion inventaire</a>
+				<br />- <a id="Lieu_Biblio"		href="#" onclick="return linkClick(this.href,'');">Gestion bibliothèque</a>
+				<br />- <a id="Lieu_Casiers"	href="#" onclick="return linkClick(this.href,'');">Gestion des casiers</a>
+				<br />- <a id="Lieu_Etude"		href="#" onclick="return linkClick(this.href,'');">Gestion des études</a>
+				<br />- <a id="Lieu_MediaAcces"	href="#" onclick="return linkClick(this.href,'');">Gestion des accès aux médias</a>
+				<hr />
+				<br />- <a id="Lieu_Msg"		href="?mj=Lieu_Sendmsg">Envoyer un message</a>
+				<br />- <a id="Lieu_Banque"		href="?mj=Lieu_Banque">Gestion des banques</a>
+				<br />- <a id="Lieu_Casino"		href="?mj=Lieu_Casino">Gestion des casinos</a>
+				<br />- <a id="Lieu_Medias"		href="?mj=Lieu_Medias">Gestion des médias</a>
+				<br />- <a id="Lieu_Mairie"		href="?mj=Lieu_Mairie">Gestion Mairie</a>
+				<br />- <a id="Lieu_Producteur"	href="?mj=Lieu_Producteur">Gestion des centres de productions</a>
+			</form>
+			<? } ?>
+		</fieldset>
+		
+		<fieldset class="mj_right">
+			<? if($PAGE_EJ){ ?>
+			<legend>Gestion des items</legend>
+		
+			<form name="Item">
+				<br />- <a href="?mj=Item_Arme">Gestion des armes</a>
+				<br />- <a href="?mj=Item_Badge">Gestion des badges</a>
+				<br />- <a href="?mj=Item_Clef">Gestion des clés</a>
+				<br />- <a href="?mj=Item_Defense">Gestion des défenses</a>
+				<br />- <a href="?mj=Item_Drogue">Gestion des drogues</a>
+				<br />- <a href="?mj=Item_Livre">Gestion des livres</a>
+				<br />- <a href="?mj=Item_Munition">Gestion des munitions</a>
+				<br />- <a href="?mj=Item_Nourriture">Gestion des nourriture</a>
+				<br />- <a href="?mj=Item_Autre">Gestion des objets divers</a>
+				<br />- <a href="?mj=Item_Media">Gestion des objets médias</a>
+				<br />- <a href="?mj=Item_Ordinateur">Gestion des ordinateurs</a>
+				<br />- <a href="?mj=Item_CarteMemoire">Gestion des cartes mémoire</a>
+				<br />- <a href="?mj=Item_Sac">Gestion des sac</a>
+				<br />- <a href="?mj=Item_Telephone">Gestion des téléphones</a>
+				<br />- <a href="?mj=Item_Talkiewalkie">Gestion des talkiewalkies</a>
+				<br />- <a href="?mj=Item_Trousse">Gestion des trousses de soin</a>
+				<br />- <a href="?mj=Item_Listall">Afficher DB</a>
+			</form>
+			<? } ?>
+		</fieldset>
+		
+		<fieldset class="mj_left">
+			<? if($PAGE_DEV){ ?>
+			<legend>Développement</legend>
+		
+			<form name="Dev">
+				<br />- <a href="?mj=Dev_ErrLog">Log des erreurs</a>
+			</form>
+			<? } ?>
+		</fieldset>
+		
+		<div class="clearboth"></div>
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+//<!--
+displayTab(<?=$DEFAULT_TAB;?>);
+//-->
+</script>

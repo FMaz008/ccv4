@@ -1,0 +1,49 @@
+﻿<form id="action_MediaListe" action="?popup=1&m=Action_Lieu_MediaAcces" method="post" onsubmit="return ajaxSubmitForm(this);">
+	<table class="tbl_center">
+		<tr><td class="title">Accéder aux médias</td></tr>
+		<tr><td class="name">Quel item utiliser : </td></tr>
+		<?if(!empty($LIST_MEDIA_ACCES_RECEPTEUR)){?>
+			<tr><td>
+				<table class="tbl_center">
+					<tr><td class="title" colspan="4">Reception</td></tr>
+					<tr><td class="name"></td>
+					<td class="name">Nom</td>
+					<td class="name">Type de média</td>
+					<td class="name">Canal</td></tr>
+					<?foreach($LIST_MEDIA_ACCES_RECEPTEUR as $media){?>
+						<tr><td class="value"><input type="radio" value="<?=$media->getId();?>" name="mediaSelected"></td>
+						<td class="value"><?=$media->getNom();?></td>
+						<td class="value"><?=$media->getMediaTypeAffichable();?></td>
+						<td class="value"><?=$media->getChannelId();?></td>
+						</tr><?}?>
+				</table>
+		<?}
+		if(!empty($LIST_MEDIA_ACCES_EMETTEUR)){?>
+		<tr><td>
+				<table class="tbl_center">
+					<tr><td class="title" colspan="4">Emission</td></tr>
+					<tr><td class="name"></td>
+					<td class="name">Nom</td>
+					<td class="name">Type de média</td>
+					<td class="name">Canal</td></tr>
+					<?foreach($LIST_MEDIA_ACCES_EMETTEUR as $media){?>
+						<tr><td class="value"><input type="radio" value="<?=$media->getId();?>" name="mediaSelected"></td>
+						<td class="value"><?=$media->getNom();?></td>
+						<td class="value"><?=$media->getMediaTypeAffichable();?></td>
+						<td class="value"><?=$media->getChannelId();?></td>
+						</tr><?}?>
+				</table>
+		<?}
+		if(empty($LIST_MEDIA_ACCES_EMETTEUR) && empty($LIST_MEDIA_ACCES_RECEPTEUR)){?>
+			<center><i>Aucun accès aux médias n'est disponible</i></center>
+		<?}?>
+		<tr><td class="value" colspan="4">
+		<center><input type="submit" class="button" name="mediaAcces" value="Accéder aux médias" /></center>
+		</td></tr>
+		<?if($GERANT){?>
+			<tr><td class="value" colspan="4">
+				<center><input type="button" class="button" style="width:120px;" name="admin" value="Administrer" onclick="actionLink('Action_Lieu_MediaAccesAdmin');" /></center>
+			</td></tr>
+		<?}?>
+	</table>
+</form>

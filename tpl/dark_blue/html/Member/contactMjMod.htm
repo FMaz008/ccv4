@@ -1,0 +1,61 @@
+<form id="formPPA" method="post" action="?popup=1&m=ContactMjMod&id=<?=$PPA[0]['id'];?>" onsubmit="return ajaxSubmitForm(this);">
+<input type="hidden" id="form_action" name="form_action" value="" />
+<div class="panel">
+	<div class="title">Suivi d'un contact</div>
+	<div class="clearboth"></div>
+	
+	<div class="name member_contactMjMod_name">
+		De: <?=$PPA[0]['de'];?><br />
+		<?=$PPA[0]['date'];?>
+	</div>
+	<div class="value">
+		<?=$PPA[0]['msg'];?>
+	</div>
+	
+
+
+
+<?
+if(count($PPA)>1) {
+	for($i=1;$i<count($PPA);$i++){
+	?>
+		<div class="clearboth"><hr /></div>
+		<div class="name member_contactMjMod_name">
+			De: <?=$PPA[$i]['de'];?><br />
+			<?=$PPA[$i]['date'];?>
+		</div>
+		<div class="value">
+			<?=$PPA[$i]['msg'];?>
+		</div>
+	<?
+	}
+} 
+?>
+</div>
+<div class="clearboth"></div>
+
+<? if($PPA[0]['statut']=='ouvert') { ?>
+	<div class="member_contactMjMod_notice">
+		- Merci de fermer le ticket lorsqu'une conclusion aboutie. -
+	</div>
+	
+	<div class="panel">
+		<div class="title">Ajouter une réponse</div>
+	
+		<div class="name">Message</div>
+		<div class="value member_contactMjMod_messageContainer">
+			<textarea name="msg" style="width:700px; height:150px;"></textarea>
+		</div>
+		<div class="clearboth"></div>
+		
+		<div class="send">
+			<input type="submit" class="button" name="reply" value="Envoyer la réponse" onclick="$('form_action').value='reply';" />
+			<input type="submit" class="button" name="close" value="Fermer le ticket"  onclick="$('form_action').value='del';return confirm('Fermer le ticket?');" />
+		</div>
+	</div>
+<? }else{ ?>
+	<div class="member_contactMjMod_notice">
+		- Ce ticket est fermé. -
+	</div>
+<? } ?>
+</form>

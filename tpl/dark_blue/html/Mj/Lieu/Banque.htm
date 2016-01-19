@@ -1,0 +1,53 @@
+<form name="form1" action="" method="post">
+<table class="center">
+	<tr>
+		<td class="title" colspan="7">Liste des banques</td>	
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">No. Banque</td>
+		<td class="name">Lieu tech</td>
+		<td class="name">Nom</td>
+		<td class="name">Comptes</td>
+		<td class="name">Capital</td>
+		<td class="name">Action(s)</td>
+	</tr>
+	
+	<?
+	if(isset($BANQUES)){
+		foreach($BANQUES as $banque){
+			?>
+			<tr>
+				<td class="name">
+					<input type="radio" name="id" value="<?=$banque['banque_id'];?>" />
+				</td>
+				<td class="value"><?=$banque['banque_no'];?></td>
+				<td class="value"><?=$banque['banque_lieu'];?></td>
+				<td class="value"><?=$banque['banque_nom'];?></td>
+				<td class="value"><?=$banque['comptes'];?></td>
+				<td class="value" style="text-align:right;"><?=$banque['capital'];?></td>
+				<td class="value">
+					<a href="?mj=Lieu_BanqueCompte&id=<?=$banque['banque_id'];?>">Voir comptes</a>
+				</td>
+			</tr>
+			<?
+		}
+	}else{
+		?>
+		<tr>
+			<td class="value" colspan="7">
+				<i><strong>Aucune banque</strong></i>
+			</td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td colspan="7" value="name">
+			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Lieu_BanqueAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onClick="document.forms['form1'].action='?mj=Lieu_BanqueMod';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_BanqueDel';return confirm('Effacer la banque ?\n\nCETTE ACTION SUPPRIMERA TOUS LES COMPTES, HISTORIQUES, ET CARTES LIÉS À CETTE BANQUE.');" />
+		</td>
+	</tr>
+</table>
+</form>

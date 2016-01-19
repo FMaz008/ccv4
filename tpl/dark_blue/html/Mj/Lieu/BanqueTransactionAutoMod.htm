@@ -1,0 +1,48 @@
+
+<form id="bank" method="post" action="?mj=Lieu_BanqueTransactionAutoMod2" onsubmit="return ajaxSubmitForm(this);">
+<input type="hidden" name="compteId" value="<?=$COMPTE->getId();?>" />
+<input type="hidden" name="banqueId" value="<?=$BANQUE_ID;?>" />
+<input type="hidden" name="tid" value="<?=$TRANSACTION->getId();?>" />
+
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="2">
+			Modification d'une transaction pour le compte: <?=$COMPTE->getNoBanque() . '-' . $COMPTE->getNoCompte();?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Compte récepteur</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="compteTo" value="<?=$TRANSACTION->getCompteNoTo();?>" size="19" maxlength="19" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Description</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="description" value="<?=$TRANSACTION->getDescription();?>" size="25" maxlength="50" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Montant</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="value" value="<?=$TRANSACTION->getValue();?>" size="10" /> <?=GAME_DEVISE;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Date de la prochaine transaction</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="date_day" value="<?=substr($TRANSACTION->getDateTxt(), 8, 2);?>" size="2" />
+			 / 
+			<input type="text" class="text" name="date_month" value="<?=substr($TRANSACTION->getDateTxt(), 5, 2);?>" size="2" />
+			 / 
+			<input type="text" class="text" name="date_year" value="<?=substr($TRANSACTION->getDateTxt(), 0, 4);?>" size="4" /> (jj/mm/aaaa)
+		</td>
+	</tr>
+	<tr>
+		<td class="value" colspan="2">
+			<input type="submit" class="button" name="transaction_save" value="Enregistrer" />
+		</td>
+	</tr>
+</table>
+</form>
+<a href="?mj=Lieu_BanqueTransactionAuto&id=<?=$COMPTE->getId();?>&bid=<?=$BANQUE_ID?>"><< Retour</a><br />

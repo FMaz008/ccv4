@@ -1,0 +1,28 @@
+﻿<br />
+<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="6">Erreurs</td>
+	</tr>
+	<tr>
+		<td class="name">id</td>
+		<td class="name">date</td>
+		<td class="name">message</td>
+		<td class="name">fichier</td>
+		<td class="name">ligne</td>
+		<td class="name"></td>
+	</tr>
+	<? if(empty($ERRORS)) {?>
+		<tr><td class="value" colspan="6"><i>- Aucune erreur -</i></td></tr>
+	<? } else { 
+		foreach($ERRORS as $error) { ?>
+			<tr>
+				<td class="value"><?=$error['id'];?></td>
+				<td class="value"><?=fctToGameTime($error['date']);?></td>
+				<td class="value"><?=$error['msg'];?></td>
+				<td class="value"><?=$error['file'];?></td>
+				<td class="value"><?=$error['line'];?></td>
+				<td class="value"><a href="?mj=Dev_ErrLogDetails&id=<?=$error['id'];?>">détails</a></td>
+			</tr>
+		<? }
+		} ?>
+</table>

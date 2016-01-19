@@ -1,0 +1,90 @@
+
+<div class="visitor_titre">Options du compte</div>
+
+<form method="post" id="form1" action="?m=Config_Compte2">
+<div class="panel">
+	<div class="title">Configuration</div>
+
+	<div class="name inscription_name">
+		EMail:<br />
+		<p class="inscription_note">Tout changement nécessitera une confirmation du email ainsi qu'une réactivation du mot de passe.</p>
+	</div>
+	<div class="value inscription_value">
+			<input type="text" name="email" value="<?=$EMAIL;?>" />
+	</div>
+	<div class="clearboth"></div>
+
+
+	<div class="name inscription_name">
+		Mot de passe:<br />
+		<p class="inscription_note">(vide=inchangé)</p>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+			Une première fois:
+			<br />
+			<input class="text" type="password" name="pass1" value="" />
+			<br />
+			<br />Confirmation syntaxique:
+			<br />
+			<input class="text" type="password" name="pass2" value="" />
+	</div>
+	<div class="clearboth"></div>
+
+	<div class="name inscription_name">
+		Avancer ma remise à
+		<br />
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+			<select name="adv_rem">
+				<option value="0">Inchangée</option>
+				<? foreach($REMISE_ADV as $remise){ ?>
+					<option value="<?=$remise["brut"];?>"><?=$remise["formated"];?></option>
+				<? } ?>
+			</select>
+			<br />
+			Actuellement (approx.): <?=$NEXT_REMISE;?>
+	</div>
+	<div class="clearboth"></div>
+
+	<div class="name inscription_name">
+		Habillage du site
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+			<select name="skinname" size="1">
+			<? foreach($SKINS as $skin){ ?>
+				<option value="<?=$skin["name"];?>" <?if(isset($skin["set"])){?> SELECTED<?}?>><?=$skin["title"];?></option>
+			<? } ?>
+			</select>
+	</div>
+	<div class="clearboth"></div>
+
+
+	<div class="name inscription_name">
+		Évènements par page du HE
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+			<select name="heitems" size="1">
+				<? foreach($HEITEMS as $item){ ?>
+					<option value="<?=$item["value"];?>" <?if(isset($item["set"])){?> SELECTED<?}?>><?=$item["value"];?></option>
+				<? } ?>
+			</select>
+	</div>
+	<div class="clearboth"></div>
+
+	<div class="send">
+			<input class="button" type="submit" name="save" value="Sauvegarder" />
+	</div>
+
+</div>
+</form>

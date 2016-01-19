@@ -1,0 +1,60 @@
+﻿<form id="action_Media" action="?popup=1&m=Action_Item_Media2" method="post" onsubmit="return ajaxSubmitForm(this);">
+	<table class="tbl_center">
+		<tr><td class="title">Accéder aux médias</td></tr>
+		<tr><td class="name">Quel item utiliser : </td></tr>
+		<?if(!empty($LIST_ITEMS_MEDIA_RECEPTEUR)){?>
+			<tr><td>
+				<table class="tbl_center">
+					<tr><td class="title" colspan="4">Reception</td></tr>
+					<tr><td class="name"></td>
+					<td class="name">Nom</td>
+					<td class="name">Type de média</td>
+					<td class="name">Canal</td></tr>
+					<?foreach($LIST_ITEMS_MEDIA_RECEPTEUR as $item){?>
+						<tr><td class="value"><input type="radio" value="<?=$item->getInvId();?>" name="mediaSelected"></td>
+						<td class="value"><?=$item->getNom();?></td>
+						<td class="value">
+							<?if($item->getMediaType()=="tous"){?>
+								<select name="<?=$item->getInvId();?>_typeSelected">
+									<option value="tele">Télé</option>
+									<option value="radio">Radio</option>
+								</select>
+							<?}
+							else{?>
+								<input type="hidden" value="<?=$item->getMediaType();?>" name="<?=$item->getInvId();?>_typeSelected" /><?=$item->getMediaTypeAffichable();?>
+							<?}?>
+						</td>
+						<td class="value"><input type="text" name="<?=$item->getInvId();?>_channelSelected" id="<?=$item->getInvId();?>_channelSelected" class="text" maxlength="8"/></td>
+						</tr><?}?>
+				</table>
+		<?}
+		if(!empty($LIST_ITEMS_MEDIA_EMETTEUR)){?>
+		<tr><td>
+				<table class="tbl_center">
+					<tr><td class="title" colspan="4">Emission</td></tr>
+					<tr><td class="name"></td>
+					<td class="name">Nom</td>
+					<td class="name">Type de média</td>
+					<td class="name">Canal</td></tr>
+					<?foreach($LIST_ITEMS_MEDIA_EMETTEUR as $item){?>
+						<tr><td class="value"><input type="radio" value="<?=$item->getInvId();?>" name="mediaSelected"></td>
+						<td class="value"><?=$item->getNom();?></td>
+						<td class="value">
+							<?if($item->getMediaType()=="tous"){?>
+								<select name="<?=$item->getInvId();?>_typeSelected">
+									<option value="tele">Télé</option>
+									<option value="radio">Radio</option>
+								</select>
+							<?}
+							else{?>
+								<input type="hidden" value="<?=$item->getMediaType();?>" name="<?=$item->getInvId();?>_typeSelected" /><?=$item->getMediaTypeAffichable();?>
+							<?}?>
+						</td>
+						<td class="value"><input type="text" name="<?=$item->getInvId();?>_channelSelected" id="<?=$item->getInvId();?>_channelSelected" class="text" maxlength="8"/></td>
+						</tr><?}?>
+				</table>
+		<?}?>
+		<tr><td class="value" colspan="4">
+		<center><input type="submit" class="button" name="mediaAcces" value="Accéder aux médias" /></center>
+		</td></tr>
+	</table>

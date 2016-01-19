@@ -1,0 +1,14 @@
+<br />
+<? if(isset($ERREUR)){ ?>
+	<div class="index_lite_erreur">
+		<div class="index_lite_erreurName"><blink>Erreur</blink></div>
+		<?=$ERREUR;?>
+	</div><br />
+<? } ?>
+<?=$PAGE_SOURCE;?>
+
+<div class="footer clearboth">
+	<span>
+	Nombre de requ&ecirc;tes: <?=$QUERY_COUNT;?> (<?=$SQL_GEN_TIME;?>sec), G&eacute;n&eacute;ration de la page: <?=$PAGE_GEN_TIME;?>sec
+	</span>
+</div>

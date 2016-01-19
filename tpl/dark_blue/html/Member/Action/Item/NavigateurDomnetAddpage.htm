@@ -1,0 +1,127 @@
+<script type="text/javascript">
+//<!--
+	validate = function(){
+		
+		if($F('page_titre')==""){
+			alert('Vous devez entrer un titre.');
+			return false;
+		}
+		
+		
+		//Requête AJAX pour Creer la page
+		showplzwait();
+		var myAjax = new Ajax.Request(
+				'?popup=1&m=Action_Item_SitePageadd', 
+				{
+					method: 'post', 
+					parameters: 'titre='+encodeURIComponent($F('page_titre'))+
+								'&content='+encodeURIComponent($F('page_content'))+
+								'&url=<?=$SITE->getUrl();?>'+
+								'&user='+$F('header_user')+
+								'&pass='+$F('header_pass')+
+								'&acces='+$('acces').checked+
+								'&showIndex='+$('showIndex').checked, 
+					onComplete: operation_confirm,
+					onFailure: fail
+				});
+		return false;
+	}
+
+	//Fonction générales
+	fail = function(){
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML="La requête &agrave; échouée, veuillez ré-essayer plus tard.";
+	}
+
+	showplzwait = function(){
+		$('plzwait1').style.display="block";
+		$('plzwait2').style.display="block";
+		$('request_msgtxt').innerHTML="Veuillez patienter...";
+		$('request_msg').style.display="none";
+	}
+	hideplzwait = function(){
+		$('plzwait1').style.display="none";
+		$('plzwait2').style.display="none";
+	}
+	operation_confirm = function(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		if (params[0]=="OK"){
+			hideplzwait();
+			$('perso_pa').innerHTML=params[1];
+			goTo(params[2]);
+		}else{
+			$('request_msg').style.display="block";
+			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+		}
+	}
+//-->
+</script>
+<!-- Zone ombragée -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Chargement en cours, veuillez patienter...</div>
+			<div id="request_msg" style="display:none;text-align:center;"><br /><a href="#" onclick="hideplzwait();">- Fermer -</a></div>
+		</td>
+		</tr>
+	</tr>
+	</table>
+</div>
+
+
+
+<form id="action_navigateurDomnetAddpage" onsubmit="return ajaxSubmitForm(this);">
+	
+	<center>
+		<strong>Ajouter une page</strong>
+	</center>
+	<br />
+	<table class="tbl_center">
+	<tr>
+		<td class="name">Titre</td>
+	</tr>
+	<tr>
+		<td class="value">
+			<input type="text" class="text" name="page_titre" size="50" maxlength="250" id="page_titre" value="" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Contenu [HJ: BBCodes autorisés]</td>
+	</tr>
+	<tr>
+		<td class="value">
+			<textarea id="page_content" name="page_content" style="width:600px;height:400px;"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Définition de la visibilité</td>
+	</tr>
+	<tr>
+		<td class="value">
+			<table>
+			<tr>
+				<td class="name">Acc&egrave;s</td>
+				<td class="name">Afficher dans l'index</td>
+			</tr>
+			<tr>
+				<td class="value">
+					<input type="radio" id="acces" name="acces" value="pub" CHECKED /> Public<br />
+					<input type="radio" 			name="acces" value="priv" /> Privé
+				</td>
+				<td class="value">
+					<input type="radio" id="showIndex" name="showIndex" value="1" CHECKED /> Oui<br />
+					<input type="radio"					name="showIndex" value="0" /> Non (Via URL seulement)
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	
+	<input type="button" class="button" name="create" value="Enregistrer la page !" onclick="validate();" />
+</form>

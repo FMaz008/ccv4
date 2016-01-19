@@ -1,0 +1,102 @@
+<script type="text/javascript">
+//<!--
+	$('perso_pa').innerHTML="<?=$PA;?>";
+	$('perso_cash').innerHTML="<?=$CASH;?>";
+	/**
+	 * SRC: http://www.rexchung.com/2007/02/22/getting-radio-buttons-value-with-prototypejs/
+	 */
+	$RF = function(rName) {
+	    var tmp = Form.getInputs('action_mairieVisaVertExam','radio',rName).find(function(radio) { return radio.checked; })
+		if(tmp==undefined)	
+			return null;
+		return tmp.value;
+	}
+	
+	valider = function(){
+		var bad = false;
+		
+		<?
+		foreach($SECTIONS as $section){
+			foreach($section['questions'] as $question){
+				?>
+				if($RF('Q<?=$question['id'];?>')==null)	bad=true;
+				<?
+			}
+		}
+		?>
+		
+		if(bad == true){
+			alert('Vous devez répondre à toutes les questions');
+			return false;
+		}
+		
+		var rep= confirm('Envoyer votre copie d\'examen ?');
+		if (rep)
+			 return ajaxSubmitForm($("action_mairieVisaVertExam"));
+		return false;
+	}
+//-->
+</script>
+
+
+<br />
+<form id="action_mairieVisaVertExam" method="post" action="?popup=1&m=Action_Lieu_MairieVisaVertExam2" onsubmit="return valider();">
+	<input type="hidden" name="no_exam" value="<?=$NO_EXAM;?>" />
+	<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="2">EXAMEN DE PASSATION DU VISA VERT</td>
+	</tr>
+	</table>
+	<br />
+	
+	<?
+	foreach($SECTIONS as $section)
+	{
+		?>
+		
+		<table class="tbl_center">
+		<tr>
+			<td class="title">Section <?=$section['section'];?></td>
+		</tr>
+		</table>
+		
+		<?
+		foreach($section['questions'] as $question) {
+			?>
+			<input type="hidden" name="Q[]" value="<?=$question['id'];?>" />
+			<table class="tbl_center">
+			<tr>
+				<td class="name" colspan="2"><?=$question['question'];?></td>
+			</tr>
+			
+			<?
+			foreach($question['reponses'] as $reponse){
+				?>
+				
+				<tr>
+					<td class="name" style="width:15px;">
+						<input type="radio" name="Q<?=$question['id'];?>" value="<?=$reponse['reponse_tech'];?>" />
+					</td>
+					<td class="valueleft"><?=$reponse['reponse'];?></td>
+				</tr>
+				
+			<?
+			}
+			?>
+			
+			</table>
+			<?
+		}
+	}
+	?>
+		
+	<br />
+	<br />
+	<table class="tbl_center">
+	<tr>
+		<td class="send">
+			<input type="submit" class="button" name="corriger" value="Soumettre pour la correction" style="width:250px;" />
+		</td>
+	</tr>
+	</table>
+</form>

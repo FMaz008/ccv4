@@ -1,0 +1,222 @@
+
+<br />
+<form id="action_boutique" method="post" action="?popup=1&m=Action_Lieu_Boutique2" onsubmit="return ajaxSubmitForm(this);">
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="4">
+			Inventaire de la boutique - ACHAT
+		</td>
+	</tr>
+	<tr>
+		<td class="name" style="width:75px;">Qte</td>
+		<td class="name">Item</td>
+		<td class="name" style="width:50px;">Pr</td>
+		<td class="name" style="width:75px;">Prix</td>
+	</tr>
+	<?
+	if(empty($INV_BOUTIQUE)){
+		?>
+		<tr>
+			<td class="value" colspan="4">
+				<i>-aucun item en inventaire pour le moment-</i>
+			</td>
+		</tr>
+		<?
+	}else{
+		foreach($INV_BOUTIQUE as $item){
+		?>
+			<tr>
+				<td class="value" style="text-align:left;width:75px;">
+					<input type="text" class="text" name="itema<?=$item->getInvId();?>" value="0" size="3" /> /<?=$item->getQte();?>
+				</td>
+				<td class="value" style="text-align:left;">
+					<span class="fakelink" id="item_<?=$item->getInvId();?>" onmousemove="infobulle(this, event);"><?=$item->getNom();?></span>
+					<div id="ib_item_<?=$item->getInvId();?>" style="width:300px;" class="infobulle">
+						<img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/items/<?=$item->getImage();?>" align="left" style="border:0px;margin:3px;" />
+						<?=$item->getDescription();?>
+					</div>
+				</td>
+				<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+				<td class="value" style="text-align:right;"><?=$item->getBoutiquePrixVente();?> <?=$GAME_DEVISE?></td>
+			</tr>
+		<?
+		}
+	}
+	?>
+</table>
+
+
+
+
+
+
+
+
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="4">
+			Rachat de la boutique - VENTE
+		</td>
+	</tr>
+	<tr>
+		<td class="name" style="width:75px;">Qte</td>
+		<td class="name">Item</td>
+		<td class="name" style="width:50px;">Pr</td>
+		<td class="name" style="width:75px;">Prix</td>
+	</tr>
+	<?
+	if(empty($INV_BOUTIQUE)){
+		?>
+		<tr>
+			<td class="value" colspan="4">
+				<i>-aucun de vos items actuels int&eacute;resse la boutique pour le moment-</i>
+			</td>
+		</tr>
+		<?
+	}else{
+		foreach($INV_PERSO as $item){
+		?>
+			<tr>
+				<td class="value" style="text-align:left;width:75px;">
+					<input type="text" class="text" name="itemv<?=$item['inv']->getInvId();?>" value="0" size="3" /> /<?=$item['inv']->getQte();?>
+				</td>
+				<td class="value" style="text-align:left;">
+					<span class="fakelink" id="item_<?=$item['inv']->getInvId();?>" onmousemove="infobulle(this, event);"><?=$item['inv']->getNom();?></span>
+					<div id="ib_item_<?=$item['inv']->getInvId();?>" style="width:300px;" class="infobulle">
+						<img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/items/<?=$item['inv']->getImage();?>" align="left" style="border:0px;margin:3px;" />
+						<?=$item['inv']->getDescription();?>
+					</div>
+				</td>
+				<td class="value" style="text-align:right;"><?=$item['inv']->getPr();?></td>
+				<td class="value" style="text-align:right;"><?=$item['boutique']->getBoutiquePrixAchat();?> <?=$GAME_DEVISE?></td>
+			</tr>
+		<?
+		}
+	}
+	?>
+</table>
+
+
+
+
+
+
+
+<br />
+<br />
+<table class="center" style="margin-left:auto;margin-right:auto;width:500px;">
+<tr>
+	<td class="value" style="vertical-align:top;">
+	
+		<table style="width:300px;">
+		<tr>
+			<td class="title" colspan="2">Type de transaction</td>
+		</tr>
+		<tr>
+			<td class="name" style="width:15px;"><input type="radio" name="achat_type" value="achat" checked="checked" /></td>
+			<td class="value" style="text-align:left;">Acheter et/ou vendre(<?=$PA_COST['achat'];?> PA)</td>
+		</tr>
+		<tr>
+			<td class="name"><input type="radio" name="achat_type" value="nego" /></td>
+			<td class="value" style="text-align:left;">N&eacute;gocier le prix de l'achat/vente (<?=$PA_COST['nego'];?> PA)</td>
+		</tr>
+		<?
+		if($CAN_VOL)
+		{
+			?>	
+			<tr>
+				<td class="name"><input type="radio" name="achat_type" value="vol" /></td>
+				<td class="value" style="text-align:left;">
+					<a href="#" class="infobulle">Vendre et/ou Voler
+						<div style="margin-left:90px;" class="infobulle">
+							Si vous ratez le vol, le vendeur aura votre description physique. Vous serez aussi banni de ce lieu pour un certain temps et t&eacute;l&eacute;port&eacute; au centre de police.
+						</div>
+					</a> (<?=$PA_COST['vol'];?> PA)
+				</td>
+			</tr>
+			<?
+		}
+		?>
+		</table>
+	</td>
+	<td class="value" style="vertical-align:top;">
+	
+		<table style="width:400px;">
+		<tr>
+			<td class="title" colspan="2">
+				Type de paiement
+				<?
+				if($CAN_VOL)
+				{
+					?>
+					(non requis pour le vol)
+					<?
+				}
+				?>
+			</td>
+		</tr>
+		<tr>
+		<tr>
+			<td class="name" style="width:15px;"><input type="radio" name="pay_type" value="cash" CHECKED /></td>
+			<td class="value" style="text-align:left;">Argent comptant</td>
+		</tr>
+		
+		<?
+		if(isset($PAIEMENT_DIRECT))
+		{
+			?>
+			<tr>
+				<td class="name" style="vertical-align:top;"><input type="radio" name="pay_type" value="card" /></td>
+				<td class="value" style="text-align:left;">
+					Carte bancaire:
+					<?
+					if (!isset($CARTES)){
+					?>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<i>Vous ne poss&eacute;dez aucune carte bancaire.</i>
+					<? }else{
+						foreach($CARTES as $carte){
+						?>
+							<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="cardid" value="<?=$carte->getInvId();?>" /> <?=$carte->getNoBanque();?>-<?=$carte->getNoCompte();?>-<?=$carte->getNoCarte();?> <?=$carte->getNote();?>
+						<?
+						}
+						?>
+						<br />
+						<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						NIP: <input type="text" class="text" name="nip" maxlength="5" size="6" value="" />
+						<?
+					}?>
+				</td>
+			</tr>
+			<?
+		}
+		else
+		{
+			?>
+			<tr>
+				<td colspan="2"><i>Paiement par carte non disponible.</i></td>
+			</tr>
+			<?
+		}
+		?>
+		</table>
+		
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+<table class="center" style="width:750px;">
+<tr>
+	<td style="text-align:center;" colspan="4">
+		<input type="submit" class="button" style="width:120px;" name="buy" value="Achat/Vente" />
+		<? if(isset($admin)){ ?>
+		<input type="button" class="button" style="width:120px;" name="admin" value="Administrer" onclick="actionLink('Action_Lieu_BoutiqueAdmin');" />
+		<? } ?>
+	</td>
+</tr>
+</table>
+</form>
+<br />

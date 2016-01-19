@@ -1,0 +1,61 @@
+<script type="text/javascript">
+//<!--
+	goBack = function()
+	{
+		ajaxSubmitForm($("action_redirect"));
+	}
+//-->
+</script>
+
+<form id="action_redirect" method="post" action="?popup=1&m=Action_Lieu_BanqueTransactionAuto">
+	<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+</form>
+
+<br />
+<form id="action_bank" method="post" action="?popup=1&m=Action_Lieu_BanqueTransactionAutoAdd2" onsubmit="return ajaxSubmitForm(this);">
+<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="3">
+			Création d'une transaction automatique pour le compte: <?=$COMPTE;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Compte récepteur</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="compteNoTo" value="" size="19" maxlength="19" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Description</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="description" value="" size="25" maxlength="50" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Montant</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="value" value="" size="10" /> <?=GAME_DEVISE;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Date de la première transaction </td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="date_day" value="" size="2" />
+			 / 
+			<input type="text" class="text" name="date_month" value="" size="2" />
+			 / 
+			<input type="text" class="text" name="date_year" value="" size="4" /> (jj/mm/aaaa)
+			<br />Les transactions se font tous les mois.
+		</td>
+	</tr>
+	<tr>
+		<td class="value" colspan="3">
+			<input type="submit" class="button" name="transaction_save" value="Enregistrer" />
+		</td>
+	</tr>
+</table>
+</form>
+<span class="fakelink" onclick="goBack();">&lt;&lt; Retour</span>
+<br />

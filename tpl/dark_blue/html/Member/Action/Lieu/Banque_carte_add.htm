@@ -1,0 +1,53 @@
+<script type="text/javascript">
+//<!--
+	goBack = function()
+	{
+		ajaxSubmitForm($("action_redirect"));
+	}
+//-->
+</script>
+
+<form id="action_redirect" method="post" action="?popup=1&m=Action_Lieu_BanqueCarte">
+	<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+</form>
+
+<br />
+<form id="action_bank" method="post" action="?popup=1&m=Action_Lieu_BanqueCarteAdd2" onsubmit="return ajaxSubmitForm(this);">
+<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="3">
+			Création de l'acc&egrave;s par carte pour le compte: <?=$COMPTE;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Nom</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="nom" value="" size="25" maxlength="25" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">NIP</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="nip" value="" size="5" maxlength="5"  />
+			<span style="font-size:8pt;color:#FF0000;"><br />(chiffres de 0 &agrave; 9 seulement)</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Active</td>
+		<td class="value" style="text-align:left;">
+			<input type="radio" name="valid" value="1" CHECKED /> Activée
+			<br />
+			<input type="radio" name="valid" value="0" /> Désactivée
+		</td>
+	</tr>
+	<tr>
+		<td class="value" colspan="3">
+			<input type="submit" class="button" name="card_save" value="Enregistrer" />
+		</td>
+	</tr>
+</table>
+</form>
+<span class="fakelink" onclick="goBack();">&lt;&lt; Retour</span>
+<br />

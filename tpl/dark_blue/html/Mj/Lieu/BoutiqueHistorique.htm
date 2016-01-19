@@ -1,0 +1,23 @@
+<script type="text/javascript">
+//<!--
+//-->
+</script>
+
+<form name="historique" action="?mj=Lieu_BoutiqueHistorique&id=<?=$_GET['id'];?>" method="post">
+	<table style="width:800px;">
+	<tr><td class="title">Historique des transactions - boutique <?=$LIEU_TECH;?></td></tr>
+	<tr><td class="value">
+			<?if(isset($HISTORIQUE_LIST)){
+				foreach($HISTORIQUE_LIST as $historique){
+					echo($historique['details']);?><br />
+			<?	}
+			}
+			else{?>
+				<i>Pas de transaction répertoriée.</i>
+			<?}?>
+	</td></tr>
+	<tr><td class="name">
+		<center><input type="submit" class="button" name="del" value="Supprimer l'historique"/></center>
+	</td></tr>
+	</table>
+</form>

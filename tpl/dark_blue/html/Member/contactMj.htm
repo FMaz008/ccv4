@@ -1,0 +1,134 @@
+<script type="text/javascript">
+//<!--
+showPannel = function(what)
+{
+	$('list').style.display = "none";
+	$('nouv').style.display = "none";
+	$('blist').className = "ongletOff";
+	$('bnouv').className = "ongletOff";
+	
+	$(what).style.display = "block";
+	$('b' + what).className="ongletOn";
+	
+	if(what=="nouv")
+		selectType();
+}
+selectType = function(){
+	if ($F("type")=="ppa"){
+		$("sujetTitre").innerHTML = "<u>Résumez</u> ce que vous voulez tenter :";
+		$("descTitre").innerHTML = "Faites maintenant preuve de RP :";
+		
+	}else if($F("type")=="plainte"){
+		$("sujetTitre").innerHTML = "Brièvement, sur quoi porte votre plainte ?";
+		$("descTitre").innerHTML = "Décrivez avec soin et détails la situation :";
+		
+	}else if($F("type")=="quete"){
+		$("sujetTitre").innerHTML = "De quelle quête s'agit-il ?";
+		$("descTitre").innerHTML = "Faites maintenant preuve de RP :";
+		
+	}else if($F("type")=="question"){
+		$("sujetTitre").innerHTML = "Avez-vous recherché sur le forum ? Si oui, résumez votre question:";
+		$("descTitre").innerHTML = "De façon claire et compréhensible, votre question :";
+		
+	}
+}
+//-->
+</script>
+
+	<div class="member_contactMj_topMenu">
+		<div id="blist" class="ongletOn" onclick="showPannel('list');"><span>Gestion</span></div>
+		<div id="bnouv" class="ongletOff" onclick="showPannel('nouv');"><span>Nouveau</span></div>
+	</div>
+	<div class="clearboth"></div>
+		
+		
+	<div id="list" class="member_contactMj_content" style="display:none;overflow-y:scroll;">
+		<table align="center">
+		<tr>
+			<td class="title" colspan="5">Ticket de contact ouvert en ce moment</td>
+		</tr>
+		<tr>
+			<td class="name" style="width:100px;">Ouvert le</td>
+			<td class="name" style="width:100px;">Type</td>
+			<td class="name">Sujet</td>
+			<td class="name" style="width:100px;">Saisi par</td>
+			<td class="name" style="width:100px;">Répondu le</td>
+		</tr>
+		<? if(isset($PPA)){ 
+			foreach($PPA as $ppa){ ?>
+				<tr <? if($ppa['statut']=='ferme') { echo 'style="color:#666666;"'; } ?>>
+					<td class="value"><?=$ppa['date'];?></td>
+					<td class="value"><?=$ppa['type'];?></td>
+					<td class="value">
+						<a href="#" onclick="actionLink('ContactMjMod&id=<?=$ppa['id'];?>')">
+							<?=$ppa['titre'];?>
+						</a>
+					</td>
+					<td class="value"><?=$ppa['mjnom'];?></td>
+					<td class="value"><?=$ppa['replyDate'];?></td>
+				</tr>				
+			<? }
+		}else{ ?>
+			<tr>
+				<td class="value" colspan="5">
+					<i>Aucun contact avec les MJ n'est actif en ce moment.</i>
+				</td>
+			</tr>
+		<? } ?>
+		</table>
+	</div>
+	
+	
+	
+	<div id="nouv" class="member_contactMj_content" style="display:none;overflow-y:scroll;">
+		<? if(isset($CAN_POST)){ ?>
+			<form id="contactMJ" method="post" action="?popup=1&m=ContactMjNew" onsubmit="return ajaxSubmitForm(this);">
+			<table align="center">
+				<tr><td class="title" colspan="2">Contacter un MJ</td></tr>
+				<tr>
+					<td class="name">Concernant:</td>
+					<td class="value">
+						<select id="type" name="type" onchange="selectType();">
+							<option value="ppa" SELECTED>PPA (ProPoser Action)</option>
+							<option value="plainte">Plainte</option>
+							<option value="quete">Quête</option>
+							<option value="question">Question</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="name" id="sujetTitre" colspan="2">wait</td>
+				</tr>
+				<tr>
+					<td class="value" colspan="2">
+						<input type="text" class="text" name="titre" value="" size="80" maxlength="256" />
+					</td>
+				</tr>
+				<tr>
+					<td class="name" id="descTitre" colspan="2">wait</td>
+				</tr>
+				<tr>
+					<td class="value" colspan="2">
+						<textarea name="msg" style="width:600px;height:300px;"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td	class="send" colspan="2">
+						<input type="submit" class="button" name="send" value="Soumettre" />
+					</td>
+				</tr>
+			</table>
+			</form>
+		<? }else{ ?>
+			<center><strong><i>- Vous avez atteint votre maximum de tickets ouverts simultanément (<?=PPA_MAX;?>). -</i></strong></center>
+		<? } ?>
+	</div>
+		
+		
+	
+
+<script type="text/javascript">
+//<!--
+	showPannel('list');
+//-->
+</script>

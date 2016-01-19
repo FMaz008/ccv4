@@ -1,0 +1,41 @@
+<br />
+<table style="center">
+<tr>
+	<td class="title">Navigateur</td>
+</tr>
+<tr>
+	<td class="name"><?=$HEADER;?></td>
+</tr>
+<tr>
+	<td class="value">
+		<br />
+		<br />
+		<h1>
+			<?
+			if(isset($site)){
+				echo $site->getTitre();
+			}
+			?>
+		</h1>
+		<? if(isset($TITRE)){ ?>
+			<h2>&nbsp;&nbsp;<?=$TITRE;?></h2>
+		<? } ?>
+		<? if(isset($PAGE)){ ?>
+			<br />
+			<?=$PAGE;?>
+			<br />
+		<? } ?>
+	</td>
+</tr>
+<tr>
+	<td class="value">
+		<? if(isset($INDEX)){ ?>
+			<br />
+			<br />
+			<?=$INDEX;?>
+		<? } ?>
+	</td>
+</tr>
+</table>
+<br />
+<br />

@@ -1,0 +1,194 @@
+<script type="text/javascript">
+//<!--
+Changer_Perso = function(){
+	var perso=prompt('À quel personnage voulez-vous associer cet item ?','');
+	if(perso!=""){
+		var myAjax = new Ajax.Updater(
+			'div_perso', 
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat=item_asso_perso&search='+perso
+			});
+	}
+}
+Changer_Perso2 = function(id, perso){
+	$('div_perso').innerHTML = perso+' (<a href="#" onclick="Changer_Perso();">Changer</a>)\n<input type="hidden" name="inv_persoid" value="'+id+'" />';
+}
+
+Changer_Lieu = function(){
+	var lieu=prompt('À quel lieu voulez-vous associer cet item ? (Nom technique)','');
+	if(lieu!=""){
+		var myAjax = new Ajax.Updater(
+			'div_lieu', 
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat=item_asso_lieu&search='+lieu
+			});
+	}
+}
+Changer_Lieu2 = function(tech, nom){
+	$('div_lieu').innerHTML = nom+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="inv_lieutech" value="'+tech+'" />';
+}
+
+Changer_Boutique = function(){
+	var boutique=prompt('À quelle boutique voulez-vous associer cet item ? (Nom technique du lieu)','');
+	if(boutique!=""){
+		var myAjax = new Ajax.Updater(
+			'div_boutique', 
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat=item_asso_boutique&search='+boutique
+			});
+	}
+}
+Changer_Boutique2 = function(tech, nom){
+	$('div_boutique').innerHTML = nom+' (<a href="#" onclick="Changer_Boutique();">Changer</a>)\n<input type="hidden" name="inv_boutiquelieutech" value="'+tech+'" />';
+}
+
+showHideTypeAsso = function(show_what){
+	$('tr_perso').style.display = 'none';
+	$('tr_lieu').style.display = 'none';
+	$('tr_boutique').style.display = 'none';
+	$('tr_casier').style.display = 'none';
+	$('tr_item').style.display = 'none';
+	
+	$('tr_'+show_what).style.display = 'table-row';
+	$('att_' + show_what).checked=true;
+}
+
+
+
+
+validateForm = function(){
+	if ($('att_perso').checked)
+		if( !is_defined($('form1').inv_persoid) || $('form1').inv_persoid.value == '')
+			return notvalid("Vous devez choisir un personnage.");
+			
+	if ($('att_lieu').checked)
+		if( !is_defined($('form1').inv_lieutech) || $('form1').inv_lieutech.value == '')
+			return notvalid("Vous devez choisir un lieu.");
+			
+	if ($('att_boutique').checked)
+		if( !is_defined($('form1').inv_boutiquelieutech) || $('form1').inv_boutiquelieutech.value == '')
+			return notvalid("Vous devez choisir une boutique.");
+			
+	if ($('att_casier').checked)
+		if( !is_defined($('form1').inv_casierid) || $('form1').inv_casierid.value == '')
+			return notvalid("Vous devez choisir un casier.");
+			
+	if ($('att_item').checked)
+		if( !is_defined($('form1').inv_itemid) || $('form1').inv_itemid.value == '')
+			return notvalid("Vous devez choisir un item.");
+	
+	
+	return true;
+}
+is_defined = function( v ){
+    return typeof(v) != 'undefined';
+}
+notvalid = function(msg){
+	alert (msg);
+	return false;
+}
+//-->
+</script>
+
+<br />
+<form name="form1" id="form1" method="post" action="?mj=Item_Inv_Cartememoire&id=<?=$ITEM['inv_id'];?>&rpage=<?=$_GET['rpage'];?>&rid=<?=$_GET['rid'];?>" onsubmit="return validateForm();">
+<table class="subcenter">
+	<tr>
+		<td class="title" colspan="8">Gestion d'une carte mémoire</td>
+	</tr>
+	<tr>
+		<td class="name">Id</td>
+		<td class="value"><?=$ITEM['inv_id'];?></td>
+	</tr>
+	<tr>
+		<td class="name">Associé à</td>
+		<td class="value">
+			<table>
+			<tr>
+				<td class="name"><input type="radio" name="attacheA" id="att_perso" value="perso" onClick="showHideTypeAsso('perso');" />Perso</td>
+				<td class="name"><input type="radio" name="attacheA" id="att_lieu" value="lieu" onClick="showHideTypeAsso('lieu');" />Lieu</td>
+				<td class="name"><input type="radio" name="attacheA" id="att_boutique" value="boutique" onClick="showHideTypeAsso('boutique');" />Boutique</td>
+				<td class="name"><input type="radio" name="attacheA" id="att_casier" value="casier" onClick="showHideTypeAsso('casier');" />Casier</td>
+				<td class="name"><input type="radio" name="attacheA" id="att_item" value="item" onClick="showHideTypeAsso('item');" />Item</td>
+			</tr>
+			
+			<tr id='tr_perso' style="display:none;">
+				<td colspan="3">
+					<div id="div_perso" style="height:6em;overflow:auto;">
+						<?=$ITEM['perso'];?> (<a href="#" onclick="Changer_Perso();">Changer</a>)
+						<input type="hidden" name="inv_persoid" value="<?=$ITEM['inv_persoid'];?>" />
+					</div>
+				</td>
+			</tr>
+			<tr id='tr_lieu' style="display:none;">
+				<td colspan="3">
+					<div id="div_lieu" style="height:6em;overflow:auto;">
+						<?=$ITEM['lieu'];?> (<a href="#" onclick="Changer_Lieu();">Changer</a>)
+						<input type="hidden" name="inv_lieutech" value="<?=$ITEM['inv_lieutech'];?>" />
+					</div>
+				</td>
+			</tr>
+			<tr id='tr_boutique' style="display:none;">
+				<td colspan="3">
+					<div id="div_boutique" style="height:6em;overflow:auto;">
+						<?=$ITEM['boutique'];?> (<a href="#" onclick="Changer_Boutique();">Changer</a>)
+						<input type="hidden" name="inv_boutiquelieutech" value="<?=$ITEM['inv_boutiquelieutech'];?>" />
+					</div>
+				</td>
+			</tr>
+			<tr id='tr_casier' style="display:none;">
+				<td colspan="3">
+					<div id="div_casier" style="height:6em;overflow:auto;">
+						Id Casier: <input type="text" class="text" name="inv_idcasier" value="<?=$ITEM['inv_idcasier'];?>" />
+					</div>
+				</td>
+			</tr>
+			<tr id='tr_item' style="display:none;">
+				<td colspan="3">
+					<div id="div_item" style="height:6em;overflow:auto;">
+						Id Item: <input type="text" class="text" name="inv_itemid" value="<?=$ITEM['inv_itemid'];?>" />
+					</div>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="name">Contenu</td>
+		<td class="value"><textarea name="inv_memoiretext" style="width:300px;height:100px;"><?=$ITEM['inv_memoiretext'];?></textarea></td>
+	</tr>
+	<tr>
+		<td class="name">Résistance</td>
+		<td class="value"><input type="text" class="text" name="inv_resistance" value="<?=$ITEM['inv_resistance'];?>" /> / <?=$ITEM['db_resistance'];?></td>
+	</tr>
+	<tr>
+		<td class="name">Complément de description spécifique à l'objet</td>
+		<td class="value"><textarea name="inv_extradesc" style="width:300px;height:100px;"><?=$ITEM['inv_extradesc'];?></textarea></td>
+	</tr>
+	<tr>
+		<td class="name">Note MJ sur cet item</td>
+		<td class="value"><textarea name="inv_notemj" style="width:300px;height:100px;"><?=$ITEM['inv_notemj'];?></textarea></td>
+	</tr>
+	<tr>
+		<td class="name">Note MJ sur ces items (base de données)</td>
+		<td class="value"><div style="overflow:auto;width:300px;height:100px;"><?=$ITEM['db_notemj'];?></div></td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" class="send">
+			<input type="submit" class="button" name="mod" value="Enregistrer" />
+		</td>
+	</tr>
+</table>
+</form>
+
+<script type="text/javascript">
+showHideTypeAsso('<?=$ITEM['att_type'];?>');
+</script>

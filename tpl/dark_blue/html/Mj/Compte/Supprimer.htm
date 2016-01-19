@@ -1,0 +1,25 @@
+
+
+<table class="center">
+
+
+	<tr>
+		<td class="title" colspan="1">Suppression du compte de <?=$donnees['user'];?></td>
+	</tr>
+	<tr>
+		<td class="name">Pseudo du personnage :</td>
+
+	</tr>
+		<?foreach($pj as $perso){?>
+	<tr>
+		<td class="value"><?=$perso['nom'];?></td>
+
+	</tr><?}?>
+</table>
+<center>
+<form action="?mj=Compte_Del&id=<?=$donnees['id'];?>&action=suppr" method="post">
+Êtes vous vraiment sûr de vouloir supprimer le compte de <?=$donnees['user'];?> ?<br>
+<input type="submit" style="background-color:#990000;" value="OUI"/>
+<input type="button" style="background-color:#006600;" value="NON" onclick="location.href='?mj=index'; return false;" />
+</form>
+</center>

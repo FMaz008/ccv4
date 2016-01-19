@@ -1,0 +1,20 @@
+<form method="post" action="?m=DelPerso2&id=<?=$PERSO['id'];?>">
+<div class="panel">
+	<div class="title">Suppression d'un personnage</div>
+	<div class="clearboth"></div>
+	
+	<div class="value member_delPerso">
+		Êtes-vous bien certain(e) de vouloir
+		<span style="color:red;">supprimer</span>
+		le personnage <?=$PERSO['nom'];?> ?
+	</div>
+	<div class="clearboth"></div>
+	
+	<div class="send">
+		<input type="button" class="button" name="no" value="Annuler" style="background-color:#003300;" onclick="location.href='?m=News';" />
+		<input type="submit" class="button" name="yes" value="Supprimer" style="background-color:#330000;" />
+	</div>
+	<div class="clearboth"></div>
+	
+</div>
+</form>

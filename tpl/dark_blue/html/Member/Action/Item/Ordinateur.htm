@@ -1,0 +1,49 @@
+<table class="tbl_center">
+	<tr><td class="title">Appareils Disponibles</td></tr>
+	<?php
+	if(!isset($LIST_PC)){
+		?>
+		<i> - Vous ne poss&egrave;dez aucun appareil informatique - </i>
+		<?
+	}else{
+		foreach($LIST_PC as $pc){
+			?>
+			<tr>
+				<td class="value" align="left">
+					<span class="fakelink" onclick="actionLink('Action_Item_Ordinateur2&amp;id=<?=$pc->getInvId();?>');">
+						<?=$pc-> getNom();?> #<?=$pc->getInvId();?>
+					</span>
+				</td>
+			</tr>
+			<?php
+		}
+	}
+	?>
+</table>
+
+
+<!--
+<table class="tbl_center">
+<tr>
+	<td class="title">Menu principal de l'Ordinateur</td>
+</tr>
+<?php
+	if($INTERNET) {
+	?>
+		<tr>
+			<td class="value">Internet</td>
+		</tr>
+		<?php
+	}
+	if($MCREAD){
+		?>
+		<tr>
+			<td class="value">
+				<span class="fakelink" onclick="actionLink('Action_Item_CartesMemoireAfficher');">Gestion des cartes Memoire</span>
+			</td>
+		</tr>
+		<?php
+	}
+?>
+</table>
+-->

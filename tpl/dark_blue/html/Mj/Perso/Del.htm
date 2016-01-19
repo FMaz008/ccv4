@@ -1,0 +1,33 @@
+
+
+<table class="center">
+
+
+	<tr>
+		<td class="title" colspan="5">Personnage à supprimer</td>
+	</tr>
+	<tr>
+		<td class="name">Nom</td>
+		<td class="name">Age</td>
+		<td class="name">Lieu</td>
+		<td class="name">PV</td>
+		<td class="name">Argent</td>
+
+	</tr>
+		
+	<tr>
+		<td class="value"><?=$perso['nom'];?></td>
+		<td class="value"><?=$perso['age'];?></td>
+		<td class="value"><?=$perso['lieu'];?></td>
+		<td class="value"><?=$perso['pv'];?></td>
+		<td class="value"><?=$perso['cash'];?></td>
+
+	</tr>
+</table>
+<center>
+<form action="?mj=Perso_Del&id=<?=$perso['id'];?>&action=suppr" method="post">
+Êtes vous vraiment sûr de vouloir supprimer le perso : <?=$perso['nom'];?> ?<br>
+<input type="submit" style="background-color:#990000;" value="OUI"/>
+<input type="button" style="background-color:#006600;" value="NON" onclick="location.href='?mj=index'; return false;" />
+</form>
+</center>

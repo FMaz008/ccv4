@@ -1,0 +1,52 @@
+<script type="text/javascript">
+function toggleView(rowId){
+	var rowDisplay = $('details_'+rowId).style.display;
+	$('details_'+rowId).style.display = (rowDisplay == "none") ? "table-row" : "none";
+}
+</script>
+<table class="center">
+<tr>
+	<td class="title" colspan="6">Logs des dernières 25 transaction M+</td>
+</tr>
+</table>
+
+<? foreach($LOGS as $log){ ?>
+	<a name="t<?=$log['id'];?>" />
+	<table class="center">
+	<tr>
+		<td class="name">Id</td>
+		<td class="name">Date</td>
+		<td class="name">User</td>
+		<td class="name">IP</td>
+		<td class="name">Email</td>
+		<td class="name">Item</td>
+	</tr>
+	<tr>
+		<td class="value" rowspan="2"><?=$log['id'];?></td>
+		<td class="value"><?=$log['date'];?></td>
+		<td class="value"><?=$log['user'];?> (id# <?=$log['userId'];?>)</td>
+		<td class="value"><?=$log['ip'];?></td>
+		<td class="value"><?=$log['email'];?></td>
+		<td class="value"><?=$log['item'];?></td>
+	</tr>
+	</table>
+	<table class="center">
+	<tr>
+		<td class="name">Status Paypal</td>
+		<td class="name">Status CC2034</td>
+		<td class="name">Détails POST</td>
+	</tr>
+	<tr>
+		<td class="value"><?=$log['statusPP'];?></td>
+		<td class="value"><?=$log['statusCC'];?></td>
+		<td class="value"><a href="#t<?=$log['id'];?>" onclick="toggleView('<?=$log['id'];?>');">Show détails</a></td>
+	</tr>
+	<tr id="details_<?=$log['id'];?>" style="display:none;">
+		<td class="value" colspan="3" style="text-align:left;"><?=$log['post'];?><hr /></td>
+	</tr>
+	</table>
+	<br />
+	<br />
+<? } ?>
+
+</table>

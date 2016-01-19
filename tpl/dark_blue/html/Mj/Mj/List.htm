@@ -1,0 +1,59 @@
+<script type="text/javascript">
+function confirmdel(msg){
+	answer = confirm (msg);
+	if (answer) {
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function submitForm(id) {
+	$('id' + id).checked = true;
+	document.forms["form1"].action = "?mj=Mj_Mod";
+	document.forms['form1'].submit();
+}
+</script>
+
+<form name="form1" method="post" action="">
+<table class="center">
+	<tr>
+		<td class="title" colspan="9">Gestion des accès MJ</td>
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name" style="width:100px;">Nom</td>
+		<td class="name" style="width:100px;">Compte</td>
+		<td class="name">Poste</td>
+		<td class="name" style="width:25px;">PPA</td>
+		<td class="name" style="width:25px;">EJ</td>
+		<td class="name" style="width:25px;">HJ</td>
+		<td class="name" style="width:25px;">DEV</td>
+		<td class="name" style="width:25px;">ADMIN</td>
+	</tr>
+	<? foreach($MJ as $mj){ ?>
+		<tr>
+			<td class="name">
+				<input type="radio" name="id" id="id<?=$mj['id'];?>" value="<?=$mj['id'];?>" />
+			</td>
+			<td class="value" style="text-align:left;">
+				<a href="#" onclick="submitForm(<?=$mj['id'];?>);"><?=$mj['nom'];?></a>
+			</td>
+			<td class="value" style="text-align:left;"><?=$mj['user'];?></td>
+			<td class="value" style="text-align:left;"><?=$mj['poste'];?></td>
+			<td class="value"><?=$mj['ax_ppa'];?></td>
+			<td class="value"><?=$mj['ax_ej'];?></td>
+			<td class="value"><?=$mj['ax_hj'];?></td>
+			<td class="value"><?=$mj['ax_dev'];?></td>
+			<td class="value"><?=$mj['ax_admin'];?></td>
+		</tr>
+	<? } ?>
+	<tr>
+		<td class="send" colspan="8">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Mj_Add';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Mj_Mod';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Mj_Del';return confirmdel('Effacer l\'accès ?');" />
+		</td>
+	</tr>
+</table>
+</form>

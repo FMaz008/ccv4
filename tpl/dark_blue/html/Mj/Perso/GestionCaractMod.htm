@@ -1,0 +1,95 @@
+<script type="text/javascript">
+var nbr_ajout=0;
+AjouterIncompatible = function(){
+	var myAjax = new Ajax.Request(
+		'?mj=Perso_GestionCaractIncompatible&popup=1', 
+		{
+			method: 'post', 
+			parameters: 'divid='+ (nbr_ajout+1),
+			onComplete: AjouterIncompatible_completed
+		});
+}
+
+AjouterIncompatible_completed = function(originalRequest){
+	var rval= originalRequest.responseText;
+	$('add_incompatible_'+nbr_ajout).innerHTML = rval;
+	nbr_ajout++; //Augmenter le total en cas de plusieurs ajouts
+	$('total_incompatible_add').value = nbr_ajout;
+	
+}
+</script>
+<form name="form1" method="post" action="?mj=Perso_GestionCaractMod">
+<input type="hidden" name="id" value="<?=$CARACT['id'];?>" />
+<table>
+
+<tr>
+	<td colspan="2" class="title">Gestion d'une caractéristique</td>
+</tr>
+
+<tr>
+	<td class="name">Nom</td>
+	<td class="value">
+		<input type="text" class="text" name="nom" value="<?=$CARACT['nom'];?>" />
+	</td>
+</tr>
+<tr>
+	<td class="name">Catégorie</td>
+	<td class="value">
+		<select name="catId">
+			<option value="0" <? if($CARACT['catid']==0){ echo 'SELECTED'; } ?>>Est une catégorie</option>
+		<?
+		foreach($CAT as $cat){
+			?>
+			<option value="<?=$cat['id'];?>" <? if($CARACT['catid']==$cat['id']){ echo 'SELECTED'; } ?>><?=$cat['nom'];?></option>
+			<?
+		}
+		?>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td class="name">Description</td>
+	<td class="value">
+		<textarea name="desc"><?=$CARACT['desc'];?></textarea>
+	</td>
+</tr>
+<tr>
+	<td class="name">Type</td>
+	<td class="value">
+		<input type="text" class="text" name="type" value="<?=$CARACT['type'];?>" />
+	</td>
+</tr>
+<tr>
+	<td class="name">Incompatible avec</td>
+	<td class="value">
+		<table>
+		<tr>
+			<td class="name">DEL</td>
+			<td class="name">Nom</td>
+		</tr>
+		<?php
+		foreach($CARACT_INCOMPATIBLE as $caract){
+			?>
+			<tr>
+				<td class="name">
+					<input type="checkbox" name="del[]" value="<?=$caract['id'];?>" />
+				</td>
+				<td class="value"><?=$caract['nom'];?></td>
+			</tr>
+			<?php
+		}
+		?>
+		</table>
+		<input type="hidden" name="total_incompatible_add" id="total_incompatible_add" value="0" />
+		<input type="button" class="button" name="preadd" onclick="AjouterIncompatible();" value="Ajouter une incompatibilité" />
+		<div id="add_incompatible_0"></div>
+	</td>
+</tr>
+
+	<tr>
+		<td colspan="2" value="name">
+			<input type="submit" class="button" name="save" value="Enregistrer" />
+		</td>
+	</tr>
+</table>
+</form>

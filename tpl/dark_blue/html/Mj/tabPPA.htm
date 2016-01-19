@@ -1,0 +1,51 @@
+<form action="?mj=index" method="post">
+	<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="5">PPA sous votre suivi</td>
+	</tr>
+	<tr>
+		<td class="name" style="width:100px;">Ouvert le</td>
+		<td class="name" style="width:100px;">Type</td>
+		<td class="name">Sujet</td>
+		<td class="name" style="width:100px;">Joueur</td>
+		<td class="name" style="width:100px;">État</td>
+	</tr>
+	<? if($PPA_MJ != NULL){
+		foreach($PPA_MJ as $ppa){ ?>
+			<tr>
+				<td class="value"><?=$ppa['date'];?></td>
+				<td class="value"><?=$ppa['type'];?></td>
+				<td class="value">
+					<a href="?mj=Perso_Ppa&id=<?=$ppa['id'];?>">
+						<?=$ppa['titre'];?>
+					</a>
+				</td>
+				<td class="value"><a href="#gestion_perso" onclick="$('perso_search').value='<?=addslashes($ppa['perso']);?>';gosearch('perso');"><?=$ppa['perso'];?></a></td>
+				<td class="value"><?=$ppa['replyDate'];?></td>
+			</tr>
+		<? }
+	}else{ ?>
+		<tr><td colspan="5" style="font-style:italic;">- aucun pour le moment -</td></tr>
+	<? } ?>
+	<tr>
+		<td class="title" colspan="5">PPA en liste d'attente</td>
+	</tr>
+	<? if($PPA != NULL){
+		foreach($PPA as $ppa){ ?>
+			<tr>
+				<td class="value"><?=$ppa['date'];?></td>
+				<td class="value"><?=$ppa['type'];?></td>
+				<td class="value">
+					<a href="?mj=Perso_Ppa&id=<?=$ppa['id'];?>">
+						<?=$ppa['titre'];?>
+					</a>
+				</td>
+				<td class="value"><a href="#gestion_perso" onclick="$('perso_search').value='<?=addslashes($ppa['perso']);?>';gosearch('perso');"><?=$ppa['perso'];?></a></td>
+				<td class="value"><?=$ppa['replyDate'];?></td>
+			</tr>
+		<? }
+	}else{ ?>
+		<tr><td colspan="5" style="font-style:italic;">- aucun pour le moment / accès refusé -</td></tr>
+	<? } ?>
+</table>
+</form>

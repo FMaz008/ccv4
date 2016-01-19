@@ -1,0 +1,12 @@
+<?
+if ($PERSO_INFO['imgurl']!='')
+{
+	?>
+	<img class="imgbg" align="left" src="<?=$PERSO_INFO['imgurl'];?>" alt="avatar" />
+	<?
+}
+?>
+Dernière activité: <?=$PERSO_INFO['expiration'];?>
+<hr />
+<br />
+<?=$PERSO_INFO['description'];?>

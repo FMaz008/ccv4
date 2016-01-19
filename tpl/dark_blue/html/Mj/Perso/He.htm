@@ -1,0 +1,24 @@
+<script type="text/javascript">
+//<!--
+
+	function heItemAutoHeight(itemNo){
+		var droite = $('droite'+itemNo) ;
+		var gauche = $('gauche'+itemNo) ;
+		var mh = Math.max(gauche.offsetHeight, droite.offsetHeight);
+		droite.style.height=mh+"px";
+		gauche.style.height=mh+"px";
+	}
+
+//-->
+</script>
+<strong>Pages:</strong><br />
+<? for ($i=1;$i-1<$HE_SIZE/$HE_MSGPERPAGE;$i++) {
+	if ($i == $HE_PAGE) { ?>
+		[<?=$i;?>]
+	<? }else{ ?>
+		[<a href="?mj=Perso_He&amp;id=<?=$_GET['id'];?>&amp;hepage=<?=$i;?>"><?=$i;?></a>]
+	<? }
+} ?>
+<hr />
+
+<?=$HE_MESSAGES;?>

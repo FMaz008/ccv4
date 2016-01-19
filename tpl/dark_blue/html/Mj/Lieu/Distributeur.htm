@@ -1,0 +1,68 @@
+<br />
+<br />
+<form name="form1" action="?mj=Lieu_Distributeur&id=<?=$LIEU_ID;?>" method="post">
+<table class="center">
+	<tr>
+		<td class="title" colspan="3">Liste des producteurs dont ce lieu vend la production en gros</td>	
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">Lieu de production</td>
+		<td class="name"></td>
+	</tr>
+	
+	<?
+	if(isset($PRODUCTEURS))
+	{
+		foreach($PRODUCTEURS as $prod)
+		{
+			?>
+			<tr>
+				<td class="name">
+					<input type="radio" name="id" value="<?=$prod['id'];?>" />
+				</td>
+				<td class="value">
+					<a href="?mj=Lieu_ProducteurMod&id=<?=$prod['id'];?>"><?=$prod['pnom_technique'];?></a>
+				</td>
+				<td class="value">
+					<a href="?mj=Lieu_ProducteurInv&id=<?=$prod['id'];?>">Production &gt;&gt;</a>
+				</td>
+			</tr>
+			<?
+		}
+	}
+	else
+	{
+		?>
+		<tr>
+			<td class="value" colspan="3">
+				<i><strong>Aucun producteur</strong></i>
+			</td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td colspan="3" value="name">
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="return confirm('Effacer le producteur ?');" />
+		</td>
+	</tr>
+</table>
+</form>
+
+<br />
+<form method="post" action="?mj=Lieu_Distributeur&id=<?=$LIEU_ID;?>">
+	Ajouter un producteur:<br />
+	<select name="id">
+		<?
+		foreach($ADD_PRODUCTEURS as $prod)
+		{
+			?>
+			<option value="<?=$prod['id'];?>"><?=$prod['nom_technique'];?></option>
+			<?
+		}
+		?>
+	</select>
+	<input type="submit" class="button" name="add" value="Ajouter" />
+</form>
+

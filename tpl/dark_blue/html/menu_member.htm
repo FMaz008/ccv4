@@ -1,0 +1,21 @@
+<a href="?m=News">Mon compte</a>
+<?
+if(isset($MENU_PERSO))
+{
+	foreach ($MENU_PERSO as $element)
+	{
+		?>
+		<a href="<?=$element['url'];?>"><?=$element['txt'];?></a>
+		<?
+	}
+}
+if(isset($MENU_MJ))
+{
+	?>
+	<a href="?mj=index">Panneau MJ</a>
+	<?
+}
+?>
+<a href="?v=Logout" onclick="return confirm('Êtes-vous certain de vouloir vous déconnecter ?');">Déconnexion</a>
+
+<a href="http://forum.cybercity2034.com" onclick="window.open(this.href);return false">Forum</a>

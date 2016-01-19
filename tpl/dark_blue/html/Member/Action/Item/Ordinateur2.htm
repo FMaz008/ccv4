@@ -1,0 +1,92 @@
+<span class="fakelink" onclick="actionLink('Action_Item_Ordinateur');">
+	&lt;&lt; Retour
+</span>
+
+<table class="tbl_center">
+<tr>
+	<td colspan="3" class="title">Menu principal de l'Ordinateur</td>
+</tr>
+<tr>
+	<td class="value" style="width:33%;">Internet</td>
+	<td class="value" style="width:33%;">Mémoire interne</td>
+	<td class="value" style="width:33%;">Mémoire externe</td>
+</tr>
+<tr>
+	<td style="vertical-align:bottom;">
+		<?php
+		if($INTERNET) {
+			?>
+			<form id="www" action="?popup=1&m=Action_Item_Navigateur" method="post" onsubmit="return ajaxSubmitForm(this);">
+					<input type="hidden" name="ordiId" value="<?=$PC_ID;?>" />
+			
+					
+					<input type="submit" value="Accéder" name="post" class="button" />
+			
+				</form>
+			<?php
+		}
+		?>
+	</td>
+	<td style="vertical-align:bottom;">
+		<form id="memInt" action="?popup=1&m=Action_Item_OrdinateurMemoire" method="post" onsubmit="return ajaxSubmitForm(this);">
+			<input type="hidden" name="ordiId" value="<?=$PC_ID;?>" />
+			
+			<?php
+			if($PC_IS_CRYPT){
+				?>
+				<i>Clé encryption requise</i>:
+				<br /><input type="text" class="text" name="<?=$PC_ID;?>_cle" value="" />
+				<br />
+				<br />
+				<?php
+			}
+			?>
+			<input type="submit" value="Accéder" name="post" class="button"/>
+			
+		</form>
+	</td>
+	
+	<td style="vertical-align:bottom;">
+		<?php
+		if($MCREAD){
+			?>
+			<form id="memExt" action="?popup=1&m=Action_Item_CarteMemoire" method="post" onsubmit="return ajaxSubmitForm(this);">
+			<input type="hidden" name="ordiId" value="<?=$PC_ID;?>" />
+			<table>
+				<?
+				foreach($CARTES as $carte)
+				{
+					?>
+					<tr>
+						<td align="left">
+							<input type="radio" name="carteId" value="<?=$carte->getInvId();?>"/>
+							<?=$carte->getNom();?> #<?=$carte->getInvId();?>
+			
+							<?
+							if($carte->isCrypt()){
+								?>
+								<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Clé encryption requise</i>:
+								<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="text" name="<?=$carte->getInvId();?>_cle" value="" />
+								<?
+							}
+							?>
+						</td>
+					</tr>
+					<?
+				}
+				?>
+				
+				<tr>
+					<td class="center">
+						<input type="submit" value="Accéder" name="post" class="button"/>
+					</td>
+				</tr>
+				</table>
+				</form>
+			<?php
+		}
+		?>
+	</td>
+</tr>
+</table>
+

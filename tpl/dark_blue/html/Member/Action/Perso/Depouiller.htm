@@ -1,0 +1,145 @@
+<br />
+<form id="action_depouiller" method="post" action="?popup=1&m=Action_Perso_DepouillerList" onsubmit="return ajaxSubmitForm(this);">
+	<table class="tbl_center">
+		<tr><td class="title" colspan="2">D&eacute;pouiller une personne inconsciente ou blessée</td></tr>
+		<tr>
+			<td class="name"></td>
+			<td class="name">Nom</td>
+		</tr>
+		<?
+		if (isset($LIST_PERSO))
+		{
+			foreach($LIST_PERSO as $perso)
+			{
+				?>
+				<tr>
+					<td class="name" style="width:10px;">
+						<input type="radio" name="persoid" value="<?=$perso->getId();?>" />
+					</td>
+					<td class="value" style="text-align:left;">
+						<?if ($perso->getSexe()=='m'){?>
+							<span id="perso_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+						<?}else{?>
+							<span id="perso_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+						<?}?>
+							<?=$perso->getNom();?>
+						</span>
+						<div id="ib_perso_<?=$perso->getId();?>" class="infobulle" style="width:300px;">
+							<div class="title">Infos</div>
+							<?if ($perso->getAvatar()!='') {?>
+								<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
+							<? } ?>
+							<?=$perso->getDescription();?>
+						</div>
+					</td>
+				</tr>
+				<?
+			}
+		}
+		else
+		{
+			?>
+			<tr>
+				<td class="value" colspan="2">
+					<i>-personne-</i>
+				</td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class="send" colspan="2">
+				<input type="submit" class="button" name="save" value="Fouiller" />
+			</td>
+		</tr>
+	</table>
+</form>
+<br />
+
+
+
+
+
+
+
+<form id="action_fouiller" method="post" action="?popup=1&m=Action_Perso_FouillerAsk" onsubmit="return ajaxSubmitForm(this);">
+	<table class="tbl_center">
+		<tr><td class="title" colspan="3">Fouiller une personne en santé</td></tr>
+		<tr>
+			<td class="name"></td>
+			<td class="name">Nom</td>
+			<td class="name" style="width:40px;">Autorisé ?</td>
+		</tr>
+		<?
+		if (isset($LIST_PERSO_OK))
+		{
+			foreach($LIST_PERSO_OK as $arr)
+			{
+				$perso = $arr['perso'];
+				$auth = $arr['auth'];
+				?>
+				<tr>
+					<td class="name" style="width:10px;">
+						<input type="radio" name="persoid" value="<?=$perso->getId();?>" />
+					</td>
+					<td class="value" style="text-align:left;">
+						<?if ($perso->getSexe()=='m'){?>
+							<span id="sperso_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+						<?}else{?>
+							<span id="sperso_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+						<?}?>
+							<?=$perso->getNom();?>
+							<div id="ib_sperso_<?=$perso->getId();?>" style="width:300px;" class="infobulle">
+								<div class="title">Infos</div>
+								<?if ($perso->getAvatar()!='') {?>
+									<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
+								<? } ?>
+								<?=$perso->getDescription();?>
+							</div>
+						</span>
+					</td>
+					<td>
+						<?
+						if($auth)
+						{
+							?>
+							Oui
+							<?
+						}
+						else
+						{
+							?>
+							En attente
+							<?
+						}
+						?>
+					</td>
+				</tr>
+				<?
+			}
+		}
+		else
+		{
+			?>
+			<tr>
+				<td class="value" colspan="3">
+					<i>-personne-</i>
+				</td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td class="send" colspan="3">
+				<div class="name">Message:</div>
+				<div class="send">
+					<textarea class="member_action_menotter_msg" name="msg"></textarea>
+				</div>
+				
+				<input type="submit" class="button" name="save" value="Demander la permission" />
+				<input type="submit" class="button" name="fouiller" value="Fouiller >>" onclick="$('action_fouiller').action='?popup=1&m=Action_Perso_DepouillerList';" />
+			</td>
+		</tr>
+	</table>
+</form>
+<br />

@@ -1,0 +1,41 @@
+<br />
+<form id="action_biblio" method="post" action="?popup=1&m=Action_Lieu_LireLivre" onsubmit="return ajaxSubmitForm(this);">
+	<input type="hidden" name="URL_RETOUR" value="Action_Lieu_Biblio" />
+<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="4">Liste des livres disponibles</td>
+	</tr>
+	<tr>
+		<td class="name" style="width:15px;"></td>
+		<td class="name">Titre</td>
+		<td class="name">Auteur</td>
+		<td class="name">Taille</td>
+	</tr>
+	
+	<?
+	if (isset($LIVRES)){
+		foreach($LIVRES as $livre){
+		?>
+			<tr>
+				<td class="name">
+					<input type="radio" name="id" value="<?=$livre->getDbId();?>" />
+				</td>
+				<td class="value"><?=$livre->getTitre();?></td>
+				<td class="value"><?=$livre->getAuteur();?></td>
+				<td class="value"><?=$livre->getTaille();?> Kb</td>
+			</tr>
+		<?
+		}
+	}else{
+	?>
+		<tr><td class="value" colspan="4"><i>- aucun livre disponible -</i></td></tr>
+	<?
+	}
+	?>
+	<tr>
+		<td class="send" colspan="4">
+			<input type="submit" class="button" name="lire" value="Consulter le livre" />
+		</td>
+	</tr>
+</table>
+</form>

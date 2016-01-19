@@ -1,0 +1,54 @@
+<script type="text/javascript">
+//<!--
+//-->
+</script>
+
+<br />
+<form id="action_bank" method="post" action="?mj=Lieu_BanqueTransactionAutoAdd" onsubmit="return ajaxSubmitForm(this);">
+<input type="hidden" name="compteId" value="<?=$COMPTE->getId();?>" />
+<input type="hidden" name="banqueId" value="<?=$BANKID;?>" />
+
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="2">
+			Création d'une transaction automatique pour le compte: <?=$COMPTE->getNoBanque() . '-' . $COMPTE->getNoCompte();?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Compte récepteur</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="compteNoTo" value="" size="19" maxlength="19" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Description</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="description" value="" size="25" maxlength="50" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Montant</td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="value" value="" size="10" /> <?=GAME_DEVISE;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Date de la première transaction </td>
+		<td class="value" style="text-align:left;">
+			<input type="text" class="text" name="date_day" value="" size="2" />
+			 / 
+			<input type="text" class="text" name="date_month" value="" size="2" />
+			 / 
+			<input type="text" class="text" name="date_year" value="" size="4" /> (jj/mm/aaaa)
+			<br />Les transactions se font tous les mois.
+		</td>
+	</tr>
+	<tr>
+		<td class="value" colspan="2">
+			<input type="submit" class="button" name="save" value="Enregistrer" />
+		</td>
+	</tr>
+</table>
+</form>
+<a href="?mj=Lieu_BanqueTransactionAuto&id=<?=$COMPTE->getId();?>&bid=<?=$BANKID;?>">&lt;&lt; Retour</a>
+<br />

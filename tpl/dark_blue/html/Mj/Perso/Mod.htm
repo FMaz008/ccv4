@@ -1,0 +1,395 @@
+<script type="text/javascript">
+//<!--
+Changer_Lieu = function()
+{
+	var lieu=prompt('Vers quel lieu souhaitez-vous déplacer le personnage ? (Nom technique)','');
+	if(lieu!=""){
+		var myAjax = new Ajax.Updater(
+			'div_lieu', 
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat=p_modifier_lieu&search='+lieu
+			});
+	}
+}
+Changer_Lieu2 = function(lieu)
+{
+	$('div_lieu').innerHTML = lieu+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="lieu" value="'+lieu+'" />';
+}
+
+Changer_Compte = function()
+{
+	var compte=prompt('À quel compte souhaitez-vous associer ce personnage ?','');
+	if(compte!=""){
+		var myAjax = new Ajax.Updater(
+			'div_compte', 
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat=p_modifier_compte&search='+compte
+			});
+	}
+}
+
+Changer_Compte2 = function(id, compte)
+{
+	$('div_compte').innerHTML = compte+' (<a href="#" onclick="Changer_Compte();">Changer</a>)\n<input type="hidden" name="userId" value="'+id+'" />';
+}
+
+
+get_stat_total = function()
+{
+	var total = 0
+	
+	<?
+	foreach($PERSO->getStat() as $statId)
+	{
+		?>
+		total += parseInt($('stat_<?=$PERSO->getStatCode($statId);?>').value);
+		<?
+	}
+	?>
+	
+	return total;
+}
+
+
+valider_stats = function()
+{
+	var total = get_stat_total();
+	
+	if(total!=0){
+		alert('Le total des stats doit arriver à 0 et il est actuellement de ' + total);
+		return false;
+	}
+	return true;
+}
+calculate_stat_total = function()
+{
+
+	$('stat_total').innerHTML = get_stat_total();
+}
+//-->
+</script>
+
+<?
+if(isset($MODIFICATIONS))
+{
+	?>
+	Modifications enregistrés:<br />
+	<?
+	echo $MODIFICATIONS;
+}
+?>
+
+<form method="post" action="?mj=Perso_Mod&id=<?=$PERSO->getId();?>" onsubmit="return valider_stats();">
+<table class="center">
+
+<tr>
+	<td class="title" colspan="6">Modifier le perso <?=$PERSO->getNom();?></td>
+</tr>
+<tr>
+	<td colspan="6" class="name" style="text-align:center;"><input type="submit" class="button" name="save" value="Enregistrer" /></td>
+</tr>
+<tr>
+	<td class="name" rowspan="2">Nom :</td>
+	<td class="value" rowspan="2"><input type="text" class="text" name="nom" value="<?=$PERSO->getNom();?>" /></td>
+	
+	<td class="name" rowspan="2">Type :</td>
+	<td class="value" rowspan="2">
+		<select name="playertype">
+			<?
+			$types = array('humain','pnj','animal','robot','objet','mannequin','zombi');
+			foreach($types as $type){
+			?>
+				<option value="<?=$type;?>" <? if($PERSO->getType()==$type){ echo 'SELECTED'; } ?>><?=$type;?></option>
+			<?}?>
+		</select>
+	</td>
+	
+	<td class="name">Actif :</td>
+	<td class="value" style="text-align:left;">
+		<input type="radio" name="actif" value="0" <? if(!$PERSO->isBloque()){ echo 'CHECKED'; } ?> />Oui
+		&nbsp;&nbsp;
+		<input type="radio" name="actif" value="1" <? if($PERSO->isBloque()){ echo 'CHECKED'; } ?> />Non (bloqué)
+	</td>
+</tr>
+
+<tr>
+	<td class="name">Visa Vert :</td>
+	<td class="value" style="text-align:left;">
+		<input type="radio" name="visavert" value="1" <? if($PERSO->getVisaPerm()=="1"){ echo 'CHECKED'; } ?> />Oui
+		&nbsp;&nbsp;
+		<input type="radio" name="visavert" value="0" <? if($PERSO->getVisaPerm()!="1"){ echo 'CHECKED'; } ?> />Non
+	</td>
+</tr>
+<tr>
+	<td class="name">Associé au compte :</td>
+	<td class="value">
+		<div id="div_compte" style="height:6em;overflow:auto;">
+			<?=$ACCOUNT_USER;?> (<a href="#" onclick="Changer_Compte();">Changer</a>)
+			<input type="hidden" name="userId" value="<?=$PERSO->getUserId();;?>" />
+		</div>
+	</td>
+
+	<td class="name">Lieu :</td>
+	<td class="value">
+		<div id="div_lieu" style="height:6em;overflow:auto;">
+			<?=$PERSO_LIEU;?> (<a href="#" onclick="Changer_Lieu();">Changer</a>)
+			<input type="hidden" name="lieu" value="<?=$PERSO_LIEU;?>" />
+		</div>
+	</td>
+
+	<td class="name">Sexe :</td>
+	<td class="value" style="text-align:left;">
+		<input type="radio" name="sexe" value="m" <? if($PERSO->getSexe()=='m'){ echo 'CHECKED'; } ?> />Homme<br />
+		<input type="radio" name="sexe" value="f" <? if($PERSO->getSexe()=='f'){ echo 'CHECKED'; } ?> />Femme
+	</td>
+</tr>
+
+<tr>
+	<td class="name">Âge :</td>
+	<td class="value"><input type="text" class="text" name="age" value="<?=$PERSO->getAge();?>" maxlength="3" size="3" /></td>
+
+	<td class="name">Taille :</td>
+	<td class="value"><input type="text" class="text" name="taille" value="<?=$PERSO->getTaille();?>" maxlength="4" size="4" /></td>
+
+	<td class="name">Argent :</td>
+	<td class="value"><input type="text" class="text" name="cash" value="<?=$PERSO->getCash();?>" size="9" style="text-align:right;" /> <?=GAME_DEVISE;?></td>
+</tr>
+
+<tr>
+	<td class="name">Ethnie :</td>
+	<td class="value"><input type="text" class="text" name="ethnie" value="<?=$PERSO->getEthnie();?>" maxlength="20" size="10"/></td>
+
+	<td class="name"></td>
+	<td class="value"></td>
+
+	<td class="name">PR Max :</td>
+	<td class="value"><input type="text" class="text" name="prmax" value="<?=$PERSO->getPrMax();?>" maxlength="3" size="3" /></td>
+</tr>
+
+<tr>
+	<td class="name">PV / PV Max :</td>
+	<td class="value">
+		<input type="text" class="text" name="pv" value="<?=$PERSO->getPv();?>" maxlength="3" size="3" /> /
+		<input type="text" class="text" name="pvmax" value="<?=$PERSO->getPvMax();?>" maxlength="3" size="3" />
+	</td>
+
+	<td class="name">PA / PA Max :</td>
+	<td class="value">
+		<input type="text" class="text" name="pa" value="<?=$PERSO->getPa();?>" maxlength="3" size="3" /> /
+		<input type="text" class="text" name="pamax" value="<?=$PERSO->getPaMax();?>" maxlength="3" size="3" />
+	</td>
+
+	<td class="name">PN :</td>
+	<td class="value"><input type="text" class="text" name="pn" value="<?=$PERSO->getPn();?>" maxlength="3" size="3" /></td>
+</tr>
+
+<tr>
+	<td class="name">Desc. yeux :</td>
+	<td class="value"><input type="text" class="text" name="yeux" value="<?=$PERSO->getYeux();?>" maxlength="100"/></td>
+	
+	<td class="name">Drogues consommées :</td>
+	<td class="value">
+		<?
+		echo isset($DROGUES) ? 'Oui (#' . $DROGUES . ')' : 'Non';
+		?>
+	</td>
+	
+	<td class="name">Langues 1:</td>
+	<td class="value">
+		<?=Member_Perso::convCodeLngToTxt($PERSO->getLangue1Code());?>
+		(<?=Member_Perso::convCodeMaitriseLngToTxt($PERSO->getLangue1LvlCode());?>)
+	</td>
+</tr>
+<tr>
+	<td class="name">Desc. cheveux :</td>
+	<td class="value"><input type="text" class="text" name="cheveux" value="<?=$PERSO->getCheveux();?>" maxlength="100"/></td>
+	
+	<td class="name">Menotté :</td>
+	<td class="value"style="text-align:left;">
+		<input type="radio" name="menotte" value="<?=true;?>" <? if($PERSO->getMenotte()!=false){ echo 'CHECKED'; } ?> />Oui - Id menottes : 
+		<input type="text" class="text" name="menotteId" value="<?=($PERSO->getMenotte()!=false) ? $PERSO->getMenotte() : "";?>" size="4" style="text-align:right;" /><br />
+		<input type="radio" name="menotte" value="<?=false;?>" <? if($PERSO->getMenotte()===false){ echo 'CHECKED'; } ?> />Non
+	</td>
+	
+	<td class="name">Langues 2:</td>
+	<td class="value">
+		<?=Member_Perso::convCodeLngToTxt($PERSO->getLangue2Code());?>
+		(<?=Member_Perso::convCodeMaitriseLngToTxt($PERSO->getLangue2LvlCode());?>)
+	</td>
+</tr>
+
+<tr>
+	<td class="name" colspan="2">Stats :</td>
+	<td class="name" colspan="4">Compétences :</td>
+</tr>
+<tr>
+	<td class="value" colspan="2" style="text-align:center;">
+		<table align="center">
+		<tr>
+			<td class="name" style="text-align:center;">Stat</td>
+			<td class="name" style="text-align:center;">XP<br />Brute</td>
+			<td class="name" style="text-align:center;">XP<br />Modif</td>
+			<td class="name" style="text-align:center;">LVL<br />Modif</td>
+		</tr>
+			<?
+			foreach($PERSO->getStat() as $statId)
+			{
+				$realXp = $PERSO->getStatRealXp($statId);
+				$baseXp = $PERSO->getStatRawXp($statId);
+				$realLvl= $PERSO->getStatRealLevel($statId);
+				
+				$color = "";
+				if($realXp < $baseXp)
+					$color = "color:#F00;";
+				
+				if($realXp > $baseXp)
+					$color = "color:#0F0;";
+
+				$color2 = "";
+				if($realLvl < 0)
+					$color2 = "color:#F00;";
+				
+				if($realLvl > 0)
+					$color2 = "color:#0F0;";
+				?>
+				<tr>
+					<td class="name">
+						<span id="stat_<?=$statId;?>" onmousemove="infobulle(this, event);" style="border-bottom:1px dotted;"><?=$PERSO->getStatCode($statId);?></span>
+						<div class="infobulle" id="ib_stat_<?=$statId;?>" style="width:100px;">
+							<div class="title"><?=$PERSO->getStatName($statId);?></div>
+						</div>
+					</td>
+					<td class="value"><input type="text" class="text" id="stat_<?=$PERSO->getStatCode($statId);?>" name="stat_<?=$PERSO->getStatCode($statId);?>" value="<?=$baseXp;?>" size="3" onchange="calculate_stat_total();" style="text-align:right;" /></td>
+					<td class="txtStyle_valeur" style="text-align:right;font-weight:bold;<?=$color;?>">
+						<?=$realXp;?>
+					</td>
+					<td class="txtStyle_valeur" style="text-align:right;font-weight:bold;<?=$color2;?>">
+						<?=$realLvl;?>
+					</td>
+				</tr>
+				<?
+			}
+			?>
+			<tr>
+				<td class="value" style="text-align:right;">Total:</td>
+				<td class="value"><div id="stat_total" class="txtStyle_valeur" style="text-align:right;">0</div></td>
+				<td class="value"></td>
+			</tr>
+		</table>
+	</td>
+
+	<td class="value" colspan="4">
+		<table>
+			<tr>
+				<?
+				$maxCol = 3;
+				for($i=0;$i<$maxCol;$i++)
+				{
+					?>
+					<td class="name" style="text-align:center;">Abbr</td>
+					<td class="name" style="text-align:center;">XP</td>
+					<td class="name" style="text-align:center;">Lvl Brute</td>
+					<td class="name" style="text-align:center;">Lvl Modif</td>
+					<?
+				}
+				?>
+			</tr>
+			<tr>
+				<?
+				$i=0;
+				foreach($PERSO->getComp() as $compId)
+				{
+					$i++;
+					$baseLvl = $PERSO->getCompRawLevel($compId);
+					$realLvl = $PERSO->getCompRealLevel($compId);
+					
+					$color = "";
+					if($realLvl < $baseLvl)
+						$color = "color:#F00;";
+					
+					if($realLvl > $baseLvl)
+						$color = "color:#0F0;";
+					
+					?>
+					<td class="name">
+						<span id="comp_<?=$compId;?>" onmousemove="infobulle(this, event);" style="border-bottom:1px dotted;"><?=$PERSO->getCompCode($compId);?></span>
+						<div class="infobulle" id="ib_comp_<?=$compId;?>" style="width:200px;">
+							<div class="title"><?=$PERSO->getCompName($compId);?></div>
+							<?=$COMP_MOD_TXT[$compId]['txt'];?>
+						</div>
+					</td>
+					<td class="value">
+						<input type="text" class="text" id="comp_<?=$PERSO->getCompCode($compId);?>" name="comp_<?=$PERSO->getCompCode($compId);?>" value="<?=$PERSO->getCompXp($compId);?>" size="3" style="text-align:right;" />
+					</td>
+					<td class="txtStyle_valeur" style="padding-right:10px;text-align:right;">
+						<?=$baseLvl?>
+					</td>
+					<td class="txtStyle_valeur" style="padding-right:10px;text-align:right;font-weight:bold;">
+						<span style="<?=$color?>"><?=$realLvl?></span>
+					</td>
+					<?
+					if($i%$maxCol==0)
+					{
+						?>
+						</tr>
+						<tr>
+						<?
+					}
+				}
+				?>
+				</tr>
+		</table>
+	</td>
+</tr>
+
+<tr>
+	<td colspan="3">
+		Action du moment :<br /><textarea name="current_action" style="width:300px;height:150px;"><?=$PERSO->getCurrentAction();?></textarea><br />
+		Historique :<br /><textarea name="background" style="width:300px;height:150px;"><?=$BACKGROUND;?></textarea><br />
+	</td>
+	<td colspan="3">
+		Note MJ :<br /><textarea name="note_mj" style="width:400px;height:150px;"><?=$NOTE_MJ;?></textarea><br />
+		Description physique :<br /><textarea name="description" style="width:400px;height:150px;"><?=$PERSO->getDescription();?></textarea><br />
+	</td>
+</tr>
+
+<tr>
+	<td class="title" colspan="6">Caractéristiques</td>
+</tr>
+
+<?
+if(isset($CARACT)){
+	foreach($CARACT as $caract){ ?>
+		<tr>
+			<td class="name" colspan="6">
+				<?=$caract['nom'];?> <span style="font-style:italic;font-weight:normal;">(<?=$caract['cat'];?>)</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="value" colspan="6" style="text-align:right;padding-bottom:15px;">
+				<textarea name="caract_<?=$caract['id'];?>" style="width:650px;height:50px;"><?=$caract['desc'];?></textarea>
+				<br />Effacer: <input type="checkbox" name="del_caract_<?=$caract['id'];?>" value="DEL" />
+			</td>
+		</tr>
+<?	}
+} ?>
+
+<tr>
+	<td class="name">Ajouter</td>
+	<td class="value" colspan="5">
+		<select name="add_caract">
+			<option value=""></option>
+			<? foreach($ALLCARACT as $caract){ ?>
+				<option value="<?=$caract['id'];?>"><?=$caract['cat'];?> : <?=$caract['nom'];?></option>
+			<? } ?>
+		</select>
+	</td>
+<tr>
+	<td colspan="6" class="name" style="text-align:center;"><input type="submit" class="button" name="save" value="Enregistrer" /></td>
+</tr>
+</table>
+</form>

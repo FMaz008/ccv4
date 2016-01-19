@@ -1,0 +1,20 @@
+<? if(isset($STATUS_MSG)){ echo $STATUS_MSG; } ?>
+
+<form name="deleteperso" method="post" action="?mj=Perso_Sendmsg&id=<?=$PERSO_ID;?>">
+<table class="center">
+	<tr>
+		<td class="title">Envoyer un message au personnage</td>
+	</tr><tr>
+		<td class="value">
+			À: <strong><?=$PERSO_NOM;?></strong>,<br />
+			De <input type="text" class="text" name="from" value="<?=$MJ_NOM;?>" /><br />
+			<textarea name="msg" style="width:400px;height:200px;"></textarea>
+		</td>
+	</tr><tr>
+		<td class="send">
+			<input type="hidden" name="persoid" value="<?=$PERSO_ID;?>" />
+			<input class="button" type="submit" name="send" value="Envoyer le message" />
+		</td>
+	</tr>
+</table>
+</form>

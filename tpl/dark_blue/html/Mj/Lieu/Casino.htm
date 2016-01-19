@@ -1,0 +1,45 @@
+<form name="form1" action="" method="post">
+<table class="center">
+	<tr>
+		<td class="title" colspan="7">Liste des casino</td>	
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">Lieu tech</td>
+		<td class="name">Nom</td>
+		<td class="name">Capital</td>
+	</tr>
+	
+	<?
+	if(isset($CASINOS)){
+		foreach($CASINOS as $casino){
+			?>
+			<tr>
+				<td class="name">
+					<input type="radio" name="id" value="<?=$casino->getId();?>" />
+				</td>
+				<td class="value"><?=$casino->getLieuTech();?></td>
+				<td class="value"><?=$casino->getNom();?></td>
+				<td class="value" style="text-align:right;"><?=$casino->getCash();?></td>
+			</tr>
+			<?
+		}
+	}else{
+		?>
+		<tr>
+			<td class="value" colspan="7">
+				<i><strong>Aucun casino</strong></i>
+			</td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td colspan="7" value="name">
+			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Lieu_CasinoAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onClick="document.forms['form1'].action='?mj=Lieu_CasinoMod';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_CasinoDel';return confirm('Effacer le casino ? CETTE ACTION EFFACERA LE CAPITAL DE CELUI-CI.');" />
+		</td>
+	</tr>
+</table>
+</form>

@@ -1,0 +1,62 @@
+<script type="text/javascript">
+//<!--
+	confirmdel = function() {
+		if (confirm("Êtes-vous certain de vouloir effacer cette transaction ?")) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+//-->
+</script>
+<br />
+<form id="form1" method="post" action="">
+<input type="hidden" name="compteId" value="<?=$COMPTE->getId()?>" />
+<input type="hidden" name="banqueId" value="<?=$BANKID;?>" />
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="5">
+			Liste des transactions automatiques pour le compte: <?=$COMPTE->getNoBanque() . '-' . $COMPTE->getNoCompte();?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name" style="width:10px;"></td>
+		<td class="name">Compte récepteur</td>
+		<td class="name">Description</td>
+		<td class="name">Montant</td>
+		<td class="name">prochaine transaction</td>
+	</tr>
+	<?
+	if(isset($TRANSACTIONS)){
+		foreach($TRANSACTIONS as $transaction){
+		?>
+			<tr>
+				<td class="value" style="width:10px;"><input type="radio" name="tid" value="<?=$transaction->getId();?>" /></td>
+				<td class="value"><?=$transaction->getCompteNoTo();?></td>
+				<td class="value"><?=$transaction->getDescription();?></td>
+				<td class="value"><?=$transaction->getValue();?></td>
+				<td class="value"><?=$transaction->getDateTxt();?></td>
+			</tr>
+		<?
+		}
+	}else{
+	?>
+		<tr>
+			<td class="value" colspan="5">
+				<i>-aucune transaction-</i>
+			</td>
+		</tr>
+	<?
+	}
+	?>
+	<tr>
+		<td class="value" colspan="5">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Lieu_BanqueTransactionAutoAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Lieu_BanqueTransactionAutoMod';" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Lieu_BanqueTransactionAutoDel';return confirmdel();" />
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+<a href="?mj=Lieu_BanqueCompte&id=<?=$BANKID;?>"><< Retour</a><br />

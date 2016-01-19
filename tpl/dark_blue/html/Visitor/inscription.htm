@@ -1,0 +1,384 @@
+<script type="text/javascript">
+//<!--
+function validate(){
+	
+	var re;
+	
+	
+	//Validation du USER
+	if ($F('user')==""){
+		alert("Le nom d'utilisateur est vide.");
+		$('user').focus();
+		return false;
+	}
+	
+	if ($F('user').length < 4) {
+		alert("Votre nom d'utilisateur est trop court.");
+		$('user').focus();
+		return false;
+	}
+	
+	re = new RegExp("^[A-Za-z0-9_-]+$");
+	if (!$F('user').match(re)) {
+		alert("Le nom d'utilisateur comporte des caractères invalide.");
+		$('user').focus();
+		return false;
+	}
+	
+	
+	//Validation du PASS
+	if ($F('pass')==""){
+		alert("Le mot de passe est vide.");
+		$('pass').focus();
+		return false;
+	}
+	
+	if ($F('pass') != $F('pass2')) {
+		alert("Les mots de passe ne correspondent pas.");
+		$('pass').focus();
+		return false;
+	}
+	
+	if ($F('pass') == $F('user')) {
+		alert("Votre mot de passe est identique à votre nom d'utilisateur.");
+		$('pass').focus();
+		return false;
+	}
+	
+	if ($F('pass').length < 4) {
+		alert("Votre mot de passe est ridiculement trop court.");
+		$('pass').focus();
+		return false;
+	}
+	
+	if ($F('pass').length < 6) {
+		if(!confirm("Votre mot de passe est très court.\n\nVoulez-vous vraiment continuer ?"))
+			return false;
+	}
+	
+	var passList = new Array(
+							"asdf",
+							"asdfg",
+							"asdfgh",
+							"zxcv",
+							"zxcvb",
+							"zxcvbn",
+							"qsdf",
+							"qsdfg",
+							"qsdfgh",
+							"wxcv",
+							"wxcvb",
+							"wxcvbn",
+							"1234",
+							"12345",
+							"123456",
+							"abcd",
+							"abcde",
+							"abcdef",
+							"qwer",
+							"qwert",
+							"qwerty",
+							"azer",
+							"azert",
+							"azerty",
+							"4321",
+							"54321",
+							"654321",
+							"ytrewq",
+							"ytreza",
+							"fedcba"
+						);
+	for(var i=0;i<passList.length;i++)
+		if($F('pass') == passList[i])
+			if(!confirm("Votre mot de passe est anormalement simple.\n\nVoulez-vous vraiment continuer ?"))
+				return false;
+	
+	
+	
+	//Validation du EMAIL
+	if ($F('email')==""){
+		alert("Le email est vide.");
+		$('email').focus();
+		return false;
+	}
+	
+	if ($F('email') != $F('email2')) {
+		alert("Les emails ne correspondent pas.");
+		$('email').focus();
+		return false;
+	}
+	
+	re = new RegExp("^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$");
+	if (!$F('email').match(re)) {
+		alert("Le email est invalide.");
+		$('email').focus();
+		return false;
+	}
+	
+	
+	//Validation date de NAISSANCE
+	re = new RegExp("^(19|20)[0-9]{2}$");
+	if (!$F('naissance').match(re) || parseInt($F('naissance'))>2005) {
+		alert("Vous devez entrer une année de naissance valide.");
+		$('user').focus();
+		return false;
+	}
+	
+	
+	//Validation des CONFIRMATIONS
+	if(!$("confirm1").checked){
+		alert("Vous devez accepter la condition #1.");
+		return false;
+	}
+	if(!$("confirm2").checked){
+		alert("Vous devez accepter la condition #2.");
+		return false;
+	}
+	if(!$("confirm3").checked){
+		alert("Vous devez accepter la condition #4.");
+		return false;
+	}
+	
+	
+	//Validation contre les cons.
+	if($("unconfirm").checked){
+		$("inscr").reset();
+		alert("Il va falloir que vous appreniez à lire.\n\nReprennez la page d'en haut, et allez-y avec attention cette fois-ci (et jusqu'en bas).");
+		return false;
+	}
+	
+	
+	
+	//Requête AJAX pour valider le user et le email par rapport à la base de donnée (Si déjà utilisé)
+	showplzwait();
+	var myAjax = new Ajax.Request(
+		'?popup=1&v=InscriptionCheck', 
+		{
+			method: 'post',
+			parameters: 'user='+$F('user')+
+						'&email='+$F('email'), 
+			onComplete: operation_confirm,
+			onFailure: fail
+		});
+	
+	
+	return false;
+	
+}
+
+//Fonction AJAX générales
+function fail(){
+	$('request_msg').style.display="block";
+	$('request_msgtxt').innerHTML="La requête a échoué, veuillez réessayer plus tard.";
+}
+
+function showplzwait(){
+	location.href="#";
+	$('plzwait1').style.display="block";
+	$('plzwait2').style.display="block";
+	$('request_msgtxt').innerHTML="Veuillez patienter...";
+	$('request_msg').style.display="none";
+}
+function hideplzwait(){
+	location.href="#form";
+	$('plzwait1').style.display="none";
+	$('plzwait2').style.display="none";
+}
+function operation_confirm(originalRequest){
+	
+	var rval= originalRequest.responseText;
+	var params=rval.split("|");
+	
+	if (params[0]=="OK"){
+		hideplzwait();
+		$('inscr').submit();
+	}else{
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+	}
+}
+//-->
+</script>
+<!-- Zone ombragée -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td></tr>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Veuillez patienter...</div>
+			<div id="request_msg" style="display:none;text-align:center;"><br /><a href="#form" onclick="hideplzwait();">- Fermer -</a></div>
+			<div style="text-align:center;"><a href="#" onclick="hideplzwait();return false;">Fermer</a></div>
+		</td>
+		</tr>
+	</table>
+</div>
+
+
+<div class="visitor_titre">Inscription:</div>
+
+<div class="panel inscription_info">
+	<div class="title">Notices importantes</div>
+	<div class="content"><?=$NOTICES;?></div>
+</div>
+
+<div class="panel inscription_info">
+	<div class="title">Règles Hors-Jeu</div>
+	<div class="content"><?=$REGLES;?></div>
+</div>
+
+
+
+
+
+
+<form action="?v=Inscription2" method="post" id="inscr">
+	
+	<a id="form"></a>
+	<div class="panel">
+		<div class="title">Création d'un nouveau compte</div>
+		<div class="value inscription_notice">
+			Les informations de votre compte ne sont <u>pas</u> celles de votre personnage.
+			<br />(le 'user' n'est pas le nom du personnage, votre 'âge' n'est pas celui de votre personnage, etc.)
+			<hr />
+		</div>
+		<div class="clearboth"></div>
+		
+		
+		<div class="name inscription_name">
+			User:
+			<p class="inscription_note">
+				&rarr; Caractères permis: a-zA-Z0-9_-<br />
+				&rarr; Minimum 4 caractères.<br />
+			</p>
+		</div>
+		<div class="value inscription_value">
+			<input class="text" type="text" id="user" name="user" size="20" maxlength="25" value=""/>
+		</div>
+		<div class="clearboth"></div>
+		
+		
+		<div class="name inscription_name">
+			Mot de passe:
+			<p class="inscription_note">
+				&rarr; Les mots de passe sont cryptés avec un algorythme irréversible afin d'assurer une sécurité accrue.<br />
+				&rarr; Il est possible de changer le mot de passe si celui-ci est perdu, mais pas de le récupérer.<br />
+				&rarr; Ne donnez <span class="souligne">jamais</span> le mot de passe de votre compte, même pas à l'administrateur.<br />
+				&rarr; Si vous prennez un mot de passe trop simple, que votre ami se connecte à votre compte puis que vous êtes détecté comme doublon et que votre compte est effacé: vous aurez été prévenu.<br />
+				&rarr; Minimun 4 caractères.<br />
+			</p>
+		</div>
+		<div class="value inscription_value">
+			Une première fois:
+			<br />
+			<input type="password" class="text" id="pass" name="pass" size="20" maxlength="25" />
+			<br />
+			<br />Confirmation syntaxique:
+			<br />
+			<input type="password" class="text" id="pass2" name="pass2" size="20" maxlength="25" />
+		</div>
+		<div class="clearboth"></div>
+		
+		
+		<div class="name inscription_name">
+			Courriel:
+			<p class="inscription_note">
+				&rarr; Il vous sera demandé de confirmer votre courriel.<br />
+				&rarr; Nous prennons le SPAM très au sérieux, votre email ne sera jamais rendu publique de quelque facon que ce soit sans votre autorisation.<br />
+			</p>
+		</div>
+		<div class="value inscription_value">
+			Une première fois:
+			<br />
+			<input type="text" class="text" id="email" name="email" size="30" />
+			<br />
+			<br />Confirmation syntaxique:
+			<br />
+			<input type="text" class="text" id="email2" name="email2" size="30" />
+		</div>
+		<div class="clearboth"></div>
+
+		
+		
+		
+		<div class="name inscription_name">
+			Sexe:
+			<p class="inscription_note">
+				&rarr; À titre statistique uniquement.<br />
+				&rarr; Cette information n'à strictement aucune incidence sur le jeu. (Vous pouvez jouer un personnage de sexe différent du votre)<br />
+			</p>
+		</div>
+		<div class="value inscription_value">
+			<input type="radio" name="sexe" value="m" checked="checked" />Homme
+			<br />
+			<input type="radio" name="sexe" value="f" />Femme
+		</div>
+		<div class="clearboth"></div>
+		
+		
+		<div class="name inscription_name">
+			Année de naissance:
+			<p class="inscription_note">
+				&rarr; À titre statistique uniquement.<br />
+				&rarr; Cette information n'a strictement aucune incidence sur le jeu.<br />
+			</p>
+		</div>
+		<div class="value inscription_value">
+			<input type="text" class="text" id="naissance" name="naissance" value="19xx" size="4" maxlength="4" />
+		</div>
+		<div class="clearboth"></div>
+		
+
+		<div class="name inscription_name">
+			Comment avez-vous entendu parlé du jeu ?
+			<p class="inscription_note">
+				&rarr; À titre statistique uniquement.<br />
+				&rarr; Cette information n'a strictement aucune incidence sur le jeu.<br />
+			</p>
+		</div>
+		<div class="value inscription_value">
+			J'ai entendu parlé du jeu par ...
+			<select name="pub">
+				<option value="amireel">... un(e) ami(e) réel.</option>
+				<option value="amivirtuel">... une connaissance virtuelle.</option>
+				<option value="pub">... de la publicité. (google, etc.)</option>
+				<option value="annuaire">... par cet annuaire: &nbsp;&nbsp;&nbsp;→</option>
+				<option value="forum">... par ce forum: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→</option>
+				<option value="misc" selected>... autre: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→</option>
+			</select>
+			&nbsp;
+			Si requis, spécifiez: <input type="text" class="text" name="pub_detail" value="" maxlength="50" />
+		</div>
+		<div class="clearboth"></div>
+
+		
+		<div class="name inscription_name inscription_condition">
+			Conditions:
+		</div>
+		<div class="value inscription_value">
+			<p><input type="checkbox" class="check" id="confirm1" name="confirm1" />&nbsp;(1)
+				J'ai plus de 16 ans ou j'ai le consentement de mes parents pour jouer à CyberCity 2034.
+			</p>
+			
+			<p><input type="checkbox" class="check" id="confirm2" name="confirm2" />&nbsp;(2)
+				Je confirme avoir lu et respecter en totalité et en tout temps les règles Hors-Jeu.
+			</p>
+			
+			<p><input type="checkbox" class="check" id="unconfirm" />&nbsp;(3)
+				J'affirme ne pas avoir lu avec grande attention et je désire effacer ce formulaire.
+				
+			<p><input type="checkbox" class="check" id="confirm3" name="confirm3" />&nbsp;(4)
+				Je suis conscient que ce jeu comporte des scènes de violence, des vulgarités, qu'il est laissé aux commandes des joueurs et donc, qu'aucune forme de censure ou de contrôle de contenu n'existe.
+			</p>
+		</div>
+		<div class="clearboth"></div>
+		
+		
+		<div class="send">
+			<hr />
+			<input type="button" onclick="validate();" class="button" name="go" value="Créer le compte" />
+		</div>
+	</div>
+	
+	
+</form>

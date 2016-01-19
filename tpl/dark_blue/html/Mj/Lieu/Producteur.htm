@@ -1,0 +1,55 @@
+<form name="form1" action="" method="post">
+<table class="center">
+	<tr>
+		<td class="title" colspan="6">Liste des producteurs</td>	
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">Lieu tech</td>
+		<td class="name">PA</td>
+		<td class="name">Cash</td>
+		<td class="name">1 PA => X <?=GAME_DEVISE;?></td>
+		<td class="name"></td>
+	</tr>
+	
+	<?
+	if(isset($PRODUCTEURS))
+	{
+		foreach($PRODUCTEURS as $prod)
+		{
+			?>
+			<tr>
+				<td class="name">
+					<input type="radio" name="id" value="<?=$prod['id'];?>" />
+				</td>
+				<td class="value"><?=$prod['nom_technique'];?></td>
+				<td class="value"><?=$prod['total_pa'];?>/<?=$prod['pa_needed'];?></td>
+				<td class="value"><?=$prod['cash'];?> <?=GAME_DEVISE;?></td>
+				<td class="value"><?=$prod['pa_cash_ratio'];?></td>
+				<td class="value">
+					<a href="?mj=Lieu_ProducteurInv&id=<?=$prod['id'];?>">Production &gt;&gt;</a>
+				</td>
+			</tr>
+			<?
+		}
+	}
+	else
+	{
+		?>
+		<tr>
+			<td class="value" colspan="6">
+				<i><strong>Aucun producteur</strong></i>
+			</td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td colspan="6" value="name">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Lieu_ProducteurAdd';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Lieu_ProducteurMod';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Lieu_ProducteurDel';return confirm('Effacer le producteur ?\n\nCETTE ACTION SUPPRIMERA TOUT L\'INVENTAIRE.');" />
+		</td>
+	</tr>
+</table>
+</form>

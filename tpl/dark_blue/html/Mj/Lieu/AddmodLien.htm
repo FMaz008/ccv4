@@ -1,0 +1,41 @@
+<? if (isset($ADD)){ ?>
+	<table style="width:900px;">
+<? } ?>
+
+<tr>
+	<? if (!isset($ADD)){ ?>
+		<td class='name' style="width:25px;"><input type="checkbox" name="<?=$lien['id'];?>_del" /></td>
+	<? } ?>
+	<td class='value' style="width:150px;"><input type="text" class="text" name="<?=$lien['id'];?>_<?=$lien['prefix'];?>from" style="text-align:right;width:100px;" value="<?=$lien['from'];?>" /> &gt;</td>
+	<td class='value' style="width:150px;">&gt; <input type="text" class="text" name="<?=$lien['id'];?>_<?=$lien['prefix'];?>to" style="text-align:right;width:100px;" value="<?=$lien['to'];?>" /></td>
+	<td class='value' style="width:135px;">
+		<select name="<?=$lien['id'];?>_<?=$lien['prefix'];?>icon">
+			<option value=""<?if(empty($lien["icon"])){ echo ' SELECTED'; }?>>-aucune-</option>
+			<option value="bus.gif"<?if($lien["icon"]=='bus.gif'){ echo ' SELECTED'; }?>>bus.gif</option>
+			<option value="cartier.gif"<?if($lien["icon"]=='cartier.gif'){ echo ' SELECTED'; }?>>cartier.gif</option>
+			<option value="passage.gif"<?if($lien["icon"]=='passage.gif'){ echo ' SELECTED'; }?>>passage.gif</option>
+		</select>
+	</td>
+	<td class='value' style="width:60px;"><input type="text" class="text" name="<?=$lien['id'];?>_<?=$lien['prefix'];?>pa" size="2" value="<?=$lien['pa'];?>" />pa</td>
+	<td class='value' style="width:75px;"><input type="text" class="text" name="<?=$lien['id'];?>_<?=$lien['prefix'];?>cout" size="3" value="<?=$lien['cout'];?>" style="text-align:right;" /><?=GAME_DEVISE;?></td>
+	<td class='value' style="width:100px;">
+		<select name="<?=$lien['id'];?>_<?=$lien['prefix'];?>protection">
+			<option value="0"	<?if($lien['protection']=='0'){ echo ' SELECTED'; }?>>Libre accès</option>
+			<option value="pass"<?if($lien['protection']=='pass'){ echo ' SELECTED'; }?>>Pass</option>
+			<option value="clef"<?if($lien['protection']=='clef'){ echo ' SELECTED'; }?>>Clé</option>
+		</select>
+	</td>
+	<td class='value' style="width:75px;"><input type="text" class="text" name="<?=$lien['id'];?>_<?=$lien['prefix'];?>pass" size="6" value="<?=$lien['pass'];?>" /></td>
+	<td class='value' style="width:130px;">
+		<input type="radio" name="<?=$lien['id'];?>_<?=$lien['prefix'];?>bloque" value="0"<?if($lien['bloque']=='0'){ echo ' CHECKED'; }?> /> Non
+		<input type="radio" name="<?=$lien['id'];?>_<?=$lien['prefix'];?>bloque" value="1"<?if($lien['bloque']=='1'){ echo ' CHECKED'; }?> /> Oui
+	</td>
+	<? if (isset($ADD)){ ?>
+		<td class='name' style="width:25px;"><input type="checkbox" name="<?=$lien['id'];?>_<?=$lien['prefix'];?>sym" /></td>
+	<? } ?>
+</tr>
+
+<? if (isset($ADD)){ ?>
+	</table>
+	<div id="add_<?=$lien['id'];?>"></div>
+<? } ?>

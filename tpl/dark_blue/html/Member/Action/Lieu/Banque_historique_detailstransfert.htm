@@ -1,0 +1,64 @@
+<script type="text/javascript">
+//<!--
+	goBack = function() {
+		<? if(isset($NIP)){ ?>
+			$("action_redirect").action = "?popup=1&m=Action_Lieu_Guichet3historique";
+		<? }else{ ?>
+			$("action_redirect").action = "?popup=1&m=Action_Lieu_BanqueHistorique";
+		<? } ?>
+		ajaxSubmitForm($("action_redirect"));
+	}
+//-->
+</script>
+<form id="action_redirect" method="post" action="">
+<? if(isset($NIP)){ ?>
+	<input type="hidden" name="carteid" value="<?=$CARD_ID;?>" />
+	<input type="hidden" name="nip" value="<?=$NIP;?>" />
+<? }else{ ?>
+	<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+<? } ?>
+</form>
+
+<br />
+<table class="center" style="width:300px;">
+	<tr>
+		<td class="name">Date</td>
+		<td class="value" style="text-align:left;"><?=$TRANSACTION['date'];?></td>
+	</tr>
+	<tr>
+		<td class="name">Transaction</td>
+		<td class="value" style="text-align:left;"><?=$TRANSACTION['id'];?></td>
+	</tr>
+	<tr>
+		<td class="name">Code</td>
+		<td class="value" style="text-align:left;"><?=$TRANSACTION['code'];?></td>
+	</tr>
+	<tr>
+		<?
+		if(substr($TRANSACTION['code'],0,1)=='D') {
+		?>
+			<td class="name">De</td>
+		<?
+		}else{
+		?>
+			<td class="name">Vers</td>
+		<?
+		}
+		?>
+		<td class="value" style="text-align:left;">
+			<?=$TRANSACTION['compte2'];?><br />
+			Institution: <?=$TRANSACTION['bank2nom'];?>
+		
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Montant</td>
+		<td class="value" style="text-align:left;"><?=$TRANSACTION['montant'];?></td>
+	</tr>
+	<tr>
+		<td class="name">Solde</td>
+		<td class="value" style="text-align:left;"><?=$TRANSACTION['solde'];?></td>
+	</tr>
+</table>
+<span class="fakelink" onclick="goBack();">&lt;&lt; Retour</span>
+<br />

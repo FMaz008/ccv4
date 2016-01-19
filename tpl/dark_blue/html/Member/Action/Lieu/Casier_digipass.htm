@@ -1,0 +1,66 @@
+<script type="text/javascript">
+//<!--
+	addno = function(no) {
+		$("pass2").value+=no;
+		$("pass").value=$("pass2").value;
+	}
+	reset = function(no) {
+		$("pass2").value='';
+		$("pass").value=$("pass2").value;
+	}
+	check = function(no) {
+		ajaxSubmitForm($("action_casierDigi"));
+	}
+//-->
+</script>
+
+<br />
+<form id="action_casierDigi" method="post" action="?popup=1&m=Action_Lieu_CasierInv">
+<input type="hidden" name="pass" id="pass" value="" />
+<input type="hidden" name="id_casier" value="<?=$ID_CASIER;?>" />
+
+<table class="subcenter">
+	<tr>
+		<td class="title">Entrez le code</td>
+	</tr>
+	<tr>
+		<td class="name" style="text-align:center;">
+			<? if(isset($WRONGPASS)) { ?>
+				<font color="red">Code Erron&eacute; /!\</font>
+			<? } ?>
+			
+			<input type="text" class="text" name="pass2" id="pass2" value="" DISABLED />
+			
+			<? if(isset($WRONGPASS)) { ?>
+				<font color="red">/!\ Code Erron&eacute;</font>
+			<? } ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="value">
+			<table align="center">
+				<tr>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/1.gif" onclick="addno(1);" /></td>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/2.gif" onclick="addno(2);" /></td>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/3.gif" onclick="addno(3);" /></td>
+				</tr>
+				<tr>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/4.gif" onclick="addno(4);" /></td>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/5.gif" onclick="addno(5);" /></td>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/6.gif" onclick="addno(6);" /></td>
+				</tr>
+				<tr>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/7.gif" onclick="addno(7);" /></td>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/8.gif" onclick="addno(8);" /></td>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/9.gif" onclick="addno(9);" /></td>
+				</tr>
+				<tr>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/star.gif" onclick="reset();" /></td>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/0.gif" onclick="addno(0);" /></td>
+					<td><img src="<?=$SKIN_VIRTUAL_PATH;?>img/digipass/diese.gif" onclick="check();" /></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>

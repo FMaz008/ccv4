@@ -1,0 +1,41 @@
+
+
+<br />
+<form id="action_casierList" method="post" action="?popup=1&m=Action_Lieu_CasierInv" onsubmit="return ajaxSubmitForm(this);">
+	<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="3">Liste des casiers</td>
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">Identification</td>
+		<td class="name">Protection</td>
+	</tr>
+	
+	<? if (isset($CASIERS)){
+		foreach($CASIERS as $casier){?>
+			<tr>
+				<td class="name" style="width:25px;">
+					<input type="radio" name="id_casier" value="<?=$casier->getId();?>" />
+				</td>
+				<td><?=$casier->getNom();?></td>
+				<td><?=$casier->getProtectionTxt();?></td>
+			</tr>
+		<? }
+	}else{
+		?>
+		<tr>
+			<td class="send" colspan="3">
+				<i>- Aucun casier dans ce lieu -</i>
+			</td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td class="send" colspan="3">
+			<input type="submit" class="button" name="open" value="Ouvrir" />
+		</td>
+	</tr>
+	</table>
+</form>

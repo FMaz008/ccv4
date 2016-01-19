@@ -1,0 +1,32 @@
+<form id="action_siteAdd" method="post" action="?popup=1&m=Action_Item_Siteadd" onsubmit="return ajaxSubmitForm(this);">
+	
+	<center>
+		<strong>Cr&eacute;er un nouveau site</strong>
+	</center>
+	<br />
+	<p>
+		Vous êtes sur le point de cr&eacute;er un nouveau site. Avant de ce faire, nous devons collecter quelques informations. Veuillez noter qu'afin de pouvoir compl&eacute;ter votre demande d'ajout, vous devez avoir une carte bancaire afin de payer les frais d'ouverture.
+	</p>
+	
+	<p>
+		Votre site sera accessible en tappant une adresse URL dans le navigateur, quelle adresse d&eacute;sirez-vous obtenir ? (Caract&egrave;re A-Za-z0-9_.- uniquement)<br />
+		URL: <input type="text" class="text" name="new_url" value="" />
+	</p>
+	
+	<p>
+		Pour agr&eacute;menter la pr&eacute;sentation de votre site, vous pouvez lui attribuer un titre. <br />
+		Titre: <input type="text" class="text" name="new_titre" value="" />
+	</p>
+	
+	<p>
+		Afin de pouvoir effectuer des modifications, vous devez cr&eacute;er un compte d'administration. <br />
+		Utilisateur: <input type="text" class="text" name="new_user" value="" /><br />
+		Mot de passe: <input type="text" class="text" name="new_pass" value="" /> [HJ: Comme tout les mots de passe IJ, celui-ci n'est pas crypt&eacute;. D'autres personnes pourraient en prendre connaissance.]
+	</p>
+	
+	<p>
+		Le coût d'ouverture d'un site est de 75<?=GAME_DEVISE;?>. Pour effectuer ce paiement en ligne, nous avons besoin d'un # de carte et de votre NIP.<br />
+		# de carte: <input type="text" class="text" name="new_carte" value="" /><br />
+		NIP: <input type="text" class="text" name="new_nip" value="" />
+	</p>
+</form>

@@ -1,0 +1,39 @@
+﻿<form name="form1" action="" method="post">
+	<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+<table class="center">
+	<tr>
+		<td class="title" colspan="6">Gestion des accès média du lieu <?=$LIEU_TECH;?></td>	
+	</tr>
+	
+	<tr>
+		<td class="name"></td>
+		<td class="name">ID</td>
+		<td class="name">Nom de l'accès</td>
+		<td class="name">Type accessible</td>
+		<td class="name">Canal</td>
+		<td class="name">Sens</td>
+	</tr>
+	
+	<? foreach($MEDIA_ACCES as $media){ ?>
+		<tr>
+			<td class="name" style="width:10px;">
+				<input type="radio" name="id_mediaAcces" value=<?=$media->getId();?> />
+			</td>
+			<td class="value"><?=$media->getId();?></td>
+			<td class="value"><?=$media->getNom();?></td>
+			<td class="value"><?=$media->getMediaTypeAffichable();?></td>
+			<td class="value"><?=$media->getChannelId();?></td>
+			<td class="value"><? if($media->isRecepteur()) {?>Récepteur<? } else {?>Emetteur<?}?></td>
+		</tr>
+	<? } ?>
+	
+	<tr>
+		<td colspan="6" class="send">
+			<input type="submit" class="button" name="add" value="Ajouter"  onClick="document.forms['form1'].action='?mj=Lieu_MediaAccesAdd';"/>
+			<input type="submit" class="button" name="mod" value="Modifier"  onClick="document.forms['form1'].action='?mj=Lieu_MediaAccesMod';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_MediaAccesDel';return confirm('Voulez-vous vraiment supprimer la sélection ?');" />
+		</td>
+	</tr>
+</table>
+
+</form>

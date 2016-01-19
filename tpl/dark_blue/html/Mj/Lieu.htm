@@ -1,0 +1,67 @@
+<script type="text/javascript">
+//<!--
+function confirmdel(msg){
+	answer = confirm (msg);
+	if (answer) {
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function submitForm(id) {
+	$('id' + id).checked = true;
+	document.forms["form1"].action = "?mj=Lieu_Mod";
+	document.forms['form1'].submit();
+}
+//-->
+</script>
+<br />
+<form name="form1" method="post" action="">
+<table class="subcenter">
+	<tr>
+		<td class="title" colspan="7">Gestion des lieux</td>
+	</tr>
+	<tr>
+		<td colspan="6" value="name">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Lieu_Add';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Lieu_Mod';" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Lieu_Del';return confirmdel('Effacer le lieu ?');" />
+		</td>
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">Id</td>
+		<td class="name">Nom tech</td>
+		<td class="name">Nom aff</td>
+		<td class="name"><a href="?mj=Lieu&qte_item=1">Qte item.</a></td>
+		<td class="name"><a href="?&mj=Lieu&qte_perso=1">Qte perso.</a></td>
+		<td class="name">Boutique</td>
+	</tr>
+	<? if (!isset($LIEUX)){ ?>
+		<tr><td class="value" colspan='6'><i>- Aucun lieu -</i></td></tr>
+	<?}else {
+		foreach($LIEUX as $lieu){ 
+		?>
+			<tr>
+				<td class="value"><input type="radio" name="id" id="id<?=$lieu['id'];?>" value="<?=$lieu['id'];?>" /></td>
+				<td class="value"><?=$lieu['id'];?></td>
+				<td class="value"><a href="#" onclick="submitForm(<?=$lieu['id'];?>);"><?=$lieu['nom_technique'];?></a></td>
+				<td class="value"><?=$lieu['nom_affiché'];?></td>
+				<td class="value"><? if(isset($lieu['qte_item'])){ echo $lieu['qte_item']; }else{ echo '-'; }?></td>
+				<td class="value"><? if(isset($lieu['qte_perso'])){ echo $lieu['qte_perso']; }else{ echo '-'; }?></td>
+				<td class="value"><? if(isset($lieu['boutique']) && $lieu['boutique']==1){ echo "Boutique"; }?></td>
+			</tr>
+	<?
+		}
+	}
+	?>
+	<tr>
+		<td colspan="6" value="name">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Lieu_Add';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Lieu_Mod';" />
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Lieu_Del';return confirmdel('Effacer le lieu ?');" />
+		</td>
+	</tr>
+</table>
+</form>

@@ -1,0 +1,157 @@
+<?php
+/**
+ * Fichier de configuration du moteur de jeu.
+ *
+ * @author Francois Mazerolle <admin@maz-concept.com>
+ * @copyright Copyright (c) 2009, Francois Mazerolle
+ * @version 1.0
+ * @package CyberCity_2034
+ */
+
+
+//Constantes de connexion à une base de données pour le jeu
+define ('DB_HOST',			'localhost');
+define ('DB_USER',			'ccv4');
+define ('DB_PASS',			'passtmp');
+define ('DB_BASE',			'cybercity2034_v4');
+define ('DB_PREFIX',		'cc_');
+
+//Constantes de connexion à une base de données pour un forum (Simple Machine Forum seulement)
+define ('DB_FORUM_HOST',	NULL); //Placer ce champs à NULL pour désactiver
+define ('DB_FORUM_USER',	'');
+define ('DB_FORUM_PASS',	'');
+define ('DB_FORUM_BASE',	'');
+define ('DB_FORUM_PREFIX',	'smf_');
+define ('FORUM_URL',		'http://forum.cybercity2034.com/');		//Root path de l'intallation du forum
+define ('FORUM_TITLE_LENGTH', 50);									//Tronquer le titre après X caractères
+define ('FORUM_BOARD_IDS',	'6,5,4,23');							//Piger les sujets les plus récents parmis ces boards
+define ('FORUM_SUBJECT_LIMIT', 4);									//Nombre de sujets à afficher
+
+//Connexion à la base de données des redirecteurs email (serveur PostFix seulement)
+define ('DB_EMAIL_HOST',	NULL); //Placer ce champs à NULL pour désactiver
+define ('DB_EMAIL_USER',	'');
+define ('DB_EMAIL_PASS',	'');
+define ('DB_EMAIL_BASE',	'');
+define ('DB_EMAIL_PREFIX',	'');
+
+
+
+
+//CONSTANTES SESSION
+
+//Délais d'expiration (en minutes) d'une session
+define ('SESSION_TIMEOUT',		45);
+
+//Heure actuelle
+define ('CURRENT_TIME',			mktime ());
+
+//Active des spécifités pour ce jeu
+define('GAME_IS_CYBERCITY', true);
+
+
+
+
+//CONSTANTES D'ACCÈS AUX FICHIERS
+
+//Ce qui va après les @ des emails.
+define ('SITE_DOMAIN', 				'cybercity2034.com');
+
+//Chemin virtuel vers la racine du moteur de jeu
+define ('SITE_VIRTUAL_PATH',		'http://beta.cybercity2034.com/sandbox/');
+
+//Chemin physique vers la racine du site
+define ('SITE_PHYSICAL_PATH',		'/home/www/cybercity2034.com/public_html/beta/sandbox/');
+
+//Chemin de base des templates (pour les liens d'images)
+// SKIN_ROOT'	-> Défini dans index.php après l'instanciation de la session
+
+//Chemin physique vers les templates (pour inclusion des fichiers)
+// SKIN_REAL'	-> Défini dans index.php après l'instanciation de la session
+
+
+
+
+//CONSTANTES D'AFFICHAGE
+
+//Charset à utiliser par défaut sur le site
+define ('SITE_CHARSET',						'UTF-8');
+
+//Nom du skin à utiliser par défaut
+define ('SITE_DEFAULT_SKIN',				'darkblueOLD');
+
+//Nom du skin de base (100% complet).
+// Si un fichier n'existe pas dans un skin, on charge celui du skin de base.
+define ('SITE_BASE_SKIN',					'darkblueOLD');
+
+//Titre du jeu
+define ('SITE_NAME',						'CyberCity 2034');
+
+//Version du jeu
+define ('SITE_VERSION',						'v4 O.O.');
+
+//Devise utilisée dans le jeu
+define ('GAME_DEVISE',						'Cr');
+
+//Décalage temporel (en année) par rapport à l'année actuelle
+define ('GAMETIME_DECAL',					31);
+
+//Mode debug [true = affiche les erreurs, false = log les erreurs]
+define ('DEBUG_MODE',						true);
+
+
+
+
+//CONSTANTES DE JEU
+
+//Lieu (Nom technique) du spawn innitial lors de l'inscription
+define ('LIEU_DEPART',						'A');			
+
+//Considérer une porte tenue pendant X heures
+define ('TENIRPORTE_TIMEOUT',				48);
+
+//Lieu (Nom technique) vers lequel un perso est téléportée force pour innactivité
+define ('INNACTIVITE_TELEPORT_LOCATION',	'A.douanes.innactifs');
+
+//Délais (en heures) avant qu'un perso soit déplacé automatiquement vers le lieu des innactifs
+define ('INNACTIVITE_TELEPORT_DELAY',		72);
+
+//Délais (en jours) avant qu'un perso soit effacé
+define ('INNACTIVITE_DELETE_DELAY',			30);
+
+//Lieu (Nom technique) d'innactivité désiré. Ce lieu exclu les joueurs de la téléportation automatique pour inactivité
+define ('INNACTIVITE_VOLUNTARY_LOCATION',	'A.douanes.salleattente');
+
+//Nombre de PA à donner à un joueur à sa remise
+define ('PA_PAR_REMISE',					50);
+
+//Nombre de PPA simultanément ouverts par perso.
+define ('PPA_MAX',							3);
+
+//Nombre de niveau de compétences à attribuer à l'inscription
+define ('INSCRIPTION_NBR_COMP',				10);
+
+//Nombre de niveau maximal par compétences à attribuer à l'inscription
+define ('INSCRIPTION_MAX_COMP',				5);
+
+
+//CONSTANTES DE FONCTIONNEMENT INTERNE DU SYSTÈME
+
+//Délais (en jours) d'expiration (supression définitive) des messages supprimés
+define("ENGINE_HE_EXPIRE"		, 30);	
+				
+//Page  accessible par ?m= qui ne requiert une authentification mais pas un perso actif
+define("ENGINE_ACCESS_WITHOUT_PERSO", 			'News'
+												. ',CreerPerso'
+												. ',CreerPerso2'
+												. ',CreerPerso2Check'
+												. ',CreerPerso3'
+												. ',ModPerso'
+												. ',DelPerso'
+												. ',ModPerso2'
+												. ',DelPerso2'
+												. ',ModPersoCheck'
+												. ',Config_Compte'
+												. ',Config_Compte2');
+
+
+

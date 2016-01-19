@@ -1,0 +1,341 @@
+﻿<script type="text/javascript">
+//<!--
+var nbr_ajout=0;
+var qte_ajout=0;
+AjouterLien = function(qte){
+	qte_ajout=qte; // Redondance ?
+	$('add_lien').style.display='block';
+	
+	var myAjax = new Ajax.Request(
+		'?mj=Lieu_ModAddlien&popup=1', 
+		{
+			method: 'post', 
+			parameters: 'divid='+ (nbr_ajout+1) + '&lieu_tech=' + $F('nom_technique'),
+			onComplete: AjouterLien_completed
+		});
+}
+
+AjouterLien_completed = function(originalRequest){
+	var rval= originalRequest.responseText;
+	$('add_'+nbr_ajout).innerHTML = rval;
+	nbr_ajout++; //Augmenter le total en cas de plusieurs ajouts
+	$('total_add').value = nbr_ajout;
+	
+	qte_ajout--; //Décrémenter la quantité à ajouté de CET ajout
+	if (qte_ajout>0){
+		AjouterLien(qte_ajout);
+	}
+}
+
+ClearAjouterLien = function(){
+	$('add_lien').style.display='none';
+	$('add_0').innerHTML='';
+	nbr_ajout=0;
+}
+
+
+
+
+var nbr_action_ajout=0;
+AjouterAction = function(){
+	var myAjax = new Ajax.Request(
+		'?mj=Lieu_AddActionpage&popup=1', 
+		{
+			method: 'post', 
+			parameters: 'divid='+ (nbr_action_ajout+1) + '&lieu_tech=' + $F('nom_technique'),
+			onComplete: AjouterAction_completed
+		});
+}
+
+AjouterAction_completed = function(originalRequest){
+	var rval= originalRequest.responseText;
+	$('add_action_'+nbr_action_ajout).innerHTML = rval;
+	nbr_action_ajout++; //Augmenter le total en cas de plusieurs ajouts
+	$('total_action_add').value = nbr_action_ajout;
+	
+}
+
+Ajouter_Perso = function(){
+	var perso=prompt('Quel est le nom du personnage que vous souhaiter placer propriétaire de cette boutique ?','');
+	
+	if(perso!=null){
+		var myAjax = new Ajax.Updater(
+			'div_proprio2', 
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat=p_ajouter_perso&search='+perso
+			});
+	}
+}
+
+Ajouter_Perso2 = function(id, perso){
+	$('div_proprio2').innerHTML = perso + ' (<a href="#" onclick="Ajouter_Perso();">Modifier</a>)\n<input type="hidden" name="addGerant" value="' + id + '"/>';
+}
+
+confirmdel = function(msg){
+	answer = confirm (msg);
+	if (answer) {
+		return true;
+	}else{
+		return false;
+	}
+}
+//-->
+</script>
+
+<br />
+<a href="?mj=Lieu">&lt;&lt; Retour à la liste des lieux</a><br />
+<form method="post" name="form1" action="?mj=Lieu_<?=$SUBMITNAME;?>">
+	<table align="center">
+		<tr>
+			<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> un lieu</td>
+		</tr>
+		<? if( $SHOWID == true ){ ?>
+		<tr>
+			<td class="name">ID du lieu</td>
+			<td class="value"><input type="hidden" name="id" value="<?=$LIEU['id'];?>" /><?=$LIEU['id'];?></td>
+		</tr>
+		<? } ?>
+		
+		<tr>
+			<td class="name">Nom Technique</td>
+			<td class="value">
+				<?
+				if ($SUBMITNAME=='Add'){
+				?>
+					<select name="pre" style="text-align:right;">
+						<option value=""></option>
+						<? foreach($PAGE_LIEUX as $plieu){ ?>
+							<option value="<?=$plieu[0];?>."><?=$plieu[0];?>.</option>
+						<? } ?>
+					</select>
+					<input type="text" class="text" name="nom_technique" id="nom_technique" value="" maxlength="100" />
+				<?
+				}else{
+				?>
+					<input type="text" class="text" name="nom_technique" id="nom_technique" value="<?=$LIEU["nom_technique"];?>" onfocus="alert('ATTENTION, changer ce champs incorrectement signifie que plusieurs déplacements seront en erreur.');" /></td>
+				<?
+				}
+				?>
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Nom Affiché</td>
+			<td class="value"><input type="text" class="text" name="nom_affiche" value="<?=$LIEU["nom_affiche"];?>" maxlength="50" /></td>
+		</tr>
+		<tr>
+			<td class="name">Description</td>
+			<td class="value"><textarea name="description" style="width:300px;height:100px;"><?=$LIEU["description"];?></textarea></td>
+		</tr>
+		<tr>
+			<td class="name">Taille du lieu<br />(En lien avec la porté des armes)</td>
+			<td class="value">
+				<select name="dimension">
+					<option value="TC" <? if($LIEU['dimension']=='TC'){ echo 'SELECTED'; } ?>>TC : Très Court (Très petit)</option>
+					<option value="C" <? if($LIEU['dimension']=='C'){ echo 'SELECTED'; } ?>>C : Court (Petit)</option>
+					<option value="M" <? if($LIEU['dimension']=='M'){ echo 'SELECTED'; } ?>>M : Moyen (Moyen)</option>
+					<option value="L" <? if($LIEU['dimension']=='L'){ echo 'SELECTED'; } ?>>L : Longue (Grand)</option>
+					<option value="TL" <? if($LIEU['dimension']=='TL'){ echo 'SELECTED'; } ?>>TL : Très Longue (Très grand)</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Image</td>
+			<td class="value">
+				<select name="image">
+					<option value=""<?if($LIEU['image']==''){?> SELECTED<?}?>>-aucune-</option>
+					<? foreach($IMGS as $image){ ?>
+						<option value="<?=$image;?>"<?if($image==$LIEU["image"]){?> SELECTED<?}?>><?=$image;?></option>
+					<? } ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Proprio ID</td>
+			<td class="value">
+				<div id="div_proprio1" style="height:6em;overflow:auto;">
+					<?if(!empty($GERANTS)){ 
+						foreach($GERANTS as $gerant){?>
+							<?=$gerant["nom"];?> (Supprimer : <input type="checkbox" name="delGerant_<?=$gerant["id"];?>" value="true" />)<br />
+						<?}?>
+					<?}else{?>
+						<i>- Aucun -</i>
+					<?}?>
+				</div>
+				<div id="div_proprio2">
+					<a href="#" onclick="Ajouter_Perso();">Ajouter un gérant</a>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Boutique<br />(Si applicable)</td>
+			<td class="value">
+				Cash en caisse: <input type="text" class="text" name="boutique_cash" value="<?=$LIEU['boutique_cash'];?>" size="6" style="text-align:right;" /><?=GAME_DEVISE;?><br />
+				# de compte: <input type="text" class="text" name="boutique_compte" value="<?=$LIEU['boutique_compte'];?>" size="19" /><br />
+				Vol possible:<br />
+					<input type="radio" name="boutique_vol" value="1" <? if($LIEU['boutique_vol']=='1'){ echo 'CHECKED'; } ?> /> Oui
+					<input type="radio" name="boutique_vol" value="0" <? if($LIEU['boutique_vol']=='0'){ echo 'CHECKED'; } ?> /> Non
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Soin du lieu<br />(Si applicable)</td>
+			<td class="value">
+				Capacité technique du lieu: <br />
+				<select name="coeff_soin">
+					<option value="0" <? if($LIEU['coeff_soin']==0){ echo 'SELECTED'; } ?>>0 - Soin de blessés légés</option>
+					<option value="1" <? if($LIEU['coeff_soin']==1){ echo 'SELECTED'; } ?>>1 - Soin des non-autonomes</option>
+					<option value="2" <? if($LIEU['coeff_soin']==2){ echo 'SELECTED'; } ?>>2 - Soin des inconscients</option>
+					<option value="3" <? if($LIEU['coeff_soin']==3){ echo 'SELECTED'; } ?>>3 - Ré-animation possible</option>
+				</select>
+				<br />
+				<br />Quantité Matériel médical:
+				<br/>(1=3PV)
+				<br/><input type="text" name="qteMateriel" value="<?=$LIEU['qteMateriel'];?>" size="1" />
+			</td>
+		</tr>
+<?
+if ($SUBMITNAME=='Mod'){
+?>
+		<tr>
+			<td class="name">Action(s) liée(s):</td>
+			<td class="value">
+				<table>
+				<tr>
+					<td class="name">DEL</td>
+					<td class="name">Module</td>
+					<td class="name">Titre menu</td>
+				</tr>
+				<?
+				if(isset($ACTIONS)){
+					foreach($ACTIONS as $action){
+						?>
+						<tr>
+							<td class="value">
+								<input type="checkbox" name="delAction_<?=$action['id'];?>" value="true" />
+							</td>
+							<td class="name">
+								<?=$action['url'];?>
+							</td>
+							<td class="value">
+								<input type="text" class="text" name="<?=$action['id'];?>_actioncaption" value="<?=$action['caption'];?>" />
+							</td>
+							<td>
+								<?php
+								if(isset($action['config_url']))
+								{
+									?>
+									<input type="button" value="configurer >>" onclick="location.href='?mj=<?=$action['config_url']; ?>&id=<?=$LIEU['id'];?>';" />
+									<?php
+								}
+								?>
+							</td>
+						</tr>
+						<?
+					}
+				}
+				?>
+				</table>
+				
+				<input type="hidden" name="total_action_add" id="total_action_add" value="0" />
+				<input type="button" class="button" name="preadd" onclick="AjouterAction();" value="Ajouter une action" />
+				<div id="add_action_0"></div>
+			</td>
+		</tr>
+<?
+}
+?>
+		<tr>
+			<td class="name">Note MJ</td>
+			<td class="value"><textarea name="notemj" style="width:300px;height:75px;"><?=$LIEU['notemj'];?></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="send">
+				<input type="submit" class="button" name="save" value="Enregistrer" />
+			</td>
+		</tr>
+	</table>
+</form>
+<br />
+<br />
+<?
+if ($SUBMITNAME=='Mod'){
+?>
+	<form id="liens" method="post" action="?mj=Lieu_Mod">
+		<input type="hidden" name="liens" value="1" />
+		<input type="hidden" name="total_add" id="total_add" value="0" />
+		<input type="hidden" name="id" value="<?=$LIEUID;?>" />
+		
+		<div style="width:900px;margin-left:auto;margin-right:auto;text-align:center;">
+			<table>
+				<tr>
+					<td class="title" colspan="9">Gestion des liaisons inter-lieux</td>
+				</tr>
+				<tr>
+					<td class="name" style="width:25px;"></td>
+					<td class="name" style="width:150px;">from</td>
+					<td class="name" style="width:150px;">to</td>
+					<td class="name" style="width:135px;">icon</td>
+					<td class="name" style="width:60px;">pa</td>
+					<td class="name" style="width:75px;">cout</td>
+					<td class="name" style="width:100px;">protection</td>
+					<td class="name" style="width:75px;">pass</td>
+					<td class="name" style="width:130px;">bloque</td>
+				</tr>
+				
+				<? foreach($LIENS2 as $lien){
+					echo $lien;
+				}?>
+				
+				<tr>
+					<td class="name"></td>
+					<td colspan="8"><hr /></td>
+				</tr>
+				
+				<? foreach($LIENS1 as $lien){
+					echo $lien;
+				}?>
+				
+				<tr>
+					<td colspan="9" style="text-align:center;">
+						<input type="submit" class="button" name="lien_del" value="Supprimer la sélection" onclick="return confirmdel('Effacer le(s) lien(s) sélectionné(s) ?');" />
+						<input type="submit" class="button" name="lien_save" value="Enregistrer" />
+						Ajouter <input type="text" class="text" id="add_qte" value="1" size="2" /> lien(s)
+						<input type="button" class="button" name="preadd" onclick="AjouterLien($('add_qte').value);" value="Ok !" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		
+		<br />
+		
+		
+		<div id="add_lien" style="width:900px;margin-left:auto;margin-right:auto;display:none;text-align:center;">
+			<table>
+				<tr>
+					<td class="title" colspan="9">Gestion des liaisons inter-lieux</td>
+				</tr>
+				<tr>
+					<td class="name" style="width:150px;">from</td>
+					<td class="name" style="width:150px;">to</td>
+					<td class="name" style="width:135px;">icon</td>
+					<td class="name" style="width:60px;">pa</td>
+					<td class="name" style="width:75px;">cout</td>
+					<td class="name" style="width:100px;">protection</td>
+					<td class="name" style="width:75px;">pass</td>
+					<td class="name" style="width:130px;">bloque</td>
+					<td class="name" style="width:25px;">&lt;&lt;</td>
+				</tr>
+			</table>
+			<div id="add_0"></div>
+			<input type="button" class="button" value="Annuler" onClick="ClearAjouterLien();" />
+			<input type="submit" class="button" name="lien_add" value="Insérer" />
+		<div>
+		
+		
+	</form>
+<?
+}
+?>
+		

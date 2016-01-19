@@ -1,0 +1,9 @@
+<a href="?m=Mp_Index" class="infobulle">
+	<?=$PUB_TITLE;?>
+
+	<div class="infobulle pubMpIframe">
+		<div class="title">Membre Plus (cliquez pour les détails)</div>
+		<?=$PUB_DESC;?><br />
+		Encouragez le jeu en devenant Membre PLUS&nbsp;!<br />
+	</div>
+</a>

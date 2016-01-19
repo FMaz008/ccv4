@@ -1,0 +1,56 @@
+
+
+<br />
+
+
+<a href="?mj=Lieu_Biblio&id=<?=$LIEU_ID;?>">&lt;&lt; Retour à la liste des livres en bibliothèque</a><br />
+
+
+<form method="post" name="form1" action="?mj=Lieu_BiblioAdd">
+	<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+	
+	<table class="center">
+		<tr>
+			<td class="title" colspan="4">Ajouter un livre à la bibliothèque</td>
+		</tr>
+		
+		<tr>
+			<td class="name" style="width:15px;"></td>
+			<td class="name">Titre</td>
+			<td class="name">Auteur</td>
+			<td class="name">Taille</td>
+		</tr>
+		
+		<? 
+		if(isset($LIVRES)) {
+			foreach($LIVRES as $livre){
+				?>
+				<tr>
+					<td class="name">
+						<input type="radio" name="LIVRE_ID" value="<?=$livre->getDbId();?>" />
+					</td>
+					<td class="value"><a href="?mj=Item_LivreMod&id=<?=$livre->getDbId();?>&rpage=Lieu_Biblio&rid=<?=$LIEU_ID;?>"><?=$livre->getTitre();?></a></td>
+					<td class="value"><?=$livre->getAuteur();?></td>
+					<td class="value"><?=$livre->getTaille();?> Kb</td>
+				</tr>
+				<?
+			}
+		}else{
+			?>
+			<tr>
+				<td class="title" colspan="4"><i>- aucun livre disponible -</i></td>
+			</tr>
+		<?
+		}
+		?>
+		
+		<tr>
+			<td colspan="4" class="send">
+				<input type="submit" class="button" name="save" value="Ajouter ce livre" />
+			</td>
+		</tr>
+	</table>
+</form>
+<br />
+<br />
+

@@ -1,0 +1,24 @@
+<table class="tbl_center">
+	<tr>
+		<td class="title" colspan="3">Log de suppression de personnages</td>
+	</tr>
+	<tr>
+		<td class="name">Date</td>
+		<td class="name">Perso</td>
+		<td class="name">MJ</td>
+	</tr>
+	<?
+	foreach ($donnees as $log)
+	{
+		?>
+		<tr>
+			<td class="value"><?=$log['timestamp'];?></td>
+			<td class="value"><?=$log['perso'];?></td>
+			<td class="value"><?=$log['mj'];?></td>
+		</tr>
+		<?
+	}
+	?>
+
+	
+</table>

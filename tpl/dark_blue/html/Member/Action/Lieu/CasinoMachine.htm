@@ -1,0 +1,69 @@
+<script type="text/javascript">
+//<!--
+	go = function()
+	{
+		var myAjax = new Ajax.Request(
+			'?m=Action_Lieu_CasinoGame&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'game=machine',
+				onComplete: go_confirm
+			}
+		);
+	}
+	
+	go_confirm = function(originalRequest)
+	{
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		$('result_a').innerHTML = params[1];
+		$('result_b').innerHTML = params[2];
+		$('result_c').innerHTML = params[3];
+		$('msg').innerHTML = params[4];
+		$('perso_cash').innerHTML=params[5];
+		$('perso_pa').innerHTML=params[6];
+	}
+	
+//-->
+</script>
+<style>
+td.result
+{
+	width:50px;
+	height:75px;
+	font-size:400%;
+	border:1px solid;
+}
+</style>
+<br />
+<table class="tbl_center">
+<tr>
+	<td class="title" colspan="2">
+		Casino <?=$CASINO['casino_nom'];?> - Machine à sous
+	</td>
+</tr>
+<tr>
+	<td style="text-align:center;">
+		
+		<table style="margin:0 auto;">
+		<tr>
+			<td id="result_a" class="result">?</td>
+			<td id="result_b" class="result">?</td>
+			<td id="result_c" class="result">?</td>
+		</tr>
+		<tr>
+			<td colspan="3" id="msg"></td>
+		</tr>
+		</table>
+		
+		Coût: 500<?php echo $GAME_DEVISE;?>
+		
+		<hr />
+		<input type="button" onclick="go();" value="Jouer !" />
+		<hr />
+		
+	</td>
+</tr>
+</table>
+

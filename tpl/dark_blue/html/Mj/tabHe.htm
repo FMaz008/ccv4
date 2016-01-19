@@ -1,0 +1,64 @@
+<form action="?mj=index" method="post">
+	<table class="tbl_center">
+		<tr>
+			<td class="title" colspan="2">HE MJ </td>
+		</tr>
+		<? if($HE != NULL){
+			foreach($HE as $he){?>
+				<tr>
+					<td class="name">
+						<? /*
+						<input type="checkbox" name="<?='ppa_suppr_'.$he['id'];?>" value="<?=$he['id'];?>">
+						*/ ?>
+						
+						<?
+						switch ($he['type'])
+						{
+							case 'perso':
+								?>
+								Perso: <a href="#gestion_perso" onclick="document.forms['perso'].search.value='<?=addslashes($he['concernant']);?>';gosearch('perso');"><?=$he['concernant'];?></a>, 
+								<?
+								break;
+							case 'compte':
+								?>
+								Compte: <a href="#gestion_compte" onclick="document.forms['compte'].search.value='<?=addslashes($he['concernant']);?>';gosearch('compte');"><?=$he['concernant'];?></a>, 
+								<?
+								break;
+							case 'lieu':
+								?>
+								Lieu: <a href="#gestion_lieu" onclick="document.forms['lieu'].search.value='<?=addslashes($he['concernant']);?>';gosearch('lieu');"><?=$he['concernant'];?></a>, 
+								<?
+								break;
+							case 'item':
+								?>
+								Item: <?=$he['concernant'];?>, 
+								<?
+								break;
+							case 'mj':
+								?>
+								Mj: <?=$he['concernant'];?>, 
+								<?
+								break;
+							case 'system':
+								?>
+								Système/Autre: <?=$he['concernant'];?>, 
+								<?
+								break;
+						}
+						?>
+						le <?=$he['date']?> :
+					</td>
+				</tr>
+				<tr>
+					<td class="value" style="text-align:left;"><?=$he['msg'];?><br /><br /></td>
+				</tr>
+			<? }
+		}else{ ?>
+			<tr><td colspan="5" style="font-style:italic;">- aucun pour le moment -</td></tr>
+		<? } ?>
+	</table>
+	
+	<? /*
+	<input type="submit" class="button" name="ppa_suppr_save" value="Supprimer"/>
+	*/ ?>
+</form>

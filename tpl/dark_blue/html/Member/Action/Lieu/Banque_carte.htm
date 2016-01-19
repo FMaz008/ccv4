@@ -1,0 +1,76 @@
+<script type="text/javascript">
+//<!--
+	confirmdel = function() {
+		if (confirm("Êtes-vous certain de vouloir effacer l'access ?\n(la carte deviendra innutilisable de facon permanente)\n\n***Note: Vous pouvez d&eacute;sactiver la carte en utilisant le bouton MODIFIER")) {
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	redirect_form = function(url) {
+		$("action_redirect").action = url;
+		ajaxSubmitForm($("action_redirect"));
+	}
+//-->
+</script>
+<br />
+<form id="action_redirect" method="post" onsubmit="return ajaxSubmitForm(this)" action="?popup=1&m=Action_Lieu_BanqueCarteDel">
+<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+<table class="center" style="width:600px;">
+	<tr>
+		<td class="title" colspan="4">
+			Gestion des acc&egrave;s par carte pour le compte: <?=$COMPTE;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name" style="width:10px;"></td>
+		<td class="name" style="width:50px;"># carte</td>
+		<td class="name">Nom</td>
+		<td class="name" style="width:75px;">Statut</td>
+	</tr>
+	<?
+	if(isset($LIST_CARTE)){
+		foreach($LIST_CARTE as $carte){
+		?>
+			<tr>
+				<td class="value" style="width:10px;"><input type="radio" name="cid" value="<?=$carte->getNo();?>" /></td>
+				<td class="value" style="width:75px;"><?=$carte->getNo();?></td>
+				<td class="value" style="text-align:left;"><?=$carte->getNom();?></td>
+				<td class="value" style="text-align:center;">
+					<?
+					if($carte->isValid()){
+					?>
+						Activ&eacute;
+					<?
+					}else{
+					?>
+						Innactive
+					<?
+					}
+					?>
+				</td>
+			</tr>
+		<?
+		}
+	}else{
+	?>
+		<tr>
+			<td class="value" colspan="4">
+				<i>-aucune carte-</i>
+			</td>
+		</tr>
+	<?
+	}
+	?>
+	<tr>
+		<td class="value" colspan="4">
+			<input type="button" class="button" name="new_card" value="Cr&eacute;er un acc&egrave;s" onclick="redirect_form('?popup=1&m=Action_Lieu_BanqueCarteAdd');" />
+			<input type="button" class="button" name="mod_card" value="Modifier" onclick="redirect_form('?popup=1&m=Action_Lieu_BanqueCarteMod');" />
+			<input type="submit" class="button" name="del_card" value="Effacer l'acc&egrave;s" onclick="return confirmdel();" />
+		</td>
+	</tr>
+</table>
+</form>
+<span class="fakelink" onclick="actionLink('Action_Lieu_Banque');">&lt;&lt; Retour</span>
+<br />

@@ -1,0 +1,943 @@
+<script type="text/javascript">
+//<!--
+	var re;
+	var arrSelect = new Array(	<?
+								$go=false;
+								foreach($CARACT as $caract){
+									if($go)
+										echo ',';
+									else
+										$go=true;
+									
+									echo '"' . $caract['id'] . '"';
+								}
+								?>
+						);
+
+var first =0;
+
+isset = function(variable){
+	var ret = (typeof( window[variable] ) == "undefined");
+	if(!ret && first==0){
+		first++;
+		alert('DEBUG: Une variable est manquante.');
+	}
+	return ret;
+}
+
+validate = function(){
+	
+	//Validation du NOM
+	if ($F('nom')==""){
+		alert("Le nom du personnage est vide.");
+		$('nom').focus();
+		return false;
+	}
+	
+	if ($F('nom').length < 4) {
+		alert("Le nom du personnage est trop court.");
+		$('nom').focus();
+		return false;
+	}
+	
+	re = new RegExp("^[-\' çéèôêîA-Za-z]+$");
+	if (!$F('nom').match(re)) {
+		alert("Le nom du personnage comporte des caractères invalides.");
+		$('nom').focus();
+		return false;
+	}
+	
+	
+	//Validation de l'AGE
+	if ($F('age')==""){
+		alert("L'âge du personnage est vide.");
+		$('age').focus();
+		return false;
+	}
+	
+	re = new RegExp("^[0-9]{1,2}$");
+	if (!$F('age').match(re)) {
+		alert("L'âge du personnage comporte des caractères invalides.");
+		$('age').focus();
+		return false;
+	}
+	
+	
+	
+	//Validation de POIDS
+	if ($F('poids')==""){
+		alert("Le poids du personnage est vide.");
+		$('poids').focus();
+		return false;
+	}
+	
+	re = new RegExp("^[0-9]{1,3}$");
+	if (!$F('poids').match(re)) {
+		alert("Le poids du personnage comporte des caractères invalides.");
+		$('poids').focus();
+		return false;
+	}
+	
+	
+	//Validation de la TAILLE
+	
+	
+	//Validation des YEUX
+	if ($F('yeux')==""){
+		alert("La description des yeux du personnage est vide.");
+		$('yeux').focus();
+		return false;
+	}
+	
+	
+	//Validation des CHEVEUX
+	if ($F('cheveux')==""){
+		alert("La description des cheveux du personnage est vide.");
+		$('cheveux').focus();
+		return false;
+	}
+
+	//Validation de la DESCRIPTION
+	if ($F('description')==""){
+		alert("La description du personnage est vide.");
+		$('description').focus();
+		return false;
+	}
+
+	//Validation du BACKGROUND
+	if ($F('background')==""){
+		alert("L'historique (background) du personnage est vide.");
+		$('background').focus();
+		return false;
+	}
+	
+	
+	//Validation des STATS
+	var stat_total=recalculate_stat();
+	if (stat_total != 0)
+	{
+		alert('Le total des stats doit être de ZERO (0). Il est actuellement de ' + stat_total);
+		return false;
+	}
+	
+	//Validation des COMPS
+	var comp_total=recalculate_comp();
+	if (comp_total != <?=INSCRIPTION_NBR_COMP;?>)
+	{
+		alert('Le total des compétences doit être de <?=INSCRIPTION_NBR_COMP;?>. Il est actuellement de ' + comp_total);
+		return false;
+	}
+	
+	//Validation des sélections
+	if(!select_caract())
+	{
+		alert('Le total des signes particuliers doit être de 5 ou plus.');
+		return false;
+	}
+	
+	
+	//Valider qu'il y a une valeur dans les caracts sélectionnés
+	for (var i=0;i<arrSelect.length; i++){
+		if(isset($(arrSelect[i])) && $(arrSelect[i]).checked){
+			if($F('caractDesc_' + arrSelect[i]) == ""){
+				alert("Vous devez entrer une brève description pour chacune de vos caractéristiques.");
+				$('caractDesc_' + arrSelect[i]).focus();
+				return false;
+			}
+		}
+	}	
+	
+	//Requête AJAX pour valider le nom par rapport à la base de donnée (Si déjà utilisé)
+	showplzwait();
+	var myAjax = new Ajax.Request(
+		'?popup=1&m=<?=$CHECK_URL;?>', 
+		{
+			method: 'post', 
+			parameters: 'nom='+$F('nom'), 
+			onComplete: operation_confirm,
+			onFailure: fail
+		});
+	
+	
+	return false;
+}
+
+recalculate_stat = function()
+{
+	var total=0;
+	<?
+	foreach($STATS as $stat)
+	{
+		?>
+		total+=  parseInt(stat_value('stat_<?=$stat['id'];?>'));
+		<?
+	}
+	?>
+	$('stat_total').innerHTML = total;
+	
+	$('stat_total').style.color= (total==0) ? "green" : "red";
+	return total;
+	
+}
+
+stat_value = function(radioName){
+	for(var i=0; i<7;i++)
+		if($(radioName + '' + i).checked)
+			return $(radioName + '' + i).value;
+}
+
+recalculate_comp = function()
+{
+	var total=0;
+	<?
+	foreach($COMPS as $comp)
+	{
+		?>
+		total+=	parseInt(comp_value('comp_<?=$comp['id'];?>'));
+		<?
+	}
+	?>
+	$('comp_total').innerHTML = total;
+	
+	$('comp_total').style.color= (total==<?=INSCRIPTION_NBR_COMP;?>) ? "green" : "red";
+	return total;
+}
+comp_value = function(radioName){
+	for(var i=0; i<=<?=INSCRIPTION_MAX_COMP;?>;i++)
+		if($(radioName + '' + i).checked)
+			return $(radioName + '' + i).value;
+}
+
+
+
+
+
+
+
+
+//Lors d'une sélection, s'assurer que les valeurs sont crédibles
+select_caract = function(){
+	//Mettre normale toutes les sélections avant d'en désactiver
+	for (var i=0;i<arrSelect.length; i++){
+		if(isset($(arrSelect[i]))){
+			$(arrSelect[i]).disabled=false;
+			$('td_'+arrSelect[i]).className="value";
+			$('a_'+arrSelect[i]).style.color="";
+			$('tr_'+arrSelect[i]).style.display="none";
+		}
+	}
+	
+	
+	<? if($GAME_IS_CYBERCITY){ ?>
+		//Effectuer les choix imposés par les valeurs
+		if(parseInt($F('age')) <= 15){
+			activate_signe('4');
+		}else{
+			desactivate_signe('4');
+		}
+		
+		if(parseInt($F('age')) >= 60){
+			activate_signe('5');
+		}else{
+			desactivate_signe('5');
+		}
+		
+		if(parseInt($F('poids')) < 100){
+			desactivate_signe('12');
+		}
+		
+		
+		if(parseInt($F('taillem')) == 2 && parseInt($F('taillecm')) > 50){
+			activate_signe('2');
+		}else{
+			desactivate_signe('2');
+		}
+		
+		if(parseInt($F('taillem')) == 1 && parseInt($F('taillecm')) < 50){
+			activate_signe('3');
+		}else{
+			desactivate_signe('3');
+		}
+		
+		
+		//Combo obligatoire
+		if($('6').checked && $('2').checked){
+			activate_signe('12');
+		}
+	<? } ?>
+	
+	//Désactiver les champs qui sont incompatibles
+	<?
+	if(isset($CARACT_INCOMPATIBLE)){
+		foreach($CARACT_INCOMPATIBLE as $arr){
+			?>
+			selectOpose("<?=$arr['id1'];?>", "<?=$arr['id2'];?>");
+			<?
+		}
+	}
+	?>
+	
+	
+	//Marquer les sélections
+	var total=0;
+	for (var i=0;i<arrSelect.length; i++){
+		if($(arrSelect[i]).checked){
+			activate_signe(arrSelect[i]);
+			total++;
+		}
+	}
+	
+	$('select_total').innerHTML = total;
+	$('select_total').style.color= (total>=5) ? "green" : "red";
+	
+	
+	return (total>=5);
+	
+}
+
+selectOpose = function(a, b){
+	if(isset($(a)) && $(a).checked){
+		activate_signe(a);
+		desactivate_signe(b);
+	}
+	
+	if(isset($(b)) && $(b).checked){
+		activate_signe(b);
+		desactivate_signe(a);
+	}
+}
+
+//Rendre la sélection impossible
+desactivate_signe = function(id){
+	$(id).disabled=true;
+	$(id).checked=false;
+	$('a_'+id).style.color="#333333";
+	$('tr_'+id).style.display="none";
+}
+
+activate_signe = function(id){
+	$(id).checked=true;
+	$('td_'+id).className="name";
+	return Try.these(
+      function() { $('tr_'+id).style.display="table-row"; }, //Pour tout les navigateurs conformes au W3C
+	  function() { $('tr_'+id).style.display="inline"; } //IE semble trop attardé pour supporter table-row.
+	);
+}
+
+
+
+
+
+//Fonction AJAX générales
+fail = function(){
+	$('request_msg').style.display="block";
+	$('request_msgtxt').innerHTML="La requête à échouée, veuillez ré-essayer plus tard.";
+}
+
+showplzwait = function(){
+	location.href="#";
+	$('plzwait1').style.display="block";
+	$('plzwait2').style.display="block";
+	$('request_msgtxt').innerHTML="Veuillez patienter...";
+	$('request_msg').style.display="none";
+}
+hideplzwait = function(){
+	location.href="#form";
+	$('plzwait1').style.display="none";
+	$('plzwait2').style.display="none";
+}
+operation_confirm = function(originalRequest){
+	
+	var rval= originalRequest.responseText;
+	var params=rval.split("|");
+	
+	if (params[0]=="OK"){
+		hideplzwait();
+		$('formulaire').submit();
+	}else{
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+	}
+}
+function heItemAutoHeight(itemNo){
+	var droite = $('droite'+itemNo) ;
+	var gauche = $('gauche'+itemNo) ;
+	var mh = Math.max(gauche.offsetHeight, droite.offsetHeight);
+	droite.style.height=mh+"px";
+	gauche.style.height=mh+"px";
+}
+//-->
+</script>
+<!-- Zone ombragée -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Veuillez patienter...</div>
+			<div id="request_msg" style="display:none;text-align:center;"><br /><a href="#form" onclick="hideplzwait();">- Fermer -</a></div>
+		</td>
+		</tr>
+	</tr>
+	</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="visitor_titre">Création d'un personnage:</div>
+
+<? if(isset($PAGE_HE_MESSAGES)) { ?>
+	<div class="panel member_creerPerso2_refusPanel">
+		<div class="title">Explications sur le refus / Corrections à apporter: </div>
+		<div class="value">
+			<?=$PAGE_HE_MESSAGES;?>
+		</div>
+	</div>
+	<hr class="clearboth" />
+<? } ?>
+
+
+<form id="formulaire" name="form1" method="post" action="?m=<?=$REDIRECT_TO;?>">
+<div class="panel">
+	<div class="title">Fiche d'inscription</div>
+
+
+	
+	<div class="name inscription_name">Nom:<br />
+		<p class="inscription_note">
+			- Le nom sera uniquement affiché pour vous-même. Les autres joueurs ne le verront pas.
+			<br />- Indiquez un nom complet, auquel cas la douane se réserve le droit de le compléter à sa guise.
+			<br />- Caractères permis: a-zA-Z -'<br />
+		</p>
+	</div>
+	<div class="value inscription_value">
+		<input type="text" class="text" id="nom" name="nom" value="<?if(isset($PERSO)){ echo $PERSO['nom']; } ?>" maxlength="25" size="20" />
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Sexe:<br />
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+		<input type="radio" name="sexe" value="m" <? echo ((isset($PERSO) && $PERSO['sexe']=='m') || !isset($PERSO)) ? 'CHECKED' : ''; ?> /> Homme<br />
+		<input type="radio" name="sexe" value="f" <? echo (isset($PERSO) && $PERSO['sexe']=='f') ? 'CHECKED' : ''; ?> /> Femme
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Ethnie:<br />
+	<br />
+	</div>
+	<div class="value inscription_value">
+		<select name="ethnie">
+			<option value="Caucasienne"		<? echo ((isset($PERSO) && $PERSO['ethnie']=='Caucasienne') || !isset($PERSO))		? 'SELECTED' : ''; ?>>Caucasienne</option>
+			<option value="Hispanique"		<? echo (isset($PERSO) && $PERSO['ethnie']=='Hispanique')		? 'SELECTED' : ''; ?>>Hispanique</option>
+			<option value="Afro-americaine"	<? echo (isset($PERSO) && $PERSO['ethnie']=='Afro-americaine')	? 'SELECTED' : ''; ?>>Afro-americaine</option>
+			<option value="Africaine"		<? echo (isset($PERSO) && $PERSO['ethnie']=='Africaine')		? 'SELECTED' : ''; ?>>Africaine</option>
+			<option value="Asiatique"		<? echo (isset($PERSO) && $PERSO['ethnie']=='Asiatique')		? 'SELECTED' : ''; ?>>Asiatique</option>
+			<option value="Orientale"		<? echo (isset($PERSO) && $PERSO['ethnie']=='Orientale')		? 'SELECTED' : ''; ?>>Orientale</option>
+			<option value="Amérindienne"	<? echo (isset($PERSO) && $PERSO['ethnie']=='Amérindienne')		? 'SELECTED' : ''; ?>>Amérindienne</option>
+			<option value="Autre"			<? echo (isset($PERSO) && $PERSO['ethnie']=='Autre')			? 'SELECTED' : ''; ?>>Autre</option>
+		</select>
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Taille:<br />
+		<p class="inscription_note">
+			- La taille doit être au système métrique.
+			<br />- Exemple de format: 1m85<br />
+		</p>
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+		<select name="taillem" id="taillem" size="3" onchange="select_caract();">
+			<option value="0" <? echo (isset($PERSO) && $PERSO['taillem']=='0')	? 'SELECTED' : ''; ?>>0</option>
+			<option value="1" <? echo ((isset($PERSO) && $PERSO['taillem']=='1') || !isset($PERSO))	? 'SELECTED' : ''; ?>>1</option>
+			<option value="2" <? echo (isset($PERSO) && $PERSO['taillem']=='2')	? 'SELECTED' : ''; ?>>2</option>
+		</select>m
+		<select name="taillecm" id="taillecm" size="3" onchange="select_caract();">
+			<option value="00" <? echo (isset($PERSO) && $PERSO['taillecm']=='00')	? 'SELECTED' : ''; ?>>00</option>
+			<option value="05" <? echo (isset($PERSO) && $PERSO['taillecm']=='05')	? 'SELECTED' : ''; ?>>05</option>
+			<option value="10" <? echo (isset($PERSO) && $PERSO['taillecm']=='10')	? 'SELECTED' : ''; ?>>10</option>
+			<option value="15" <? echo (isset($PERSO) && $PERSO['taillecm']=='15')	? 'SELECTED' : ''; ?>>15</option>
+			<option value="20" <? echo (isset($PERSO) && $PERSO['taillecm']=='20')	? 'SELECTED' : ''; ?>>20</option>
+			<option value="25" <? echo (isset($PERSO) && $PERSO['taillecm']=='25')	? 'SELECTED' : ''; ?>>25</option>
+			<option value="30" <? echo (isset($PERSO) && $PERSO['taillecm']=='30')	? 'SELECTED' : ''; ?>>30</option>
+			<option value="35" <? echo (isset($PERSO) && $PERSO['taillecm']=='35')	? 'SELECTED' : ''; ?>>35</option>
+			<option value="40" <? echo (isset($PERSO) && $PERSO['taillecm']=='40')	? 'SELECTED' : ''; ?>>40</option>
+			<option value="45" <? echo (isset($PERSO) && $PERSO['taillecm']=='45')	? 'SELECTED' : ''; ?>>45</option>
+			<option value="50" <? echo (isset($PERSO) && $PERSO['taillecm']=='50')	? 'SELECTED' : ''; ?>>50</option>
+			<option value="55" <? echo (isset($PERSO) && $PERSO['taillecm']=='55')	? 'SELECTED' : ''; ?>>55</option>
+			<option value="60" <? echo (isset($PERSO) && $PERSO['taillecm']=='60')	? 'SELECTED' : ''; ?>>60</option>
+			<option value="65" <? echo (isset($PERSO) && $PERSO['taillecm']=='65')	? 'SELECTED' : ''; ?>>65</option>
+			<option value="70" <? echo (isset($PERSO) && $PERSO['taillecm']=='70')	? 'SELECTED' : ''; ?>>70</option>
+			<option value="75" <? echo (isset($PERSO) && $PERSO['taillecm']=='75')	? 'SELECTED' : ''; ?>>75</option>
+			<option value="80" <? echo ((isset($PERSO) && $PERSO['taillecm']=='80') || !isset($PERSO))	? 'SELECTED' : ''; ?>>80</option>
+			<option value="85" <? echo (isset($PERSO) && $PERSO['taillecm']=='85')	? 'SELECTED' : ''; ?>>85</option>
+			<option value="90" <? echo (isset($PERSO) && $PERSO['taillecm']=='90')	? 'SELECTED' : ''; ?>>90</option>
+			<option value="95" <? echo (isset($PERSO) && $PERSO['taillecm']=='95')	? 'SELECTED' : ''; ?>>95</option>
+		</select>cm
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Poids:<br />
+		<p class="inscription_note">
+			- Caractères permis: 0-9<br />
+		</p>
+	</div>
+	<div class="value inscription_value">
+		<input type="text" class="text" id="poids" name="poids" value="<?if(isset($PERSO)){ echo $PERSO['poids']; } ?>" maxlength="3" size="3" onchange="select_caract();" /> Kg
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Âge:<br />
+		<p class="inscription_note">
+			- L'âge doit être réaliste, et vous devrez jouer en fonction de ce que l'âge implique.
+			<br />- Caractères permis: 0-9<br />
+		</p>
+	</div>
+	<div class="value inscription_value">
+		<input type="text" class="text" id="age" name="age" value="<?if(isset($PERSO)){ echo $PERSO['age']; } ?>" maxlength="2" size="3" onchange="select_caract();" /> ans
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Yeux:<br />
+		<p class="inscription_note">
+			- Courte description en une ligne des yeux (Max 100 chr).
+			
+		</p>
+	</div>
+	<div class="value inscription_value">
+		<input type="text" class="text" id="yeux" name="yeux" value="<?if(isset($PERSO)){ echo $PERSO['yeux']; } ?>" maxlength="100" size="40" />
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Cheveux:<br />
+		<p class="inscription_note">
+			- Courte description en une ligne des cheveux (Max 100 chr).
+		</p>
+	</div>
+	<div class="value inscription_value">
+		<input type="text" class="text" id="cheveux" name="cheveux" value="<?if(isset($PERSO)){ echo $PERSO['cheveux']; } ?>" maxlength="100" size="40" />
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+
+<?
+$arrLangues = array(
+				'af','al','ge','am','en','ar','an','az','ba',
+				'bl','bo','bu','ca','cc','cm','si','ko','cr',
+				'da','sp','es','fa','fi','fl','fr','ir','we',
+				'gn','gk','he','hi','hu','in','ic','it','ja',
+				'ka','kh','ki','lo','la','li','lu','ma','my',
+				'ml','mo','mn','du','ne','no','ur','ps','pl',
+				'po','ro','ru','sa','se','sl','sn','sw','tj',
+				'tm','cz','th','tu','uk','yi'
+			);
+$arrMaitrise = array('cu','pe','co','bi','lm');
+?>
+	
+	<div class="name inscription_name">Langue parlée:<br />
+		<p class="inscription_note">
+			- Peu-importe la langue choisie, celle qui sera réellement parlée dans le jeu sera toujours le français.
+			<br />- La langue officielle par défaut est l'anglais.
+		</p>
+		<br />
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+		<table>
+		<tr>
+			<td class="title" colspan="2">
+				Langue officielle
+			</td>
+		</tr>
+		<tr>
+			<td class="value">
+				Anglais
+			</td>
+			<td class="value">
+				<select name="lng1_lvl">
+					<?			
+					foreach($arrMaitrise as $key)
+					{
+						?>
+						<option value="<?=$key;?>" <? echo (isset($PERSO) && $PERSO['lng1_lvl']==$key)	? 'SELECTED' : ''; ?>><?=ucwords(Member_Perso::convCodeMaitriseLngToTxt($key));?></option>
+						<?
+					}
+					?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;<!--Spacer--></td>
+		</tr>
+		<tr>
+			<td class="title" colspan="2">
+				Langue seconde
+			</td>
+		</tr>
+		<tr>
+			<td class="value">
+				<select name="lng2">
+					<option value="--" style="font-style:italic;" <? echo (isset($PERSO) && $PERSO['lng2']=='--')	? 'SELECTED' : ''; ?>>- aucune -</option>
+					<?			
+					foreach($arrLangues as $key)
+					{
+						?>
+						<option value="<?=$key;?>" <? echo (isset($PERSO) && $PERSO['lng2']==$key)	? 'SELECTED' : ''; ?>><?=ucwords(Member_Perso::convCodeLngToTxt($key));?></option>
+						<?
+					}
+					?>
+				</select>
+			</td>
+			<td class="value">
+				<select name="lng2_lvl">
+					<?			
+					foreach($arrMaitrise as $key)
+					{
+						?>
+						<option value="<?=$key;?>" <? echo (isset($PERSO) && $PERSO['lng2_lvl']==$key)	? 'SELECTED' : ''; ?>><?=ucwords(Member_Perso::convCodeMaitriseLngToTxt($key));?></option>
+						<?
+					}
+					?>
+				</select>
+			</td>
+		</tr>
+		</table>
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Statistiques:<br />
+		<p class="inscription_note">
+			- Les stats varient en fonction des actions de votre personnage.
+			<br />- La somme de toutes les stats doit être et restera à zero.
+			<br />- Vous pouvez sélectionner un nombre personnalisé de points d'expériences.
+			<br />- Laisser toutes les statistiques à zéro est tout à fait acceptable, voir recommandé.
+		</p>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+		<table>
+		<tr>
+			<td class="name">&nbsp;</td>
+			<td class="name" style="text-align:center;font-size:15px;">-75</td>
+			<td class="name" style="text-align:center;font-size:14px;">-50</td>
+			<td class="name" style="text-align:center;font-size:13px;">-25</td>
+			<td class="name" style="text-align:center;font-size:12px;">0</td>
+			<td class="name" style="text-align:center;font-size:13px;">+25</td>
+			<td class="name" style="text-align:center;font-size:14px;">+50</td>
+			<td class="name" style="text-align:center;font-size:15px;">+75</td>
+		</tr>
+		<?
+		foreach($STATS as $stat)
+		{
+			?>
+			<tr>
+				<td class="name">
+					<span id="stat_<?=$stat['id'];?>" onmousemove="infobulle(this, event);">
+						<?=$stat['nom'];?>
+					</span>
+					<div id="ib_stat_<?=$stat['id'];?>" class="infobulle" style="width:300px;">
+						<div class="title">Description</div>
+						<?=$stat['description'];?>
+					</div>
+				</td>
+				<td class="value" style="text-align:center;background-color:#660000;"><input type="radio" id="stat_<?=$stat['id'];?>0" name="stat_<?=$stat['id'];?>" value="-75" onclick="recalculate_stat();" <?if($stat['xp']==-75){ echo 'checked="checked"'; } ?> /></td>
+				<td class="value" style="text-align:center;background-color:#551100;"><input type="radio" id="stat_<?=$stat['id'];?>1" name="stat_<?=$stat['id'];?>" value="-50" onclick="recalculate_stat();" <?if($stat['xp']==-50){ echo 'checked="checked"'; } ?> /></td>
+				<td class="value" style="text-align:center;background-color:#442200;"><input type="radio" id="stat_<?=$stat['id'];?>2" name="stat_<?=$stat['id'];?>" value="-25" onclick="recalculate_stat();" <?if($stat['xp']==-25){ echo 'checked="checked"'; } ?> /></td>
+				<td class="value" style="text-align:center;background-color:#333300;"><input type="radio" id="stat_<?=$stat['id'];?>3" name="stat_<?=$stat['id'];?>" value="0" onclick="recalculate_stat();" <?if($stat['xp']==0){ echo 'checked="checked"'; } ?> /></td>
+				<td class="value" style="text-align:center;background-color:#224400;"><input type="radio" id="stat_<?=$stat['id'];?>4" name="stat_<?=$stat['id'];?>" value="25" onclick="recalculate_stat();" <?if($stat['xp']==25){ echo 'checked="checked"'; } ?> /></td>
+				<td class="value" style="text-align:center;background-color:#115500;"><input type="radio" id="stat_<?=$stat['id'];?>5" name="stat_<?=$stat['id'];?>" value="50" onclick="recalculate_stat();" <?if($stat['xp']==50){ echo 'checked="checked"'; } ?> /></td>
+				<td class="value" style="text-align:center;background-color:#006600;"><input type="radio" id="stat_<?=$stat['id'];?>6" name="stat_<?=$stat['id'];?>" value="75" onclick="recalculate_stat();" <?if($stat['xp']==75){ echo 'checked="checked"'; } ?> /></td>
+			</tr>
+			<?
+		}
+		?>
+		<tr>
+			<td colspan="8" style="text-align:center;">
+				<hr />
+				Total:
+				<span id="stat_total" style="font-weight:bold;color:green;">0</span>
+				<hr />
+			</td>
+		</tr>
+		</table>
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Description physique:<br />
+				<p class="inscription_note">
+					- Minimum 10 lignes.
+					<br />- Entrer ici d'autres détails afin de compléter l'apparence physique de votre personnage.
+					<br />- Votre perso doit être humain, nous sommes encore sur la Terre, et pas en l'an 4000, donc soyez réaliste.
+					<br />- Ne mentionnez pas le nom de votre personnage dans cette description.
+					<br />- C'est une description <u>physique</u>, c'est à dire des choses qu'il est possible de constater en vous croisant dans la rue sans jamais vous avoir parlé.
+					<br />- Votre description ne doit pas aller à l'encontre des caratéristiques que vous sélectionnerez plus bas.
+					<br />- Cette description est celle affichée aux joueurs, vous pouvez y intégrer vos caractéristiques, puisque ces dernières ne sont pas automatiquement affichées aux autres joueurs.
+				</p>
+				<br />
+				<br />
+	</div>
+	<div class="value inscription_value">
+		<textarea name="description" id="description" cols="70" rows="10" tabindex="1"><?if(isset($PERSO)){ echo $PERSO['description']; } ?></textarea>
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Caractéristiques particulières:<br />
+		<p class="inscription_note">
+			- Vous devez en sélectionner au minimum 5.
+			<br />- Ces distinctions ne sont pas nécéssairement des qualités, des défauts. Tout dépendra de votre facon de les jouers.
+			<br />- Pour chaque caractéristiques, vous devez inscrire une brève description de comment cette dernière affectera votre personnage.
+			<br />- Les exemples inscrits ne sont qu'à titre indicatif: vous êtes encouragé à faire preuve d'imagination et à inventer vos propres descriptions.
+			<br />- Lors de la sélection de certains champs, d'autres, incompatibles avec votre sélection se désactivent. Comme les combinaisons possibles sont très grandes, vous devez rester crédibles dans vos sélections même si elles ne se désactivent pas automatiquement.
+		</p>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+		<div style="width:400px;height:400px;overflow-y:scroll;">
+			<table>
+			<? foreach($CAT as $cat){ ?>
+				<tr>
+					<td class="title" colspan="2">
+						<?=$cat['nom'];?>
+					</td>
+				</tr>
+				<? foreach($CARACT as $caract){
+					if($caract['catid'] == $cat['id']){ ?>
+					
+						<tr>
+							<td class="name"><input type="checkbox" name="arrCaract[]" id="<?=$caract['id'];?>" value="<?=$caract['id'];?>" onclick="select_caract();" <?if(isset($PERSO) && isset($PERSO_CARACT[$caract['id']])){ echo 'CHECKED'; } ?> /></td>
+							<td id="td_<?=$caract['id'];?>" class="value" colspan="1">
+								<span id="a_<?=$caract['id'];?>" onmousemove="infobulle(this, event);">
+									<?=$caract['nom'];?>
+								</span>
+								<div id="ib_a_<?=$caract['id'];?>" class="infobulle" style="width:300px;">
+									<div class="title"><u>Exemple</u> de répercutions en jeu</div>
+									<?=$caract['desc'];?>
+								</div>
+							</td>
+						
+						</tr>
+						<tr id="tr_<?=$caract['id'];?>">
+							<td class="name">\-&gt;</td>
+							<td colspan="2">
+								<textarea id="caractDesc_<?=$caract['id'];?>" name="caractDesc_<?=$caract['id'];?>" style="width:300px;height:50px;"><?if(isset($PERSO) && isset($PERSO_CARACT[$caract['id']])){ echo $PERSO_CARACT[$caract['id']]; } ?></textarea>
+							</tr>
+						</tr>
+				
+				<? 	}
+				}
+			} ?>
+			</table>
+		</div>
+		<table style="width:400px;">
+		<tr>
+			<td colspan="2" style="text-align:center;">
+				<hr />
+				Total:
+				<span id="select_total" style="font-weight:bold;color:red;">0</span>
+				<hr />
+			</td>
+		</tr>
+		</table>
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Compétences:<br />
+		<p class="inscription_note">
+			- Vous attribuez un total de <?=INSCRIPTION_NBR_COMP;?> niveaux.
+			<br />- Ces compétences représentes les habilleté de votre personnage au moment de votre entré en jeu.
+			<br />- Ce ne sont que des niveaux de départ pour vous aider à débuter. Votre personnage pourra très bien évoluer dans n'importe quelle compétence.
+		</p>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	</div>
+	<div class="value inscription_value">
+		<div style="width:400px;height:400px;overflow-y:scroll;">
+			<table>
+			<tr>
+				<td class="name">&nbsp;</td>
+				<?
+				$fontsize = 13;
+				for($i=0;$i<=INSCRIPTION_MAX_COMP;$i++)
+				{
+					?>
+					<td class="name" style="text-align:center;font-size:<?=($fontsize+$i);?>px;"><?=$i;?></td>
+					<?
+				}
+				?>
+			</tr>
+			<?
+			foreach($COMPS as $comp)
+			{
+				?>
+				<tr>
+					<td class="name">
+						<span id="comp_<?=$comp['id'];?>" onmousemove="infobulle(this, event);">
+							<?=$comp['nom'];?>
+						</span>
+					</td>
+					<div id="ib_comp_<?=$comp['id'];?>" class="infobulle" style="width:300px;">
+						<div class="title"><u>Exemple</u> de répercutions en jeu</div>
+						<?=$comp['description'];?>
+					</div>
+					<?
+					$max = 66;
+					$gradation = floor($max/(INSCRIPTION_MAX_COMP+1));
+					for($i=0;$i<=INSCRIPTION_MAX_COMP;$i++)
+					{
+						$red = $max - ($gradation*($i+1));
+						if(strlen($red)==1)
+							$red = '0' . $red;
+						$color = '#' . $red . '6600';
+						?>
+						<td class="value" style="text-align:center;background-color:<?=$color;?>;"><input type="radio" id="comp_<?=$comp['id'];?><?=$i;?>" name="comp_<?=$comp['id'];?>" value="<?=$i;?>" onclick="recalculate_comp();" <?if($comp['lvl']==$i){ echo 'checked="checked"'; } ?> /></td>
+						<?
+					}
+					?>
+				</tr>
+				<?
+			}
+			?>
+			</table>
+		</div>
+		<table style="width:400px;">
+		<tr>
+			<td colspan="2" style="text-align:center;">
+				<hr />
+				Total:
+				<span id="comp_total" style="font-weight:bold;color:red;">0</span>
+				<hr />
+			</td>
+		</tr>
+		</table>
+	</div>
+	<div class="clearboth"></div>
+	
+
+	
+	<div class="name inscription_name">Historique du passé de votre personnage:<br />
+				<p class="inscription_note">
+					- Minimum 20 lignes.
+					<br />- L'historique permet de vérifier la qualité de votre Role-Play. Cela permet aussi de donner une base plus solide à votre personnage.
+					<br />- Les maîtres de jeu peuvent se servir de votre background pour paufiner le personnage.
+					<br />- Tout historique allant à l'encontre du background du jeu entrainera le refus de votre personnage.
+					<br />- Votre historique ne doit pas aller à l'encontre de vos caratéristiques sélectionnées.
+				</p>
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+	</div>
+	<div class="value inscription_value">
+		<textarea name="background" id="background" cols="70" rows="20" tabindex="1"><?if(isset($PERSO)){ echo $PERSO['background']; } ?></textarea>
+	</div>
+	<div class="clearboth"></div>
+
+
+	
+	<div class="send">
+		<input type="hidden" id="SaveType" name="SaveType" value="" />
+		<input type="button" class="button" name="save" onclick="$('SaveType').value='save';validate();" value="Enregistrer le brouillon" style="width:250px;" />
+		<input type="button" class="button" name="go" onclick="$('SaveType').value='go';validate();" value="Soumettre le personnage à la validation" style="width:250px;" />
+	</div>
+	
+
+</div>
+</form>
+
+<script type="text/javascript">
+//<!--
+	select_caract();
+	recalculate_stat();
+	recalculate_comp();
+//-->
+</script>

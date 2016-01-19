@@ -1,0 +1,47 @@
+
+<br />
+<form id="action_casierClef" method="post" action="?popup=1&m=Action_Lieu_CasierInv" onsubmit="return ajaxSubmitForm(this);">
+<input type="hidden" name="id_casier" value="<?=$ID_CASIER;?>" />
+
+<? if(isset($WRONGPASS)) { ?>
+	<font color="red">/!\ La cl&eacute; que vous avez essay&eacute; n'ouvre pas la serrure /!\</font>
+<? } ?>
+
+<table class="subcenter">
+	<tr>
+		<td class="title" colspan="2">S&eacute;lectionnez la cl&eacute; que vous d&eacute;sirez utilisez</td>
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">Inscription sur la cl&eacute;</td>
+	</tr>
+	<?
+	if (isset($CLEFS)){
+		foreach($CLEFS as $cle){
+			?>
+			<tr>
+				<td class="value" style="width:25px;">
+					<input type='radio' name='clef' value='<?=$cle->getInvId();?>' />
+				</td>
+				<td class="value" style="width:25px;">
+					<?=$cle->getNom();?>
+				</td>
+			</tr>
+			<?
+		} 
+	}else{
+		?>
+		<tr><td colspan="2" style="text-align:center;"><i>- Aucune cl&eacute; dans votre inventaire -</i></td></tr>
+		<?
+	}
+	?>
+	
+	<tr>
+		<td colspan="2" class="send">
+			<input type="submit" class="button" name="open" value="Utiliser cette cl&eacute;" />
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+<br />

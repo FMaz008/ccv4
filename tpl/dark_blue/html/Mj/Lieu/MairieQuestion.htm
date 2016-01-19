@@ -1,0 +1,48 @@
+<form name="form1" action="" method="post">
+	<table class="center">
+	<tr>
+		<td class="title">Liste des questions de l'examen de la mairie</td>
+	</tr>
+	</table>
+	
+	
+	<?
+	foreach($SECTIONS as $section){
+		?>
+		<br />
+		<hr />
+		<strong><?=$section['section'];?></strong>
+		<hr />
+		
+		<?
+		foreach($section['questions'] as $question){
+			?>
+			<table class="center">
+			<tr>
+				<td class="name" style="width:10px;" rowspan="2">
+					<input type="radio" name="questionId" value="<?=$question['id'];?>" />
+				</td>
+				<td class="name" style="width:25px;">Q</td>
+				<td class="value" style="text-align:left;"><?=$question['question'];?></td>
+			</tr>
+			<tr>
+				<td class="name" style="width:25px;">R</td>
+				<td class="value" style="text-align:left;"><?=$question['reponse'];?></td>
+			</tr>
+			</table>
+			<? 
+		}
+	}
+	?>
+	
+	<table class="center">
+	<tr>
+		<td class="send">
+			<input type="submit" class="button" name="add" value="Ajouter"  onClick="document.forms['form1'].action='?mj=Lieu_MairieQuestionAdd';"/>
+			<input type="submit" class="button" name="mod" value="Modifier"  onClick="document.forms['form1'].action='?mj=Lieu_MairieQuestionMod';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_MairieQuestionDel';return confirm('Voulez-vous vraiment supprimer la sélection ?');" />
+		</td>
+	</tr>
+</table>
+
+</form>

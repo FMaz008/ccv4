@@ -1,0 +1,148 @@
+<script type="text/javascript">
+//<!--
+	var arrLieux = Array();
+	var tmp_type;
+	gosearch = function (type)
+	{
+		tmp_type = type;
+		var myAjax = new Ajax.Request(
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat='+type+'&search='+$(type).search.value,
+				onComplete: gosearch_confirm
+			});
+	}
+	
+	gosearch_confirm = function (originalRequest)
+	{
+		var rval= originalRequest.responseText;
+		$("lieu_results").innerHTML = rval;
+	}
+	
+	
+	//Cette fonction est apellé automatiquement lors d'un click sur un résultat de la recherche AJAX
+	lieuSelect = function (id, ntech, nom)
+	{
+		addLieu(id, ntech);
+	}
+	
+	
+	
+	
+	//Ajouter un lieu au tableau des lieux
+	addLieu = function (id, nom)
+	{
+		if(searchLieu(id)===false)
+		{
+			arrLieux.push(id);
+			
+			//Créer le div
+			var elem=document.createElement('div');
+			with (elem)
+			{
+				style.display = "block";
+				innerHTML = nom + " ";
+			}
+			elem.id = "lieux_" + id;
+			
+			//Créer le lien de suppression
+			var span=document.createElement('span');
+			with (span)
+			{
+				className="fakelink";
+				style.fontSize="10px";
+				innerHTML = "(Supprimer)";
+			}
+			span.onclick = Function("remLieu("+id+")");
+			
+			//Joindre les deux éléments
+			elem.appendChild(span);
+			$("listLieux").appendChild(elem);
+			
+			//Mettre a jour le champs dans le formulaire
+			setUrlLieux();
+		}
+	}
+	
+	//Supprimer un lieu
+	remLieu = function (id)
+	{
+		//Rechercher si l'ID existe déjà
+		var i = searchLieu(id);
+		if(i !== false)
+		{
+			//Supprimer l'entré du tableau
+			arrLieux.splice(i,1);
+			
+			//Supprimée l'entrée visible
+			$("listLieux").removeChild($("lieux_" + id));
+			
+			//Mettre a jour le champs dans le formulaire
+			setUrlLieux();
+		}
+	}
+
+	//Rechercher si un lieu est présent
+	searchLieu = function (id)
+	{
+		for(var i=0; i<arrLieux.length; i++)
+			if(arrLieux[i] == id)
+				return i;
+		return false;
+	}
+	
+	//Retourner un string URL de la liste des lieux
+	setUrlLieux = function()
+	{
+		var val;
+		for(var i=0; i<arrLieux.length; i++)
+			if(i===0)
+				val = arrLieux[i];
+			else
+				val += "," + arrLieux[i];
+		$('arrLieux').value = val;
+	}
+	
+	
+//-->	
+</script>
+
+<? if(isset($STATUS_MSG)){ echo $STATUS_MSG; } ?>
+
+
+
+<table class="center">
+	<tr>
+		<td class="title" colspan="2">Envoyer un message à un ou plusieurs lieux</td>
+	</tr>
+	<tr>
+		<td class="value" style="vertical-align:top;">
+			<form method="post" id="Lieu_Sendmsg" onsubmit="gosearch(this.id);return false;">
+				N. tech.: <input type="text" class="text" name="search" style="width:100px;" />
+						<input type="submit" class="button" name="go" value="Go" style="width:25px;" />
+	
+				<div id="lieu_results" style="height:30em;overflow:auto;"></div>
+			</form>
+		</td>
+		<td class="value">
+		<form method="post" action="?mj=Lieu_Sendmsg">
+			<input type="hidden" id="arrLieux" name="arrLieux" value="" />
+			<table>
+			<tr>
+				<td class="value">
+					À: <div id="listLieux" style="height:7em;overflow:auto;"></div>
+					<br />
+					De <input type="text" class="text" name="from" value="<?=$MJ_NOM;?>" /><br />
+					<textarea name="msg" style="width:400px;height:200px;"></textarea>
+				</td>
+			</tr><tr>
+				<td class="send">
+					<input class="button" type="submit" name="send" value="Envoyer le message" />
+				</td>
+			</tr>
+			</table>
+		</form>
+	</tr>
+</table>
+

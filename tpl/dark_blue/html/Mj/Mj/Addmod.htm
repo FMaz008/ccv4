@@ -1,0 +1,96 @@
+<script type="text/javascript">
+	function Changer_Compte(){
+		var compte=prompt('À quel compte souhaitez-vous associer cet accès MJ ?','');
+		if(compte!=""){
+			var myAjax = new Ajax.Updater(
+				'div_compte', 
+				'?mj=Search&popup=1', 
+				{
+					method: 'post', 
+					parameters: 'searchWhat=p_modifier_compte&search='+compte
+				});
+		}
+	}
+	
+	function Changer_Compte2(id, compte){
+		$('div_compte').innerHTML = compte+' (<a href="#" onclick="Changer_Compte();">Changer</a>)\n<input type="hidden" name="userId" value="'+id+'" />';
+	}
+</script>
+
+<br />
+<a href="?mj=Mj_List">&lt;&lt; Retour à la liste des MJ</a><br />
+<form method="post" action="?mj=Mj_<?=$SUBMITNAME;?>">
+<table class="center">
+	
+	<tr>
+		<td class="title" colspan="6"><?=$ACTIONTYPETXT;?> l'accès MJ</td>
+	</tr>
+
+	<? if( $SHOWID == true ){ ?>
+	<tr>
+		<td class="name">ID de l'accès</td>
+		<td class="value"><input type="hidden" name="id" value="<?=$MJ['id'];?>" /><?=$MJ['id'];?></td>
+	</tr>
+	<? } ?>
+
+	<td class="name">Associé au compte :</td>
+	<td class="value">
+		<div id="div_compte" style="height:6em;overflow:auto;">
+			<? if(isset($MJ['user'])){ ?>
+				<?=$MJ['user'];?> (<a href="#" onclick="Changer_Compte();">Changer</a>)
+			<? }else{ ?>
+				<a href="#" onclick="Changer_Compte();">Ajouter</a>
+			<? } ?>
+			<input type="hidden" name="userId" value="<?=$MJ['userId'];?>" />
+		</div>
+	</td>
+
+	<tr>
+		<td class="name">Nom du MJ :</td>
+		<td class="value"><input type="text" class="text" name="nom" value="<?=$MJ['nom'];?>" maxlength="25" /></td>
+	</tr>
+	
+	<tr>
+		<td class="name">Poste :</td>
+		<td class="value"><input type="text" class="text" name="poste" value="<?=$MJ['poste'];?>" maxlength="100" /></td>
+	</tr>
+	
+	<? if($SHOWEMAILFORWARDER){ ?>
+		<tr>
+			<td class="name">Email :</td>
+			<td class="value">
+				<input type="text" class="text" name="email_prefix" value="<?=$MJ['email_prefix'];?>" maxlength="25" />
+				@<?=$SITE_DOMAIN;?>
+			</td>
+		</tr>
+	<? }else{ ?>
+		<input type="hidden" name="email_prefix" value="" />
+	<? } ?>
+	
+	<tr>
+		<td class="name">Présent :</td>
+		<td class="value">
+			<input type="radio" name="present" value="1" <?if($MJ['present']==1){ echo "CHECKED"; }?> /> Présent<br />
+			<input type="radio" name="present" value="0" <?if($MJ['present']!=1){ echo "CHECKED"; }?> /> Absent
+		</td>
+	</tr>
+
+	<tr>
+		<td class="name">Accès :</td>
+		<td class="value" style="text-align:left;">
+			<input type="checkbox" name="ax_hj" value="1" <?if($MJ['ax_hj']==1){ echo "CHECKED"; }?> />Accès HJ<br />
+			<input type="checkbox" name="ax_ej" value="1" <?if($MJ['ax_ej']==1){ echo "CHECKED"; }?> />Accès IJ<br />
+			<input type="checkbox" name="ax_ppa" value="1" <?if($MJ['ax_ppa']==1){ echo "CHECKED"; }?> />Accès PPA<br />
+			<input type="checkbox" name="ax_dev" value="1" <?if($MJ['ax_dev']==1){ echo "CHECKED"; }?> />Accès Développeur<br />
+			<input type="checkbox" name="ax_admin" value="1" <?if($MJ['ax_admin']==1){ echo "CHECKED"; }?> />ADMINISTRATEUR<br />
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2" class="send">
+			<input type="submit" class="button" name="save" value="Enregistrer" />
+		</td>
+	</tr>
+</table>
+</form>
+	

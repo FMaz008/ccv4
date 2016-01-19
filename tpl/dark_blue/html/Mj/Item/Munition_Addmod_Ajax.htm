@@ -1,0 +1,12 @@
+<select name="<?=$MUNITIONS_IDX;?>_munitionid_add">
+	<option value="">- aucune -</option>
+	<?
+    foreach($MUNITIONS as $mun)
+    {
+        ?>
+		<option value="<?=$mun['db_id'];?>"><?=$mun['db_nom'];?></option>
+        <?
+    }
+    ?>
+</select>
+<div id="add_munition_<?=$MUNITIONS_IDX;?>"></div>

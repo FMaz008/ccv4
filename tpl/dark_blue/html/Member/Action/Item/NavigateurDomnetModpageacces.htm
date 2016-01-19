@@ -1,0 +1,92 @@
+TESTESTES<script type="text/javascript">
+//<!--
+	saveAccess = function(id){
+		
+		//Requête AJAX pour Creer la page
+		showplzwait();
+		var myAjax = new Ajax.Request(
+				'?popup=1&m=Action_Item_SitePageaccessmod', 
+				{
+					method: 'post', 
+					parameters: '&userid='+id+
+								'&no='+<?=$PAGE->getId();?>+
+								'&adddel=' + $('ax_'+id).checked+
+								'&user='+$F('header_user')+
+								'&pass='+$F('header_pass'), 
+					onComplete: operation_confirm,
+					onFailure: fail
+				});
+		return false;
+	}
+
+	//Fonction generales
+	fail = function(){
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML="La requête &agrave; &eacute;chou&eacute;e, veuillez r&eacute;-essayer plus tard.";
+	}
+
+	showplzwait = function(){
+		$('plzwait1').style.display="block";
+		$('plzwait2').style.display="block";
+		$('request_msgtxt').innerHTML="Veuillez patienter...";
+		$('request_msg').style.display="none";
+	}
+	hideplzwait = function(){
+		$('plzwait1').style.display="none";
+		$('plzwait2').style.display="none";
+	}
+	operation_confirm = function(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		if (params[0]=="OK"){
+			hideplzwait();
+		}else{
+			$('request_msg').style.display="block";
+			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+		}
+	}
+//-->
+</script>
+<!-- Zone ombragée -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Veuillez patienter...</div>
+			<div id="request_msg" style="display:none;text-align:center;"><br /><a href="#" onclick="hideplzwait();">- Fermer -</a></div>
+		</td>
+		</tr>
+	</tr>
+	</table>
+</div>
+
+
+
+<form id="Action_Item_Sitepageaccessmod" action="#" onsubmit="return ajaxSubmitForm(this);">
+	
+	<center>
+		<strong>Modifier les acces à la page</strong>
+	</center>
+	<br />
+	<table class="center" style="width:200px;">
+	<tr>
+		<td class="name"></td>
+		<td class="name">User</td>
+	</tr>
+	
+	<?
+	foreach($ACCES as $ax)
+	{
+		?>
+		<tr>
+			<td class="value"><input type="checkbox" id="ax_<?=$ax['obj']->getId();?>" <? if($ax['ax'])	{ echo 'checked="checked" '; } ?> onclick="saveAccess(<?=$ax['obj']->getId();?>);"/></td>
+			<td class="value"><?=$ax['obj']->getUser();?></td>
+		</tr>
+		<?
+	}
+	?>
+	</table>
+</form>

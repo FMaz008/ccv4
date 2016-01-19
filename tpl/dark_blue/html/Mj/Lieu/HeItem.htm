@@ -1,0 +1,24 @@
+<div class="he_item">
+	<div class="he_leftbar" id="gauche<?=$MSG->getId();?>">
+		<?=$MSG->getDateTxt();?>
+		<br />De:
+		<? foreach($MSG->getFrom() as $from){ ?>
+			<br /><?=$from['nom'];?>
+		<? } ?>
+		<br />A:
+		<? foreach($MSG->getTo() as $to){ ?>
+			<br /><?=$to['nom'];?>
+		<? } ?>
+	</div>
+
+	<div class="he_rightbar" id="droite<?=$MSG->getId();?>">
+		<?=$MSG->getMsg();?>
+	</div>
+	<div class="clearboth"></div>
+</div>
+
+<script type="text/javascript">
+<!--
+	heItemAutoHeight(<?=$MSG->getId();?>);
+-->
+</script>

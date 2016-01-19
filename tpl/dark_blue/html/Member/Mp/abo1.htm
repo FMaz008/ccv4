@@ -1,0 +1,172 @@
+<script type="text/javascript">
+//<!--
+	
+	
+	//Fonction AJAX générales
+	function fail(){
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML="La requête à échouée, veuillez ré-essayer plus tard.";
+	}
+	
+	function showplzwait(){
+		$('plzwait1').style.display="block";
+		$('plzwait2').style.display="block";
+		$('request_msgtxt').innerHTML="Veuillez patienter...";
+		$('request_msg').style.display="none";
+	}
+	function hideplzwait(){
+		$('plzwait1').style.display="none";
+		$('plzwait2').style.display="none";
+	}
+
+
+
+
+
+	function fct_step1(who){
+		if(who=="me"){
+			$('panel_searchUser').style.display='none';
+			$('userId').value='<?=$ACCOUNT_ID;?>';
+			$('userName').value='<?=$ACCOUNT_USER;?>';
+			$('userMp').value='<?=$MP_LVL;?>';
+		}else{
+			$('panel_searchUser').style.display='inline';
+			$('userId').value='';
+			$('userName').value='';
+			$('userMp').value='';
+		}
+	}
+	
+	function fct_searchUser(){
+	
+		//Requête AJAX pour valider si l'utilisateur existe
+		showplzwait();
+		var myAjax = new Ajax.Request(
+			'?popup=1&m=Mp_ConfirmUser',
+			{
+				method: 'post',
+				parameters: 'user='+$F('panel_userName'),
+				onComplete: operation_confirm,
+				onFailure: fail
+			});
+	}
+	
+	function fct_changerSearch(){
+		$('panel_searchUser').style.display='inline';
+		$('panel_foundUser').style.display='none';
+		$('userId').value='';
+		$('userName').value='';
+	}
+	
+	function operation_confirm(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		
+		if (params[0]=="OK"){
+			hideplzwait();
+			$('userId').value=decodeURIComponent(params[1]);
+			$('userName').value=decodeURIComponent(params[2]);
+			$('panel_searchUser').style.display='none';
+			$('panel_foundUser').style.display='inline';
+			$('panel_foundUserName').innerHTML = $F('userName');
+		}else{
+			$('userId').value='';
+			$('userName').value='';
+			$('request_msg').style.display="block";
+			$('request_msgtxt').innerHTML=params[1];
+		}
+	}
+	
+	
+	function validate(){
+		if($F('userId') == ''){
+			alert("Vous devez spécifier un utilisateur valide.");
+			return false;
+		}
+		return true;
+	}
+
+//-->
+</script>
+<!-- Zone ombragée -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Veuillez patienter...</div>
+			<div id="request_msg" style="text-align:center;"></div>
+			<div style="text-align:center;"><br /><a href="#form" onclick="hideplzwait();">- Fermer -</a></div>
+		</td>
+		</tr>
+	</tr>
+	</table>
+</div>
+
+
+
+
+
+
+<?if(false){?>
+
+<hr />
+<table id="abo_progress">
+	<tr>
+		<td class="name">
+			Étape 1
+			<br /><i>Sélectionner le compte</i>
+		</td>
+		<td class="sep">&rarr;</td>
+		<td class="value">
+			Étape 2
+			<br /><i>Choisir le forfait</i>
+		</td>
+		<td class="sep">&rarr;</td>
+		<td class="value">
+			Étape 3
+			<br /><i>Passer à la caisse</i>
+		</td>
+	</tr>
+</table>
+<hr />
+
+<br />
+<br />
+<div style="width:100%;">
+	<form name="myform" id="myform" onsubmit="return false;">
+		<strong>Abonnement concernant :</strong>
+		<br /><input type="radio" name="who" value="me" onclick="fct_step1(this.value);" CHECKED /> Ce compte (<?=$ACCOUNT_USER;?>)
+		<br /><input type="radio" name="who" value="friend" onclick="fct_step1(this.value);" /> Un ami
+	</form>
+</div>
+
+<br />
+<br />
+<div id="panel_searchUser" style="display:none;">
+	<form onsubmit="return false;">
+		<strong>Identifier l'utilisateur à abonner.</strong>
+		<br />Nom d'utilisateur: <input type="text" class="text" id="panel_userName" value="" />
+		<input type="submit" class="button" name="valid_user" value="Valider" onclick="fct_searchUser($('panel_userName').value);" />
+	</form>
+</div>
+<div id="panel_foundUser" style="display:none;">
+	<strong>Identifier l'utilisateur à abonner.</strong>
+	<br /><span id="panel_foundUserName" style="font-style:italic;"></span> trouvé.
+	<a href="#" onclick="fct_changerSearch();">Changer</a>
+</div>
+
+<br />
+<br />
+<div style="text-align:right;width:100%;">
+	<form name="myform" method="post" action="?m=Mp_Abo2" onsubmit="return validate();">
+		<input type="hidden" name="userId" id="userId" value="<?=$ACCOUNT_ID;?>" />
+		<input type="hidden" name="userName" id="userName" value="<?=$ACCOUNT_USER;?>" />
+		<input type="hidden" name="userMp" id="userMp" value="<?=$MP_LVL;?>" />
+		<input type="submit" class="button" name="next" value="Suivant >>" />
+	</form>
+</div>
+<?}?>
+Page obsolète !

@@ -1,0 +1,67 @@
+<script type="text/javascript">
+function confirmdel(msg){
+	answer = confirm (msg);
+	if (answer) {
+		return true;
+	}else{
+		return false;
+	}
+}
+</script>
+<form name="form1" action="" method="post">
+<table class="center">
+	<tr>
+		<td class="title" colspan="8">Liste des compte de la banque <?=$BANK_NAME;?></td>	
+	</tr>
+	<tr>
+		<td class="name"></td>
+		<td class="name">Perso réel</td>
+		<td class="name">Compte au nom de</td>
+		<td class="name"># Comptes</td>
+		<td class="name">Solde</td>
+		<td class="name">N.I.P.</td>
+		<td class="name">Autorisation transferts automatiques</td>
+		<td class="name">Action(s)</td>
+	</tr>
+	
+	<?
+	if(isset($COMPTES)){
+		foreach($COMPTES as $compte){
+			?>
+			<tr>
+				<td class="name">
+					<input type="radio" name="id" value="<?=$compte['compte_id'];?>" />
+				</td>
+				<td class="value"><?=$compte['compte_perso'];?></td>
+				<td class="value"><?=$compte['compte_nom'];?></td>
+				<td class="value"><?=$compte['compte_banque'];?>-<?=$compte['compte_compte'];?></td>
+				<td class="value" style="text-align:right;"><?=$compte['compte_cash'];?></td>
+				<td class="value"><?=$compte['compte_nip'];?></td>
+				<td class="value"><?=($compte['compte_auth_auto_transaction'] == '1')? 'oui' : 'non';?></td>
+				<td class="value">
+					<a href="?mj=Lieu_BanqueCompteHistorique&id=<?=$compte['compte_id'];?>">Voir l'historique</a><br />
+					<a href="?mj=Lieu_BanqueCompteCarte&id=<?=$compte['compte_id'];?>">Voir accès cartes</a><br />
+					<a href="?mj=Lieu_BanqueTransactionAuto&id=<?=$compte['compte_id'];?>&bid=<?=$BANK_ID;?>">Voir les transactions automatiques</a>
+				</td>
+			</tr>
+			<?
+		}
+	}else{
+		?>
+		<tr>
+			<td class="value" colspan="7">
+				<i><strong>La banque ne possède aucun compte</strong></i>
+			</td>
+		</tr>
+		<?
+	}
+	?>
+	<tr>
+		<td colspan="7" value="name">
+			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Lieu_BanqueCompteAdd&amp;bankId=<?php echo $BANK_ID; ?>';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onclick="document.forms['form1'].action='?mj=Lieu_BanqueCompteMod';"/>
+			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Lieu_BanqueCompteDel&amp;bankId=<?php echo $BANK_ID; ?>';return confirmdel('Effacer le compte ?\n\nCETTE ACTION SUPPRIMERA LES CARTE ET L\'HISTORIQUE.');" />
+		</td>
+	</tr>
+</table>
+</form>

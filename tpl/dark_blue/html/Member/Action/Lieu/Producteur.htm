@@ -1,0 +1,48 @@
+<form id="action_etudier" method="post" action="?popup=1&m=Action_Lieu_Producteur2" onsubmit="return ajaxSubmitForm(this);">
+<table class="center">
+	<tr>
+		<td class="title" colspan="2">Travailler à la production</td>
+	</tr>
+	<tr>
+		<td class="name">Taux offert:</td>
+		<td class="value">
+			<?=round($PROD['pa_cash_ratio']*10,2);?> <?=GAME_DEVISE;?> pour 10 PA
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Pendant combien de temps voulez-vous travailler ?</td>
+		<td class="value">
+			<?
+			if($PROD['cash']<$PROD['pa_cash_ratio'])
+			{
+				?>
+				<i>- Ce producteur n'offre actuellement pas de travail. -</i>
+				<?
+			}
+			else
+			{
+				?>
+				<select name="pa">
+				<?
+				for($i=10;
+					$i <= $PERSO->getPa() && $i*$PROD['pa_cash_ratio'] <= $PROD['cash'];
+					$i=$i+10)
+				{
+					?>
+					<option value="<?=$i;?>"><?=$i;?> PA =&gt; environ <?=fctCreditFormat($i*$PROD['pa_cash_ratio'],true);?></option>
+					<?php
+				}
+				?>
+				</select>
+				<?
+			}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td class="send" colspan="2">
+			<input type="submit" class="button" name="save" value="Travailler" />
+		</td>
+	</tr>		
+</table>
+</form>

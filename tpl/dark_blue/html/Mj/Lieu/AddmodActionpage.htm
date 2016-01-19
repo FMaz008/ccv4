@@ -1,0 +1,12 @@
+<select name="<?=$ACTION_IDX;?>_actionpage_add">
+	<?
+	foreach($ACTION as $action)
+	{
+		?>
+		<option value="<?=$action['url'];?>" <?if (isset($action['sel'])){ echo 'SELECTED '; } ?>><?=$action['url'];?></option>
+		<?
+	}
+	?>
+</select>
+<input type="text" id="caption_<?=$ACTION_IDX;?>" class="text" name="<?=$ACTION_IDX;?>_actioncaption_add" value="" />
+<div id="add_action_<?=$ACTION_IDX;?>"></div>

@@ -1,0 +1,40 @@
+
+<br />
+<form id="action_laboDrogue" method="post" action="?popup=1&m=Action_Lieu_LaboDrogue2" onsubmit="return ajaxSubmitForm(this);">
+<table class="tbl_center">
+<tr>
+	<td class="title" colspan="2">Inventaire personnel</td>
+</tr>
+
+<tr>
+	<td class="name">Qte</td>
+	<td class="name">Nom</td>
+</tr>
+
+<? if (isset($INV_PERSO) && count($INV_PERSO)>0){
+	foreach($INV_PERSO as $item){?>
+		<tr>
+			<td style="width:100px;">
+				<input type="text" class="text" name="drqte_<?=$item->getInvId();?>" value="0" style="width:30px;" />
+				/ <?=$item->getQte();?>
+			</td>
+			<td class="value" style="text-align:left;"><?=$item->getNom();?></td>
+		</tr>
+	<? } 
+}else{ ?>
+	<tr><td>
+	<i>Vous ne poss&egrave;dez aucune substance &agrave; m&eacute;langer</i>
+	</td></tr>
+<? } ?>
+
+<tr><td colspan="2" class="name" style="text-align:center;">
+	Cout en PA : <?=$COUT_PA;?>
+</td></tr>
+
+<tr>
+	<td colspan="2" class="send">
+		<input type="submit" class="button" value="Produire" />
+	</td>
+</tr>
+</table>
+</form>

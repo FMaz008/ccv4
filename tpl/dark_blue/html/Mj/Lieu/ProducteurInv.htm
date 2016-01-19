@@ -1,0 +1,119 @@
+<br />
+<a href="?mj=Lieu_Producteur">&lt;&lt; Retour à la liste des producteurs</a><br />
+
+<form name="form1" action="?mj=Lieu_ProducteurInv&id=<?=$PROD['id'];?>" method="post">
+<table class="center">
+	<tr>
+		<td class="title" colspan="7">
+			Modifier l'inventaire de production de <?=$PROD['nom_technique'];?>.
+		</td>	
+	</tr>
+	<tr>
+		<td class="name">Effacer?</td>
+		<td class="name">Nom</td>
+		<td class="name">Coût de production</td>
+		<td class="name">Qte en stock</td>
+		<td class="name">Qte par pack</td>
+		<td class="name">Prix de vente d'un pack</td>
+		<td class="name">Valeur de l'item</td>
+	</tr>
+	<?
+	if(empty($ITEMS))
+	{
+		?>
+			<tr>
+			<td colspan="7">
+				<i><strong>L'inventaire est vide, ce producteur ne produit rien.</strong></i>
+			</td>
+			</tr>
+		<?
+	}
+	else
+	{
+		foreach ($ITEMS as $item)
+		{
+			?>
+			<tr>
+				<td class="name"><input type="checkbox" name="del_<?=$item['id'];?>" value="1" /></td>
+				<td class="value"><?=$item['db_nom'];?></td>
+				<td class="value">
+					<input type="text" name="pa_<?=$item['id'];?>" value="<?=$item['pa_needed'];?>" size="3" style="text-align:right;" /> PA
+					(~<?=fctCreditFormat($item['pa_needed']*$PROD['pa_cash_ratio'], true, 2);?> /un.)
+				</td>
+				<td class="value"><input type="text" name="qte_<?=$item['id'];?>" value="<?=$item['qte'];?>" size="3" style="text-align:right;" /></td>
+				<td class="value"><input type="text" name="pack_<?=$item['id'];?>" value="<?=$item['pack'];?>" size="3" style="text-align:right;" /></td>
+				<td class="value">
+					<input type="text" name="prix_<?=$item['id'];?>" value="<?=$item['prix'];?>" size="3" style="text-align:right;" /> <?=GAME_DEVISE;?>
+					(~<?=fctCreditFormat($item['prix']/($item['pack']+0.0000001), true,2);?> /un.)
+				</td>
+				<td class="value"><?=fctCreditFormat($item['db_valeur'],true);?></td>
+			</tr>
+			<?
+		}
+	}
+	?>
+		
+	<tr>
+		<td class="send" colspan="7">
+			<input type="submit" name="save" value="Enregistrer" />
+		</td>
+	</tr>
+	
+</table>
+</form>
+
+
+
+
+
+
+<script type="text/javascript">
+//<!--
+function checkEnter(e)
+{
+	if (e.keyCode == 13)
+	{
+		gosearch();
+		return false;
+	}
+}
+
+gosearch = function()
+{
+	$("results").innerHTML="Chargement en cours...";
+	$("results").style.display="inline";
+	$("button").style.display="inline";
+			
+	
+	var myAjax = new Ajax.Updater(
+			'results', 
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat=inventaire_item&search=' + $('search').value
+			});
+}
+
+
+
+
+
+//-->
+</script>
+
+
+
+<form id="itemAdd" method="post" action="?mj=Lieu_ProducteurInv&id=<?=$PROD['id'];?>">
+	<br />Ajouter un item correspondant à: 
+	<br /> Nom/Id.: <input type="text" class="text" id="search" style="width:125px;" onkeypress="return checkEnter(event);" />
+	<input type="button" class="button" onclick="gosearch();" value="Rechercher" />
+	<br />
+
+	<div id="results" style="display:none;clear:both;"></div>
+	<div id="button" style="text-align:center;display:none;clear:both;">
+		<input type="submit" class="button" name="add" value="Ajouter" />
+	</div>
+</form>
+
+
+

@@ -1,0 +1,35 @@
+<form name="form1" action="" method="post">
+	<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+<table class="center">
+	<tr>
+		<td class="title" colspan="5">Gestion des compétences étudiables dans le lieu <?=$LIEU_TECH;?> (via le module d'étude)</td>	
+	</tr>
+	
+	<tr>
+		<td class="name"></td>
+		<td class="name">Compétence</td>
+		<td class="name">Cout PA</td>
+		<td class="name">Cout Cash</td>
+		<td class="name">Efficacité de l'étude</td>
+	</tr>
+	
+	<? foreach($COMPS as $comp){ ?>
+		<tr>
+			<td class="name" style="width:10px;">
+				<input type="checkbox" name="<?=$comp['comp'];?>" value="<?=$comp['comp'];?>" <? if(isset($comp['chk'])){ echo 'CHECKED '; } ?>/>
+			</td>
+			<td class="value"><?=$comp['compTxt'];?></td>
+			<td class="value"><input type="text" class="text" name="<?=$comp['comp'];?>_pa" value="<? if(isset($comp['chk'])){ echo $comp['cout_pa']; }else{ echo '3'; } ?>" size="2" maxlength="8" /></td>
+			<td class="value"><input type="text" class="text" name="<?=$comp['comp'];?>_cash" value="<? if(isset($comp['chk'])){ echo $comp['cout_cash']; }else{ echo '0'; } ?>" size="8" maxlength="8" /> <?=GAME_DEVISE;?></td>
+			<td class="value"><input type="text" class="text" name="<?=$comp['comp'];?>_qualite" value="<? if(isset($comp['chk'])){ echo $comp['qualite_lieu']; }else{ echo '70'; } ?>" size="3" maxlength="3" /> %</td>
+		</tr>
+	<? } ?>
+	
+	<tr>
+		<td colspan="5" class="send">
+			<input type="submit" class="button" name="save" value="Sauvegarder"  onClick="document.forms['form1'].action='?mj=Lieu_EtudeSave';" />
+		</td>
+	</tr>
+</table>
+
+</form>

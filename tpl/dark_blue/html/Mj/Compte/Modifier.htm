@@ -1,0 +1,168 @@
+
+
+<form action="?mj=Compte_Mod&id=<?=$_GET['id'];?>" method="post">
+<table class="center">
+
+		
+		<tr>
+			<td class="title" colspan="2">Modifier les informations </td>	
+		</tr>
+		<tr>
+			
+	
+		</tr>
+		<tr>
+			<td class="value">User :</td>
+			<td class="value"><input type="text" class="text" name="user" value="<?=$ACC['user']; ?>" /></td>
+
+	
+		</tr>
+		<tr>
+			<td class="value">Email :</td>
+			<td class="value"><input type="text" class="text" name="email" value="<?=$ACC['email']; ?>" /></td>
+			
+			
+		</tr>
+		<tr>
+
+			<td class="value"> Sexe :</td>
+			<td class="value">
+				<select size="1" name="sexe">
+					<option value="m" <? if($ACC["sexe"] == 'm'){ echo 'selected'; } ?> >Masculin</option>
+					<option value="f" <? if($ACC["sexe"] == 'f'){ echo 'selected'; } ?> >Féminin</option>
+				</select>
+			</td>
+			
+			
+		</tr>
+	
+	
+		<tr>
+
+			<td class="value"> Date d'inscription :</td>
+			<td class="value"><?=$ACC["date_inscr"];?></td>
+			
+			
+		</tr>
+	
+	
+		<tr>
+
+			<td class="value"> Dernière connexion :</td>
+			<td class="value"><?=$ACC["last_conn"];?></td>
+			
+			
+		</tr>
+	
+	
+		<tr>
+
+			<td class="value"> Heure de la remise :</td>
+			<td class="value">
+			<?=$remise_initiale['annee'];?>/<?=$remise_initiale['mois'];?>/<?=$remise_initiale['jour'];?>&nbsp;
+			<input type="text" class="text" name="rem_heure" value="<?=$remise_initiale['heure'];?>" size="2"> 
+			<input type="text" class="text" name="rem_minute" value="<?=$remise_initiale['minute'];?>" size="2">  </td>
+			
+			
+			
+			
+		</tr>		
+		
+
+		<? if($ACCESS_ADMIN){ ?>
+			<tr>
+	
+				<td class="value"> Membre Plus :</td>
+				<td class="value"> 
+					<select size="1" id="mp" name="mp" onchange="$('mp_tr').style.display= ($F('mp')==0) ? 'none' : 'table-row';">
+					<option value="0" <?if($ACC['mp']=='0'){echo "selected";}?>>Membre de BASE</option>
+					<option value="1" <?if($ACC['mp']=='1'){echo "selected";}?>>Membre PLUS niveau 1</option>
+					<option value="2" <?if($ACC['mp']=='2'){echo "selected";}?>>Membre PLUS niveau 2</option>
+					<option value="3" <?if($ACC['mp']=='3'){echo "selected";}?>>Membre PLUS niveau 3</option>
+					</select>
+				</td>
+				
+				
+			</tr>
+			
+			<tr id="mp_tr" style="display:<? echo (($ACC['mp'] == '0') ? 'none' : 'table-row'); ?>;">
+				<td class="value"> Date d'expiration membre PLUS :</td>
+				<td class="value">
+					<input type="text" class="text" name="mp_annee" value="<?=$date_mp['annee'];?>" size="4" maxlength="4">
+					<input type="text" class="text" name="mp_mois" value="<?=$date_mp['mois'];?>" size="2" maxlength="2"> 
+					<input type="text" class="text" name="mp_jour" value="<?=$date_mp['jour'];?>" size="2" maxlength="2">
+					<br /> AAAA/MM/JJ
+				</td>
+			</tr>
+		<? } ?>
+		
+		<tr>
+
+			<td class="value"> Autoriser les doublons :</td>
+			<td class="value"><input type="checkbox" name="doublons" value="1" <? if($ACC['auth_doublons'] == '1'){ echo "checked"; }?>></td>
+			
+			
+		</tr>	
+		
+		<tr>
+
+			<td class="value"> Nombre de création de perso autorisé :</td>
+			<td class="value">
+				<select size="1" name="creation_perso">
+				<option value="0" <?if($ACC['auth_creation_perso']==0){echo "selected";}?>>aucun</option>
+				<option value="1" <?if($ACC['auth_creation_perso']==1){echo "selected";}?>>1</option>
+				<option value="2" <?if($ACC['auth_creation_perso']==2){echo "selected";}?>>2</option>
+				<option value="3" <?if($ACC['auth_creation_perso']==3){echo "selected";}?>>3</option>
+				</select>
+			</td>
+			
+			
+		</tr>	
+		
+		<tr>
+
+			<td class="value"> Compte bloqué :</td>
+			<td class="value"><input type="checkbox" name="bloquer" value="1" <? if($ACC['bloque'] == '1'){ echo "checked"; }?>></td>
+			
+			
+		</tr>	
+		
+		<tr>
+			<td class="value"> </td>
+			<td class="value"><input type="submit" class="button" name="save" value="Modifier"/></td>
+			
+		</tr>
+		
+		
+		
+		
+</form>
+</table>
+
+
+<table class="center">
+
+
+	<tr>
+		<td class="title" colspan="7">Personnage du compte</td>
+	</tr>
+	<tr>
+		<td class="name">Nom</td>
+		<td class="name">Age</td>
+		<td class="name">Lieu</td>
+		<td class="name">PV</td>
+		<td class="name">Argent</td>
+		<td class="name">Modifier</td>
+		<td class="name">HE</td>
+	</tr>
+		<?foreach($PERSOS as $perso){?>
+	<tr>
+		<td class="value"><?=$perso['nom'];?></td>
+		<td class="value"><?=$perso['age'];?></td>
+		<td class="value"><?=$perso['lieu'];?></td>
+		<td class="value"><?=$perso['pv'];?></td>
+		<td class="value" style="text-align:right;"><?=$perso['cash'];?></td>
+		<td class="value"><a href="?mj=Perso_Mod&id=<?=$perso['id'];?>">Modifier Perso</a></td>
+		<td class="value"><a href="?mj=Perso_He&id=<?=$perso['id'];?>">Afficher HE</a></td>
+	</tr><?}?>
+</table>

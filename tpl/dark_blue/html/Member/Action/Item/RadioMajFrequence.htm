@@ -1,0 +1,18 @@
+<form id="action_radioMajFrequence" onsubmit="return false;">
+	<table class="tbl_center" style="width:200px;">
+		<tr>
+			<td class="title" colspan="2">Selectionner une fr&eacute;quence</td>
+		</tr>
+		<tr>
+			<td class="name">Fr&eacute;quence</td>
+			<td class="value">
+				<input type="text" class="text" name="frequence" id="frequence" value="<?=$radio->getFrequence();?>" maxlength="8" size="20"/>
+			</td>
+		</tr>	
+		<tr>
+			<td class="send" colspan="2">
+				<input type="button" class="button" onclick="saveFreq('frequence=' + escape($F('frequence')) + '&idradio=<?=$radio->getInvId(); ?>&post=1')" value="Enregistrer" />
+			</td>
+		</tr>
+	</table>
+</form>

@@ -1,0 +1,977 @@
+<script type="text/javascript">
+	
+	function gosearch(type){
+		var type_search = type;
+		
+		$(type+"_results").innerHTML="Chargement en cours...";
+		$(type+"_results").style.display="inline";
+		$(type+"_button").style.display="inline";
+				
+		switch(type){
+			case "pan_ajout":				type_search = "item";	break;
+			case "pan_transfert_lieu":		type_search = "lieu";	break;
+			case "pan_transfert_boutique":	type_search = "lieu";	break;
+			case "pan_transfert_casier":	type_search = "casier";	break;
+			case "pan_transfert_perso":		type_search = "perso";	break;
+			case "pan_transfert_item":		type_search = "item";	break;
+		}
+		
+		var myAjax = new Ajax.Updater(
+			type+'_results', 
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat=inventaire_'+type_search+'&search=' + $(type+'_search').value
+			});
+	}
+	
+	function testerRadio(radio) {
+		var sel = false;
+		
+		if(!is_defined(radio)){ //Si aucun résultats
+			sel = false;
+		}else{
+		//void(el=d.getElementsByTagName('INPUT'));
+			for(i=0;i<el.length;i++)
+				void(el[i].checked=1)
+			
+			if( is_defined(radio.length) ){ //Si plus de 1 résultat
+				for (var i=0; i<radio.length;i++)
+					if (radio[i].checked)
+						sel = true;
+			}else{ 	//Si 1 seul résultat
+				if (radio.checked)
+					sel = true;
+			}
+		}
+		
+		if (!sel)
+			alert('Vous devez sélectionner un item.');
+			
+		return sel;
+	}
+	
+	function testerCheck(theForm, checkName) {
+		var sel = false;
+
+		var elchk=theForm.elements[checkName];	
+		
+		if(!is_defined(elchk)){ //Si aucun résultats
+			sel = false;
+		}else{
+			if( is_defined(elchk.length) ){ //Si plus de 1 résultat
+				for (var i=0; i<elchk.length;i++)
+					if (elchk[i].checked)
+						sel = true;
+			}else{ 	//Si 1 seul résultat
+				if (elchk.checked)
+					sel = true;
+			}
+		}
+		
+		if (!sel)
+			alert('Vous devez sélectionner un item.');
+			
+		return sel;
+	}
+	
+	function is_defined( v ){
+	    return typeof(v) != 'undefined';
+	}
+
+	function checkEnter(e, type){
+		if (e.keyCode == 13){
+			gosearch(type);
+			return false;
+		}
+	}
+	
+	function showPanel(panelName){
+		//Masquer tous les panel
+		$('pan_ajout').style.display='none';
+		$('pan_transfert').style.display='none';
+		$('pan_transfert_lieu').style.display='none';
+		$('pan_transfert_boutique').style.display='none';
+		$('pan_transfert_perso').style.display='none';
+		$('pan_transfert_casier').style.display='none';
+		$('pan_transfert_item').style.display='none';
+		
+		//Afficher le(s) panel(s) demandé(s)
+		if(panelName=='pan_transfert_lieu' || panelName=='pan_transfert_perso' || panelName=='pan_transfert_casier' || panelName=='pan_transfert_boutique' || panelName=='pan_transfert_item')
+			$('pan_transfert').style.display='inline';
+			
+		$(panelName).style.display='inline';
+	}
+</script>
+
+
+<form name="form1" action="" method="post">
+<table style="width:800px;">
+	<tr>
+		<td class="title" colspan="5">
+			Modifier l'inventaire de la boutique <?=$LIEU_TECH;?>
+		</td>	
+	</tr>
+	
+	<?
+	$currentCat = '';
+	if(!isset($ITEMS)){
+		?>
+			<i><strong>L'inventaire est vide</strong></i>
+		<?
+	}else{
+		foreach ($ITEMS as $item){
+			$showHeader = false;
+			if($currentCat != $item->getTypeTech()){
+				?> 
+				</table>
+				<?
+				$currentCat = $item->getTypeTech();
+				$showHeader = true;
+			}
+			switch ($item->getTypeTech()){
+				case 'arme_feu':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="14" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Fiab.</td>
+						<td class="name">Force</td>
+						<td class="name">Pa</td>
+						<td class="name">Portée</td>
+						<td class="name">Préci.</td>
+						<td class="name">Rési.</td>
+						<td class="name">Tir/tour</td>
+						<td class="name">Muni.</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getResistance();?>/<?=$item->getResistanceMax();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getTirParTour();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getMunition();?>/<?=$item->getMunitionMax();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'arme_blanche':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="12" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Fiab.</td>
+						<td class="name">Force</td>
+						<td class="name">Pa</td>
+						<td class="name">Portée</td>
+						<td class="name">Préci.</td>
+						<td class="name">Rési.</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getResistance();?>/<?=$item->getResistanceMax();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'arme_lancee':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="11" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Fiab.</td>
+						<td class="name">Force</td>
+						<td class="name">Pa</td>
+						<td class="name">Portée</td>
+						<td class="name">Préci.</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'arme_paralysante':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="11" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Fiab.</td>
+						<td class="name">Force</td>
+						<td class="name">Pa</td>
+						<td class="name">Portée</td>
+						<td class="name">Préci.</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'arme_explosif':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="11" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Fiab.</td>
+						<td class="name">Force</td>
+						<td class="name">Pa</td>
+						<td class="name">Portée</td>
+						<td class="name">Préci.</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'autre':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="6" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'badge':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="6" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?> (<?=$item->getTitre();?>)</a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'cartebancaire':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="7" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">No Carte</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getNoCarte();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'cartememoire':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="10" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Crypt</td>
+						<td class="name">Key</td>
+						<td class="name">Écriture</td>
+						<td class="name">Mémoire</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->isCrypt();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getKey();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getMcWrite();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getMemorySize();?>/<?=$item->getMemorySizeMax();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'clef':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="8" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" style="width:50px;">Equipé</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name" style="width:20px;">Pass</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value">
+						<?
+						if($item->canEquip()){
+							if (!$item->isEquip()){
+								?>
+								<a href="?mj=Perso_InventaireItemEquiper&id=<?=$item->getInvId();?>&rid=<?=$_GET['id'];?>&equip=1">Équiper</a>
+								<?
+							}else{
+								?>
+								<a href="?mj=Perso_InventaireItemEquiper&id=<?=$item->getInvId();?>&rid=<?=$_GET['id'];?>"&equip=0>Ranger</a>
+								<?
+							}
+						}
+						?>
+					</td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Perso_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value"><?=$item->getCode();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'defense_tete':
+				case 'defense_torse':
+				case 'defense_bras':
+				case 'defense_main':
+				case 'defense_jambe':
+				case 'defense_pied':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="7" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Resistance</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getResistance();?>/<?=$item->getResistanceMax();?> Seuil: <?=$item->getResistanceSeuil();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'drogue':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="6" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'livre':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="7" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Titre</td>
+						<td class="name" style="width:150px;">Auteur</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Perso_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getTitre();?></a></td>
+					<td class="value"><?=$item->getAuteur();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'munition':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="6" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'nourriture':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="7" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Pn</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPn();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'ordinateur':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="11" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Crypt</td>
+						<td class="name">Key</td>
+						<td class="name">Écriture</td>
+						<td class="name">Mémoire</td>
+						<td class="name">Internet</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><? echo ($item->isCrypt()) ? 'Oui' : 'Non'; ?></td>
+					<td class="value" style="text-align:right;"><?=$item->getKey();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getMcWrite();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getMemorySize();?>/<?=$item->getMemorySizeMax();?></td>
+					<td class="value" style="text-align:right;"><?=$item->isInternetCapable();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'sac':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="7" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Capacité</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getCapaciteMax();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'talkiewalkie':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="11" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Fréquence</td>
+						<td class="name">Émet</td>
+						<td class="name">Crypt</td>
+						<td class="name">Key</td>
+						<td class="name">Silence</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getFrequence();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getCanTalk();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getCryptCapable();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getClef();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getSilenceCapable();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'telephone':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="12" class="name"><?=$item->getType();?></td></tr>
+						<tr>					
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">No Tel</td>
+						<td class="name">Prix Appel</td>
+						<td class="name" style="width:175px;">No Compte</td>
+						<td class="name">Anonyme</td>
+						<td class="name">Type Affichage</td>
+						<td class="name">Memoire</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getNotel();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getPrixAppel();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getNobanque();?>-<?=$item->getNocompte();?> (Nip: <?=$item->getNip();?>)</td>
+					<td class="value" style="text-align:right;"><?=$item->getAnonymeCapable();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getTypeAffichage();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getMemorySize();?>/<?=$item->getMemorySizeMax();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'trousse':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="6" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				case 'media':
+					if ($showHeader){
+						?>
+						<table style="width:800px;">
+						<tr><td colspan="7" class="name"><?=$item->getType();?></td></tr>
+						<tr>
+						<!--<td class="name" style="width:15px;">&nbsp;</td>-->
+						<td class="name" style="width:20px;">Qte</td>
+						<td class="name" >Nom</td>
+						<td class="name" style="width:20px;">Pr</td>
+						<td class="name" >Média accessible</td>
+						<td class="name" >Sens d'accès</td>
+						<td class="name">Prix Achat</td>
+						<td class="name">Prix Vente</td>
+						</tr>
+						<?
+					}
+					?>
+					<tr>
+					<!--<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>-->
+					<td class="value"><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?=$item->getMediaTypeAffichable();?></td>
+					<td class="value" style="text-align:right;"><?if($item->isEmetteur()){echo "Emetteur";}else{echo "Récepeteur";}?></td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixachat_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					<td class="value">
+						<input type="text" class="text" size="5" name="prixvente_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente(false);?>" style="text-align:right;" />&nbsp;<?=GAME_DEVISE;?>
+					</td>
+					</tr>
+					<?
+					break;
+				default:
+					?>
+					<tr>
+					<td class="name"></td>
+					<td class="name" colspan="3">Type d'item non pris en charge (<?=$item->getType();?>)</td>
+					</tr>
+					<?
+			}
+		}
+	}
+	?>
+	
+</table>
+
+
+
+<a name="pan" />
+<hr />
+
+
+<div id="pan">
+	<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_ajout');">Ajoute un/des item(s) ...</a> &nbsp;&nbsp;&nbsp;
+	<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_transfert');">Transférer la sélection ...</a> &nbsp;&nbsp;&nbsp;
+	<!--
+	<input type="submit" class="button" name="del" style="background-color:#330000;" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_BoutiqueItemDel&id=<?=$_GET['id'];?>&rpage=Mj_Lieu_Boutique&rid=<?=$_GET['id'];?>';return (testerCheck(this.form, 'invId[]'));" /> &nbsp;&nbsp;&nbsp;
+	-->
+	<input type="submit" class="button" name="mod" value="Enregistrer" onClick="document.forms['form1'].action='?mj=Lieu_BoutiqueItemMod&id=<?=$_GET['id'];?>&rpage=Mj_Lieu_Boutique&rid=<?=$_GET['id'];?>';" /> &nbsp;&nbsp;&nbsp;
+	<input type="submit" class="button" name="historique" value="Voir l'historique" onClick="document.forms['form1'].action='?mj=Lieu_BoutiqueHistorique&id=<?=$_GET['id'];?>';" /> &nbsp;&nbsp;&nbsp;
+	
+	<div id="pan_ajout" style="display:none;clear:both;">
+		<br />&nbsp;&nbsp;&nbsp;... correspondant à: 
+		<br /> Nom/Id.: <input type="text" class="text" id="pan_ajout_search" style="width:125px;" onkeypress="return checkEnter(event,'pan_ajout');" />
+		<input type="button" class="button" onclick="gosearch('pan_ajout');" value="Rechercher" />
+		<br />
+		
+		<div id="pan_ajout_results" style="display:none;clear:both;"></div>
+		<div id="pan_ajout_button" style="text-align:center;display:none;clear:both;">
+			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Lieu_BoutiqueItemAdd&id=<?=$_GET['id'];?>&rpage=Mj_Lieu_Boutique&rid=<?=$_GET['id'];?>';return testerCheck(this.form, 'itemId[]');" />
+		</div>
+	</div>
+	
+	
+	<div id="pan_transfert" style="display:none;clear:both;">
+		<br />&nbsp;&nbsp;&nbsp;... vers: 
+		<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_transfert_lieu');">Un lieu ...</a> &nbsp;&nbsp;&nbsp;
+		<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_transfert_boutique');">Une boutique ...</a> &nbsp;&nbsp;&nbsp;
+		<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_transfert_casier');">Un casier ...</a> &nbsp;&nbsp;&nbsp;
+		<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_transfert_perso');">Un perso ...</a> &nbsp;&nbsp;&nbsp;
+		<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_transfert_item');">Un item ...</a> &nbsp;&nbsp;&nbsp;
+		
+		
+		<?
+		$arrType = array(
+						array('tech'=>'lieu',		'class'=>'Lieu_BoutiqueDonnerLieu',		'radio'=>'lieuTech',	'txt'=>'Lieu'),
+						array('tech'=>'boutique',	'class'=>'Lieu_BoutiqueDonnerBoutique',	'radio'=>'lieuTech',	'txt'=>'Boutique'),
+						array('tech'=>'casier',		'class'=>'Lieu_BoutiqueDonnerCasier',	'radio'=>'casierId',	'txt'=>'Casier'),
+						array('tech'=>'perso',		'class'=>'Lieu_BoutiqueDonnerPerso',	'radio'=>'persoId',		'txt'=>'Perso'),
+						array('tech'=>'item',		'class'=>'Lieu_BoutiqueDonnerItem',		'radio'=>'itemId',		'txt'=>'Item')
+					);
+		foreach($arrType as $type){
+		?>
+			<div id="pan_transfert_<?=$type['tech'];?>" style="display:none;clear:both;">
+				<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;... correspondant à: 
+				<br /> Nom/Id.: <input type="text" class="text" id="pan_transfert_<?=$type['tech'];?>_search" style="width:125px;" onkeypress="return checkEnter(event,'pan_transfert_<?=$type['tech'];?>');" />
+				<input type="button" class="button" onclick="gosearch('pan_transfert_<?=$type['tech'];?>');" value="Rechercher <?=$type['txt'];?>" />
+				<br />
+				
+				<div id="pan_transfert_<?=$type['tech'];?>_results" style="display:none;clear:both;"></div>
+				<div id="pan_transfert_<?=$type['tech'];?>_button" style="text-align:center;display:none;clear:both;">
+					<input type="submit" class="button" name="move<?=$type['tech'];?>" value="Déposer/Transférer" onClick="document.forms['form1'].action='?mj=<?=$type['class'];?>&id=<?=$_GET['id'];?>&rpage=Mj_Lieu_Boutique&rid=<?=$_GET['id'];?>';return (testerRadio(this.form.<?=$type['radio'];?>));" />
+				</div>
+			</div>
+		<?
+		}
+		?>
+		
+	</div>
+	
+</div>
+</form>

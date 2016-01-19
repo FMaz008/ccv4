@@ -1,0 +1,51 @@
+<?
+if ($SHOW_HEADER)
+{
+	?>
+	<table style="width:<?=$TABLE_WIDTH;?>;">
+	<tr><td colspan="7" class="name"><?=$ITEM->getType();?></td></tr>
+	<tr>
+	<td class="name" style="width:15px;">&nbsp;</td>
+	<td class="name" style="width:20px;">Qte</td>
+	<td class="name" style="width:50px;">Equipé</td>
+	<td class="name" >Nom</td>
+	<td class="name" style="width:20px;">Pr</td>
+	<td class="name">Resistance</td>
+	<td class="name">Pn</td>
+	</tr>
+	<?
+}
+?>
+<tr>
+	<td class="name">
+		<input type="checkbox" name="invId[]" value="<?=$ITEM->getInvId();?>" />
+		</td>
+	<td class="value">
+		<? if($ITEM->canRegroupe()){ ?>
+			<input type="text" class="text" size="2" name="inv<?=$ITEM->getInvId();?>" value="<?=$ITEM->getQte();?>" />
+		<? } ?>
+	</td>
+	<td class="value">
+		<?
+		if($RETURN_PAGE == 'Perso_Inventaire' && $ITEM->canEquip())
+		{
+			if (!$ITEM->isEquip())
+			{
+				?>
+				<a href="?mj=Perso_InventaireEquip&id=<?=$ITEM->getInvId();?>&rid=<?=$RETURN_ID;?>&equip=1">Équiper</a>
+				<?
+			}
+			else
+			{
+				?>
+				<a href="?mj=Perso_InventaireEquip&id=<?=$ITEM->getInvId();?>&rid=<?=$RETURN_ID;?>&equip=0">Ranger</a>
+				<?
+			}
+		}
+		?>
+	</td>
+	<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$ITEM->getInvId();?>&rpage=<?=$RETURN_PAGE;?>&rid=<?=$RETURN_ID;?>"><?=$ITEM->getNom();?></a></td>
+	<td class="value" style="text-align:right;"><?=$ITEM->getPr();?></td>
+	<td class="value" style="text-align:right;"><?=$ITEM->getResistance();?>/<?=$ITEM->getResistanceMax();?></td>
+	<td class="value" style="text-align:right;"><?=$ITEM->getPn();?></td>
+</tr>

@@ -1,0 +1,76 @@
+<? if((isset($CREATE_PERSO) && $CREATE_PERSO>0) || isset($MODS) || isset($WAIT)){ ?>
+	<div class="panel news_panel1">
+		<div class="title">Gestion des inscriptions</div>
+		<? if(isset($CREATE_PERSO) && $CREATE_PERSO>0){ ?>
+			<div class="name clearboth">
+				Vous êtes autorisé<? echo ($SEXE=='f') ? 'e' : ''; ?> à créer <?=$CREATE_PERSO;?> personnage<? echo ($CREATE_PERSO>1) ? 's' : ''; ?> !
+			</div>
+			<div class="value clearboth">
+				Souhaitez-vous créer un nouveau personnage ?<br />
+				<div class="news_choix">
+					[ <a href='?m=CreerPerso'>Procéder à la création</a> ]
+				</div>
+				<div class="clearboth"></div>
+			</div>
+		<? } ?>
+		
+		<? if(isset($WAIT)){ ?>
+			<div class="name clearboth">
+				Personnage<? echo (count($WAIT)>1) ? 's' : ''; ?> est en attente de validation...
+			</div>
+			<? foreach($WAIT as $perso){ ?>
+				<div class="value clearboth">
+					<?=$perso['nom'];?> n'a pas encore été validé<? echo ($perso['sexe']=='f') ? 'e' : ''; ?>.
+					<br />
+					
+					<div class="news_choix clearboth">
+						<i>Patientez...</i>
+						[&nbsp;<a href='?m=ModPerso&id=<?=$perso['id'];?>'>Consulter/Modifier</a>&nbsp;]
+					</div>
+				</div>
+				<div class="clearboth"></div>
+			<? } 
+		} ?>
+		
+		<? if(isset($MODS)){ ?>
+			<div class="name clearboth">
+				Personnage<? echo (count($MODS)>1) ? 's' : ''; ?> <? echo (count($MODS)>1) ? 's' : ''; ?> en attente de modifications et re-soumission
+			</div>
+			<? foreach($MODS as $perso){ ?>
+				<div class="value clearboth">
+					Souhaitez-vous apporter les correctifs à votre personnage <?=$perso['nom'];?> ?<br />
+					<div class="news_choix">
+						[&nbsp;
+						<a href='?m=ModPerso&id=<?=$perso['id'];?>'>Oui, consulter</a>
+						&nbsp;/&nbsp;
+						<a href='?m=DelPerso&id=<?=$perso['id'];?>'>Non, le supprimer</a>
+						&nbsp;]
+					</div>
+					<div class="clearboth"></div>
+				</div>
+			<? } 
+		} ?>
+	</div>
+<? } ?>
+
+
+
+
+<div class="panel news_panel2">
+	<div class="title">
+		Voici les nouvelles HJ au sujet du jeu:
+	</div>
+	<? if(isset($NEWS)){
+		foreach($NEWS as $news){ ?>
+			<div class="value clearboth"><?=$news;?></div>
+		<? }
+	}else{
+		?>
+		<div class="value clearboth"><i>Aucune nouvelle pour le moment</i></div>
+		<?
+	} ?>
+</div>
+
+<div class="panel news_panel3">
+	<a href="?m=Config_Compte">Configurer votre compte</a>
+</div>

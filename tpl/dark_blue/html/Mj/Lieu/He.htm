@@ -1,0 +1,23 @@
+<script type="text/javascript">
+<!--
+function heItemAutoHeight(itemNo){
+	var droite = $('droite'+itemNo) ;
+	var gauche = $('gauche'+itemNo) ;
+	var mh = Math.max(gauche.offsetHeight, droite.offsetHeight);
+	droite.style.height=mh+"px";
+	gauche.style.height=mh+"px";
+}
+-->
+</script>
+
+<strong>He du lieu: </strong><?=$LIEU_NOM;?>
+<div align="right">
+<a href="?mj=Lieu_He&id=<?=$LIEU_ID;?>">Première page</a> | <a href="?mj=Lieu_He&id=<?=$LIEU_ID;?>&page=<?=($PAGE == 1)? $PAGE : $PAGE-1;?>"><<</a> Page <?=$PAGE;?> <a href="?mj=Lieu_He&id=<?=$LIEU_ID;?>&page=<?=$PAGE+1;?>">>></a>
+</div>
+
+<?=$HE_ITEMS;?>
+
+<?if(empty($HE_ITEMS))
+{?>
+	<i>Pas de messages.</i>
+<?}?>

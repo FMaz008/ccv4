@@ -1,0 +1,54 @@
+<div class="index_lite_erreur" style="display:none;" id="erreurBox">
+	<div class="index_lite_erreurName"><blink>Erreur</blink></div>
+	<span id="erreurMsg"></span>
+</div><br />
+
+<form id="action_telephonerMajMemoire" action="#" method="post" onsubmit="return ajaxSubmitForm(this);">
+<table class="center" style="width:200px;">
+	<tr>
+		<td colspan="3" class="title">R&eacute;pertoire</td>
+	</tr>
+	<tr>
+		<td class="name">Nom</td>
+		<td class="name">#</td>
+		<td class="name"></td>
+	</tr>
+
+	<?
+	$i=0;
+	foreach($contenuMemoire as $mem){
+		?>	
+		<tr>
+			<td class="value">
+				<input type="text" class="text" name="nom_<?=$i;?>" id="nom_<?=$i;?>" value="<?=$mem[0];?>" maxlength="18" size="18"/>
+			</td>
+			<td class="value">
+				<input type="text" class="text" name="no_<?=$i;?>" id="no_<?=$i;?>" value="<?=$mem[1];?>" maxlength="8" size="8"/>
+			</td>
+			<td class="value">
+				<span class="fakelink" onclick="$('numero_destinataire').value=$F('no_<?=$i;?>');">Composer</span>
+			</td>
+		</tr>
+		<?
+		$i++;
+	}
+	?>	
+
+	
+	<tr>
+		<td colspan="3" class="center">	<input type="button"  OnClick="SaveChange(<?
+																				$z=0;
+																				while($z < $telephone->getMemorySizeMax()) 
+																				{
+																					?>'nom_<?=$z;?>=' + encodeURIComponent($F('nom_<?=$z;?>')) +<?
+																					?>'&no_<?=$z;?>=' + encodeURIComponent($F('no_<?=$z;?>')) + '&' +<?
+																					$z++;
+																				}?>'idtelephone=<?=$telephone->getInvId(); ?>&post=1')<?
+																?>" value="Enregistrer" class="button" name="submit"/>
+			<input type="button" class="button" onclick="showhidediv('none');" value="Annuler" />
+		</td>
+	</tr>
+</table>
+</form>
+
+

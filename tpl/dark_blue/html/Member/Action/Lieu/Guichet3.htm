@@ -1,0 +1,114 @@
+<script type="text/javascript">
+//<!--
+	//Fonction generales
+	fail = function(){
+		$('request_msg').style.display="block";
+		$('request_msgtxt').innerHTML="La requête &agrave; &eacute;chou&eacute;e, veuillez r&eacute;-essayer plus tard.";
+	}
+
+	showplzwait = function(){
+		$('plzwait1').style.display="block";
+		$('plzwait2').style.display="block";
+		$('request_msgtxt').innerHTML="Veuillez patienter...";
+		$('request_msg').style.display="none";
+	}
+	hideplzwait = function(){
+		$('plzwait1').style.display="none";
+		$('plzwait2').style.display="none";
+	}
+
+
+
+	//Retrait
+	operation_retrait = function(){
+		showplzwait();
+		
+		var myAjax = new Ajax.Request(
+				'?popup=1&m=Action_Lieu_Guichet3Retrait', 
+				{
+					method: 'post', 
+					parameters: 'montant='+$('montant').value+'&carteid=<?=$_POST['carteid'];?>&nip=<?=$_POST['nip'];?>', 
+					onComplete: operation_confirm,
+					onFailure: fail
+				});
+	}
+	
+	
+	operation_confirm = function(originalRequest){
+		
+		var rval= originalRequest.responseText;
+		var params=rval.split("|");
+		
+		if (params[1]=="OK"){
+			$('cash').innerHTML = params[2];
+			$('perso_cash').innerHTML=params[3];
+			$('perso_pa').innerHTML=params[4];
+			
+			hideplzwait();
+		}else{
+			$('request_msg').style.display="block";
+			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+		}
+	}
+//-->
+</script>
+<!-- Zone ombragée -->
+<div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
+<div id="plzwait2" class="plzwait_content">
+	<table style="margin:0 auto;width:300px;height:150px;">
+		<tr><td class="title" style="height:10px;">Traitement de la demande</td>
+		<tr>
+		<td class="name">
+			<div id="request_msgtxt">Veuillez patienter...</div>
+			<div id="request_msg" style="display:none;text-align:center;"><br /><a href="#" onclick="hideplzwait();">- Fermer -</a></div>
+		</td>
+		</tr>
+	</tr>
+	</table>
+</div>
+
+
+<br />
+<form id="action_guichet3Histo" method="post" action="?popup=1&m=Action_Lieu_Guichet3historique" onsubmit="return ajaxSubmitForm(this);">
+	<input type="hidden" name="carteid" value="<?=$CARD_ID;?>" />
+	<input type="hidden" name="nip" id="pass" value="<?=$NIP;?>" />
+	<table class="center" style="width:300px;">
+		<tr>
+			<td class="title">
+				Relev&eacute; des transactions
+			</td>
+		</tr>
+		<tr>
+			<td class="value" style="text-align:center;">
+				[<a href="#" onclick="document.forms[0].onsubmit();">Relev&eacute; des transactions</a>]
+			</td>
+		</tr>
+	</table>
+</form>
+
+
+
+
+<br />
+<form id="action_guichet3Retrait" method="post" action="?popup=1&m=Action_Lieu_Guichet3Retrait" onsubmit="return ajaxSubmitForm(this);">
+	<input type="hidden" name="carteid" value="<?=$CARD_ID;?>" />
+	<input type="hidden" name="nip" value="<?=$NIP;?>" />
+	<input type="hidden" name="nextstep" value="retrait" />
+	
+	<table class="center" style="width:300px;">
+		<tr>
+			<td class="title" colspan="2">
+				Retrait<br />
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Solde</td>
+			<td class="value"><span class="valeur" id="cash"><?=$SOLDE;?></span></td>
+		</tr>
+		<tr>
+			<td class="name">Retrait</td>
+			<td class="value"><input type="text" class="text" id="montant" value="0.00" size="5" maxlength="5" /></td>
+		</tr>
+		<tr><td class="send" colspan="2"><input type="button" class="button" name="eff_retrait" value="Effectuer le retrait" onclick="operation_retrait();" /></td></tr>
+	</table>
+</form>

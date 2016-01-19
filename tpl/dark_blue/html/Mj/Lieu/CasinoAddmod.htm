@@ -1,0 +1,41 @@
+<br />
+<a href="?mj=Lieu_Casino">&lt;&lt; Retour à la liste des casino</a><br />
+<form method="post" name="form1" action="?mj=Lieu_Casino<?=$SUBMITNAME;?>">
+	<table align="center">
+		<tr>
+			<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> un casino</td>
+		</tr>
+		<? if( $SHOWID == true ){ ?>
+			<tr>
+				<td class="name">ID du casino</td>
+				<td class="value"><input type="hidden" name="id" value="<? echo $CASINO->getId(); ?>" /><? echo $CASINO->getId(); ?></td>
+			</tr>
+		<? } ?>
+		
+		
+		
+		<tr>
+			<td class="name">Casino accessible depuis le lieu</td>
+			<td class="value">
+				<input type="text" class="text" name="casino_lieu" value="<? echo $CASINO->getLieuTech(); ?>" />
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Nom</td>
+			<td class="value">
+				<input type="text" class="text" name="casino_nom" value="<? echo $CASINO->getNom(); ?>" />
+			</td>
+		</tr>
+		<tr>
+			<td class="name">En coffres</td>
+			<td class="value">
+				<input type="text" class="text" name="casino_cash" value="<? echo $CASINO->getCash(); ?>" /><?=GAME_DEVISE;?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="send">
+				<input type="submit" class="button" name="save" value="Enregistrer" />
+			</td>
+		</tr>
+	</table>
+</form>

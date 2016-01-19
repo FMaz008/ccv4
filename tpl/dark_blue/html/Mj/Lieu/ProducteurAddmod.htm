@@ -1,0 +1,78 @@
+<script type="text/javascript">
+//<!--
+Changer_Lieu = function()
+{
+	var lieu=prompt('Lieu ? (Nom technique)','');
+	if(lieu!=""){
+		var myAjax = new Ajax.Updater(
+			'div_lieu', 
+			'?mj=Search&popup=1', 
+			{
+				method: 'post', 
+				parameters: 'searchWhat=selectLieu&search='+lieu
+			});
+	}
+}
+Changer_Lieu2 = function(id, lieu)
+{
+	$('div_lieu').innerHTML = lieu+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="lieuId" value="'+id+'" />';
+}
+//-->
+</script>
+
+<br />
+<a href="?mj=Lieu_Producteur">&lt;&lt; Retour à la liste des producteurs</a><br />
+<form method="post" name="form1" action="?mj=Lieu_Producteur<?=$SUBMITNAME;?>">
+	<table align="center">
+		<tr>
+			<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> un producteur</td>
+		</tr>
+		<? if( $SHOWID == true ){ ?>
+			<tr>
+				<td class="name">ID du producteur</td>
+				<td class="value"><input type="hidden" name="id" value="<?=$PROD['id'];?>" /><?=$PROD['id'];?></td>
+			</tr>
+		<? } ?>
+		
+		
+		<tr>
+			<td class="name">On peut travailler à la production à partir de ce lieu</td>
+			<td class="value">
+				<div id="div_lieu" style="height:6em;overflow:auto;">
+					<?=$PROD['nom_technique'];?> (<a href="#" onclick="Changer_Lieu();">Changer</a>)
+					<input type="hidden" name="lieuId" value="<?=$PROD['lieuId'];?>" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="name">Cash</td>
+			<td class="value">
+				<input type="text" class="text" name="cash" value="<?=$PROD['cash'];?>" size="5" /> <?=GAME_DEVISE;?>
+			</td>
+		</tr>
+		<tr>
+			<td class="name">1 PA donne</td>
+			<td class="value">
+				<input type="text" class="text" name="pa_cash_ratio" value="<?=$PROD['pa_cash_ratio'];?>" size="5" />
+			</td>
+		</tr>
+		<tr>
+			<td class="name">PA en banque (nombre de PA qui ont été travaillés)</td>
+			<td class="value">
+				<input type="text" class="text" name="total_pa" value="<?=$PROD['total_pa'];?>" size="5" /> PA
+			</td>
+		</tr>
+		<tr>
+			<td class="name">PA requis pour lancer une production</td>
+			<td class="value">
+				<input type="text" class="text" name="pa_needed" value="<?=$PROD['pa_needed'];?>" size="5" /> PA
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" class="send">
+				<input type="submit" class="button" name="save" value="Enregistrer" />
+			</td>
+		</tr>
+	</table>
+</form>
