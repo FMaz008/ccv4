@@ -16,9 +16,11 @@ Libre à vous de vous amuser avec et à lancer vos propres jeux !
 - LIEU_DEPART
 - INNACTIVITE_TELEPORT_LOCATION
 - INNACTIVITE_VOLUNTARY_LOCATION
+
 <br />
 Si vous avez des problèmes, contactez-moi directement au email indiqué dans mes commits.<br />
 <br />
+
 # Thèmes/Skin:
 Pour développer un nouveau skin, il suffit de créer un nouveau dossier dans /tpl/.
 Lorsque le moteur tente d'utiliser un fichier de votre skin, si le fichier n'existe pas dans votre skin, le moteur chargera le fichier dans le skin par défaut (dark_blue).
