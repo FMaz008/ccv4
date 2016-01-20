@@ -7,7 +7,7 @@ Libre à vous de vous amuser avec et à lancer vos propres jeux !
 
 # Installation:
 1) Copier les fichiers<br />
-2) Renommer const.inc.php_template en const.inc.php_template<br />
+2) Renommer const.inc.php_template en const.inc.php<br />
 3) Configurer const.inc.php<br />
 4) Importer la structure de base de données du fichier db_structure_only.sql<br />
 5) Importer les données de base du fichier db_basic_data.sql<br />
