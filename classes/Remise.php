@@ -12,6 +12,12 @@ class Remise
 {
 	public static $debugInfo;
 	
+	/**
+	 * Fonction principale qui effectue des remises.
+	 * 
+	 * @param Member_Account &$account Instance du compte actuellement utilisé (pour des fins d'affichages en cas d'inactivité)
+	 * @param int $maxRemise Nombre de compte auxquels effectuer les remises (indépendamment du nombre de perso)
+	 */
 	public static function doRemise(&$account, $maxRemise)
 	{
 		$dbMgr = DbManager::getInstance(); //Instancier le gestionnaire
@@ -23,9 +29,12 @@ class Remise
 			$db->beginTransaction();
 		
 			//Tagger tout les comptes qui doivent recevoir une remise
-			$query = 'SELECT id'
-						. ' FROM ' . DB_PREFIX . 'account'
-						. ' WHERE remise<UNIX_TIMESTAMP()'
+			//Le LEFT JOIN sert à sélectionner uniquement les comptes qui ont au moins 1 perso associé. (passer les comptes sans perso)
+			$query = 'SELECT a.id as id'
+						. ' FROM ' . DB_PREFIX . 'account as a'
+						. ' LEFT JOIN (SELECT userId, COUNT(*) as tot FROM ' . DB_PREFIX . 'perso GROUP BY userId) as p ON (p.userId=a.id)'
+						. ' WHERE a.remise<UNIX_TIMESTAMP() AND p.tot>0'
+						. ' ORDER BY a.remise ASC'
 						. ' LIMIT :max;';
 			$prep = $db->prepare($query);
 			$prep->bindValue('max',		$maxRemise,		PDO::PARAM_INT);
