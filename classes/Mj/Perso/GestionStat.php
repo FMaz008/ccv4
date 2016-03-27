@@ -17,7 +17,7 @@ class Mj_Perso_GestionStat
 				. ' FROM ' . DB_PREFIX . 'stat'
 				. ' ORDER BY nom;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

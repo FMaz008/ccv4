@@ -17,7 +17,7 @@ class Mj_Perso_Connaissance
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',		$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$bdd = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -36,7 +36,7 @@ class Mj_Perso_Connaissance
 					. ' WHERE persoid=:id;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',		$_GET['id'],			PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -91,7 +91,7 @@ class Mj_Perso_Connaissance
 				. ' ORDER BY nomid;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',		$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$donnee = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

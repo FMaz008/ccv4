@@ -30,7 +30,7 @@ class Visitor_Passrecover2
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':email',		$_POST['email'],		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$content = $prep->fetch();
 		
 		if ($content === false)
@@ -67,7 +67,7 @@ class Visitor_Passrecover2
 		$prep = $db->prepare($query);
 		$prep->bindValue(':pass',		$pass,				PDO::PARAM_STR);
 		$prep->bindValue(':email',		$_POST['email'],	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		
 		
 		

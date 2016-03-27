@@ -32,7 +32,7 @@ class Member_Config_Compte2
 			$prep = $db->prepare($query);
 			$prep->bindValue(':userId',		$account->getId(),	PDO::PARAM_INT);
 			$prep->bindValue(':pass',		$newPass,			PDO::PARAM_STR);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 		}
 		
 		
@@ -47,7 +47,7 @@ class Member_Config_Compte2
 			$prep = $db->prepare($query);
 			$prep->bindValue(':userId',		$account->getId(),				PDO::PARAM_INT);
 			$prep->bindValue(':extraTime',	(int)$_POST['adv_rem']*60*60,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 		}
 		
 		
@@ -62,7 +62,7 @@ class Member_Config_Compte2
 		$prep->bindValue(':userId',		$account->getId(),		PDO::PARAM_INT);
 		$prep->bindValue(':heItems',	$_POST['heitems'],		PDO::PARAM_INT);
 		$prep->bindValue(':skin',		$_POST['skinname'],		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		
 		
 		//Modification du email
@@ -95,7 +95,7 @@ class Member_Config_Compte2
 			$prep->bindValue(':userId',		$account->getId(),	PDO::PARAM_INT);
 			$prep->bindValue(':email',		$_POST['email'],	PDO::PARAM_STR);
 			$prep->bindValue(':valCode',	$valCode,			PDO::PARAM_STR);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			
 			
 			//Envoi du email

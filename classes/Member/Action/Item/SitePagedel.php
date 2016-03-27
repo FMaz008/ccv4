@@ -59,7 +59,7 @@ class Member_Action_Item_Sitepagedel
 				. ' WHERE page_id=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',			$matches[2],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 
@@ -68,7 +68,7 @@ class Member_Action_Item_Sitepagedel
 					WHERE id=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',			$matches[2],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

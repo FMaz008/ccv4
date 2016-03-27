@@ -58,7 +58,7 @@ class Member_Action_Item_MenotterDel
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',			$persoMenotte->getId(),			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -69,7 +69,7 @@ class Member_Action_Item_MenotterDel
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':itemId',			$persoMenotte->getMenotte(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 				

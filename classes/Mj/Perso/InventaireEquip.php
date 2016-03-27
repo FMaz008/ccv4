@@ -30,7 +30,7 @@ class Mj_Perso_InventaireEquip
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':invId',		$_GET['id'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -48,7 +48,7 @@ class Mj_Perso_InventaireEquip
 				$prep = $db->prepare($query);
 				$prep->bindValue(':type',		$arr['db_type'],		PDO::PARAM_STR);
 				$prep->bindValue(':persoId',	$arr['inv_persoid'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -67,7 +67,7 @@ class Mj_Perso_InventaireEquip
 				$prep->bindValue(':type',		$arr['db_type'],		PDO::PARAM_STR);
 				$prep->bindValue(':sousType',	$arr['db_soustype'],	PDO::PARAM_STR);
 				$prep->bindValue(':persoId',	$arr['inv_persoid'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -81,7 +81,7 @@ class Mj_Perso_InventaireEquip
 			foreach($arrAll as &$arr)
 			{
 				$prep->bindValue(':invId',	$arr['inv_id'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 			}
 			$prep->closeCursor();
 			$prep = NULL;
@@ -95,7 +95,7 @@ class Mj_Perso_InventaireEquip
 		$prep = $db->prepare($query);
 		$prep->bindValue(':equip',		$_GET['equip'],	PDO::PARAM_STR);
 		$prep->bindValue(':invId',		$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 				

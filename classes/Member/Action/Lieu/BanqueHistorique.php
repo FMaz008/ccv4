@@ -39,7 +39,7 @@ class Member_Action_Lieu_BanqueHistorique
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compte',		$compte_no,	PDO::PARAM_STR);
 		$prep->bindValue(':banque',		$banque_no,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -67,7 +67,7 @@ class Member_Action_Lieu_BanqueHistorique
 				. ' ORDER BY date ASC;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compte',		$_POST['compte'],	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrTrs = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

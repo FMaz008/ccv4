@@ -33,7 +33,7 @@ class Member_Mp_Index
 				. ' ORDER BY `date` DESC;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':userId',	$account->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

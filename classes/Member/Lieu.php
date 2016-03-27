@@ -186,7 +186,7 @@ class Member_Lieu
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$persoid,		PDO::PARAM_INT);
 		$prep->bindValue(':nomTech',	$this->nomTech,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrLien = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -293,7 +293,7 @@ class Member_Lieu
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nomTech',	$nomTech,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		return $prep->fetch();
 	}
 	
@@ -328,7 +328,7 @@ class Member_Lieu
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
 		$prep->bindValue(':nomTech',	$this->nomTech,		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrPersoConnu = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -494,7 +494,7 @@ class Member_Lieu
 				. ' ORDER BY id_casier;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',		$this->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrCasier = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -647,7 +647,7 @@ class Member_Lieu
 		$prep = $db->prepare($query);
 		$prep->bindValue(':cash',	$this->boutiqueCash,	PDO::PARAM_INT);
 		$prep->bindValue(':id',		$this->id,				PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -746,7 +746,7 @@ class Member_Lieu
 				. ' WHERE `boutiqueid` = :lieuId';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$this->id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrGerants = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -801,7 +801,7 @@ class Member_Lieu
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nomTech',	$this->getNomTech(),	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -891,7 +891,7 @@ class Member_Lieu
 				. ' ORDER BY id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',		$this->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrMediaAcces = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -954,7 +954,7 @@ class Member_Lieu
 				. ' WHERE `Id`=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$id, PDO::PARAM_INT);
-		$count = $prep->execute($db, __FILE__,__LINE__);
+		$count = $prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -991,14 +991,14 @@ class Member_Lieu
 		$prep->bindValue(':mediaType',			$mediaType, 		PDO::PARAM_STR);
 		$prep->bindValue(':canalId',			$channelId, 		PDO::PARAM_INT);
 		$prep->bindValue(':interactionType',	$interactionType,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
 		//Trouver l'id
 		$query = "SELECT LAST_INSERT_ID()";
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$result = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -1008,7 +1008,7 @@ class Member_Lieu
 				. ' WHERE `id` = :id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id', $id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -1040,7 +1040,7 @@ class Member_Lieu
 				. ' ORDER BY `date` DESC;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':boutiqueid', $this->id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -1106,7 +1106,7 @@ class Member_Lieu
 					. ' ORDER BY `date` ASC LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':boutiqueid', $this->id, PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -1118,7 +1118,7 @@ class Member_Lieu
 					. ' WHERE `id` = :id LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id', $transactionId, PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -1140,7 +1140,7 @@ class Member_Lieu
 		$prep->bindValue(':marchandage', $marchandage, PDO::PARAM_INT);
 		$prep->bindValue(':moyenpaiement', $moyenPaiement, PDO::PARAM_INT);
 		$prep->bindValue(':prixtotal', $prixTotal, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	 }
@@ -1160,7 +1160,7 @@ class Member_Lieu
 				. ' WHERE `boutiqueid` = :boutiqueid;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':boutiqueid', $this->id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	 }

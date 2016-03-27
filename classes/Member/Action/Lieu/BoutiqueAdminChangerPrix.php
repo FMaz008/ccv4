@@ -41,7 +41,7 @@ class Member_Action_Lieu_BoutiqueAdminChangerPrix
 			$prep->bindValue(':prixVente',	$btvnt,				PDO::PARAM_INT);
 			$prep->bindValue(':prixAchat',	$btach,				PDO::PARAM_INT);
 			$prep->bindValue(':invId',		$item->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 		}
 		$prep->closeCursor();
 		$prep = NULL;

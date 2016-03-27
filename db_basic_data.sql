@@ -1,5 +1,5 @@
 -- Créer un compte test
-INSERT INTO `cc_account` (`1`,`user`,`pass`,`email`,`sexe`,`date_inscr`,`remise`,`code_validation`,`skin`) VALUES
+INSERT INTO `cc_account` (`id`,`user`,`pass`,`email`,`sexe`,`date_inscr`,`remise`,`code_validation`,`skin`) VALUES
 (1, 'test', 'teH0wLIpW0gyQ', 'test@test.com', 'm', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), NULL, 'dark_blue');
 
 -- Ajouter les droits d'accès administrateur.

@@ -25,7 +25,7 @@ class Mj_TabHe
 					. ' LIMIT 100;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':mjId',			$mj->getId(),			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

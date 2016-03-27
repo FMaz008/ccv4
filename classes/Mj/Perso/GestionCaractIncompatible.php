@@ -16,7 +16,7 @@ class Mj_Perso_GestionCaractIncompatible
 					FROM ' . DB_PREFIX . 'caract
 					ORDER BY nom ASC;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$CARACT = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

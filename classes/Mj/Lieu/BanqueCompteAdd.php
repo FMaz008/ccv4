@@ -55,7 +55,7 @@ class Mj_Lieu_BanqueCompteAdd{
 				. ' WHERE compte_banque=:compte;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compte',	$_POST['compte_banque'],	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -76,7 +76,7 @@ class Mj_Lieu_BanqueCompteAdd{
 		$prep->bindValue(':cash',							$_POST['compte_cash'],						PDO::PARAM_INT);
 		$prep->bindValue(':nip',							$_POST['compte_nip'],						PDO::PARAM_STR);
 		$prep->bindValue(':compte_auth_auto_transaction', 	$_POST['compte_auth_auto_transaction'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

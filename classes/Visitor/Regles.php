@@ -24,7 +24,7 @@ class Visitor_Regles
 				. ' LIMIT 1;'; //6 = Règles
 		$prep = $db->prepare($query);
 		$prep->bindValue(':livreId',	6, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$content = $prep->fetch();
 		
 		if ($content === false)

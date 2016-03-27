@@ -40,7 +40,7 @@ class Mj_Lieu_Sendmsg
 				for($i=1; $i<=count($arrLieux); $i++)
 					$prep->bindValue($i, $arrLieux[$i-1],	PDO::PARAM_STR);
 				
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;

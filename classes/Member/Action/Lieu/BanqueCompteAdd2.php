@@ -34,7 +34,7 @@ class Member_Action_Lieu_BanqueCompteAdd2
 				. ' WHERE banque_lieu=:nomTech;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nomTech',		$perso->getLieu()->getNomTech(),		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -73,7 +73,7 @@ class Member_Action_Lieu_BanqueCompteAdd2
 		$prep->bindValue(':compte',		$compte_no,		PDO::PARAM_STR);
 		$prep->bindValue(':nom',		$_POST['nom'],	PDO::PARAM_STR);
 		$prep->bindValue(':nip',		$_POST['nip'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -89,7 +89,7 @@ class Member_Action_Lieu_BanqueCompteAdd2
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compteId',		$compteId,			PDO::PARAM_INT);
 		$prep->bindValue(':persoId',		$perso->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

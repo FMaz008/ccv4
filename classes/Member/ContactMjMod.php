@@ -33,7 +33,7 @@ class Member_ContactMjMod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':sujetId',	$_GET['id'],						PDO::PARAM_INT);
 			$prep->bindValue(':msg',		fctScriptProtect($_POST['msg']),	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			
 			
 			//Copier le message dans les HE
@@ -49,7 +49,7 @@ class Member_ContactMjMod
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':sujetId',	$_GET['id'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			
 			$tpl->set('PAGE', '?popup=1&m=ContactMj');
 			return $tpl->fetch($account->getSkinRemotePhysicalPath() . 'html/Member/action_redirect.htm',__FILE__,__LINE__);
@@ -68,7 +68,7 @@ class Member_ContactMjMod
 		$prep = $db->prepare($query);
 		$prep->bindValue(':sujetId',	$_GET['id'],	PDO::PARAM_INT);
 		$prep->bindValue(':persoId',	$perso->getId(),PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if($arr === false)
@@ -94,7 +94,7 @@ class Member_ContactMjMod
 				. ' ORDER BY p.`date` ASC;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':sujetId',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrM = $prep->fetchAll();
 		
 		if(count($arrM) != 0)

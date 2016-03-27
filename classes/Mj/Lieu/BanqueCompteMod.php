@@ -35,7 +35,7 @@ class Mj_Lieu_BanqueCompteMod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compteId',	$_POST['id'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -73,7 +73,7 @@ class Mj_Lieu_BanqueCompteMod
 				. ' WHERE compte_banque=:banqueNo;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueNo',	$_POST['compte_banque'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -102,7 +102,7 @@ class Mj_Lieu_BanqueCompteMod
 		$prep->bindValue(':nip',							$_POST['compte_nip'],					PDO::PARAM_STR);
 		$prep->bindValue(':compteId',						$_POST['id'],							PDO::PARAM_INT);
 		$prep->bindValue(':compte_auth_auto_transaction',	$_POST['compte_auth_auto_transaction'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

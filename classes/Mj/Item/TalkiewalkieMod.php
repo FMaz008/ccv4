@@ -37,7 +37,7 @@ class Mj_Item_TalkiewalkieMod
 					. ' WHERE `db_id` = :db_id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -65,7 +65,7 @@ class Mj_Item_TalkiewalkieMod
 					. ' WHERE `item_dbid` = :db_id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$result = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -113,7 +113,7 @@ class Mj_Item_TalkiewalkieMod
 		$prep->bindValue(':db_resistance', $_POST['db_resistance'], PDO::PARAM_INT);
 		$prep->bindValue(':db_notemj', $_POST['db_notemj'], PDO::PARAM_STR);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -123,7 +123,7 @@ class Mj_Item_TalkiewalkieMod
 					. ' WHERE `item_dbid` = :db_id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$result = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -137,7 +137,7 @@ class Mj_Item_TalkiewalkieMod
 							. ' LIMIT 1;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id', $row[0], PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 			}
@@ -149,7 +149,7 @@ class Mj_Item_TalkiewalkieMod
 				$prep = $db->prepare($query);
 				$prep->bindValue(':caption', $_POST[$row[0] . '_actioncaption'], PDO::PARAM_STR);
 				$prep->bindValue(':id', $row[0], PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 			}
@@ -173,7 +173,7 @@ class Mj_Item_TalkiewalkieMod
 					$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
 					$prep->bindValue(':caption', $_POST[$i . '_actioncaption_add'], PDO::PARAM_STR);
 					$prep->bindValue(':url', $_POST[$i . '_actionpage_add'], PDO::PARAM_STR);
-					$prep->execute($db, __FILE__,__LINE__);
+					$prep->executePlus($db, __FILE__,__LINE__);
 					$prep->closeCursor();
 					$prep = NULL;
 				}

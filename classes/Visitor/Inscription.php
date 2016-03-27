@@ -24,7 +24,7 @@ class Visitor_Inscription
 				. ' WHERE db_id=:livre_id;'; //8 = NOTICES
 		$prep = $db->prepare($query);
 		$prep->bindValue(':livre_id',	8, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if ($arr === false)
@@ -40,7 +40,7 @@ class Visitor_Inscription
 					WHERE db_id=:livre_id;'; //6 = Règles HJ
 		$prep = $db->prepare($query);
 		$prep->bindValue(':livre_id',	6, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if ($arr === false)

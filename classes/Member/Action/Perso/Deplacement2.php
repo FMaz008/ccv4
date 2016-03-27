@@ -119,7 +119,7 @@ class Member_Action_Perso_Deplacement2
 			$prep->bindValue(':de',			$perso->getLieu()->getNomTech(),PDO::PARAM_STR);
 			$prep->bindValue(':vers',		$lien->getNomTech(),			PDO::PARAM_STR);
 			$prep->bindValue(':persoId',	$perso->getId(),				PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -287,7 +287,7 @@ class Member_Action_Perso_Deplacement2
 			$prep->bindValue(':vers',		$lien->getNomTech(),				PDO::PARAM_STR);
 			$prep->bindValue(':persoId',	$pid,								PDO::PARAM_INT);
 			$prep->bindValue(':expiration',	$expire_time,						PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 
 			$arrTenirPortePersoId[] = $pid;
 		}
@@ -376,7 +376,7 @@ class Member_Action_Perso_Deplacement2
 						. ' LIMIT 1;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':porteId',	$porteTenueId,		PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 			}
@@ -395,7 +395,7 @@ class Member_Action_Perso_Deplacement2
 				$prep = $db->prepare($query);
 				$prep->bindValue(':nomTech',	$lien->getNomTech(),			PDO::PARAM_STR);
 				$prep->bindValue(':limit',		count($arrPersoForcerEntrer),	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 				
@@ -420,7 +420,7 @@ class Member_Action_Perso_Deplacement2
 			$prep = $db->prepare($query);
 			$prep->bindValue(':nomTech',	$lien->getNomTech(),	PDO::PARAM_STR);
 			$prep->bindValue(':persoId',	$perso->getId(),		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			

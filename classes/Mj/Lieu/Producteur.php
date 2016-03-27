@@ -20,7 +20,7 @@ class Mj_Lieu_Producteur
 				. ' LEFT JOIN ' . DB_PREFIX . 'lieu as l ON (l.id = p.lieuId)'
 				. ' GROUP BY p.id;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

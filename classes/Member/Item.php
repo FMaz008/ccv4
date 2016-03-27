@@ -192,7 +192,7 @@ abstract class Member_Item
 		$prep->bindValue(':cacheNo',	$cacheNo,	PDO::PARAM_INT);
 		$prep->bindValue(':cacheTaux',	$tauxCache,	PDO::PARAM_INT);
 		$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -211,7 +211,7 @@ abstract class Member_Item
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -305,7 +305,7 @@ abstract class Member_Item
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -318,7 +318,7 @@ abstract class Member_Item
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
 			$prep->bindValue(':qte',		$qte,				PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -419,7 +419,7 @@ abstract class Member_Item
 			$prep = $db->prepare($query);
 			$prep->bindValue(':res',	$qte,				PDO::PARAM_INT);
 			$prep->bindValue(':id',		$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -489,7 +489,7 @@ abstract class Member_Item
 			$prep = $db->prepare($query);
 			$prep->bindValue(':lieuTech',	$boutiqueTo->getNomTech(),	PDO::PARAM_STR);
 			$prep->bindValue(':id',			$this->getInvId(),			PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -541,7 +541,7 @@ abstract class Member_Item
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',	$persoTo->getId(),	PDO::PARAM_INT);
 			$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -622,7 +622,7 @@ abstract class Member_Item
 			$prep->bindValue(':cacheNo',	$cache_no,				PDO::PARAM_INT);
 			$prep->bindValue(':cacheTaux',	$degre,					PDO::PARAM_INT);
 			$prep->bindValue(':id',			$this->getInvId(),		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -644,7 +644,7 @@ abstract class Member_Item
 		$prep->bindValue(':cacheNo',	$cache_no,	PDO::PARAM_INT);
 		$prep->bindValue(':cacheTaux',	$degre,		PDO::PARAM_INT);
 		$prep->bindValue(':id',			$newItemId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 
@@ -685,7 +685,7 @@ abstract class Member_Item
 			$prep = $db->prepare($query);
 			$prep->bindValue(':lieuTech',	$lieuTo->getNomTech(),	PDO::PARAM_STR);
 			$prep->bindValue(':id',			$this->getInvId(),		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -747,7 +747,7 @@ abstract class Member_Item
 			$prep = $db->prepare($query);
 			$prep->bindValue(':casierId',	$casierTo->getId(),	PDO::PARAM_INT);
 			$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -811,7 +811,7 @@ abstract class Member_Item
 			$prep = $db->prepare($query);
 			$prep->bindValue(':itemId',		$itemTo->getInvId(),PDO::PARAM_INT);
 			$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -875,7 +875,7 @@ abstract class Member_Item
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$itemInvId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr= $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -976,7 +976,7 @@ abstract class Member_Item
 		$prep->bindValue(':inv_extradesc',			$arr['inv_extradesc'],		PDO::PARAM_STR);
 		$prep->bindValue(':inv_notemj',				$arr['inv_notemj'],			PDO::PARAM_STR);
 		
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -1207,7 +1207,7 @@ abstract class Member_Item
 		$prep->bindValue(':persoId',		$this->getIdProprio(),	PDO::PARAM_INT);
 		$prep->bindValue(':itemId',			$this->getInvId(),		PDO::PARAM_INT);
 		$prep->bindValue(':equip',			$equip,					PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

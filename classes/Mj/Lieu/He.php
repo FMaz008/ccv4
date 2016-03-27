@@ -48,7 +48,7 @@ class Mj_Lieu_He
 		$prep->bindValue(':lieuId',	$id,	PDO::PARAM_INT);
 		$prep->bindValue(':from',	$from,	PDO::PARAM_INT);
 		$prep->bindValue(':nbr',	$nbr,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -94,7 +94,7 @@ class Mj_Lieu_He
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

@@ -44,7 +44,7 @@ class Member_ItemCartememoire extends Member_Item
 			$prep = $db->prepare($query);
 			$prep->bindValue(':mem',	$content,			PDO::PARAM_STR);
 			$prep->bindValue(':id',		$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -78,7 +78,7 @@ class Member_ItemCartememoire extends Member_Item
 				$prep->bindValue(':nip',	$key,		PDO::PARAM_INT);
 				
 			$prep->bindValue(':id',		$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			

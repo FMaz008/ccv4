@@ -41,7 +41,7 @@ class Member_Action_Lieu_BanqueHistoriqueDetails{
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compte',	$compte_no,	PDO::PARAM_STR);
 		$prep->bindValue(':banque',	$banque_no,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -70,7 +70,7 @@ class Member_Action_Lieu_BanqueHistoriqueDetails{
 		$prep = $db->prepare($query);
 		$prep->bindValue(':fullCompte',		$fullCompte,		PDO::PARAM_STR);
 		$prep->bindValue(':id',				$_POST['trsid'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

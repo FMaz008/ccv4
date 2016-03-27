@@ -32,7 +32,7 @@ class Mj_Lieu_EtudeSave
 				. ' WHERE lieuId=:lieuId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$_POST['LIEU_ID'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$ALREADY_SAVED = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

@@ -37,7 +37,7 @@ class Mj_Mj_Del{
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':mjId',	$_POST['id'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -51,7 +51,7 @@ class Mj_Mj_Del{
 			
 			$prep = $emailCon->prepare($query);
 			$prep->bindValue(':email',	$emailCC,	PDO::PARAM_STR);
-			$prep->execute($emailCon, __FILE__, __LINE__);
+			$prep->executePlus($emailCon, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -65,7 +65,7 @@ class Mj_Mj_Del{
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':mjId',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 

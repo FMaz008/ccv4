@@ -67,7 +67,7 @@ class Visitor_PaypalIPN
 		$prep->bindValue(':post',		serialize($_POST),		PDO::PARAM_STR);
 		$prep->bindValue(':ip',			$_SERVER['REMOTE_ADDR'],PDO::PARAM_STR);
 		$prep->bindValue(':time',		time(),					PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		die();
 		
 	}
@@ -90,9 +90,9 @@ class Visitor_PaypalIPN
 					. ' FROM ' . DB_PREFIX . 'account'
 					. ' WHERE id=:id'
 					. ' LIMIT 1;';
-		$prep = $db->query($query);
+		$prep = $db->queryPlus($query);
 		$prep->bindValue(':id',		$userId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		
 		if($arr === false)
@@ -164,10 +164,10 @@ class Visitor_PaypalIPN
 							. ' SET mp=:mp'
 							. ' WHERE id=:id'
 							. ' LIMIT 1;';
-				$prep = $db->query($query);
+				$prep = $db->queryPlus($query);
 				$prep->bindValue(':mp',		$lvl,		PDO::PARAM_STR);
 				$prep->bindValue(':id',		$userId,	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				break;
 			case 'abo':
 				$query = 'UPDATE ' . DB_PREFIX . 'account'
@@ -175,21 +175,21 @@ class Visitor_PaypalIPN
 							. ' mp_expiration=:expiration'
 						. ' WHERE id=:id'
 						. ' LIMIT 1;';
-				$prep = $db->query($query);
+				$prep = $db->queryPlus($query);
 				$prep->bindValue(':mp',			$lvl,		PDO::PARAM_STR);
 				$prep->bindValue(':expiration',	$duree,		PDO::PARAM_INT);
 				$prep->bindValue(':id',			$userId,	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				break;
 			case 'ext':
 				$query = 'UPDATE ' . DB_PREFIX . 'account'
 						. ' SET mp_expiration=mp_expiration+:extention'
 						. ' WHERE id=:id'
 						. ' LIMIT 1;';
-				$prep = $db->query($query);
+				$prep = $db->queryPlus($query);
 				$prep->bindValue(':extention',	$jours*24*60*60,	PDO::PARAM_INT);
 				$prep->bindValue(':id',			$userId,			PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				break;
 			
 			default:

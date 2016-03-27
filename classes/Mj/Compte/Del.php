@@ -32,7 +32,7 @@ class Mj_Compte_Del
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$donnees = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -49,7 +49,7 @@ class Mj_Compte_Del
 				. ' WHERE userId=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$info_pj = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -79,7 +79,7 @@ class Mj_Compte_Del
 				. ' WHERE userId=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$userId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -95,7 +95,7 @@ class Mj_Compte_Del
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$userId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

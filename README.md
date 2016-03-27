@@ -18,6 +18,10 @@ Libre à vous de vous amuser avec et à lancer vos propres jeux !
 - INNACTIVITE_VOLUNTARY_LOCATION
 
 <br />
+Assurez-vous que short_open_tag = On dans votre config php.ini !
+<br />
+
+<br />
 Si vous avez des problèmes, contactez-moi directement au email indiqué dans mes commits.<br />
 <br />
 

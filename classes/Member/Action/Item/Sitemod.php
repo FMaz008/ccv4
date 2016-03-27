@@ -57,7 +57,7 @@ class Member_Action_Item_Sitemod
 		$prep = $db->prepare($query);
 		$prep->bindValue(':site_id',	$site->getId(),		PDO::PARAM_INT);
 		$prep->bindValue(':id',			$_POST['accueil'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -77,7 +77,7 @@ class Member_Action_Item_Sitemod
 		$prep->bindValue(':acces',		$_POST['acces'],		PDO::PARAM_STR);
 		$prep->bindValue(':firstPage',	$_POST['accueil'],		PDO::PARAM_INT);
 		$prep->bindValue(':urlOld',		$_POST['url'],			PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

@@ -23,7 +23,7 @@ class Mj_Perso_Ppa
 				. ' LIMIT 1';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -60,7 +60,7 @@ class Mj_Perso_Ppa
 			$prep = $db->prepare($query);
 			$prep->bindValue(':noteMj',		htmlspecialchars($_POST['notemjbase']),	PDO::PARAM_STR);
 			$prep->bindValue(':id',			$_GET['id'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -77,7 +77,7 @@ class Mj_Perso_Ppa
 			$prep = $db->prepare($query);
 			$prep->bindValue(':mjId',		$_POST['mj'],	PDO::PARAM_INT);
 			$prep->bindValue(':id',			$_GET['id'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 
@@ -97,7 +97,7 @@ class Mj_Perso_Ppa
 			$prep->bindValue(':mjId',		$mj->getId(),						PDO::PARAM_INT);
 			$prep->bindValue(':msg',		htmlspecialchars($_POST['msg']),	PDO::PARAM_STR);
 			$prep->bindValue(':noteMj',		htmlspecialchars($_POST['notemj']),	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 
@@ -121,7 +121,7 @@ class Mj_Perso_Ppa
 				. ' ORDER BY p.`date` ASC;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',			$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -169,7 +169,7 @@ class Mj_Perso_Ppa
 						. ' LIMIT 1;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':sujetId',	$_GET['id'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 
@@ -182,7 +182,7 @@ class Mj_Perso_Ppa
 		$query = 'SELECT id, nom'
 				. ' FROM ' . DB_PREFIX . 'mj;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$MJ = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

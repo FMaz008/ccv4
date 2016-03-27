@@ -34,7 +34,7 @@ class Mj_Lieu_MairieQuestionAdd
 		$query = 'SELECT DISTINCT section'
 				. ' FROM ' . DB_PREFIX . 'mairie_question;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$SECTIONS = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -122,7 +122,7 @@ class Mj_Lieu_MairieQuestionAdd
 		$prep->bindValue(':section',		$_POST['section'],	PDO::PARAM_STR);
 		$prep->bindValue(':question',		$_POST['question'],	PDO::PARAM_STR);
 		$prep->bindValue(':reponseTech', strtolower($_POST['reponse_tech']),	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

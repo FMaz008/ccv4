@@ -60,7 +60,7 @@ class Member_He
 		$prep->bindValue(':persoId2',   $perso->getId(),        PDO::PARAM_INT);
 		$prep->bindValue(':from',       $from,                  PDO::PARAM_INT);
 		$prep->bindValue(':nbr',        $nbr,                   PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		
 		$heMsg = array();
 		$i=-1;
@@ -216,7 +216,7 @@ class Member_He
 			$prep = $db->prepare($query);
 			$prep->bindValue(':type',	$type,	PDO::PARAM_STR);
 			$prep->bindValue(':msg',	$msg,	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -321,7 +321,7 @@ class Member_He
 				$prep = $db->prepare($query);
 				$prep->bindValue(':max1',	$arrNumericIdCount,	PDO::PARAM_INT);
 				$prep->bindValue(':max2',	$arrNumericIdCount,	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrData = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -424,7 +424,7 @@ class Member_He
 						. ' LIMIT 1;';
 		$prep = $db->prepare($queryGet);
 		$prep->bindValue(':description', $description, PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 
 		$arr = $prep->fetch();
 		$prep->closeCursor();
@@ -442,7 +442,7 @@ class Member_He
 			$prep = $db->prepare($queryAdd);
 			$prep->bindValue(':description',	$description,	PDO::PARAM_STR);
 			$prep->bindValue(':msgWhoUse',		1,				PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 
 			$idDescription = $db->lastInsertId(); //Récupérer l'ID de la description insérée.
 			$prep->closeCursor();
@@ -458,7 +458,7 @@ class Member_He
 						. ' LIMIT 1;';
 			$prep = $db->prepare($queryUp);
 			$prep->bindValue(':id',	$idDescription,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -516,7 +516,7 @@ class Member_He
 			{
 				
 				// Présomption: l'ID gère l'ordre temporel.
-				$prep->execute();
+				$prep->executePlus();
 				
 				$qteDeleted++;
 			}
@@ -547,7 +547,7 @@ class Member_He
 						. ' AND `show`!=0;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -576,7 +576,7 @@ class Member_He
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -646,7 +646,7 @@ class Member_He
 		// $i == 2
 		$prep->bindValue($i,	$persoId,	PDO::PARAM_INT); 	
 		
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$affRow = $prep->rowCount();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -682,7 +682,7 @@ class Member_He
 		$prep = $db->prepare($query);
 		$prep->bindValue(':type',		$type,		PDO::PARAM_STR);	
 		$prep->bindValue(':persoId',	$persoId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -703,7 +703,7 @@ class Member_He
 					. ' AND persoid=:persoId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$persoId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$affRow = $prep->rowCount();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -735,7 +735,7 @@ class Member_He
 					. ' WHERE persoid=:persoId ;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$persoId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$affRow = $prep->rowCount(); //Messages effacés
 		$prep->closeCursor();
 		$prep = NULL;
@@ -748,7 +748,7 @@ class Member_He
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$persoId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -780,7 +780,7 @@ class Member_He
 					. ' GROUP BY h.`id` HAVING SUM( d.`show` )=0;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':date',	$expiration,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrMsg = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -798,7 +798,7 @@ class Member_He
 		$query = 'DELETE FROM `' . DB_PREFIX . 'he`'
 				. ' WHERE `id` IN (' . $into . ');';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$deleted = $prep->rowCount();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -809,7 +809,7 @@ class Member_He
 		$query = 'DELETE FROM `' . DB_PREFIX . 'he_fromto`'
 				. ' WHERE msgid IN (' . $into . ');';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -822,7 +822,7 @@ class Member_He
 		foreach($arrMsg as $msg)
 		{
 			$prep->bindValue(':id',	$msg['id_description'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 		}
 		$prep->closeCursor();
 		$prep = NULL;
@@ -831,7 +831,7 @@ class Member_He
 		$query = 'DELETE FROM `' . DB_PREFIX . 'he_description`'
 				. ' WHERE `msg_who_use` <= 0;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -880,7 +880,7 @@ class Member_He
 			$prep->bindValue(':qte',		$qte,		PDO::PARAM_INT);
 			$prep->bindValue(':persoId',	$persoId,	PDO::PARAM_INT);
 		}
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$affRow = $prep->rowCount();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -897,7 +897,7 @@ class Member_He
 						. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',	$persoId,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			

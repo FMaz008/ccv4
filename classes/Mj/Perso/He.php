@@ -23,7 +23,7 @@ class Mj_Perso_He
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id', 	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -79,7 +79,7 @@ class Mj_Perso_He
 		$prep->bindValue(':persoId',	$persoId,	PDO::PARAM_INT);
 		$prep->bindValue(':from',		$from,		PDO::PARAM_INT);
 		$prep->bindValue(':nbr',		$nbr,		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -119,7 +119,7 @@ class Mj_Perso_He
 				. ' WHERE persoid=:persoId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

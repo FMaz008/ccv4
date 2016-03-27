@@ -25,7 +25,7 @@ class Mj_Lieu_BiblioDel
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$row[0],	PDO::PARAM_INT);
 		$prep->bindValue(':dbId',	$row[1],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

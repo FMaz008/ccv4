@@ -30,7 +30,7 @@ class Member_Config_Perso
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',				$perso->getId(),	PDO::PARAM_INT);
 		$prep->bindValue(':userId',			$account->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		
 		$harr = $prep->fetch();
 		$tpl->set('BACKGROUND', stripslashes($harr['background']));

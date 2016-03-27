@@ -63,7 +63,7 @@ class Member_Action_Lieu_TelephonerCabine
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':noTel',			$numero_destinataire,		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -119,7 +119,7 @@ class Member_Action_Lieu_TelephonerCabine
 					. ' WHERE compte_id=1'
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -159,7 +159,7 @@ class Member_Action_Lieu_TelephonerCabine
 		$prep->bindValue(':fromPersoId',		$id_expediteur,				PDO::PARAM_INT);
 		$prep->bindValue(':toNoTel',			$numero_destinataire,		PDO::PARAM_STR);
 		$prep->bindValue(':toPersoId',			$id_destinataire,			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

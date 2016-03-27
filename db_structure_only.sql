@@ -1196,9 +1196,9 @@ ALTER TABLE `cc_producteur_inv`
   
 ---- MAJ
 
----
---- Structure table cc_boutiques_gerants + conversion
----
+--
+-- Structure table cc_boutiques_gerants + conversion
+--
 
 DROP TABLE IF EXISTS `cc_boutiques_gerants`;
 CREATE TABLE IF NOT EXISTS `cc_boutiques_gerants` AS 
@@ -1208,17 +1208,17 @@ FROM `cc_lieu` WHERE `proprioid` != 'NULL');
 ALTER TABLE `cc_boutiques_gerants` 
 ADD PRIMARY KEY(`boutiqueid`, `persoid`);
 
----
---- Suppression du champ inutile dans cc_lieu
----
+--
+-- Suppression du champ inutile dans cc_lieu
+--
 
 ALTER TABLE `cc_lieu`
 DROP COLUMN `proprioid`;
 
----
---- Structure tables relatives aux médias
---- cc_media cc_lieu_medias
----
+--
+-- Structure tables relatives aux médias
+-- cc_media cc_lieu_medias
+--
 
 DROP TABLE IF EXISTS `cc_media`;
 CREATE TABLE IF NOT EXISTS `cc_media` (
@@ -1242,17 +1242,17 @@ CREATE TABLE IF NOT EXISTS `cc_lieu_medias` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 	
----
---- Modification table item
---- Ajout d'un type d'objet
----
+--
+-- Modification table item
+-- Ajout d'un type d'objet
+--
 
 ALTER TABLE `cc_item_db` CHANGE `db_type` `db_type` ENUM( 'arme', 'autre', 'badge', 'cartebanque', 'cartememoire', 'clef', 'defense', 'drogue', 'livre', 'munition', 'nourriture', 'ordinateur', 'sac', 'talkiewalkie', 'telephone', 'trousse', 'media' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'autre' ;
 
----
---- Structure tables relatives aux historiques des boutiques
---- cc_boutiques_historiques
----
+--
+-- Structure tables relatives aux historiques des boutiques
+-- cc_boutiques_historiques
+--
 
 DROP TABLE IF EXISTS `cc_boutiques_historiques` ;
 CREATE TABLE IF NOT EXISTS `cc_boutiques_historiques` (
@@ -1267,26 +1267,26 @@ CREATE TABLE IF NOT EXISTS `cc_boutiques_historiques` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
----
---- Modification table cc_mj
---- Ajout d'un accès développeur
----
+--
+-- Modification table cc_mj
+-- Ajout d'un accès développeur
+--
 
 ALTER TABLE `cc_mj`
 ADD COLUMN `ax_dev` smallint(1) NOT NULL DEFAULT 0;
 
----
---- Modification table cc_banque_comptes
---- Ajout d'une authorisation de transactions automatiques
----
+--
+-- Modification table cc_banque_comptes
+-- Ajout d'une authorisation de transactions automatiques
+--
 
 ALTER TABLE `cc_banque_comptes`
 ADD COLUMN `compte_auth_auto_transaction` smallint(1) NOT NULL DEFAULT 0;
 
----
---- Structure table relative aux transactions automatiques
---- cc_banque_transactions
----
+--
+-- Structure table relative aux transactions automatiques
+-- cc_banque_transactions
+--
 
 DROP TABLE IF EXISTS `cc_banque_transactions`;
 CREATE TABLE IF NOT EXISTS `cc_banque_transactions` (
@@ -1299,10 +1299,10 @@ CREATE TABLE IF NOT EXISTS `cc_banque_transactions` (
 	PRIMARY KEY (`transaction_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-----
----- Structure table stockant les descriptions des perso associés à un message sans doublon
----- cc_he_description
-----
+--
+-- Structure table stockant les descriptions des perso associés à un message sans doublon
+-- cc_he_description
+--
 
 DROP TABLE IF EXISTS `cc_he_description`;
 CREATE TABLE IF NOT EXISTS `cc_he_description` (
@@ -1312,55 +1312,55 @@ CREATE TABLE IF NOT EXISTS `cc_he_description` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-----
----- Remplissage de la table des descriptions avec les descriptions déjà présentes dans la table he_fromto
-----
+--
+-- Remplissage de la table des descriptions avec les descriptions déjà présentes dans la table he_fromto
+--
 
 INSERT INTO `cc_he_description` (`description`, `msg_who_use`)
 SELECT `description`, COUNT(*) AS `nb_desc`
 FROM `cc_he_fromto` 
 GROUP BY `description`;
 
-----
----- Ajout du champ id_description correspondant dans la table cc_he_fromto
-----
+--
+-- Ajout du champ id_description correspondant dans la table cc_he_fromto
+--
 
 ALTER TABLE `cc_he_fromto`
 ADD COLUMN `id_description` int(12) NOT NULL DEFAULT 0;
 
-----
----- Remplissage du nouveau champ id_description dans la table cc_he_fromto
-----
+--
+-- Remplissage du nouveau champ id_description dans la table cc_he_fromto
+--
 
 UPDATE `cc_he_fromto` as ft LEFT JOIN `cc_he_description` as d ON (ft.description = d.description)
 SET ft.id_description = d.id;
 
-----
----- Suppression du champ description dans la table cc_he_fromto
-----
+--
+-- Suppression du champ description dans la table cc_he_fromto
+--
 
 ALTER TABLE `cc_he_fromto`
 DROP COLUMN `description`;
 
-----
----- Ajout d'une colonne name_complement pour stocker "System" ou autres trucs
-----
+--
+-- Ajout d'une colonne name_complement pour stocker "System" ou autres trucs
+--
 
 ALTER TABLE `cc_he_fromto`
 ADD COLUMN `name_complement` varchar(25) NOT NULL DEFAULT "";
 
-----
----- Remplissage de la colonne name_completement
----- Modification de la colonne persoid en concordance
-----
+--
+-- Remplissage de la colonne name_completement
+-- Modification de la colonne persoid en concordance
+--
 
 UPDATE `cc_he_fromto`
 SET `name_complement` = `persoid`, `persoid` = 0
 WHERE `persoid` = 0;
 
-----
----- Modification du type de la colonne persoid pour le rendre uniquement int
-----
+--
+-- Modification du type de la colonne persoid pour le rendre uniquement int
+--
 
 ALTER TABLE `cc_he_fromto` 
 CHANGE `persoid` 

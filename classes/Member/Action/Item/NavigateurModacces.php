@@ -46,7 +46,7 @@ class Member_Action_Item_NavigateurModacces
 						. ' (:id);';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$site->getId(),			PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 				
@@ -73,7 +73,7 @@ class Member_Action_Item_NavigateurModacces
 							$prep = $db->prepare($query);
 							$prep->bindValue(':siteId',			$site->getId(),		PDO::PARAM_INT);
 							$prep->bindValue(':id',				$ax->getId(),		PDO::PARAM_INT);
-							$prep->execute($db, __FILE__, __LINE__);
+							$prep->executePlus($db, __FILE__, __LINE__);
 							$prep->closeCursor();
 							$prep = NULL;
 							
@@ -81,7 +81,7 @@ class Member_Action_Item_NavigateurModacces
 									. ' WHERE	user_id=:userId;';
 							$prep = $db->prepare($query);
 							$prep->bindValue(':userId',			$ax->getId(),		PDO::PARAM_INT);
-							$prep->execute($db, __FILE__, __LINE__);
+							$prep->executePlus($db, __FILE__, __LINE__);
 							$prep->closeCursor();
 							$prep = NULL;
 						}
@@ -109,7 +109,7 @@ class Member_Action_Item_NavigateurModacces
 							$prep->bindValue(':admin',			isset($_POST['ax_' . $ax->getId() . '_admin'])	? '1' : '0',		PDO::PARAM_STR);
 							$prep->bindValue(':siteId',			$site->getId(),		PDO::PARAM_INT);
 							$prep->bindValue(':id',				$ax->getId(),		PDO::PARAM_INT);
-							$prep->execute($db, __FILE__, __LINE__);
+							$prep->executePlus($db, __FILE__, __LINE__);
 							$prep->closeCursor();
 							$prep = NULL;
 						}

@@ -35,7 +35,7 @@ class Innactif
 			$prep->bindValue('expiration',		$nextnow,		PDO::PARAM_INT);
 			$prep->bindValue('lieu',			INNACTIVITE_TELEPORT_LOCATION,		PDO::PARAM_STR);
 			$prep->bindValue('lieuVac', 		INNACTIVITE_VOLUNTARY_LOCATION, 	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrPerso = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -57,7 +57,7 @@ class Innactif
 				
 				$prep->bindValue('lieu',	INNACTIVITE_TELEPORT_LOCATION,		PDO::PARAM_STR);
 				$prep->bindValue('persoId',	$id,								PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				
 				Member_He::add('System', $id, 'innact', 'Votre personnage a été téléporté pour inactivité.');
 				
@@ -83,7 +83,7 @@ class Innactif
 			$prep = $db->prepare($query);
 			$prep->bindValue('expiration',		$delExpir,		PDO::PARAM_INT);
 			$prep->bindValue('lieuVac', 		INNACTIVITE_VOLUNTARY_LOCATION, 	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrPerso = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;

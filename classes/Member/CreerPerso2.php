@@ -19,7 +19,7 @@ class Member_CreerPerso2
 				. ' WHERE id=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$account->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -32,7 +32,7 @@ class Member_CreerPerso2
 		$query = 'SELECT *'
 				. ' FROM ' . DB_PREFIX . 'stat;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrS = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -52,7 +52,7 @@ class Member_CreerPerso2
 				. ' FROM ' . DB_PREFIX . 'competence'
 				. ' WHERE inscription="1";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrC = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -74,7 +74,7 @@ class Member_CreerPerso2
 					. ' AND catid=0'
 				. ' ORDER BY nom;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrC = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -96,7 +96,7 @@ class Member_CreerPerso2
 					. ' AND catid>0'
 				. ' ORDER BY nom;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrC = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -117,7 +117,7 @@ class Member_CreerPerso2
 		$query = 'SELECT *'
 				. ' FROM ' . DB_PREFIX . 'caract_incompatible;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrC = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

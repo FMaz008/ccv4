@@ -22,7 +22,7 @@ class Member_Action_Lieu_Etudier
 				. ' WHERE lieuId=:lieuId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',		$perso->getLieu()->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

@@ -21,7 +21,7 @@ class Member_ContactMj
 				. ' LIMIT 17;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrM = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -58,7 +58,7 @@ class Member_ContactMj
 				
 				//Vérifier la dernière réponse
 				$prep->bindValue(':sujetId',	$arr['id'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				$arrRep = $prep->fetch();
 				
 				$arrPpa[$i]['replyDate'] = $arrRep===false ? 'En attente' : fctToGameTime($arrRep['date']);

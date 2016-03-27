@@ -84,7 +84,7 @@ class Member_ItemRadio extends Member_Item
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nip',	$clef,				PDO::PARAM_INT);
 		$prep->bindValue(':id',		$this->getInvId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -107,7 +107,7 @@ class Member_ItemRadio extends Member_Item
 		$prep = $db->prepare($query);
 		$prep->bindValue(':freq',	$frequence,			PDO::PARAM_INT);
 		$prep->bindValue(':id',		$this->getInvId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 
@@ -147,7 +147,7 @@ class Member_ItemRadio extends Member_Item
 		$prep = $db->prepare($query);
 		$prep->bindValue(':freq',	$this->getFrequence(),	PDO::PARAM_INT);
 		$prep->bindValue(':id',		$this->getInvId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrRadio = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

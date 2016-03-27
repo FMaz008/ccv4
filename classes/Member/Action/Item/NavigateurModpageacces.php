@@ -33,7 +33,7 @@ class Member_Action_Item_NavigateurModpageacces
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',				$url_param,			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -65,7 +65,7 @@ class Member_Action_Item_NavigateurModpageacces
 				. ' WHERE page_id=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',			$url_param,			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrPageAx = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -100,7 +100,7 @@ class Member_Action_Item_NavigateurModpageacces
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',			$url_param,			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

@@ -72,7 +72,7 @@ class Member_Action_Perso_InventaireConso
 				
 				$prep = $db->prepare($query);
 				$prep->bindValue(':itemId',	$_POST['id'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 			}
@@ -107,7 +107,7 @@ class Member_Action_Perso_InventaireConso
 			$prep->bindValue(':remiseLeft',		$remiseleft,		PDO::PARAM_INT);
 			$prep->bindValue(':persoId',		$perso->getId(),	PDO::PARAM_INT);
 			$prep->bindValue(':itemId',			$newId,				PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -134,7 +134,7 @@ class Member_Action_Perso_InventaireConso
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$perso->getId(),	PDO::PARAM_INT);
 			$prep->bindValue(':itemId',			$item->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			

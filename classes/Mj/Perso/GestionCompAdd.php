@@ -29,7 +29,7 @@ class Mj_Perso_GestionCompAdd
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':abbr',	strtolower($_POST['abbr']),		PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -49,7 +49,7 @@ class Mj_Perso_GestionCompAdd
 			$prep->bindValue(':abbr',			strtolower($_POST['abbr']),	PDO::PARAM_STR);
 			$prep->bindValue(':description',	$_POST['description'],		PDO::PARAM_STR);
 			$prep->bindValue(':inscription',	$_POST['inscription'],		PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			

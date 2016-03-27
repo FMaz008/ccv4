@@ -25,7 +25,7 @@ class Member_CreerPerso3
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',		$account->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -54,7 +54,7 @@ class Member_CreerPerso3
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nom',	$_POST['nom'],	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -125,7 +125,7 @@ class Member_CreerPerso3
 		$query = 'SELECT *'
 				. ' FROM ' . DB_PREFIX . 'stat;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrStat = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -152,7 +152,7 @@ class Member_CreerPerso3
 				. ' FROM ' . DB_PREFIX . 'competence'
 				. ' WHERE inscription="1";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrComp = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -258,7 +258,7 @@ class Member_CreerPerso3
 			$prep->bindValue(':description',$_POST['description'],	PDO::PARAM_STR);
 			$prep->bindValue(':background',	$_POST['background'],	PDO::PARAM_STR);
 			$prep->bindValue(':saveType',	$saveType,			PDO::PARAM_STR);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -280,7 +280,7 @@ class Member_CreerPerso3
 				$prep->bindValue(':persoId',	$persoId, 	PDO::PARAM_INT);
 				$prep->bindValue(':statId',		$stat['id'],PDO::PARAM_INT);
 				$prep->bindValue(':xp',			$statXp, 	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 			}
 			$prep->closeCursor();
 			$prep = NULL;
@@ -305,7 +305,7 @@ class Member_CreerPerso3
 					$prep->bindValue(':persoId',	$persoId, 	PDO::PARAM_INT);
 					$prep->bindValue(':compId',		$comp['id'],PDO::PARAM_INT);
 					$prep->bindValue(':xp',			$compXp, 	PDO::PARAM_INT);
-					$prep->execute($db, __FILE__,__LINE__);
+					$prep->executePlus($db, __FILE__,__LINE__);
 				}
 			}
 			$prep->closeCursor();
@@ -327,7 +327,7 @@ class Member_CreerPerso3
 				$prep->bindValue(':persoId',	$persoId, 	PDO::PARAM_INT);
 				$prep->bindValue(':caractId',	$caract,	PDO::PARAM_INT);
 				$prep->bindValue(':desc',		$desc, 		PDO::PARAM_STR);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 			}
 			$prep->closeCursor();
 			$prep = NULL;
@@ -340,7 +340,7 @@ class Member_CreerPerso3
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':userId',		$account->getId(), 		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			

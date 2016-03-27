@@ -47,7 +47,7 @@ class Member_ItemDrogue extends Member_Item
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',		$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;	
 		}
@@ -60,7 +60,7 @@ class Member_ItemDrogue extends Member_Item
 			$prep = $db->prepare($query);
 			$prep->bindValue(':qte',	$qte,				PDO::PARAM_INT);
 			$prep->bindValue(':id',		$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}

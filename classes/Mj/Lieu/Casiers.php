@@ -12,7 +12,7 @@ $query = 'SELECT `inv_idcasier`, count(`inv_idcasier`)
 			WHERE	`inv_idcasier` IS NOT NULL
 				AND `inv_lieutech`="A.mairie"
 			GROUP BY `inv_idcasier`;';
-$result = $db->query($query, __FILE__, __LINE__, __FUNCTION__, __CLASS__, __METHOD__);
+$result = $db->queryPlus($query, __FILE__, __LINE__, __FUNCTION__, __CLASS__, __METHOD__);
 */
 
 class Mj_Lieu_Casiers
@@ -36,7 +36,7 @@ class Mj_Lieu_Casiers
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -58,7 +58,7 @@ class Mj_Lieu_Casiers
 				. ' GROUP BY id_casier;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

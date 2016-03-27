@@ -14,7 +14,7 @@
  *					. ' LIMIT 1;';
  * 			$prep = $db->prepare($query);
  *			$prep->bindValue(':carteId',	$item->getNoCarte(),	PDO::PARAM_INT);
- *			$prep->execute($db, __FILE__, __LINE__);
+ *			$prep->executePlus($db, __FILE__, __LINE__);
  *			$arr = $prep->fetch();
  *			$prep->closeCursor();
  *			$prep = NULL;
@@ -121,7 +121,7 @@ class Member_BanqueCarte
 		$prep->bindValue(':nip',		$this->nip,		PDO::PARAM_INT);
 		$prep->bindValue(':valid',		$this->isValid,	PDO::PARAM_STR);
 		$prep->bindValue(':carte',		$this->no,		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

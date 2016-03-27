@@ -13,7 +13,7 @@
 define ('DB_HOST',			'localhost');
 define ('DB_USER',			'ccv4');
 define ('DB_PASS',			'passtmp');
-define ('DB_BASE',			'cybercity2034_v4');
+define ('DB_BASE',			'ccv4');
 define ('DB_PREFIX',		'cc_');
 
 //Constantes de connexion à une base de données pour un forum (Simple Machine Forum seulement)
@@ -43,7 +43,7 @@ define ('DB_EMAIL_PREFIX',	'');
 define ('SESSION_TIMEOUT',		45);
 
 //Heure actuelle
-define ('CURRENT_TIME',			mktime ());
+define ('CURRENT_TIME',			time ());
 
 //Active des spécifités pour ce jeu
 define('GAME_IS_CYBERCITY', true);
@@ -57,7 +57,7 @@ define('GAME_IS_CYBERCITY', true);
 define ('SITE_DOMAIN', 				'cybercity2034.com');
 
 //Chemin virtuel vers la racine du moteur de jeu
-define ('SITE_VIRTUAL_PATH',		'http://beta.cybercity2034.com/sandbox/');
+define ('SITE_VIRTUAL_PATH',		'http://127.0.0.1/ccv4.git/');
 
 //Chemin physique vers la racine du site
 define ('SITE_PHYSICAL_PATH',		'/home/www/cybercity2034.com/public_html/beta/sandbox/');

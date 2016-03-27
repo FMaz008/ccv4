@@ -20,13 +20,13 @@ class Mj_Perso_GestionComp
 				. ' LEFT JOIN ' . DB_PREFIX . 'stat as s ON (s.id = cs.statid)'
 				. ' ORDER BY c.nom;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
 
 		
-		$result = $db->query($query, __FILE__,__LINE__);
+		$result = $db->queryPlus($query, __FILE__,__LINE__);
 		$cat = array();
 		$lastId=0;
 		$i =0 ;

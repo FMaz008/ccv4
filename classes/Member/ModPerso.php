@@ -25,7 +25,7 @@ class Member_ModPerso
 					. ' AND catid=0'
 				. ' ORDER BY nom;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrCat = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -48,7 +48,7 @@ class Member_ModPerso
 				. ' ORDER BY c.nom;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrCaract = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -77,7 +77,7 @@ class Member_ModPerso
 				. ' LEFT JOIN ' . DB_PREFIX . 'perso_stat as p ON (p.statid = s.id AND p.persoid=:persoId);';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrStat = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -99,7 +99,7 @@ class Member_ModPerso
 				. ' WHERE c.inscription="1";';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrComp = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -131,7 +131,7 @@ class Member_ModPerso
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$_GET['id'],		PDO::PARAM_INT);
 		$prep->bindValue(':userId',		$account->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrP = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

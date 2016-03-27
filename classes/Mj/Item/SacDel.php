@@ -8,10 +8,10 @@ class Mj_Item_SacDel
 	public static function generatePage(&$tpl, &$session, &$account, &$mj)
 	{
 		if (!isset($_POST['db_id']))
-			return fctErrorMSG("Aucun item sélectionné.");
+			return fctErrorMSG("Aucun item sÃ©lectionnÃ©.");
 
 		if($_POST['db_id'] < 10)
-			return fctErrorMSG("Item système, suppression interdite.");
+			return fctErrorMSG("Item systÃ¨me, suppression interdite.");
 
 		$dbMgr = DbManager::getInstance(); //Instancier le gestionnaire
 		$db = $dbMgr->getConn('game'); //Demander la connexion existante
@@ -21,7 +21,7 @@ class Mj_Item_SacDel
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -30,7 +30,7 @@ class Mj_Item_SacDel
 					. ' WHERE `inv_dbid` = :db_id';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 
@@ -39,7 +39,7 @@ class Mj_Item_SacDel
 					. ' WHERE `item_dbid` = :db_id';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

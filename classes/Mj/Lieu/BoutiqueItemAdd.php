@@ -48,7 +48,7 @@ class Mj_Lieu_BoutiqueItemAdd
 		for($i=1; $i<=count($arrItemId);$i++)
 			$prep->bindValue($i, $arrItemId[$i-1],	PDO::PARAM_INT);
 		
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -97,7 +97,7 @@ class Mj_Lieu_BoutiqueItemAdd
 				else
 					$prep->bindValue(':pn',			NULL,						PDO::PARAM_NULL);
 				
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				
 			}
 			

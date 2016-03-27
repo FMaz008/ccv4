@@ -171,7 +171,7 @@ class Member_Perso
 	 * $query = 'SELECT * FROM ' . DB_PREFIX . 'perso WHERE id=:persoId;';
 	 * 	$prep = $db->prepare($query);
 	 *	$prep->bindValue(':persoId',	801,	PDO::PARAM_INT);
-	 *	$prep->execute($db, __FILE__, __LINE__);
+	 *	$prep->executePlus($db, __FILE__, __LINE__);
 	 *	$arr = $prep->fetch();
 	 *	$prep->closeCursor();
 	 *	$prep = NULL;
@@ -184,7 +184,7 @@ class Member_Perso
 	 * $query = 'SELECT * FROM ' . DB_PREFIX . 'perso WHERE id=:persoId;';
 	 * 	$prep = $db->prepare($query);
 	 *	$prep->bindValue(':persoId',	801,	PDO::PARAM_INT);
-	 *	$prep->execute($db, __FILE__, __LINE__);
+	 *	$prep->executePlus($db, __FILE__, __LINE__);
 	 *	$arr = $prep->fetch();
 	 *	$prep->closeCursor();
 	 *	$prep = NULL;
@@ -278,7 +278,7 @@ class Member_Perso
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -335,7 +335,7 @@ class Member_Perso
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -459,7 +459,7 @@ class Member_Perso
 							. ' WHERE lieutech=:nomTech;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':nomTech',	$this->getLieu()->getNomTech(),	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				$arrLieuMenu = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -492,7 +492,7 @@ class Member_Perso
 							. ' WHERE inv_persoid=:persoId;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':persoId',	(int)$this->getId(),	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				$arrItemMenu = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -1114,7 +1114,7 @@ class Member_Perso
 		$esquive = ((isset($_POST['esquive'])) ? '1' : '0');
 		$prep->bindValue(':current_action',	$currentAction,	PDO::PARAM_STR);
 		$prep->bindValue(':id',				$this->id,			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 	}
 	
 	/** 
@@ -1415,7 +1415,7 @@ class Member_Perso
 		$prep = $db->prepare($query);
 		$prep->bindValue(':cash',		$montant,	PDO::PARAM_INT);
 		$prep->bindValue(':persoId',	$this->id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -1448,7 +1448,7 @@ class Member_Perso
 		$prep = $db->prepare($query);
 		$prep->bindValue(':pa',			$nbrPa,		PDO::PARAM_INT);
 		$prep->bindValue(':persoId',	$this->id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -1481,7 +1481,7 @@ class Member_Perso
 		$prep = $db->prepare($query);
 		$prep->bindValue(':pn',			$nbrPn,		PDO::PARAM_INT);
 		$prep->bindValue(':persoId',	$this->id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -1527,7 +1527,7 @@ class Member_Perso
 		$prep = $db->prepare($query);
 		$prep->bindValue(':pv',			$nbrPv,		PDO::PARAM_INT);
 		$prep->bindValue(':persoId',	$this->id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -1577,7 +1577,7 @@ class Member_Perso
 		$prep->bindValue(':from',		$fromNom,		PDO::PARAM_STR);
 		$prep->bindValue(':fromId',		$fromId,		PDO::PARAM_INT);
 		$prep->bindValue(':action',		$action,		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -1625,7 +1625,7 @@ class Member_Perso
 				. ' ORDER BY s.nom;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$this->id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrStat = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -1815,7 +1815,7 @@ class Member_Perso
 			$prep->bindValue(':persoId',	$this->id,	PDO::PARAM_INT);
 			$prep->bindValue(':statId',		$statId,	PDO::PARAM_INT);
 			$prep->bindValue(':xp',			$xp,		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 
@@ -2105,7 +2105,7 @@ class Member_Perso
 				. ' ORDER BY c.nom;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$this->id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrComp = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -2251,7 +2251,7 @@ class Member_Perso
 			$prep->bindValue(':persoId',	$this->id,	PDO::PARAM_INT);
 			$prep->bindValue(':compId',		$compId,	PDO::PARAM_INT);
 			$prep->bindValue(':xp',			$xp,		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}

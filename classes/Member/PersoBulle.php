@@ -37,7 +37,7 @@ class Member_PersoBulle
 		$prep = $db->prepare($query);
 		$prep->bindValue(':msgId',		$msgId,		PDO::PARAM_INT);
 		$prep->bindValue(':persoId',	$persoId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

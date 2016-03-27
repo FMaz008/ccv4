@@ -29,7 +29,7 @@ class Member_Action_Lieu_Banque
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nomTech',		$perso->getLieu()->getNomTech(),	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -95,7 +95,7 @@ class Member_Action_Lieu_Banque
 			$prep = $db->prepare($query);
 			$prep->bindValue(':compteId',	$_POST['compte_id'],	PDO::PARAM_STR);
 			$prep->bindValue(':persoId',	$perso->getId(),		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -126,7 +126,7 @@ class Member_Action_Lieu_Banque
 			$prep = $db->prepare($query);
 			$prep->bindValue(':compteId',	$_POST['compte_id'],	PDO::PARAM_STR);
 			$prep->bindValue(':persoId',	$perso->getId(),		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -155,7 +155,7 @@ class Member_Action_Lieu_Banque
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banque',		$banque->getNoBanque(),	PDO::PARAM_STR);
 		$prep->bindValue(':persoId',	$perso->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrCompte = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

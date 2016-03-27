@@ -39,7 +39,7 @@ class Member_Config_Perso2
 		$prep->bindValue(':background',		$_POST['background'],		PDO::PARAM_STR);
 		$prep->bindValue(':userId',			$account->getId(),			PDO::PARAM_INT);
 		$prep->bindValue(':id',				$perso->getId(),			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		
 		
 		//Enregistrer l'image du personnage
@@ -56,7 +56,7 @@ class Member_Config_Perso2
 						. ' LIMIT 1;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',				$perso->getId(),			PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				break;
 				
 			case 'remote':
@@ -102,7 +102,7 @@ class Member_Config_Perso2
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',				$perso->getId(),			PDO::PARAM_INT);
 				$prep->bindValue(':imgurl',			$_POST['imgurl'],			PDO::PARAM_STR);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				break;
 				
 			case 'local':
@@ -163,7 +163,7 @@ class Member_Config_Perso2
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',				$perso->getId(),	PDO::PARAM_INT);
 				$prep->bindValue(':imgurl',			$imgurl,			PDO::PARAM_STR);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				break;
 		}
 		

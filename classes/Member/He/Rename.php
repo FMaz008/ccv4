@@ -42,7 +42,7 @@ class Member_He_Rename
 		$prep = $db->prepare($query);
 		$prep->bindValue(':fromId',		$perso->getId(),		PDO::PARAM_INT);
 		$prep->bindValue(':whoId',		$_POST['persoId'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if ($arr === false)
@@ -59,7 +59,7 @@ class Member_He_Rename
 				$prep->bindValue(':fromId',		$perso->getId(),					PDO::PARAM_INT);
 				$prep->bindValue(':whoId',		$_POST['persoId'],					PDO::PARAM_INT);
 				$prep->bindValue(':nom',		rawurldecode($_POST['newName']),	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 			}
 			
 		}
@@ -78,7 +78,7 @@ class Member_He_Rename
 				$prep = $db->prepare($query);
 				$prep->bindValue(':fromId',		$perso->getId(),	PDO::PARAM_INT);
 				$prep->bindValue(':whoId',		$_POST['persoId'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				
 			}
 			else
@@ -94,7 +94,7 @@ class Member_He_Rename
 				$prep->bindValue(':fromId',		$perso->getId(),					PDO::PARAM_INT);
 				$prep->bindValue(':whoId',		$_POST['persoId'],					PDO::PARAM_INT);
 				$prep->bindValue(':nom',		rawurldecode($_POST['newName']),	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 			}
 			
 			

@@ -36,7 +36,7 @@ class Account
 		{
 			echo fctErrorMSG(
 				'Impossible d\'accéder au skin par défaut ( ' .
-				SITE_PHYSICAL_PATH . 'tpl/' . $this->remoteSkin . '/ )' .
+				SITE_PHYSICAL_PATH . 'tpl' . DIRECTORY_SEPARATOR . $this->remoteSkin . DIRECTORY_SEPARATOR . ' )' .
 				'<br />Vérifiez SITE_DEFAULT_SKIN et SITE_PHYSICAL_PATH.'
 			);
 			die;
@@ -59,7 +59,7 @@ class Account
 					. ' FROM ' . DB_PREFIX . 'account as a'
 					. ' LEFT JOIN ' . DB_PREFIX . 'mj as mj ON (mj.userId=a.id)'
 					. ' WHERE a.id=' . (int)$userId . ';';
-		$arr = $db->query($query,__FILE__,__LINE__)->fetch();
+		$arr = $db->queryPlus($query,__FILE__,__LINE__)->fetch();
 		
 		
 		$this->user			= $arr['user'];
@@ -87,7 +87,7 @@ class Account
 						. ' SET `skin`="' . SITE_DEFAULT_SKIN . '"'
 						. ' WHERE id=' . (int)$this->getId()
 						. ' LIMIT 1;';
-			$db->query($query,__FILE__,__LINE__);
+			$db->queryPlus($query,__FILE__,__LINE__);
 		}
 		
 	}
@@ -156,7 +156,7 @@ class Account
 	 */
 	public function getSkinRemotePhysicalPath()
 	{
-		return SITE_PHYSICAL_PATH . 'tpl/' . $this->remoteSkin . '/';
+		return SITE_PHYSICAL_PATH . 'tpl' . DIRECTORY_SEPARATOR . $this->remoteSkin . DIRECTORY_SEPARATOR;
 	}	
 	
 	

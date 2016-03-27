@@ -127,14 +127,14 @@ class Mj_Item_ArmeAdd
 		$prep->bindValue(':db_precision', $_POST['db_precision'], PDO::PARAM_INT);
 		$prep->bindValue(':db_capacite', $_POST['db_capacite'], PDO::PARAM_INT);
 		$prep->bindValue(':db_notemj', $_POST['db_notemj'], PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
 		//Trouver l'id de l'arme créé
 		$query = "SELECT LAST_INSERT_ID()";
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$result = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -160,7 +160,7 @@ class Mj_Item_ArmeAdd
 					$prep->bindValue(':db_id', $db_id, PDO::PARAM_INT);
 					$prep->bindValue(':actioncaption_add', $_POST[$i . '_actioncaption_add'], PDO::PARAM_STR);
 					$prep->bindValue(':actionpage_add', $_POST[$i . '_actionpage_add'], PDO::PARAM_STR);
-					$prep->execute($db, __FILE__,__LINE__);
+					$prep->executePlus($db, __FILE__,__LINE__);
 				}
 			}
 
@@ -178,7 +178,7 @@ class Mj_Item_ArmeAdd
 							. ' WHERE `id` = :dbid;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':dbid', (int)$dbid, PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 			}
@@ -201,7 +201,7 @@ class Mj_Item_ArmeAdd
 				{
 					$prep->bindValue(':munitionid_add', (int)$_POST[$i . '_munitionid_add'], PDO::PARAM_INT);
 					$prep->bindValue(':db_id', (int)$db_id, PDO::PARAM_INT);
-					$prep->execute($db, __FILE__,__LINE__);
+					$prep->executePlus($db, __FILE__,__LINE__);
 				}
 			}
 

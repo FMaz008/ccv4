@@ -17,7 +17,7 @@ class Mj_Lieu_Casino
 		$query = 'SELECT *'
 				. ' FROM ' . DB_PREFIX . 'casino;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

@@ -34,7 +34,7 @@ class Mj_Lieu_BiblioAdd
 				. ' FROM ' . DB_PREFIX . 'item_db'
 				. ' WHERE db_type="livre";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -82,7 +82,7 @@ class Mj_Lieu_BiblioAdd
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$_POST['LIEU_ID'],	PDO::PARAM_INT);
 		$prep->bindValue(':dbId',	$_POST['LIVRE_ID'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -97,7 +97,7 @@ class Mj_Lieu_BiblioAdd
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$_POST['LIEU_ID'],	PDO::PARAM_INT);
 		$prep->bindValue(':dbId',	$_POST['LIVRE_ID'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

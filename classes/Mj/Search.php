@@ -36,7 +36,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],				PDO::PARAM_INT);
 				$prep->bindValue(':nomTech',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -67,7 +67,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],				PDO::PARAM_INT);
 				$prep->bindValue(':nomTech',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -101,7 +101,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],				PDO::PARAM_INT);
 				$prep->bindValue(':nomTech',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -135,7 +135,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':user',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -169,7 +169,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],				PDO::PARAM_INT);
 				$prep->bindValue(':nom',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -208,7 +208,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':user',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -249,7 +249,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':nom',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -290,7 +290,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':nom',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -335,7 +335,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':nom',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -367,7 +367,7 @@ class Mj_Search
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':nomC',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
 				$prep->bindValue(':nomL',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -399,7 +399,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':nom',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -442,7 +442,7 @@ class Mj_Search
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':nom',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
 				$prep->bindValue(':type',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -485,7 +485,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':nom',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -521,7 +521,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':nom',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -560,7 +560,7 @@ class Mj_Search
 				$prep = $db->prepare($query);
 				$prep->bindValue(':id',			$_POST['search'],			PDO::PARAM_INT);
 				$prep->bindValue(':nom',	'%' . $_POST['search'] . '%',	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -606,7 +606,7 @@ class Mj_Search
 									. ' AND inv_dbid=:id;';
 						$prep = $db->prepare($query);
 						$prep->bindValue(':id',			$_POST['db_id'],			PDO::PARAM_INT);
-						$prep->execute($db, __FILE__, __LINE__);
+						$prep->executePlus($db, __FILE__, __LINE__);
 						$arrAll = $prep->fetchAll();
 						$prep->closeCursor();
 						$prep = NULL;
@@ -640,7 +640,7 @@ class Mj_Search
 									. ' AND inv_dbid=:id;';
 						$prep = $db->prepare($query);
 						$prep->bindValue(':id',			$_POST['db_id'],			PDO::PARAM_INT);
-						$prep->execute($db, __FILE__, __LINE__);
+						$prep->executePlus($db, __FILE__, __LINE__);
 						$arrAll = $prep->fetchAll();
 						$prep->closeCursor();
 						$prep = NULL;
@@ -670,7 +670,7 @@ class Mj_Search
 									. ' AND inv_dbid=:id;';
 						$prep = $db->prepare($query);
 						$prep->bindValue(':id',			$_POST['db_id'],			PDO::PARAM_INT);
-						$prep->execute($db, __FILE__, __LINE__);
+						$prep->executePlus($db, __FILE__, __LINE__);
 						$arrAll = $prep->fetchAll();
 						$prep->closeCursor();
 						$prep = NULL;
@@ -700,7 +700,7 @@ class Mj_Search
 									. ' AND inv_dbid=:id;';
 						$prep = $db->prepare($query);
 						$prep->bindValue(':id',			$_POST['db_id'],			PDO::PARAM_INT);
-						$prep->execute($db, __FILE__, __LINE__);
+						$prep->executePlus($db, __FILE__, __LINE__);
 						$arrAll = $prep->fetchAll();
 						$prep->closeCursor();
 						$prep = NULL;
@@ -730,7 +730,7 @@ class Mj_Search
 									. ' AND inv_dbid=:id;';
 						$prep = $db->prepare($query);
 						$prep->bindValue(':id',			$_POST['db_id'],			PDO::PARAM_INT);
-						$prep->execute($db, __FILE__, __LINE__);
+						$prep->executePlus($db, __FILE__, __LINE__);
 						$arrAll = $prep->fetchAll();
 						$prep->closeCursor();
 						$prep = NULL;

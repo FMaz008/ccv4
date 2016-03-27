@@ -33,7 +33,7 @@ class Mj_Compte_Mod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$ACC = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -90,7 +90,7 @@ class Mj_Compte_Mod
 				. ' WHERE userId=:userId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':userId',	$ACC['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$info_pj = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -195,7 +195,7 @@ class Mj_Compte_Mod
 		
 		$prep->bindValue(':auth_doublons',			isset($_POST['doublons']) ? '1' : '0',	PDO::PARAM_STR);
 		$prep->bindValue(':auth_creation_perso',	$_POST['creation_perso'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

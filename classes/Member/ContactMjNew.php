@@ -31,7 +31,7 @@ class Member_ContactMjNew
 					. ' AND statut="ouvert";';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if($arr[0]>=PPA_MAX)
@@ -53,7 +53,7 @@ class Member_ContactMjNew
 		$prep->bindValue(':paMax',		$perso->getPaMax(),					PDO::PARAM_STR);
 		$prep->bindValue(':pv',			$perso->getPv(),					PDO::PARAM_STR);
 		$prep->bindValue(':pvMax',		$perso->getPvMax(),					PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		
 		
 		//Copier le message dans les HE

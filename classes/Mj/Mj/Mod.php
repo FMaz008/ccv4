@@ -49,7 +49,7 @@ class Mj_Mj_Mod
 						. ' LIMIT 1;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':mjId',	$_POST['id'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arr = $prep->fetch();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -85,7 +85,7 @@ class Mj_Mj_Mod
 				$prep->bindValue(':ax_ppa',			isset($_POST['ax_ppa']) ? 1 : 0,	PDO::PARAM_INT);
 				$prep->bindValue(':ax_admin',		isset($_POST['ax_admin']) ? 1 : 0,	PDO::PARAM_INT);
 				$prep->bindValue(':ax_dev',			isset($_POST['ax_dev']) ? 1 : 0,	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 				
@@ -109,7 +109,7 @@ class Mj_Mj_Mod
 							. ' WHERE `alias` = :alias;';
 					$prep = $emailCon->prepare($query);
 					$prep->bindValue(':alias',	$emailCCOld,	PDO::PARAM_STR);
-					$prep->execute($emailCon, __FILE__, __LINE__);
+					$prep->executePlus($emailCon, __FILE__, __LINE__);
 					$prep->closeCursor();
 					$prep = NULL;
 					
@@ -124,7 +124,7 @@ class Mj_Mj_Mod
 					$prep = $emailCon->prepare($query);
 					$prep->bindValue(':alias',	$emailCCNew,	PDO::PARAM_STR);
 					$prep->bindValue(':realEmail',	$realEmail,	PDO::PARAM_STR);
-					$prep->execute($emailCon, __FILE__, __LINE__);
+					$prep->executePlus($emailCon, __FILE__, __LINE__);
 					$prep->closeCursor();
 					$prep = NULL;
 				
@@ -151,7 +151,7 @@ class Mj_Mj_Mod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':mjId', $_POST['id'], 	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

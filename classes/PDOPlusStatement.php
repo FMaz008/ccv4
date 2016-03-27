@@ -15,7 +15,7 @@ class PDOPlusStatement extends PDOStatement
 		
 	}
 	
-	public function execute(&$pdoInstance = NULL, $file=NULL, $line=NULL)
+	public function executePlus(&$pdoInstance = NULL, $file=NULL, $line=NULL)
 	{
 		$try = 0;
 		while($try < 10)

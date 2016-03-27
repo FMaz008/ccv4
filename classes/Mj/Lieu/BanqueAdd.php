@@ -61,7 +61,7 @@ class Mj_Lieu_BanqueAdd
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueNo',	$_POST['banque_no'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -76,7 +76,7 @@ class Mj_Lieu_BanqueAdd
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuTech',	$_POST['banque_lieu'],	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -97,7 +97,7 @@ class Mj_Lieu_BanqueAdd
 		$prep->bindValue(':retrait',	$_POST['banque_retrait'],	PDO::PARAM_STR);
 		$prep->bindValue(':frais',		$_POST['banque_frais_ouverture'],	PDO::PARAM_INT);
 		$prep->bindValue(':tel',		$_POST['banque_telephone'],	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

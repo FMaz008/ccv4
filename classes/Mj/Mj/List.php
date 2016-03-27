@@ -22,7 +22,7 @@ class Mj_Mj_List
 				. ' LEFT JOIN ' . DB_PREFIX . 'account as a ON (a.id = mj.userId)'
 				. ' ORDER BY nom ASC;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$mjList = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

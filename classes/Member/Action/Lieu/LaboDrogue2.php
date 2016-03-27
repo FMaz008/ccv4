@@ -130,7 +130,7 @@ class Member_Action_Lieu_LaboDrogue2{
 				
 				
 			}
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -238,7 +238,7 @@ class Member_Action_Lieu_LaboDrogue2{
 			$prep->bindValue(':percPer',	$percPer,				PDO::PARAM_INT);
 			$prep->bindValue(':percFor',	$percFor,				PDO::PARAM_INT);
 			$prep->bindValue(':percInt',	$percInt,				PDO::PARAM_INT);
-			$prep->execute();
+			$prep->executePlus();
 			
 			//$drogue_id = $db->lastInsertId();
 			

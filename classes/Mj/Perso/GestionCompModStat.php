@@ -22,7 +22,7 @@ class Mj_Perso_GestionCompModStat
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',		$_GET['id'],PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -41,7 +41,7 @@ class Mj_Perso_GestionCompModStat
 						. ' ON (cs.statid = s.id AND cs.compid=:id);';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',		$_GET['id'],				PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -129,7 +129,7 @@ class Mj_Perso_GestionCompModStat
 				. ' ORDER BY s.nom;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compId',		$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

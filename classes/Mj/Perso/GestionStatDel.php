@@ -23,7 +23,7 @@ class Mj_Perso_GestionStatDel
 					WHERE statid=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 
@@ -34,7 +34,7 @@ class Mj_Perso_GestionStatDel
 					WHERE statid=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 
@@ -44,7 +44,7 @@ class Mj_Perso_GestionStatDel
 					LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

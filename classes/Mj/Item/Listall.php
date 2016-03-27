@@ -16,7 +16,7 @@ class Mj_Item_Listall
 					. ' GROUP BY `db_id`'
 					. ' ORDER BY `db_type`, `db_soustype`, `db_nom` ASC;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

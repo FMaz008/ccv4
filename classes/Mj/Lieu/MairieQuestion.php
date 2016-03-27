@@ -18,7 +18,7 @@ class Mj_Lieu_MairieQuestion
 		$query = 'SELECT DISTINCT section'
 				. ' FROM ' . DB_PREFIX . 'mairie_question;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -33,7 +33,7 @@ class Mj_Lieu_MairieQuestion
 				. ' LEFT JOIN ' . DB_PREFIX . 'mairie_question_reponse as r'
 					. ' ON (r.questionId=q.id AND r.reponse_tech=q.reponse_tech);';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

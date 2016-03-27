@@ -42,7 +42,7 @@ class Member_Action_Item_Menotter2
 				. ' WHERE item_dbid IN (' . $queryIn . ')'
 					. ' AND url="Menotter";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -92,7 +92,7 @@ class Member_Action_Item_Menotter2
 		$prep = $db->prepare($query);
 		$prep->bindValue(':itemId',		$menId,					PDO::PARAM_INT);
 		$prep->bindValue(':persoId',	$_POST['toPersoId'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -104,7 +104,7 @@ class Member_Action_Item_Menotter2
 		$prep = $db->prepare($query);
 		$prep->bindValue(':itemId',			$menId,					PDO::PARAM_INT);
 		$prep->bindValue(':persoId',		$_POST['toPersoId'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 			

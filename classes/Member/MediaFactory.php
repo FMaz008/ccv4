@@ -18,7 +18,7 @@
 		$query = 'SELECT DISTINCT `mediaType`, `canalId`'
 				. ' FROM `' . DB_PREFIX . 'media`;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -65,7 +65,7 @@
 		foreach($titreEmission as $titre)
 		{
 			$prep->bindValue(':titre', $titre['titre'], PDO::PARAM_STR);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$arrAll = $prep->fetchAll();
 		
 			foreach($arrAll as $arr)
@@ -95,7 +95,7 @@
 		$prep = $db->prepare($query);
 		$prep->bindValue(':mediaType', $mediaType, PDO::PARAM_STR);
 		$prep->bindValue(':canalId', $canalId, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -128,7 +128,7 @@
 		$prep->bindValue(':titre',	$emissionNom, PDO::PARAM_STR);
 		$prep->bindValue(':msg',	$message, PDO::PARAM_STR);
 		$prep->bindValue(':date',	$timestamp, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -148,7 +148,7 @@
 				. ' WHERE `id` = :id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id', $id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

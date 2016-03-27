@@ -24,7 +24,7 @@ class Member_Action_Perso_Depouiller
 				. ' AND `reponse`=1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':fromId',	$perso->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$persoAuth = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

@@ -22,7 +22,7 @@ class Mj_Lieu_BanqueCompte
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueId',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -43,7 +43,7 @@ class Mj_Lieu_BanqueCompte
 				. ' ORDER BY compte_cash DESC;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueNo',	$arr['banque_no'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

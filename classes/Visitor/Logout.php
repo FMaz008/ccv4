@@ -26,7 +26,7 @@ class Visitor_Logout
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':cookieId',	$session->getSSID(),		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		
 		session_destroy();
 		

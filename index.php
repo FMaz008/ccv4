@@ -35,7 +35,7 @@ function fctRequire($filePath)
 function __autoload($classname)
 {
 	$path = str_replace('_',DIRECTORY_SEPARATOR, $classname);
-	fctRequire('classes/' . $path . '.php');
+	fctRequire('classes' . DIRECTORY_SEPARATOR . $path . '.php');
 }
 
 
@@ -186,12 +186,12 @@ class Main
 			}
 			
 			
-			$page = $this->account->getSkinRemotePhysicalPath() . 'html/index_full.htm';
+			$page = $this->account->getSkinRemotePhysicalPath() . 'html' . DIRECTORY_SEPARATOR . 'index_full.htm';
 		}
 		else
 		{
 			
-			$page = $this->account->getSkinRemotePhysicalPath() . 'html/index_lite.htm';
+			$page = $this->account->getSkinRemotePhysicalPath() . 'html' . DIRECTORY_SEPARATOR . 'index_lite.htm';
 		}
 		
 		
@@ -223,20 +223,20 @@ class Main
 		//Nombre de joueurs
 		$query='SELECT count(id)'
 				. ' FROM ' . DB_PREFIX . 'account;';
-		$arr=$this->db->query($query,__FILE__,__LINE__)->fetch();
+		$arr=$this->db->queryPlus($query,__FILE__,__LINE__)->fetch();
 		$this->tpl->set('GAME_PLAYERS', $arr[0]);
 		
 		//Nombre d'inscriptions
 		$query='SELECT count(id)'
 				. ' FROM ' . DB_PREFIX . 'perso'
 				. ' WHERE inscription_valide="0";';
-		$arr=$this->db->query($query,__FILE__,__LINE__)->fetch();
+		$arr=$this->db->queryPlus($query,__FILE__,__LINE__)->fetch();
 		$this->tpl->set('GAME_SUBSCR', $arr[0]);
 		
 		//Nombre d'online
 		$query='SELECT count(idcookie)'
 				. ' FROM ' . DB_PREFIX . 'session;';
-		$arr=$this->db->query($query,__FILE__,__LINE__)->fetch();
+		$arr=$this->db->queryPlus($query,__FILE__,__LINE__)->fetch();
 		$this->tpl->set('GAME_ONLINE', $arr[0]);
 		
 	}
@@ -274,11 +274,11 @@ class Main
 					$this->tpl->set('MENU_MJ', true);
 				
 			}
-			$page = $this->account->getSkinRemotePhysicalPath() . 'html/menu_member.htm';
+			$page = $this->account->getSkinRemotePhysicalPath() . 'html' . DIRECTORY_SEPARATOR . 'menu_member.htm';
 		}
 		else
 		{
-			$page = $this->account->getSkinRemotePhysicalPath() . 'html/menu_visitor.htm';
+			$page = $this->account->getSkinRemotePhysicalPath() . 'html' . DIRECTORY_SEPARATOR . 'menu_visitor.htm';
 		}
 		
 		$this->tpl->set('MENU', $this->tpl->fetch($page,__FILE__,__LINE__));
@@ -366,14 +366,9 @@ class Main
 	
 	private function genVisitorPage($file)
 	{
-		
-		$valRet = call_user_func_array(
-						array('Visitor_' . $file , 'generatePage'),
-						array(&$this->tpl,
-								&$this->session,
-								&$this->account
-							)
-						);
+		$className = 'Visitor_' . $file;
+		$page = new $className;
+		$valRet = $page->generatePage($this->tpl, $this->session, $this->account);
 			
 		if ($file==='Login2' && $this->session->getVar('logged')===true) //Si l'utilisateur viens juste de s'authentifier
 		{
@@ -384,7 +379,7 @@ class Main
 						. ' LIMIT 1;';
 			$prep = $this->db->prepare($query);
 			$prep->bindValue(':userId',		$this->session->getVar('userId'),		PDO::PARAM_INT);
-			$prep->execute($this->db, __FILE__, __LINE__);
+			$prep->executePlus($this->db, __FILE__, __LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -489,14 +484,10 @@ class Main
 				return fctErrorMSG($e->getMessage());	
 			}
 				
-			return call_user_func_array(
-							array('Member_' . $file , 'generatePage'),
-							array(&$this->tpl,
-									&$this->session,
-									&$this->account,
-									&$perso
-								)
-							);
+				
+			$className = 'Member_' . $file;
+			$page = new $className;
+			return $page->generatePage($this->tpl, $this->session, $this->account, $perso);
 			
 		}//Fin du if: Si un personnage à été sélection ou est sauvegardé
 		
@@ -511,21 +502,16 @@ class Main
 					. ' WHERE id=' . (int)$this->account->getMjId() 
 						. ' AND userId=' . (int)$this->account->getId()
 					. ' LIMIT 1;';
-		$arr =$this->db->query($query, __FILE__,__LINE__)->fetch();
+		$arr =$this->db->queryPlus($query, __FILE__,__LINE__)->fetch();
 		
 		//Instancier le compte MJ
 		$mj = new Mj_Mj($arr);
 		
 		$this->tpl->set('MJ_CSS', true);
 		
-		return call_user_func_array(
-						array('Mj_' . $file , 'generatePage'),
-						array(&$this->tpl,
-								&$this->session,
-								&$this->account, 
-								&$mj
-							)
-						);
+		$className = 'Mj_' . $file;
+		$page = new $className;
+		return $page->generatePage($this->tpl, $this->session, $this->account, $mj);
 	}
 	
 	
@@ -555,7 +541,7 @@ class Main
 					ORDER BY msgl.poster_time DESC
 					LIMIT ' . FORUM_SUBJECT_LIMIT . ';';
 			
-		$result = $db->query($query, __FILE__, __LINE__);
+		$result = $db->queryPlus($query, __FILE__, __LINE__);
         
         //$txt pour la rétro-compatibilité avec les vieux skin (darkblueOld et Cyberrust)
         $txt .= '<div class="forumtitre">Quoi de neuf à CyberCity ?</div>';

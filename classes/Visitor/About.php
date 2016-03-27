@@ -22,7 +22,7 @@ class Visitor_About
 		$query = 'SELECT *
 					FROM ' . DB_PREFIX . 'mj;';
 		$prep= $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -38,7 +38,7 @@ class Visitor_About
 		//Générer la liste des donateurs
 		$query = 'SELECT `user` FROM `' . DB_PREFIX . 'account` WHERE `mp` = 2;';
 		$prep= $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$donatAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

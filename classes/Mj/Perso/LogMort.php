@@ -18,7 +18,7 @@ class Mj_Perso_LogMort
 				. ' FROM ' . DB_PREFIX . 'log_persomort'
 				. ' ORDER BY timestamp DESC;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

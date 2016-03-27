@@ -19,7 +19,7 @@ class Mj_Lieu_BanqueCompteCarteDel
 				. ' WHERE `carte_compte`=:compteNo;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compteNo',	$compte_no,		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

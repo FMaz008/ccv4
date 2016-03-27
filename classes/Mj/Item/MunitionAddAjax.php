@@ -15,7 +15,7 @@ class Mj_Item_MunitionAddAjax
 					. ' FROM `' . DB_PREFIX . 'item_db`'
 					. ' WHERE `db_soustype` = "aucun" AND `db_type` = "munition";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

@@ -36,14 +36,14 @@ class Mj_index
 						FROM ' . DB_PREFIX . 'mj_he
 						WHERE attrib_mj="0"
 						ORDER BY id;';
-			$result = $db->query($query,__FILE__,__LINE__);
+			$result = $db->queryPlus($query,__FILE__,__LINE__);
 			while ($heMsg = mysql_fetch_assoc($result)){
 				if (isset($_POST['ppa_' . $heMsg['id']])){
 					if ($_POST['ppa_' . $heMsg['id']] == $heMsg['id']){
 						$query = 'UPDATE ' . DB_PREFIX . 'mj_he
 							SET attrib_mj=' . $mj->getId() . '
 							WHERE id=' . $heMsg['id'] . ';';
-						$db->query($query,__FILE__,__LINE__);
+						$db->queryPlus($query,__FILE__,__LINE__);
 						}
 					}
 				}
@@ -63,7 +63,7 @@ class Mj_index
 					. ' FROM ' . DB_PREFIX . 'perso'
 					. ' WHERE inscription_valide="0";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -95,7 +95,7 @@ class Mj_index
 					. ' WHERE	mjid=' . (int)$mj->getId()
 						. ' AND statut="ouvert";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -127,7 +127,7 @@ class Mj_index
 					. ' AND m.statut="ouvert"'
 				. ' ORDER BY m.`date` DESC;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -158,7 +158,7 @@ class Mj_index
 				. ' LEFT JOIN ' . DB_PREFIX . 'account as a ON (a.id=p.userId)'
 				. ' WHERE p.inscription_valide="0";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -180,7 +180,7 @@ class Mj_index
 				$prep = $db->prepare($query);
 				$prep->bindValue('id', $arrInscr['id']);
 				$prep->bindValue('lieu_depart', LIEU_DEPART);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 		
@@ -190,7 +190,7 @@ class Mj_index
 						. ' WHERE db_id=9'
 						. ' LIMIT 1;';
 				$prep = $db->prepare($query);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arr = $prep->fetch();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -202,7 +202,7 @@ class Mj_index
 						. ' FROM `' . DB_PREFIX . 'item_db`'
 						. ' WHERE `db_id` IN(309, 310, 311);';
 				$prep = $db->prepare($query);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arrAll = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -223,7 +223,7 @@ class Mj_index
 					$prep->bindValue('db_id',		$arr['db_id'],			PDO::PARAM_INT);
 					$prep->bindValue('persoId',		$arrInscr['id'],		PDO::PARAM_INT);
 					$prep->bindValue('resistance',	$arr['db_resistance'],	PDO::PARAM_INT);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 					
 				}
 				$prep->closeCursor();
@@ -254,7 +254,7 @@ class Mj_index
 						. ' LIMIT 1;';
 				$prep = $db->prepare($query);
 				$prep->bindValue('persoId',		$arrInscr['id'],		PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 				
@@ -290,7 +290,7 @@ class Mj_index
 						. ' LIMIT 1;';
 				$prep = $db->prepare($query);
 				$prep->bindValue('accountId',		$arrInscr['aid'],		PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 				
@@ -323,7 +323,7 @@ class Mj_index
 				. ' ORDER BY id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue('mjId',		$mj->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -341,7 +341,7 @@ class Mj_index
 				if ($_POST['ppa_suppr_' . $heMsg['id']] == $heMsg['id'])
 				{
 					$prep->bindValue('msgId',	$heMsg['id'],	PDO::PARAM_INT);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 					
 				}		
 			}

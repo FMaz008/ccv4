@@ -18,7 +18,7 @@ class Mj_Compte_LogMp
 				. ' ORDER BY `date` DESC'
 				. ' LIMIT 25;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$LOGS = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

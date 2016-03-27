@@ -29,12 +29,12 @@ class Mj_Perso_GestionStatAdd
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':abbr',	strtolower($_POST['abbr']),	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
 			
-			$result = $db->query($query, __FILE__, __LINE__);
+			$result = $db->queryPlus($query, __FILE__, __LINE__);
 			if($arr !== false)
 			{
 				unset($_POST['save']);
@@ -49,7 +49,7 @@ class Mj_Perso_GestionStatAdd
 			$prep->bindValue(':nom',	$_POST['nom'],				PDO::PARAM_STR);
 			$prep->bindValue(':abbr',	strtolower($_POST['abbr']),	PDO::PARAM_STR);
 			$prep->bindValue(':description',	$_POST['description'],		PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			

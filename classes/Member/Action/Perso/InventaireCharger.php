@@ -52,7 +52,7 @@ class Member_Action_Perso_InventaireCharger
 			$prep = $db->prepare($query);
 			$prep->bindValue(':itemDbId',	$item->getDbId(),	PDO::PARAM_INT);
 			$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrMun = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;

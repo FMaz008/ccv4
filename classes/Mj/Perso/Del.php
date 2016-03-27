@@ -31,7 +31,7 @@ class Mj_Perso_Del
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',		$_GET['id'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -73,7 +73,7 @@ class Mj_Perso_Del
 						. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',		$id,		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -88,7 +88,7 @@ class Mj_Perso_Del
 					. ' WHERE compte_idperso=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -100,7 +100,7 @@ class Mj_Perso_Del
 			foreach($arrAll as &$arrOne)
 			{
 				$prep->bindValue(':compte',	$arrOne['compte_compte'],	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 			}
 			
 			
@@ -111,7 +111,7 @@ class Mj_Perso_Del
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId1',		$id,	PDO::PARAM_INT);
 			$prep->bindValue(':persoId2',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -124,7 +124,7 @@ class Mj_Perso_Del
 			$prep = $db->prepare($query);
 			$prep->bindValue(':nom',	$arr['nom'],	PDO::PARAM_STR);
 			$prep->bindValue(':delBy',	$delBy,			PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -135,7 +135,7 @@ class Mj_Perso_Del
 						. ' WHERE persoid=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -145,7 +145,7 @@ class Mj_Perso_Del
 						. ' WHERE persoid=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -156,7 +156,7 @@ class Mj_Perso_Del
 						. ' WHERE persoid=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -166,7 +166,7 @@ class Mj_Perso_Del
 						. ' WHERE persoid=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -176,7 +176,7 @@ class Mj_Perso_Del
 						. ' WHERE persoid=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -187,7 +187,7 @@ class Mj_Perso_Del
 						. ' WHERE `fromto`="from" AND persoid=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -201,7 +201,7 @@ class Mj_Perso_Del
 						. ' WHERE persoid=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -214,7 +214,7 @@ class Mj_Perso_Del
 			foreach($arrAll as &$ppa)
 			{
 				$prep->bindValue(':ppaId',	$ppa['id'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 			}
 			$prep->closeCursor();
 			$prep = NULL;
@@ -226,7 +226,7 @@ class Mj_Perso_Del
 			foreach($arrAll as &$ppa)
 			{
 				$prep->bindValue(':ppaId',	$ppa['id'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 			}
 			$prep->closeCursor();
 			$prep = NULL;
@@ -240,7 +240,7 @@ class Mj_Perso_Del
 			$prep = $db->prepare($query);
 			$prep->bindValue(':lieu',		$arr['lieu'],	PDO::PARAM_STR);
 			$prep->bindValue(':persoId',		$id,			PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -251,7 +251,7 @@ class Mj_Perso_Del
 						. ' WHERE compte_idperso=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -267,7 +267,7 @@ class Mj_Perso_Del
 						. ' WHERE compte_id=1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':cash',	$argent_compte,		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -283,7 +283,7 @@ class Mj_Perso_Del
 			$prep = $db->prepare($query);
 			$prep->bindValue(':lieu_tech',	$arr['lieu'],	PDO::PARAM_STR);
 			$prep->bindValue(':cash',		$arr['cash'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -293,7 +293,7 @@ class Mj_Perso_Del
 						. ' WHERE compte_idperso=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -304,7 +304,7 @@ class Mj_Perso_Del
 						. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 

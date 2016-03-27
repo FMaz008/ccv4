@@ -42,7 +42,7 @@ class Member_Action_Lieu_MairieVisaVertExam2
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId', $perso->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -65,7 +65,7 @@ class Member_Action_Lieu_MairieVisaVertExam2
 			$prep = $db->prepare($query);
 			$prep->bindValue(':noExam', 	$_POST['no_exam'],	PDO::PARAM_STR);
 			$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		
@@ -100,7 +100,7 @@ class Member_Action_Lieu_MairieVisaVertExam2
 		foreach($_POST['Q'] as &$val)
 			$prep->bindValue($i++, 	$val, 	PDO::PARAM_INT);
 		
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -183,7 +183,7 @@ class Member_Action_Lieu_MairieVisaVertExam2
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			

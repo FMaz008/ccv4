@@ -19,7 +19,7 @@ class Mj_Perso_GestionCaract
 						AND catid=0
 					ORDER BY nom;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$cat = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -40,7 +40,7 @@ class Mj_Perso_GestionCaract
 						AND catid>0
 					ORDER BY nom;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$caract = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

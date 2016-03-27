@@ -42,7 +42,7 @@ class Mj_Item_Badge
 					. ' GROUP BY `db_id`'
 					. ' ORDER BY ' . $field . ' ' . $sort . ';';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$result = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

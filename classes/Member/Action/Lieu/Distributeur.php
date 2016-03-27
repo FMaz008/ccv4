@@ -34,7 +34,7 @@ class Member_Action_Lieu_Distributeur
 				. ' WHERE lieuId=:lieuId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',		$perso->getLieu()->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrItem = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

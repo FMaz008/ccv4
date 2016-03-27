@@ -47,7 +47,7 @@ class Mj_Lieu_Add
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':lieuId',		$id,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrTmp = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -63,7 +63,7 @@ class Mj_Lieu_Add
 					. ' FROM ' . DB_PREFIX . 'lieu'
 					. ' ORDER BY nom_technique ASC;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -136,7 +136,7 @@ class Mj_Lieu_Add
 		$prep->bindValue(':qteMateriel',		$_POST['qteMateriel'],				PDO::PARAM_INT);
 		$prep->bindValue(':noteMj',			$_POST['notemj'],					PDO::PARAM_STR);
 		
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -152,7 +152,7 @@ class Mj_Lieu_Add
 			$prep = $db->prepare($query);
 			$prep->bindValue(':idLieu',	$lieuId, PDO::PARAM_STR);
 			$prep->bindValue(':idPerso', $_POST['addGerant'], PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}

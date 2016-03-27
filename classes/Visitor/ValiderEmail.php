@@ -26,7 +26,7 @@ class Visitor_ValiderEmail
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':user',	$_GET['u'], PDO::PARAM_STR);
-		$prep->execute($db);
+		$prep->executePlus($db);
 		$content = $prep->fetch();
 		
 		if ($content===false)
@@ -43,7 +43,7 @@ class Visitor_ValiderEmail
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':user',	$_GET['u'], PDO::PARAM_STR);
-		$prep->execute($db);
+		$prep->executePlus($db);
 		
 		
 		//Retourner le template complété/rempli

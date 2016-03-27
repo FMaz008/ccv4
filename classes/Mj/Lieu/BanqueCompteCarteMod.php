@@ -30,7 +30,7 @@ class Mj_Lieu_BanqueCompteCarteMod
 				. ' WHERE compte_id=:compteId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compteId',	$_GET['id'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -50,7 +50,7 @@ class Mj_Lieu_BanqueCompteCarteMod
 		$prep->bindValue(':banqueNo',	$banque_no,		PDO::PARAM_INT);
 		$prep->bindValue(':compte',		$compte_no,		PDO::PARAM_INT);
 		$prep->bindValue(':carteId',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -91,7 +91,7 @@ class Mj_Lieu_BanqueCompteCarteMod
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueNo',	$_POST['carte_banque'],		PDO::PARAM_INT);
 		$prep->bindValue(':compte',		$_POST['carte_compte'],		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -116,7 +116,7 @@ class Mj_Lieu_BanqueCompteCarteMod
 		$prep->bindValue(':nip',		$_POST['carte_nip'],		PDO::PARAM_STR);
 		$prep->bindValue(':valid',		$_POST['carte_valid'],		PDO::PARAM_STR);
 		$prep->bindValue(':carteId',	$_POST['id'],				PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

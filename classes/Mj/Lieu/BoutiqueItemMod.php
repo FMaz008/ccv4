@@ -59,7 +59,7 @@ class Mj_Lieu_BoutiqueItemMod
 				$prep->bindValue(':prixVente',	$prix_vente,	PDO::PARAM_INT);
 				$prep->bindValue(':prixAchat',	$prix_achat,	PDO::PARAM_INT);
 				$prep->bindValue(':invId',		$item->getInvId(),	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 			}

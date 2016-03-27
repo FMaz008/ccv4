@@ -38,7 +38,7 @@ class Remise
 						. ' LIMIT :max;';
 			$prep = $db->prepare($query);
 			$prep->bindValue('max',		$maxRemise,		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAccount = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -63,7 +63,7 @@ class Remise
 		$query = 'DELETE FROM ' . DB_PREFIX . 'lieu_tenirporte'
 					. ' WHERE expiration<UNIX_TIMESTAMP();';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 			
@@ -71,7 +71,7 @@ class Remise
 		$query = 'DELETE FROM ' . DB_PREFIX . 'lieu_ban'
 					. ' WHERE remiseleft<1;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -81,7 +81,7 @@ class Remise
 					. ' WHERE mp_expiration<UNIX_TIMESTAMP()'
 						. ' AND mp!="0";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -128,7 +128,7 @@ class Remise
 		$query = 'SELECT DISTINCT `mediaType`, `canalId`, `titre`'
 				. ' FROM (SELECT * FROM `' . DB_PREFIX . 'media` ORDER BY `date` DESC) as temp1;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -149,7 +149,7 @@ class Remise
 		$prep->bindValue(':titre', $emission['titre'], PDO::PARAM_STR);
 		$prep->bindValue(':canalId', $emission['canalId'], PDO::PARAM_INT);
 		$prep->bindValue(':mediaType', $emission['mediaType'], PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -167,7 +167,7 @@ class Remise
 			$prep->bindValue(':titre', $emission['titre'], PDO::PARAM_STR);
 			$prep->bindValue(':canalId', $emission['canalId'], PDO::PARAM_INT);
 			$prep->bindValue(':mediaType', $emission['mediaType'], PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -188,7 +188,7 @@ class Remise
 						. ' AND inscription_valide="1";';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':userId',		$accountId,		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrPerso = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -226,7 +226,7 @@ class Remise
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':userId',		$accountId,		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -252,7 +252,7 @@ class Remise
 					. ' WHERE persoid=:persoId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',		$perso->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -263,7 +263,7 @@ class Remise
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',		$perso->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -360,7 +360,7 @@ class Remise
 						. ' AND inv_persoid=:persoId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',		$perso->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -375,7 +375,7 @@ class Remise
 						. ' AND inv_persoid=:persoId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',		$perso->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrItem = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -423,7 +423,7 @@ class Remise
 						. ' AND inv_remiseleft=0'
 						. ' AND db_type="drogue";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -455,7 +455,7 @@ class Remise
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',		$perso->getId(),		PDO::PARAM_INT);
 		$prep->bindValue(':expir',			$expir,					PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrMenotte = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -506,7 +506,7 @@ class Remise
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',		$perso->getId(),		PDO::PARAM_INT);
 		$prep->bindValue(':expir',			$expir,					PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrFouille = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

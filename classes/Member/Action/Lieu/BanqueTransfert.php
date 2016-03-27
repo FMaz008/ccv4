@@ -42,7 +42,7 @@ class Member_Action_Lieu_BanqueTransfert
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nomTech',	$perso->getLieu()->getNomTech(),	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -64,7 +64,7 @@ class Member_Action_Lieu_BanqueTransfert
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compteId',	$_POST['id'],		PDO::PARAM_INT);
 		$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -89,7 +89,7 @@ class Member_Action_Lieu_BanqueTransfert
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banque',	$cptno[0],		PDO::PARAM_INT);
 		$prep->bindValue(':compte',	$cptno[1] . '-' . $cptno[2] . '-' . $cptno[3],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

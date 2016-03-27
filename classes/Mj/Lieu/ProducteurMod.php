@@ -37,7 +37,7 @@ class Mj_Lieu_ProducteurMod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -85,7 +85,7 @@ class Mj_Lieu_ProducteurMod
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$_POST['lieuId'],	PDO::PARAM_INT);
 		$prep->bindValue(':id',		$_POST['id'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -111,7 +111,7 @@ class Mj_Lieu_ProducteurMod
 		$prep->bindValue(':total_pa',	$_POST['total_pa'],			PDO::PARAM_INT);
 		$prep->bindValue(':pa_needed',	$_POST['pa_needed'],		PDO::PARAM_INT);
 		$prep->bindValue(':id',			$_POST['id'],				PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

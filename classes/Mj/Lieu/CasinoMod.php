@@ -36,7 +36,7 @@ class Mj_Lieu_CasinoMod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':casinoId',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -71,7 +71,7 @@ class Mj_Lieu_CasinoMod
 		$prep = $db->prepare($query);
 		$prep->bindValue(':casinoLieu',	$_POST['casino_lieu'],	PDO::PARAM_STR);
 		$prep->bindValue(':casinoId',	$_POST['id'],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -92,7 +92,7 @@ class Mj_Lieu_CasinoMod
 		$prep->bindValue(':nom',	$_POST['casino_nom'],	PDO::PARAM_STR);
 		$prep->bindValue(':cash',	$_POST['casino_cash'],	PDO::PARAM_INT);
 		$prep->bindValue(':casinoId',	$_POST['id'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

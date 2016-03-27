@@ -149,7 +149,7 @@ class Member_ItemTelephone extends Member_Item
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':noTel',	$callTo,				PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -174,7 +174,7 @@ class Member_ItemTelephone extends Member_Item
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banque',	$this->getNobanque(),	PDO::PARAM_STR);
 		$prep->bindValue(':compte',	$this->getNocompte(),	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrBanque = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -230,7 +230,7 @@ class Member_ItemTelephone extends Member_Item
 						. ' LIMIT 1;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':sacid',	$arr['inv_itemid'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				$arrSac = $prep->fetch();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -250,7 +250,7 @@ class Member_ItemTelephone extends Member_Item
 				. ' WHERE `compte_id`=1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':cash', $this->getPrixAppel(), PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -276,7 +276,7 @@ class Member_ItemTelephone extends Member_Item
 		$prep->bindValue(':fromId',		$this->getIdProprio(),		PDO::PARAM_INT);
 		$prep->bindValue(':toTel',		$callTo,					PDO::PARAM_STR);
 		$prep->bindValue(':toId',		$telDistantProprioId,		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -301,7 +301,7 @@ class Member_ItemTelephone extends Member_Item
 		$prep = $db->prepare($query);
 		$prep->bindValue(':mem',	$mem,				PDO::PARAM_STR);
 		$prep->bindValue(':id',		$this->getInvId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -331,7 +331,7 @@ class Member_ItemTelephone extends Member_Item
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',		$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -362,7 +362,7 @@ class Member_ItemTelephone extends Member_Item
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compte',		$nocompte,	PDO::PARAM_STR);
 		$prep->bindValue(':banque',		$nobanque,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrCompteTel = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -400,7 +400,7 @@ class Member_ItemTelephone extends Member_Item
 			$prep->bindValue(':compte',		$nocompte,			PDO::PARAM_STR);
 			$prep->bindValue(':banque',		$nobanque,			PDO::PARAM_STR);
 			$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -430,7 +430,7 @@ class Member_ItemTelephone extends Member_Item
 			$prep->bindValue(':banque',		$nobanque,			PDO::PARAM_STR);
 			$prep->bindValue(':nip',		$nip,				PDO::PARAM_INT);
 			$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -456,7 +456,7 @@ class Member_ItemTelephone extends Member_Item
 						. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':noTel',		$noTel,			PDO::PARAM_STR);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -473,7 +473,7 @@ class Member_ItemTelephone extends Member_Item
 		$prep = $db->prepare($query);
 		$prep->bindValue(':noTel',		$this->notel,		PDO::PARAM_STR);
 		$prep->bindValue(':id',			$this->getInvId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

@@ -30,7 +30,7 @@ class Mj_Lieu_Mod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -45,7 +45,7 @@ class Mj_Lieu_Mod
 				. ' WHERE b.boutiqueid = :id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id',	$arr['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrGerants = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -66,7 +66,7 @@ class Mj_Lieu_Mod
 				. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',	$_POST['id'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arr = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -76,7 +76,7 @@ class Mj_Lieu_Mod
 				. ' WHERE b.boutiqueid = :id;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',	$arr['id'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrGerants = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -109,7 +109,7 @@ class Mj_Lieu_Mod
 				. ' FROM ' . DB_PREFIX . 'lieu'
 				. ' ORDER BY nom_technique ASC;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -146,7 +146,7 @@ class Mj_Lieu_Mod
 					WHERE lieutech=:nomTech;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nomTech',	$nomtech,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -179,7 +179,7 @@ class Mj_Lieu_Mod
 				. ' WHERE `from`=:nomTech;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nomTech',	$nomtech,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -199,7 +199,7 @@ class Mj_Lieu_Mod
 				. ' WHERE `to`=:nomTech;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nomTech',	$nomtech,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -250,7 +250,7 @@ class Mj_Lieu_Mod
 					$prep->bindValue(':protection',	$_POST[$i.'_al_protection'],	PDO::PARAM_STR);
 					$prep->bindValue(':pass',	$_POST[$i.'_al_pass'],	PDO::PARAM_STR);
 					$prep->bindValue(':bloque',	$_POST[$i.'_al_bloque'],	PDO::PARAM_STR);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 					
 					if (isset($_POST[$i . '_al_sym'])) // Créer le lien inverse si coché
 					{
@@ -264,7 +264,7 @@ class Mj_Lieu_Mod
 						$prep->bindValue(':protection',	$_POST[$i.'_al_protection'],	PDO::PARAM_STR);
 						$prep->bindValue(':pass',	$_POST[$i.'_al_pass'],	PDO::PARAM_STR);
 						$prep->bindValue(':bloque',	$_POST[$i.'_al_bloque'],	PDO::PARAM_STR);
-						$prep->execute($db, __FILE__, __LINE__);
+						$prep->executePlus($db, __FILE__, __LINE__);
 						
 					}
 				}
@@ -284,7 +284,7 @@ class Mj_Lieu_Mod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':from',	$arr['nom_technique'],	PDO::PARAM_STR);
 			$prep->bindValue(':to',		$arr['nom_technique'],	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -314,7 +314,7 @@ class Mj_Lieu_Mod
 				$prep->bindValue(':pass',		$_POST[$arr['id'] . '_pass'],	PDO::PARAM_STR);
 				$prep->bindValue(':bloque',		$_POST[$arr['id'] . '_bloque'],	PDO::PARAM_STR);
 				$prep->bindValue(':id',			$arr['id'],						PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 			}
 			$prep->closeCursor();
 			$prep = NULL;
@@ -330,7 +330,7 @@ class Mj_Lieu_Mod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':from',	$arr['nom_technique'],	PDO::PARAM_STR);
 			$prep->bindValue(':to',		$arr['nom_technique'],	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -346,7 +346,7 @@ class Mj_Lieu_Mod
 				if (isset($_POST[$arr['id'] . '_del']))
 				{
 					$prep->bindValue(':id',	$arr['id'],	PDO::PARAM_INT);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 				}
 			}
 			$prep->closeCursor();
@@ -409,7 +409,7 @@ class Mj_Lieu_Mod
 		$prep->bindValue(':noteMj',			$_POST['notemj'],		PDO::PARAM_STR);
 		$prep->bindValue(':id',				$_POST['id'],			PDO::PARAM_INT);
 		
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -426,7 +426,7 @@ class Mj_Lieu_Mod
 			if(isset($_POST['delGerant_' . $gerant['id']]))
 			{
 				$prep->bindValue(':idPerso', $gerant['id'], PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 			}
 		}
 		$prep->closeCursor();
@@ -442,7 +442,7 @@ class Mj_Lieu_Mod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':idLieu',	$arr['id'],PDO::PARAM_STR);
 			$prep->bindValue(':idPerso', $_POST['addGerant'], PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -457,7 +457,7 @@ class Mj_Lieu_Mod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':newNomTech',		$_POST['nom_technique'],	PDO::PARAM_STR);
 			$prep->bindValue(':oldNomTech',		$arr['nom_technique'],		PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 
@@ -469,7 +469,7 @@ class Mj_Lieu_Mod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':newNomTech',		$_POST['nom_technique'],	PDO::PARAM_STR);
 			$prep->bindValue(':oldNomTech',		$arr['nom_technique'],		PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -480,7 +480,7 @@ class Mj_Lieu_Mod
 				. ' WHERE lieutech=:nomTech;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nomTech',		$_POST['nom_technique'],	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -531,7 +531,7 @@ class Mj_Lieu_Mod
 					$prep->bindValue(':nomTech',	$_POST['nom_technique'],			PDO::PARAM_STR);
 					$prep->bindValue(':caption',	$_POST[$i . '_actioncaption_add'],	PDO::PARAM_STR);
 					$prep->bindValue(':url',		$_POST[$i . '_actionpage_add'],		PDO::PARAM_STR);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 				}
 			}
 		}

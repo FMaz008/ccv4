@@ -222,7 +222,7 @@ function fctBugReport($msg, $arrVarDump, $file='', $line=0, $function='', $class
 		$prep->bindValue(':msg',	$msg,						PDO::PARAM_STR);
 		$prep->bindValue(':file',	$file,						PDO::PARAM_STR);
 		$prep->bindValue(':line',	$line,						PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 				

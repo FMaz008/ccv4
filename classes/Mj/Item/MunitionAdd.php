@@ -93,14 +93,14 @@ class Mj_Item_MunitionAdd
 		$prep->bindValue(':db_pr', $_POST['db_pr'], PDO::PARAM_INT);
 		$prep->bindValue(':db_resistance', $_POST['db_resistance'], PDO::PARAM_INT);
 		$prep->bindValue(':db_notemj', $_POST['db_notemj'], PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
 		//Trouver l'id de l'arme créé
 		$query = "SELECT LAST_INSERT_ID()";
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$result = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -124,7 +124,7 @@ class Mj_Item_MunitionAdd
 					$prep->bindValue(':db_id', $db_id, PDO::PARAM_INT);
 					$prep->bindValue(':actioncaption_add', $_POST[$i . '_actioncaption_add'], PDO::PARAM_STR);
 					$prep->bindValue(':actionpage_add', $_POST[$i . '_actionpage_add'], PDO::PARAM_STR);
-					$prep->execute($db, __FILE__,__LINE__);
+					$prep->executePlus($db, __FILE__,__LINE__);
 					$prep->closeCursor();
 					$prep = NULL;
 				}
@@ -137,13 +137,13 @@ class Mj_Item_MunitionAdd
 				$query = 'DELETE
 							FROM ' . DB_PREFIX . 'item_db_armemunition
 							WHERE id=' . (int)$dbid . ';';
-				$db->query($query,__FILE__,__LINE__);
+				$db->queryPlus($query,__FILE__,__LINE__);
 				$query = 'DELETE'
 							. ' FROM `' . DB_PREFIX . 'item_db_armemunition`'
 							. ' WHERE `id` = :dbid;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':dbid', $dbid, PDO::PARAM_INT);
-				$prep->execute($db, __FILE__,__LINE__);
+				$prep->executePlus($db, __FILE__,__LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 			}
@@ -166,7 +166,7 @@ class Mj_Item_MunitionAdd
 					$prep = $db->prepare($query);
 					$prep->bindValue(':dbid', $db_id, PDO::PARAM_INT);
 					$prep->bindValue(':armeid_add', $_POST[$i . '_armeid_add'], PDO::PARAM_STR);
-					$prep->execute($db, __FILE__,__LINE__);
+					$prep->executePlus($db, __FILE__,__LINE__);
 					$prep->closeCursor();
 					$prep = NULL;
 				}

@@ -23,7 +23,7 @@ class Mj_Perso_InventaireItemDel
 		foreach ($_POST['invId'] as $itemId)
 		{
 			$prep->bindValue(':invId',		$itemId,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 		}
 		$prep->closeCursor();
 		$prep = NULL;

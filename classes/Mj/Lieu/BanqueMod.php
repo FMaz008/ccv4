@@ -36,7 +36,7 @@ class Mj_Lieu_BanqueMod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueId',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -78,7 +78,7 @@ class Mj_Lieu_BanqueMod
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueNo',	$_POST['banque_no'],	PDO::PARAM_STR);
 		$prep->bindValue(':banqueId',	$_POST['id'],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -96,7 +96,7 @@ class Mj_Lieu_BanqueMod
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuTech',	$_POST['banque_lieu'],	PDO::PARAM_STR);
 		$prep->bindValue(':banqueId',	$_POST['id'],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -115,7 +115,7 @@ class Mj_Lieu_BanqueMod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueId',	$_POST['id'],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -135,7 +135,7 @@ class Mj_Lieu_BanqueMod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':newBanqueNo',	$_POST['banque_no'],	PDO::PARAM_INT);
 			$prep->bindValue(':oldBanqueNo',	$banqueNo,				PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -145,7 +145,7 @@ class Mj_Lieu_BanqueMod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':newBanqueNo',	$_POST['banque_no'],	PDO::PARAM_INT);
 			$prep->bindValue(':oldBanqueNo',	$banqueNo,				PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -155,7 +155,7 @@ class Mj_Lieu_BanqueMod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':newBanqueNo',	$_POST['banque_no'],	PDO::PARAM_INT);
 			$prep->bindValue(':oldBanqueNo',	$banqueNo . '-%',		PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -177,7 +177,7 @@ class Mj_Lieu_BanqueMod
 		$prep->bindValue(':fraisOuverture',	$_POST['banque_frais_ouverture'],	PDO::PARAM_INT);
 		$prep->bindValue(':telephone',		$_POST['banque_telephone'],	PDO::PARAM_STR);
 		$prep->bindValue(':id',				$_POST['id'],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 			

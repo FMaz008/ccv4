@@ -104,14 +104,14 @@ class Mj_Item_MediaAdd
 		$prep->bindValue(':db_pass', $_POST['db_pass'], PDO::PARAM_STR);
 		$prep->bindValue(':db_resistance', $_POST['db_resistance'], PDO::PARAM_INT);
 		$prep->bindValue(':db_notemj', $_POST['db_notemj'], PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
 		//Trouver l'id de l'arme créé
 		$query = "SELECT LAST_INSERT_ID()";
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$result = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -132,7 +132,7 @@ class Mj_Item_MediaAdd
 					$prep->bindValue(':db_id', $db_id, PDO::PARAM_INT);
 					$prep->bindValue(':actioncaption_add', $_POST[$i . '_actioncaption_add'], PDO::PARAM_STR);
 					$prep->bindValue(':actionpage_add', $_POST[$i . '_actionpage_add'], PDO::PARAM_STR);
-					$prep->execute($db, __FILE__,__LINE__);
+					$prep->executePlus($db, __FILE__,__LINE__);
 					$prep->closeCursor();
 					$prep = NULL;
 				}

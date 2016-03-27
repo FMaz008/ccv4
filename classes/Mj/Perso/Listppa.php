@@ -23,7 +23,7 @@ class Mj_Perso_Listppa
 				. ' ORDER BY p.`statut` DESC, p.`date` DESC;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',		$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

@@ -22,7 +22,7 @@ class Mj_Lieu_Coupdoeil
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$lieuId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -41,7 +41,7 @@ class Mj_Lieu_Coupdoeil
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$lieuId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -64,7 +64,7 @@ class Mj_Lieu_Coupdoeil
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$lieuId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -79,7 +79,7 @@ class Mj_Lieu_Coupdoeil
 						. ' WHERE lieu = :lieuTech;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuTech',	$lieuTech,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -108,7 +108,7 @@ class Mj_Lieu_Coupdoeil
 			{
 				//A optimiser
 				$prep->bindValue(':persoId',	$p['id'],	PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$arr = $prep->fetch();
 				
 				

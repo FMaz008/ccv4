@@ -73,7 +73,7 @@ class Mj_Item_Inv_Clef
 		$prep->bindValue(':inv_notemj', $_POST['inv_notemj'], PDO::PARAM_STR);
 		$prep->bindValue(':inv_param', $_POST['inv_param'], PDO::PARAM_STR);
 		$prep->bindValue(':inv_id', $_GET['id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

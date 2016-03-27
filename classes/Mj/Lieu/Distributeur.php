@@ -30,7 +30,7 @@ class Mj_Lieu_Distributeur
 				. ' WHERE d.lieuId = :lieuId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId', $_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$PROD = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -47,7 +47,7 @@ class Mj_Lieu_Distributeur
 					. ' ON (l.id = p.lieuId);';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$_POST['LIEU_ID'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$PROD = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -78,7 +78,7 @@ class Mj_Lieu_Distributeur
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$_GET['id'],	PDO::PARAM_INT);
 		$prep->bindValue(':prodId',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -98,7 +98,7 @@ class Mj_Lieu_Distributeur
 				. ' LIMIT 1';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':distId',	$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

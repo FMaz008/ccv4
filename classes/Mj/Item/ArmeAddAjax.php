@@ -17,7 +17,7 @@ class Mj_Item_ArmeAddAjax
 					. ' WHERE `db_soustype` = "arme_feu"'
 					. ' AND `db_type` = "arme";';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$result = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

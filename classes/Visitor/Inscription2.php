@@ -36,7 +36,7 @@ class Visitor_Inscription2
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':user',	$_POST['user'], PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 
 		
@@ -72,7 +72,7 @@ class Visitor_Inscription2
 					. ' WHERE email=:email;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':email',	$_POST['email'], PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if($arr !== false)
@@ -156,7 +156,7 @@ class Visitor_Inscription2
 		$prep->bindValue(':pub_detail',			$_POST['pub_detail'], 		PDO::PARAM_STR);
 		$prep->bindValue(':code_validation',	$valCode, 					PDO::PARAM_STR);
 		$prep->bindValue(':skin',				SITE_DEFAULT_SKIN, 			PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		
 		
 		

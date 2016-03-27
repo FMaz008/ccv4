@@ -24,7 +24,7 @@ class Mj_Compte_Doublons
 				. ' ON (`' . DB_PREFIX . 'log_conn`.`ip` = `temp2`.`ip`)'
 				. ' ORDER BY `ip`, `' . DB_PREFIX . 'log_conn`.`timestamp` DESC) AS `temp3` LEFT JOIN `' . DB_PREFIX . 'account` ON (`' . DB_PREFIX . 'account`.`user` = `temp3`.`user`);';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$doublons = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

@@ -14,7 +14,7 @@ class Mj_Perso_LogSuppr
 				. ' FROM ' . DB_PREFIX . 'log_persosuppr'
 				. ' ORDER BY timestamp DESC;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

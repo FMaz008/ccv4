@@ -53,7 +53,7 @@ class Member_Action_Item_Siteadd
 		$prep->bindValue(':carteBanque',	$carte_banque,		PDO::PARAM_STR);
 		$prep->bindValue(':carteCompte',	$carte_compte,		PDO::PARAM_STR);
 		$prep->bindValue(':carteId',		$carte_id,			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$carte = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -77,7 +77,7 @@ class Member_Action_Item_Siteadd
 		$prep = $db->prepare($query);
 		$prep->bindValue(':carteBanque',	$carte_banque,		PDO::PARAM_STR);
 		$prep->bindValue(':carteCompte',	$carte_compte,		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -97,7 +97,7 @@ class Member_Action_Item_Siteadd
 				. ' WHERE url=:url;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':url',	$_POST['url'],		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -126,7 +126,7 @@ class Member_Action_Item_Siteadd
 		$prep = $db->prepare($query);
 		$prep->bindValue(':url',	$_POST['url'],		PDO::PARAM_STR);
 		$prep->bindValue(':titre',	$_POST['titre'],	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -143,7 +143,7 @@ class Member_Action_Item_Siteadd
 		$prep->bindValue(':siteId',		$siteid,			PDO::PARAM_INT);
 		$prep->bindValue(':user',		$_POST['user'],		PDO::PARAM_STR);
 		$prep->bindValue(':pass',		$_POST['pass'],		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

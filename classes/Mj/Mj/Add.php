@@ -51,7 +51,7 @@ class Mj_Mj_Add
 				$prep->bindValue(':ax_ppa',			isset($_POST['ax_ppa']) ? 1 : 0,	PDO::PARAM_STR);
 				$prep->bindValue(':ax_admin',		isset($_POST['ax_admin']) ? 1 : 0,	PDO::PARAM_STR);
 				$prep->bindValue(':ax_dev',			isset($_POST['ax_dev']) ? 1 : 0,	PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$mjId = $db->lastInsertId();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -78,7 +78,7 @@ class Mj_Mj_Add
 							. ' LIMIT 1;';
 					$prep = $db->prepare($query);
 					$prep->bindValue(':mjId',	$mjId,	PDO::PARAM_INT);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 					$arr = $prep->fetch();
 					$prep->closeCursor();
 					$prep = NULL;
@@ -95,7 +95,7 @@ class Mj_Mj_Add
 					$prep = $emailCon->prepare($query);
 					$prep->bindValue(':email',			$emailCC,	PDO::PARAM_STR);
 					$prep->bindValue(':destination',	$realEmail,	PDO::PARAM_STR);
-					$prep->execute($emailCon, __FILE__, __LINE__);
+					$prep->executePlus($emailCon, __FILE__, __LINE__);
 					$prep->closeCursor();
 					$prep = NULL;
 				

@@ -72,7 +72,7 @@
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':transactionId', $id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if ($arr === false)
@@ -120,7 +120,7 @@
 		$prep->bindValue(':transactionValue', $value, PDO::PARAM_INT);
 		$prep->bindValue(':transactionDescription', $description, PDO::PARAM_STR);
 		$prep->bindValue(':transactionDate', $date, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		
 		$transactionId = $db->lastInsertId();
 		$arr = array(	'transaction_id' 			=> $transactionId,
@@ -255,7 +255,7 @@
 		$prep->bindValue(':transaction_description', $this->description, PDO::PARAM_STR);
 		$prep->bindValue(':transaction_date', $this->date, PDO::PARAM_INT);
 		$prep->bindValue(':transaction_id', $this->id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 	}
 
 	/** Récupérer les transactions qui doivent être faites
@@ -277,7 +277,7 @@
 				. ' LIMIT :limit;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':limit', $limitTransaction, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrAll = $prep->fetchAll();
 		
 		$result = array();

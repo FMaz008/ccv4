@@ -21,7 +21,7 @@ class Mj_Item_ArmeDel
 					. ' WHERE `db_armeid` = :db_id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -31,7 +31,7 @@ class Mj_Item_ArmeDel
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -40,7 +40,7 @@ class Mj_Item_ArmeDel
 					. ' WHERE `inv_dbid` = :db_id';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 
@@ -49,7 +49,7 @@ class Mj_Item_ArmeDel
 					. ' WHERE `item_dbid` = :db_id';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

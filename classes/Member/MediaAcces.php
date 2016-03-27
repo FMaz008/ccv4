@@ -6,7 +6,7 @@
  * $query = 'SELECT * FROM ' . DB_PREFIX . 'lieu_medias WHERE id = :id;';
  * $prep = $db->prepare($query);
  * $prep->bindValue(':id',	345,	PDO::PARAM_INT);
- * $prep->execute($db, __FILE__, __LINE__);
+ * $prep->executePlus($db, __FILE__, __LINE__);
  * $arr = $prep->fetch();
  * $prep->closeCursor();
  * $prep = NULL;
@@ -105,7 +105,7 @@ class Member_MediaAcces
 		$prep->bindValue(':titre',	$title, PDO::PARAM_STR);
 		$prep->bindValue(':msg',	$message, PDO::PARAM_STR);
 		$prep->bindValue(':date',	$timestamp, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -146,7 +146,7 @@ class Member_MediaAcces
 		$prep = $db->prepare($query);
 		$prep->bindValue(':channelId',	$this->channelId, PDO::PARAM_INT);
 		$prep->bindValue(':id',	$this->id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -162,7 +162,7 @@ class Member_MediaAcces
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nom',	$this->nom, PDO::PARAM_STR);
 		$prep->bindValue(':id',	$this->id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -178,7 +178,7 @@ class Member_MediaAcces
 		$prep = $db->prepare($query);
 		$prep->bindValue(':mediaType',	$this->mediaType, PDO::PARAM_STR);
 		$prep->bindValue(':id',	$this->id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -194,7 +194,7 @@ class Member_MediaAcces
 		$prep = $db->prepare($query);
 		$prep->bindValue(':interactionType',	$this->interactionType, PDO::PARAM_INT);
 		$prep->bindValue(':id',	$this->id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -210,7 +210,7 @@ class Member_MediaAcces
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$this->lieuId, PDO::PARAM_INT);
 		$prep->bindValue(':id',	$this->id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

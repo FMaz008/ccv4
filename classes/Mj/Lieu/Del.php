@@ -36,7 +36,7 @@ class Mj_Lieu_Del
 		$prep = $db->prepare($query);
 		$prep->bindValue(':from',	$nom_tech,	PDO::PARAM_STR);
 		$prep->bindValue(':to',		$nom_tech,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -48,7 +48,7 @@ class Mj_Lieu_Del
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':lieuId',	$lieuId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -57,7 +57,7 @@ class Mj_Lieu_Del
 				. ' WHERE `boutiqueid` = :idLieu;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':idLieu',	$lieuId, PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

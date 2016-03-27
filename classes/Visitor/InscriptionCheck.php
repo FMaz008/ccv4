@@ -28,7 +28,7 @@ class Visitor_InscriptionCheck
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':user',	$_POST['user'], PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if ($arr !== false)
@@ -40,7 +40,7 @@ class Visitor_InscriptionCheck
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':email',	$_POST['email'], PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if($arr !== false)

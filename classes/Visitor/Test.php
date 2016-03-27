@@ -47,7 +47,7 @@ class Visitor_Test
         $query = 'SELECT *'
 				. ' FROM ' . DB_PREFIX . 'perso_fouille';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

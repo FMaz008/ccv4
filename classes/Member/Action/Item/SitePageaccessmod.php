@@ -39,7 +39,7 @@ class Member_Action_Item_SitePageaccessmod
 		$prep->bindValue(':user',		$_POST['user'],			PDO::PARAM_STR);
 		$prep->bindValue(':pass',		$_POST['pass'],			PDO::PARAM_STR);
 		$prep->bindValue(':id',			$_POST['no'],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -72,7 +72,7 @@ class Member_Action_Item_SitePageaccessmod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':user_id',		$_POST['userid'],		PDO::PARAM_INT);
 			$prep->bindValue(':page_id',		$_POST['no'],			PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -84,7 +84,7 @@ class Member_Action_Item_SitePageaccessmod
 			$prep = $db->prepare($query);
 			$prep->bindValue(':user_id',		$_POST['userid'],		PDO::PARAM_INT);
 			$prep->bindValue(':page_id',		$_POST['no'],			PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}

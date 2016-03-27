@@ -81,7 +81,7 @@ class Session
 					. ' WHERE expiration < :expiration;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':expiration', CURRENT_TIME,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -116,7 +116,7 @@ class Session
 			
 			//Rechercher le # de cookie
 			$prep->bindValue(':idcookie', $computer_idcookie,	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$ret = $prep->fetch();
 			
 			
@@ -147,7 +147,7 @@ class Session
 					. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':idcookie', $this->sessId,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -165,7 +165,7 @@ class Session
 			$prep->bindValue(':userId', $this->getVar('userId'),	PDO::PARAM_INT);
 			$prep->bindValue(':idCookie', $this->sessId,	PDO::PARAM_STR);
 			$prep->bindValue(':expiration', $expireTime,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -180,7 +180,7 @@ class Session
 			$prep = $db->prepare($query);
 			$prep->bindValue(':idCookie', $this->sessId,	PDO::PARAM_STR);
 			$prep->bindValue(':expiration', $expireTime,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}
@@ -215,7 +215,7 @@ class Session
 			$prep = $db->prepare($query);
 			$prep->bindValue(':userId', $varValue,	PDO::PARAM_INT);
 			$prep->bindValue(':idCookie', $this->sessId,	PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			

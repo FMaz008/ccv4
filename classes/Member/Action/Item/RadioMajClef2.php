@@ -26,7 +26,7 @@ class Member_Action_Item_RadioMajClef2
 			$_POST['frequence'] = 0;
 		
 		if(!is_numeric($_POST['clef']))
-			die('Cette clef n\'est pas numérique');
+			die('Cette clef n\'est pas numÃ©rique');
 		
 		$radio->majClef($_POST['clef']);
 		

@@ -23,7 +23,7 @@ class Mj_Lieu_MairieQuestionDel
 				. ' WHERE `questionId`=:questionId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':questionId',	$_POST['questionId'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -34,7 +34,7 @@ class Mj_Lieu_MairieQuestionDel
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':questionId',	$_POST['questionId'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

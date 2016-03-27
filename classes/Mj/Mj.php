@@ -105,7 +105,7 @@ class Mj_Mj
 		$prep = $db->prepare($query);
 		$prep->bindValue(':present',	$this->present,	PDO::PARAM_INT);
 		$prep->bindValue(':id',			$this->id,		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -172,7 +172,7 @@ class Mj_Mj
 		$prep->bindValue(':mjId',			$this->getId(),	PDO::PARAM_INT);
 		$prep->bindValue(':concernant',		$concernant,	PDO::PARAM_STR);
 		$prep->bindValue(':concernant_type',$type,			PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

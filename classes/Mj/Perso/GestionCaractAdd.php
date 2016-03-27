@@ -28,7 +28,7 @@ class Mj_Perso_GestionCaractAdd
 			$prep->bindValue(':type',		$_POST['type'],		PDO::PARAM_STR);
 			$prep->bindValue(':nom',		$_POST['nom'],		PDO::PARAM_STR);
 			$prep->bindValue(':desc',		$_POST['desc'],		PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 
@@ -50,7 +50,7 @@ class Mj_Perso_GestionCaractAdd
 					{
 						$prep->bindValue(':caractId',	$caractId,							PDO::PARAM_INT);
 						$prep->bindValue(':incompatId',	$_POST[$i . '_incompatible_add'],	PDO::PARAM_INT);
-						$prep->execute($db, __FILE__, __LINE__);
+						$prep->executePlus($db, __FILE__, __LINE__);
 					}
 				}
 				$prep->closeCursor();
@@ -71,7 +71,7 @@ class Mj_Perso_GestionCaractAdd
 					. ' AND catid=0'
 				. ' ORDER BY nom;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$cat = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

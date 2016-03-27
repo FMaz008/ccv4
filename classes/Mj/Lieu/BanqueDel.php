@@ -22,7 +22,7 @@ class Mj_Lieu_BanqueDel
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueId',		$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -38,7 +38,7 @@ class Mj_Lieu_BanqueDel
 					. ' WHERE `compte_banque`=:banqueNo;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueNo',		$banque_no,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -47,7 +47,7 @@ class Mj_Lieu_BanqueDel
 					. ' WHERE compte LIKE :banqueNo;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueNo',		$banque_no . '-%',	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -56,7 +56,7 @@ class Mj_Lieu_BanqueDel
 				. ' WHERE `carte_banque`=:banqueNo;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueNo',		$banque_no,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -66,7 +66,7 @@ class Mj_Lieu_BanqueDel
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banqueId',		$_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

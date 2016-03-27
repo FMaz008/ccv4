@@ -138,7 +138,7 @@ class Mj_Perso_Mod
 							. ' AND url="Menotter" LIMIT 1;';
 					$prep = $db->prepare($query);
 					$prep->bindValue(':dbid', $newMenotte->getDbId(), PDO::PARAM_INT);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 					$arrAll = $prep->fetchAll();
 					$prep->closeCursor();
 					$prep = NULL;
@@ -156,7 +156,7 @@ class Mj_Perso_Mod
 							. ' LIMIT 1;';
 					$prep = $db->prepare($query);
 					$prep->bindValue(':itemId',	$newMenotte->getInvId(), PDO::PARAM_INT);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 					$prep->closeCursor();
 					$prep = NULL;
 					
@@ -168,7 +168,7 @@ class Mj_Perso_Mod
 								. ' LIMIT 1;';
 						$prep = $db->prepare($query);
 						$prep->bindValue(':itemId',	$perso->getMenotte(), PDO::PARAM_INT);
-						$prep->execute($db, __FILE__, __LINE__);
+						$prep->executePlus($db, __FILE__, __LINE__);
 						$prep->closeCursor();
 						$prep = NULL;
 					}
@@ -181,7 +181,7 @@ class Mj_Perso_Mod
 							. ' LIMIT 1;';
 					$prep = $db->prepare($query);
 					$prep->bindValue(':itemId',	$perso->getMenotte(), PDO::PARAM_INT);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 					$prep->closeCursor();
 					$prep = NULL;
 				}
@@ -242,7 +242,7 @@ class Mj_Perso_Mod
 			$prep->bindValue(':visaPerm',		$_POST['visavert'],		PDO::PARAM_STR);
 			$prep->bindValue(':persoId',		$_GET['id'],			PDO::PARAM_INT);
 			$prep->bindValue(':menotte',		$menotte,				PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 
@@ -397,7 +397,7 @@ class Mj_Perso_Mod
 					. ' WHERE p.`persoid`=:persoId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':persoId', $_GET['id']);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -454,7 +454,7 @@ class Mj_Perso_Mod
 				$prep = $db->prepare($query);
 				$prep->bindValue(':caractId',	$_POST['add_caract'],	PDO::PARAM_INT);
 				$prep->bindValue(':persoId',	$_GET['id'],			PDO::PARAM_INT);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 			
@@ -471,7 +471,7 @@ class Mj_Perso_Mod
 						WHERE userId=:userId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':userId',	$session->getVar('userId'),	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -513,7 +513,7 @@ class Mj_Perso_Mod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$_GET['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -558,7 +558,7 @@ class Mj_Perso_Mod
 				. ' ;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -581,7 +581,7 @@ class Mj_Perso_Mod
 				. ' WHERE p.persoid=:persoId;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -608,7 +608,7 @@ class Mj_Perso_Mod
 				. ' ORDER BY t.nom, c.nom;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -631,7 +631,7 @@ class Mj_Perso_Mod
 				. ' ORDER BY c.id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arrAll = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

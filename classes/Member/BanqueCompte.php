@@ -12,7 +12,7 @@
  *
  * 	$prep = $db->prepare($query);
  *	$prep->bindValue(':carteId',	$_POST['carteid'],	PDO::PARAM_INT);
- *	$prep->execute($db, __FILE__, __LINE__);
+ *	$prep->executePlus($db, __FILE__, __LINE__);
  *	$arr = $prep->fetch();
  *	$prep->closeCursor();
  *	$prep = NULL;
@@ -135,7 +135,7 @@ class Member_BanqueCompte
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banque',	$banque_no,	PDO::PARAM_STR);
 		$prep->bindValue(':compte',	$compte_no,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -165,7 +165,7 @@ class Member_BanqueCompte
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compteId', $id, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		if ($arr === false)
@@ -192,7 +192,7 @@ class Member_BanqueCompte
 			$prep = $db->prepare($query);
 			$prep->bindValue(':banque',		$this->noBanque,		PDO::PARAM_STR);
 			$prep->bindValue(':compte',		$this->noCompte,		PDO::PARAM_STR);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -232,7 +232,7 @@ class Member_BanqueCompte
 					. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':carteId',	$carteNo,	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$arr = $prep->fetch();
 			
 			if ($arr === false)
@@ -327,7 +327,7 @@ class Member_BanqueCompte
 		$prep->bindValue(':cash',		$montant,			PDO::PARAM_INT);
 		$prep->bindValue(':noBanque',	$this->noBanque,	PDO::PARAM_STR);
 		$prep->bindValue(':noCompte',	$this->noCompte,	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		
 		$this->cash = $montant;
 	}
@@ -359,7 +359,7 @@ class Member_BanqueCompte
 		$prep->bindValue(':retrait',	$retrait,			PDO::PARAM_INT);
 		$prep->bindValue(':depot',		$depot,				PDO::PARAM_INT);
 		$prep->bindValue(':solde',		$this->getCash(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		
 		
 	}
@@ -380,7 +380,7 @@ class Member_BanqueCompte
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':compteNo',		"%{$accountno}%",	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		
 		
@@ -404,7 +404,7 @@ class Member_BanqueCompte
 					. ' WHERE `transaction_compte_from` = :transaction_compte_from;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':transaction_compte_from', $this->id, PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			
 			$arrAll = $prep->fetchAll();
 			
@@ -441,7 +441,7 @@ class Member_BanqueCompte
 		$prep->bindValue(':nom',	$name,					PDO::PARAM_STR);
 		$prep->bindValue(':nip',	$nip,					PDO::PARAM_INT);
 		$prep->bindValue(':valid',	$valid,					PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -465,7 +465,7 @@ class Member_BanqueCompte
 		$prep->bindValue(':banque',		$this->noBanque,	PDO::PARAM_STR);
 		$prep->bindValue(':compte',		$this->noCompte,	PDO::PARAM_STR);
 		$prep->bindValue(':carte',		$carteId,			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -491,7 +491,7 @@ class Member_BanqueCompte
 		$prep->bindValue(':compte',		$this->noCompte,	PDO::PARAM_STR);
 		$prep->bindValue(':carte',		$carteId,				PDO::PARAM_INT);
 		$prep->bindValue(':nom',		$name,					PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -511,7 +511,7 @@ class Member_BanqueCompte
 		$prep = $db->prepare($query);
 		$prep->bindValue(':banque',			$this->id,		PDO::PARAM_INT);
 		$prep->bindValue(':transaction',	$transactionId,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}
@@ -532,7 +532,7 @@ class Member_BanqueCompte
 		$prep = $db->prepare($query);
 		$prep->bindValue(':nip',		$newNIP,		PDO::PARAM_INT);
 		$prep->bindValue(':compteId',	$this->id,		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 
 		$this->nip = $newNIP;
 	}

@@ -37,7 +37,7 @@ class Mj_Perso_GestionCaractMod
 					$prep->bindValue(':delId2', 	$del,		PDO::PARAM_INT);
 					$prep->bindValue(':caractId1',	$itemId,	PDO::PARAM_INT);
 					$prep->bindValue(':caractId2',	$itemId,	PDO::PARAM_INT);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 				}
 				$prep->closeCursor();
 				$prep = NULL;
@@ -57,7 +57,7 @@ class Mj_Perso_GestionCaractMod
 					{
 						$prep->bindValue(':id1',	$itemId,							PDO::PARAM_INT);
 						$prep->bindValue(':id2',	$_POST[$i . '_incompatible_add'],	PDO::PARAM_INT);
-						$prep->execute($db, __FILE__, __LINE__);
+						$prep->executePlus($db, __FILE__, __LINE__);
 					}
 				}
 				$prep->closeCursor();
@@ -78,7 +78,7 @@ class Mj_Perso_GestionCaractMod
 			$prep->bindValue(':nom',	$_POST['nom'],		PDO::PARAM_STR);
 			$prep->bindValue(':desc',	$_POST['desc'],		PDO::PARAM_STR);
 			$prep->bindValue(':id',		$_POST['id'],		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 			
@@ -96,7 +96,7 @@ class Mj_Perso_GestionCaractMod
 					. ' AND catid=0'
 				. ' ORDER BY nom;';
 		$prep = $db->prepare($query);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$cat = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -119,7 +119,7 @@ class Mj_Perso_GestionCaractMod
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id', $_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -146,7 +146,7 @@ class Mj_Perso_GestionCaractMod
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id1', $_POST['id'],	PDO::PARAM_INT);
 		$prep->bindValue(':id2', $_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arrIncompatible = $prep->fetchAll();
 		$prep->closeCursor();
 		$prep = NULL;

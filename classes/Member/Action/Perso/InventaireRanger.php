@@ -47,7 +47,7 @@ class Member_Action_Perso_InventaireRanger
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',		$perso->getId(),	PDO::PARAM_INT);
 		$prep->bindValue(':itemId',			$_POST['id'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

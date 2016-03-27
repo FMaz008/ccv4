@@ -89,7 +89,7 @@ class MySQLConnection
 	 * Exemple d'utilisation - Exécute une requête et affiche le résultat
 	 * <code>
 	 * $query = 'SELECT * FROM ' . DB_PREFIX . 'perso WHERE id=801;';
-	 * $result = $db->query($query,__FILE__,__LINE__,__FUNCTION__,__CLASS__,__METHOD__);
+	 * $result = $db->queryPlus($query,__FILE__,__LINE__,__FUNCTION__,__CLASS__,__METHOD__);
 	 * echo mysql_result($result,0);
 	 * </code>
 	 *

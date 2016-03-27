@@ -59,7 +59,7 @@ class PDOPlus extends PDO
 	   
 	}
 	
-	public function prepare($query, $file=null, $line=null)
+	public function preparePlus($query, $file=null, $line=null)
 	{
 		try
 		{
@@ -86,7 +86,7 @@ class PDOPlus extends PDO
 	
 
 	
-	public function exec($sql, $file=null, $line=null)
+	public function execPlus($sql, $file=null, $line=null)
 	{
 		try
 		{
@@ -112,7 +112,7 @@ class PDOPlus extends PDO
 
 
 
-	public function query($query, $file=null, $line=null, $function=null, $class=null, $method=null, $byPassCheck=false)
+	public function queryPlus($query, $file=null, $line=null, $function=null, $class=null, $method=null, $byPassCheck=false)
 	{
 		try
 		{

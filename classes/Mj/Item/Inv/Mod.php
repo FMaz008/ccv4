@@ -16,7 +16,7 @@ class Mj_Item_Inv_Mod
 					. ' WHERE `inv_id` = :inv_id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':inv_id', $_GET['id'], PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -50,7 +50,7 @@ class Mj_Item_Inv_Mod
 						. ' WHERE `id` = :id;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id', $arr['inv_persoid'], PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$result = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -65,7 +65,7 @@ class Mj_Item_Inv_Mod
 						. ' WHERE `nom_technique` = :inv_lieutech;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':inv_lieutech', $arr['inv_lieutech'], PDO::PARAM_STR);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$result = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -80,7 +80,7 @@ class Mj_Item_Inv_Mod
 						. ' WHERE `nom_technique` = :inv_boutiquelieutech;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':inv_boutiquelieutech', $arr['inv_boutiquelieutech'], PDO::PARAM_STR);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$result = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -95,7 +95,7 @@ class Mj_Item_Inv_Mod
 						. ' WHERE `id_casier` = :inv_idcasier;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':inv_idcasier', $arr['inv_idcasier'], PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$result = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -111,7 +111,7 @@ class Mj_Item_Inv_Mod
 						. ' WHERE `inv_id` = :inv_itemid;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':inv_itemid', $arr['inv_itemid'], PDO::PARAM_INT);
-			$prep->execute($db, __FILE__,__LINE__);
+			$prep->executePlus($db, __FILE__,__LINE__);
 			$result = $prep->fetch();
 			$prep->closeCursor();
 			$prep = NULL;

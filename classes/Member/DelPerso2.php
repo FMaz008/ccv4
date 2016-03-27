@@ -29,7 +29,7 @@ class Member_DelPerso2
 		$prep = $db->prepare($query);
 		$prep->bindValue(':persoId',	$_GET['id'],		PDO::PARAM_INT);
 		$prep->bindValue(':userId',		$account->getId(),	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -49,7 +49,7 @@ class Member_DelPerso2
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':userId',	$account->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		
 		//Retourner le template complété/rempli
 		$tpl->set('PAGE', 'News');

@@ -10,7 +10,7 @@
  
 class Visitor_Login
 {
-	function generatePage(&$tpl, &$session, &$account)
+	public function generatePage(&$tpl, &$session, &$account)
 	{
 		//Retourner le template complété/rempli
 		return $tpl->fetch($account->getSkinRemotePhysicalPath() . 'html/Visitor/login.htm',__FILE__,__LINE__);

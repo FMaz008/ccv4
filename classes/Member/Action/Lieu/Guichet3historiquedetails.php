@@ -52,7 +52,7 @@ class Member_Action_Lieu_Guichet3historiquedetails
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':carteId',		$_POST['carteid'],		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -102,7 +102,7 @@ class Member_Action_Lieu_Guichet3historiquedetails
 		$prep = $db->prepare($query);
 		$prep->bindValue(':noCompte',	$noCompte,			PDO::PARAM_STR);
 		$prep->bindValue(':id',			$_POST['trsid'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;

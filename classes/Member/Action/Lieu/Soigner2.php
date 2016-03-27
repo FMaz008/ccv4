@@ -95,7 +95,7 @@ class Member_Action_Lieu_Soigner2
 		$prep = $db->prepare($query);
 		$prep->bindValue(':qte',		$materielUtilise,				PDO::PARAM_INT);
 		$prep->bindValue(':lieuId',		$perso->getLieu()->getId(),		PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

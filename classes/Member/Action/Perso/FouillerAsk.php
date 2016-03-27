@@ -48,7 +48,7 @@ class Member_Action_Perso_FouillerAsk
 					. ' WHERE fromid = ' . (int)$perso->getId()
 						. ' AND toid = ' . (int)$_POST['persoid']
 					. ' LIMIT 1;';
-		$db->query($query, __FILE__, __LINE__);
+		$db->queryPlus($query, __FILE__, __LINE__);
 		
 		//Créer la demande
 		$query = 'INSERT INTO ' . DB_PREFIX . 'perso_fouille'
@@ -58,7 +58,7 @@ class Member_Action_Perso_FouillerAsk
 		$prep = $db->prepare($query);
 		$prep->bindValue(':fromId',	$perso->getId(),	PDO::PARAM_INT);
 		$prep->bindValue(':toId',	$_POST['persoid'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 			

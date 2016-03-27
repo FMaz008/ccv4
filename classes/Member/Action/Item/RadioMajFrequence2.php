@@ -1,5 +1,5 @@
 <?php
-/** AJAX: Mettre à jour la fréquence de la radio
+/** AJAX: Mettre Ã  jour la frÃ©quence de la radio
 *
 * @package Member_Action
 * @subpackage Ajax
@@ -28,7 +28,7 @@ class Member_Action_Item_RadioMajFrequence2
 			$_POST['frequence'] = 0;
 		
 		if(!is_numeric($_POST['frequence']))
-			die('Cette fréquence n\'est pas numérique');
+			die('Cette frÃ©quence n\'est pas numÃ©rique');
 		
 		$radio->majFrequence($_POST['frequence']);
 		

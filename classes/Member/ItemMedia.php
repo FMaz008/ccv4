@@ -103,7 +103,7 @@ class Member_ItemMedia extends Member_Item
 		$prep->bindValue(':titre',	$title, PDO::PARAM_STR);
 		$prep->bindValue(':msg',	$message, PDO::PARAM_STR);
 		$prep->bindValue(':date',	$timestamp, PDO::PARAM_INT);
-		$prep->execute($db, __FILE__,__LINE__);
+		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

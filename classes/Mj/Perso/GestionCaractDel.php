@@ -23,7 +23,7 @@ class Mj_Perso_GestionCaractDel
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id', $_POST['id'],	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$cat = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -37,7 +37,7 @@ class Mj_Perso_GestionCaractDel
 					. ' WHERE catid=:id;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id', $cat['id'],	PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrAll = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;
@@ -69,7 +69,7 @@ class Mj_Perso_GestionCaractDel
 					. ' OR  id2=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id', $id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -79,7 +79,7 @@ class Mj_Perso_GestionCaractDel
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id', $id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -88,7 +88,7 @@ class Mj_Perso_GestionCaractDel
 				. ' WHERE caractid=:id;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':id', $id,	PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 	}

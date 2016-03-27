@@ -60,7 +60,7 @@ class Visitor_Login2
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':user',	$user,		PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -103,7 +103,7 @@ class Visitor_Login2
 						. ' LIMIT 1;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':id',		(int)$session->getVar('userId'),		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		
@@ -118,7 +118,7 @@ class Visitor_Login2
 						. ' ORDER BY `timestamp` ASC;';
 				$prep = $db->prepare($query);
 				$prep->bindValue(':user', $user, PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$results = $prep->fetchAll();
 				$prep->closeCursor();
 				$prep = NULL;
@@ -130,7 +130,7 @@ class Visitor_Login2
 							 . ' WHERE `id` = :id LIMIT 1;';
 					$prep = $db->prepare($query);
 					$prep->bindValue(':id', $results[0]['id'], PDO::PARAM_INT);
-					$prep->execute($db, __FILE__, __LINE__);
+					$prep->executePlus($db, __FILE__, __LINE__);
 				}
 
 				// Ajouter la nouvelle connexion
@@ -146,7 +146,7 @@ class Visitor_Login2
 				$prep->bindValue(':host',		gethostbyaddr($_SERVER['REMOTE_ADDR']),	PDO::PARAM_STR);
 				$prep->bindValue(':cookie',		$cookie,								PDO::PARAM_STR);
 				$prep->bindValue(':client',		$_SERVER['HTTP_USER_AGENT'],			PDO::PARAM_STR);
-				$prep->execute($db, __FILE__, __LINE__);
+				$prep->executePlus($db, __FILE__, __LINE__);
 				$prep->closeCursor();
 				$prep = NULL;
 			}
@@ -157,7 +157,7 @@ class Visitor_Login2
 						. ' WHERE userId=:userId;';
 			$prep = $db->prepare($query);
 			$prep->bindValue(':userId',		$session->getVar('userId'),		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$arrPerso = $prep->fetchAll();
 			$prep->closeCursor();
 			$prep = NULL;

@@ -57,7 +57,7 @@ class Template {
 	*
 	* Exemple d'utilisation:
 	* <code>
-	* echo $tpl->fetch($account->getSkinRemotePhysicalPath() . 'html/index_full.htm',__FILE__,__LINE__);
+	* echo $tpl->fetch($account->getSkinRemotePhysicalPath() . 'html' . DIRECTORY_SEPARATOR . 'index_full.htm',__FILE__,__LINE__);
 	* </code>
 	*
 	* @param string $file Chemin physique vers le fichier de template
@@ -78,7 +78,7 @@ class Template {
 			//Décortiquer le fichier actuel
 			$startPath = $this->account->getSkinRemotePhysicalPath();
 			$endPath = substr($file,strlen($startPath)-1, strlen($file)-strlen($startPath)+1);
-			$file = SITE_PHYSICAL_PATH . 'tpl/' . SITE_BASE_SKIN . $endPath;
+			$file = SITE_PHYSICAL_PATH . 'tpl' . DIRECTORY_SEPARATOR . SITE_BASE_SKIN . $endPath;
 			
 		}
 		

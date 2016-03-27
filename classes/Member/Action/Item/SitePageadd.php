@@ -54,7 +54,7 @@ class Member_Action_Item_Sitepageadd
 		$prep->bindValue(':content',		$_POST['content'],							PDO::PARAM_STR);
 		$prep->bindValue(':acces',			$_POST['acces']=='true' ? 'pub' : 'priv',	PDO::PARAM_STR);
 		$prep->bindValue(':showIndex',		($_POST['showIndex']=='true') ? '1' : '0',	PDO::PARAM_STR);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
@@ -71,7 +71,7 @@ class Member_Action_Item_Sitepageadd
 					(:page_id,:user_id);';
 			$prep->bindValue(':page_id',		$pageid,			PDO::PARAM_INT);
 			$prep->bindValue(':user_id',		$acces['id'],		PDO::PARAM_INT);
-			$prep->execute($db, __FILE__, __LINE__);
+			$prep->executePlus($db, __FILE__, __LINE__);
 			$prep->closeCursor();
 			$prep = NULL;
 		}

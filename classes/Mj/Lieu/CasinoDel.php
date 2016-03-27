@@ -21,7 +21,7 @@ class Mj_Lieu_CasinoDel
 				. ' LIMIT 1;';
 		$prep = $db->prepare($query);
 		$prep->bindValue(':casinoId',	$_POST['id'],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		

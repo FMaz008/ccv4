@@ -38,7 +38,7 @@ class Member_Action_Item_Sitepagemod
 		$prep->bindValue(':user',		$_POST['user'],			PDO::PARAM_STR);
 		$prep->bindValue(':pass',		$_POST['pass'],			PDO::PARAM_STR);
 		$prep->bindValue(':id',			$_POST['no'],			PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$arr = $prep->fetch();
 		$prep->closeCursor();
 		$prep = NULL;
@@ -72,7 +72,7 @@ class Member_Action_Item_Sitepagemod
 		$prep->bindValue(':acces',		$_POST['acces']=='true' ? 'pub' : 'priv',	PDO::PARAM_STR);
 		$prep->bindValue(':showIndex',	$_POST['showIndex']=='true' ? '1' : '0',	PDO::PARAM_STR);
 		$prep->bindValue(':id',			$_POST['no'],								PDO::PARAM_INT);
-		$prep->execute($db, __FILE__, __LINE__);
+		$prep->executePlus($db, __FILE__, __LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
 		
