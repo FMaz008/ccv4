@@ -82,7 +82,7 @@ class Mj_Lieu_EtudeSave
 				$prepIns->bindValue(':pa',		$_POST[$comp . '_pa'],	PDO::PARAM_INT);
 				$prepIns->bindValue(':cash',	$_POST[$comp . '_cash'],PDO::PARAM_INT);
 				$prepIns->bindValue(':qualiteLieu',	$_POST[$comp . '_qualite'],PDO::PARAM_STR);
-				$prepIns->execute($db, __FILE__, __LINE__);
+				$prepIns->executePlus($db, __FILE__, __LINE__);
 				
 			}
 			
@@ -90,7 +90,7 @@ class Mj_Lieu_EtudeSave
 			{
 				$prepDel->bindValue(':lieuId',	$_POST['LIEU_ID'],		PDO::PARAM_INT);
 				$prepDel->bindValue(':comp',	$comp,					PDO::PARAM_STR);
-				$prepDel->execute($db, __FILE__, __LINE__);
+				$prepDel->executePlus($db, __FILE__, __LINE__);
 			}
 			
 			if(isset($_POST[$comp]) && $found) // Element existant (Mise à jour)
@@ -100,7 +100,7 @@ class Mj_Lieu_EtudeSave
 				$prepMaj->bindValue(':coutPa',		$_POST[$comp . '_pa'],	PDO::PARAM_INT);
 				$prepMaj->bindValue(':coutCash',	$_POST[$comp . '_cash'],PDO::PARAM_INT);
 				$prepMaj->bindValue(':qualiteLieu',	$_POST[$comp . '_qualite'],PDO::PARAM_STR);
-				$prepMaj->execute($db, __FILE__, __LINE__);
+				$prepMaj->executePlus($db, __FILE__, __LINE__);
 			}
 		}
 		$prepIns->closeCursor();

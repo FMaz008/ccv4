@@ -146,7 +146,7 @@ class Mj_Lieu_MairieQuestionAdd
 				$prepIns->bindValue(':questionId',		$lastid,		PDO::PARAM_INT);
 				$prepIns->bindValue(':reponseTech', strtolower($lettres[$i]),	PDO::PARAM_STR);
 				$prepIns->bindValue(':reponse',	$_POST['reponse_' . $lettres[$i]],	PDO::PARAM_STR);
-				$prepIns->execute($db, __FILE__, __LINE__);
+				$prepIns->executePlus($db, __FILE__, __LINE__);
 			}
 		}
 		$prepIns->closeCursor();

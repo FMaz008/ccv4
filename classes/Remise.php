@@ -401,13 +401,13 @@ class Remise
 			if($arr['inv_qte']==0)
 			{
 				$prepDel->bindValue(':invId',		$arr['inv_id'],		PDO::PARAM_INT);
-				$prepDel->execute($db, __FILE__, __LINE__);
+				$prepDel->executePlus($db, __FILE__, __LINE__);
 			}
 			else
 			{
 				
 				$prepUpd->bindValue(':invId',		$arr['inv_id'],		PDO::PARAM_INT);
-				$prepUpd->execute($db, __FILE__, __LINE__);
+				$prepUpd->executePlus($db, __FILE__, __LINE__);
 			}
 		}
 		$prepDel->closeCursor();
@@ -478,7 +478,7 @@ class Remise
 			//Supprimer le menottage
 			$prepDel->bindValue(':persoId',		$arr['to_id'],		PDO::PARAM_INT);
 			$prepDel->bindValue(':itemId',		$arr['inv_id'],		PDO::PARAM_INT);
-			$prepDel->execute($db, __FILE__, __LINE__);
+			$prepDel->executePlus($db, __FILE__, __LINE__);
 			
 		}
 
@@ -528,7 +528,7 @@ class Remise
 			//Supprimer le menottage
 			$prepDel->bindValue(':toId',		$arr['toid'],		PDO::PARAM_INT);
 			$prepDel->bindValue(':fromId',		$arr['fromid'],		PDO::PARAM_INT);
-			$prepDel->execute($db, __FILE__, __LINE__);
+			$prepDel->executePlus($db, __FILE__, __LINE__);
 		}
 
 		$prepDel->closeCursor();

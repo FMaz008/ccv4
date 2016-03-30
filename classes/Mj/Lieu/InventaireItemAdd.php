@@ -89,7 +89,7 @@ class Mj_Lieu_InventaireItemAdd
 		foreach($_POST['itemId'] as $addItemId)
 		{
 			$prepSel->bindValue(':dbId',	$addItemId,	PDO::PARAM_INT);
-			$prepSel->execute($db, __FILE__, __LINE__);
+			$prepSel->executePlus($db, __FILE__, __LINE__);
 			$arr = $prepSel->fetch();
 			
 			
@@ -105,7 +105,7 @@ class Mj_Lieu_InventaireItemAdd
                 else
                     $prepSel2->bindValue(':lieuTech',	$lieuTech,	PDO::PARAM_STR);
 
-                $prepSel2->execute($db, __FILE__, __LINE__);
+                $prepSel2->executePlus($db, __FILE__, __LINE__);
 				$arr2 = $prepSel2->fetch();
 			
 				if ($arr2 !== false)
@@ -113,7 +113,7 @@ class Mj_Lieu_InventaireItemAdd
 					//Augmenter la Qte
 					$prepUpd->bindValue(':qte',		$arr2['inv_qte']+$item_qte,	PDO::PARAM_INT);
 					$prepUpd->bindValue(':invId',		$arr2['inv_id'],			PDO::PARAM_INT);
-					$prepUpd->execute($db, __FILE__, __LINE__);
+					$prepUpd->executePlus($db, __FILE__, __LINE__);
 					
 					$query_qte = 0; //Ne pas ajouter d'item avec la requête INSERT ci-dessous
 				}
@@ -154,7 +154,7 @@ class Mj_Lieu_InventaireItemAdd
 			
 			if($query_qte>0)
 				for($q=1; $q<=$query_qte; $q++)
-					$prepIns->execute($db, __FILE__, __LINE__);
+					$prepIns->executePlus($db, __FILE__, __LINE__);
 			
 		}
 		$prepSel->closeCursor();

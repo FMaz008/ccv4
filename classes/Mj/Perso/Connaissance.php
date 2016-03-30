@@ -62,13 +62,13 @@ class Mj_Perso_Connaissance
 					if (empty($nom))
 					{
 						$prepDel->bindValue(':id',	$infoConn['id'],	PDO::PARAM_INT);
-						$prepDel->execute($db, __FILE__, __LINE__);
+						$prepDel->executePlus($db, __FILE__, __LINE__);
 					}
 					else
 					{
 						$prepUpd->bindValue(':nom',	$nom,				PDO::PARAM_STR);
 						$prepUpd->bindValue(':id',	$infoConn['id'],	PDO::PARAM_INT);
-						$prepUpd->execute($db, __FILE__, __LINE__);
+						$prepUpd->executePlus($db, __FILE__, __LINE__);
 					}
 		
 		

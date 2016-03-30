@@ -83,7 +83,7 @@ class Mj_Perso_GestionCompModStat
 						$prepIns->bindValue(':compId',		$_GET['id'],		PDO::PARAM_INT);
 						$prepIns->bindValue(':statId',		$arr['id'],			PDO::PARAM_INT);
 						$prepIns->bindValue(':multi',		$_POST[$fieldName],	PDO::PARAM_INT);
-						$prepIns->execute($db, __FILE__, __LINE__);
+						$prepIns->executePlus($db, __FILE__, __LINE__);
 					}
 					
 					//Modifier le champ
@@ -92,7 +92,7 @@ class Mj_Perso_GestionCompModStat
 						$prepUpd->bindValue(':compId',		$_GET['id'],		PDO::PARAM_INT);
 						$prepUpd->bindValue(':statId',		$arr['id'],			PDO::PARAM_INT);
 						$prepUpd->bindValue(':multi',		$_POST[$fieldName],	PDO::PARAM_INT);
-						$prepUpd->execute($db, __FILE__, __LINE__);
+						$prepUpd->executePlus($db, __FILE__, __LINE__);
 					}
 					
 					//Supprimer le champ
@@ -100,7 +100,7 @@ class Mj_Perso_GestionCompModStat
 					{
 						$prepDel->bindValue(':compId',		$_GET['id'],	PDO::PARAM_INT);
 						$prepDel->bindValue(':statId',		$arr['id'],		PDO::PARAM_INT);
-						$prepDel->execute($db, __FILE__, __LINE__);
+						$prepDel->executePlus($db, __FILE__, __LINE__);
 					}
 					 
 				} 

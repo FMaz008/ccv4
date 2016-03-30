@@ -420,13 +420,9 @@ class Main
 			unset($pages, $page);
 			if($canAccessWithoutPerso)
 			{
-				return call_user_func_array(
-								array('Member_' . $file , 'generatePage'),
-								array(&$this->tpl,
-										&$this->session,
-										&$this->account
-									)
-								);
+                                $className = 'Member_' . $file;
+                                $page = new $className;
+                                return $page->generatePage($this->tpl, $this->session, $this->account);
 			}
 			else
 			{

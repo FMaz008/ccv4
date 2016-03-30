@@ -201,13 +201,13 @@ class Mj_Lieu_MairieQuestionMod
 				$prepUpd->bindValue(':reponse',		$_POST['reponse_' . $lettres[$i]],	PDO::PARAM_STR);
 				$prepUpd->bindValue(':reponseTech',	strtolower($lettres[$i]),			PDO::PARAM_STR);
 				$prepUpd->bindValue(':questionId',	$_POST['questionId'],	PDO::PARAM_INT);
-				$prepUpd->execute($db, __FILE__, __LINE__);
+				$prepUpd->executePlus($db, __FILE__, __LINE__);
 			}
 			else
 			{
 				$prepDel->bindValue(':reponseTech',	strtolower($lettres[$i]),			PDO::PARAM_STR);
 				$prepDel->bindValue(':questionId',	$_POST['questionId'],	PDO::PARAM_INT);
-				$prepDel->execute($db, __FILE__, __LINE__);
+				$prepDel->executePlus($db, __FILE__, __LINE__);
 			}
 		}
 		$prepUpd->closeCursor();

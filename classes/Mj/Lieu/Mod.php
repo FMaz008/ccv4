@@ -500,13 +500,13 @@ class Mj_Lieu_Mod
 			if (isset($_POST['delAction_' . $arr['id']]))
 			{
 				$prepDel->bindValue(':id',	$arr['id'],	PDO::PARAM_INT);
-				$prepDel->execute($db, __FILE__, __LINE__);
+				$prepDel->executePlus($db, __FILE__, __LINE__);
 			}
 			else
 			{
 				$prepUpd->bindValue(':id',		$arr['id'],	PDO::PARAM_INT);
 				$prepUpd->bindValue(':caption',	$_POST[$arr['id'] . '_actioncaption'],	PDO::PARAM_STR);
-				$prepUpd->execute($db, __FILE__, __LINE__);
+				$prepUpd->executePlus($db, __FILE__, __LINE__);
 			}
 		}
 		$prepDel->closeCursor();

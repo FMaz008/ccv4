@@ -45,7 +45,7 @@ class Mj_Item_Inv_ArmeFeu
 					$prep2 = $db->prepare($query);
 					$prep2->bindValue(':inv_persoid', $_POST['inv_persoid'], PDO::PARAM_INT);
 					//$prep2->bindValue(':db_soustype', $_POST['db_soustype'], PDO::PARAM_INT);
-					$prep2->execute($db, __FILE__,__LINE__);
+					$prep2->executePlus($db, __FILE__,__LINE__);
 					$prep2->closeCursor();
 					$prep2 = NULL;
 					$inv_equip = '1';

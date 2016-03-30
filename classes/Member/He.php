@@ -397,7 +397,7 @@ class Member_He
 					$prepAddFromTo->bindValue(':show',			0);
 					$prepAddFromTo->bindValue(':nameComplement', $persoId);
 				}
-				$prepAddFromTo->execute($db, __FILE__, __LINE__);
+				$prepAddFromTo->executePlus($db, __FILE__, __LINE__);
 			}
 		}
 		catch(Exception $e)

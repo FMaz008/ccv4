@@ -309,13 +309,13 @@ class Member_Action_Lieu_Distributeur2
 			//Payer la caisse du producteur
 			$prepProd->bindValue(':cash',	($qte*$item['prix']),	PDO::PARAM_INT);
 			$prepProd->bindValue(':id',		$item['producteurId'],	PDO::PARAM_INT);
-			$prepProd->execute($db, __FILE__, __LINE__);
+			$prepProd->executePlus($db, __FILE__, __LINE__);
 		
 		
 			//Retirer la quantité en inventaire
 			$prepInv->bindValue(':qte',		$qte,			PDO::PARAM_INT);
 			$prepInv->bindValue(':id',		$item['id'],	PDO::PARAM_INT);
-			$prepInv->execute($db, __FILE__, __LINE__);
+			$prepInv->executePlus($db, __FILE__, __LINE__);
 		
 			
 			//Mettre les items dans l'inventaire du joueur
@@ -324,7 +324,7 @@ class Member_Action_Lieu_Distributeur2
 				//Vérifier si le perso actuel possède déjà cet item, si oui: augmenter la qte.
 				$prepItem->bindValue(':dbId',		$item['db_id'],		PDO::PARAM_INT);
 				$prepItem->bindValue(':persoId',	$perso->getId(),	PDO::PARAM_INT);
-				$prepItem->execute($db, __FILE__, __LINE__);
+				$prepItem->executePlus($db, __FILE__, __LINE__);
 				$arrItem = $prepItem->fetch();
 				
 				if ($arr !== false) //L'item supporte la quantité et existe
@@ -332,7 +332,7 @@ class Member_Action_Lieu_Distributeur2
 					//Augmenter la Qte
 					$prepInv->bindValue(':qte',		$itemQte,			PDO::PARAM_INT);
 					$prepInv->bindValue(':id',		$arrItem['inv_id'],	PDO::PARAM_INT);
-					$prepInv->execute($db, __FILE__, __LINE__);
+					$prepInv->executePlus($db, __FILE__, __LINE__);
 					
 					//Ne pas ajouter d'item avec la requête INSERT ci-dessous
 					$queryQte = 0;
@@ -384,7 +384,7 @@ class Member_Action_Lieu_Distributeur2
 			$q=1;
 			while ($q<=$loopQte)
 			{
-				$prepInv->execute($db, __FILE__, __LINE__);
+				$prepInv->executePlus($db, __FILE__, __LINE__);
 				$q++;
 			}
 				

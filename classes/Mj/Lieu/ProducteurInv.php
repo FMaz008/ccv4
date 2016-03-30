@@ -127,13 +127,13 @@ class Mj_Lieu_ProducteurInv
 				$prepUpd->bindValue(':prix',	$_POST['prix_' . $arr['id']],	PDO::PARAM_INT);
 				$prepUpd->bindValue(':pack',	$_POST['pack_' . $arr['id']],	PDO::PARAM_INT);
 				$prepUpd->bindValue(':id',		$arr['id'],						PDO::PARAM_INT);
-				$prepUpd->execute($db, __FILE__, __LINE__);
+				$prepUpd->executePlus($db, __FILE__, __LINE__);
 			}
 			
 			if(isset($_POST['del_' . $arr['id']]))
 			{
 				$prepDel->bindValue(':id',		$arr['id'],		PDO::PARAM_INT);
-				$prepDel->execute($db, __FILE__, __LINE__);
+				$prepDel->executePlus($db, __FILE__, __LINE__);
 			}
 		}
 		$prepUpd->closeCursor();

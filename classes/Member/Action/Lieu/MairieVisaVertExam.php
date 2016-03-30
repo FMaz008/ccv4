@@ -54,7 +54,7 @@ class Member_Action_Lieu_MairieVisaVertExam
 		$query = 'SELECT DISTINCT `section`'
 				. ' FROM `' . DB_PREFIX . 'mairie_question`;';
 		$prepSection = $db->prepare($query);
-		$prepSection->execute($db, __FILE__, __LINE__);
+		$prepSection->executePlus($db, __FILE__, __LINE__);
 		$arrSectionId = $prepSection->fetchAll();
 		$prepSection->closeCursor();
 		$prepSection = NULL;
@@ -84,7 +84,7 @@ class Member_Action_Lieu_MairieVisaVertExam
 			
 			$prepQuestion->bindValue(':sectionId',		$arr['section'],		PDO::PARAM_INT);
 			$prepQuestion->bindValue(':nbrQuestion',	$questionsParSection,	PDO::PARAM_INT);
-			$prepQuestion->execute($db, __FILE__, __LINE__);
+			$prepQuestion->executePlus($db, __FILE__, __LINE__);
 			$arrQuestionId = $prepQuestion->fetchAll();
 
 			//s'assurer d'avoir un tableau unidimentionnel

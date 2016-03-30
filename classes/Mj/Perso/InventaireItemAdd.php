@@ -56,7 +56,7 @@ class Mj_Perso_InventaireItemAdd
 		{
 			
 			$prepSel->bindValue(':dbId',		$addItemId,		PDO::PARAM_INT);
-			$prepSel->execute($db, __FILE__, __LINE__);
+			$prepSel->executePlus($db, __FILE__, __LINE__);
 			$arr = $prepSel->fetch();
 			
 			
@@ -68,7 +68,7 @@ class Mj_Perso_InventaireItemAdd
 				//Vérifier si le perso actuel possède déjà cet item, si oui: augmenter la qte.
 				$prepSelP->bindValue(':dbId',		$addItemId,		PDO::PARAM_INT);
 				$prepSelP->bindValue(':persoId',		$_GET['id'],	PDO::PARAM_INT);
-				$prepSelP->execute($db, __FILE__, __LINE__);
+				$prepSelP->executePlus($db, __FILE__, __LINE__);
 				$arr2 = $prepSelP->fetch();
 				
 				if ($arr2 !== false)
@@ -76,7 +76,7 @@ class Mj_Perso_InventaireItemAdd
 					//Augmenter la Qte
 					$prepUpdP->bindValue(':qte',		$item_qte,			PDO::PARAM_INT);
 					$prepUpdP->bindValue(':invId',	$arr2['inv_id'],	PDO::PARAM_INT);
-					$prepUpdP->execute($db, __FILE__, __LINE__);
+					$prepUpdP->executePlus($db, __FILE__, __LINE__);
 					
 					$query_qte = 0; //Ne pas ajouter d'item avec la requête INSERT ci-dessous
 				}
@@ -169,7 +169,7 @@ class Mj_Perso_InventaireItemAdd
 			$q=1;
 			while ($q<=$query_qte)
 			{
-				$prepIns->execute($db, __FILE__, __LINE__);
+				$prepIns->executePlus($db, __FILE__, __LINE__);
 
 				$q++;
 			}
