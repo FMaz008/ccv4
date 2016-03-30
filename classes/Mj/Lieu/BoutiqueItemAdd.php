@@ -56,9 +56,9 @@ class Mj_Lieu_BoutiqueItemAdd
 		
 		
 		$query = 'INSERT INTO ' . DB_PREFIX . 'item_inv'
-				. ' (`inv_id`, `inv_dbid`, `inv_boutiquelieutech`, `inv_qte`, `inv_munition`, `inv_resistance`,`inv_remiseleft`,`inv_pn`, `inv_boutiquePrixVente`,`inv_boutiquePrixAchat`)'
+				. ' (`inv_id`, `inv_dbid`, `inv_boutiquelieutech`, `inv_qte`, `inv_munition`, `inv_resistance`,`inv_remiseleft`,`inv_pn`, `inv_boutiquePrixVente`,`inv_boutiquePrixAchat`, `inv_extradesc`, `inv_notemj`)'
 				. ' VALUES'
-				. ' (NULL,		:dbId,		:lieuTech,				:qte,		:munition,		:resistance,	NULL,			:pn,	-1,							-1);';
+				. ' (NULL,		:dbId,		:lieuTech,				:qte,		:munition,		:resistance,	NULL,			:pn,	-1,	-1, "", "");';
 		$prep = $db->prepare($query);
 		
 		foreach($arrAll as &$arr)
