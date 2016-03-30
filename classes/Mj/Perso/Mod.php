@@ -20,7 +20,7 @@ class Mj_Perso_Mod
 						. ' LIMIT 1;';
 			$prepP = $db->prepare($query);
 			$prepP->bindValue(':persoId',		$_GET['id'],	PDO::PARAM_INT);
-			$prepP->execute($db, __FILE__, __LINE__);
+			$prepP->executePlus($db, __FILE__, __LINE__);
 			$arr = $prepP->fetch();
 			
 			
@@ -85,7 +85,10 @@ class Mj_Perso_Mod
 			}
 			catch(Exception $e)
 			{
-				$msg[] = 'Lieu: ' . $_POST['lieu'];
+                            if(!isset($_POST['lieu']))
+                                $msg[] = 'Lieu: non-sélectionné';
+                            else
+                                $msg[] = 'Lieu: ' . $_POST['lieu'];
 			}
 			if($perso->getCurrentAction() != $_POST['current_action'])
 				$msg[] = "Action Courrante: \n" . $_POST['current_action'];
@@ -233,7 +236,7 @@ class Mj_Perso_Mod
 			$prep->bindValue(':pvMax',			$_POST['pvmax'],	PDO::PARAM_INT);
 			$prep->bindValue(':pn',				$_POST['pn'],		PDO::PARAM_INT);
 			$prep->bindValue(':cash',			$_POST['cash'],		PDO::PARAM_INT);
-			$prep->bindValue(':lieu',			$_POST['lieu'],		PDO::PARAM_STR);
+			$prep->bindValue(':lieu',			isset($_POST['lieu']) ? $_POST['lieu'] : LIEU_DEPART,		PDO::PARAM_STR);
 			$prep->bindValue(':currentAction',	$_POST['current_action'],	PDO::PARAM_STR);
 			$prep->bindValue(':description',	$_POST['description'],	PDO::PARAM_STR);
 			$prep->bindValue(':background',		$_POST['background'],	PDO::PARAM_STR);
@@ -249,7 +252,7 @@ class Mj_Perso_Mod
 			
 			//Fetcher toutes les informations concernant le perso
 			$prepP->bindValue(':persoId',		$_GET['id'],	PDO::PARAM_INT);
-			$prepP->execute($db, __FILE__, __LINE__);
+			$prepP->executePlus($db, __FILE__, __LINE__);
 			$arr = $prepP->fetch();
 
 			$perso = new Member_Perso($arr);
@@ -289,14 +292,14 @@ class Mj_Perso_Mod
 						$prepIns->bindValue(':persoId',		$perso->getId(),	PDO::PARAM_INT);
 						$prepIns->bindValue(':statId',		$id,				PDO::PARAM_INT);
 						$prepIns->bindValue(':xp',			$_POST[$fieldName],	PDO::PARAM_INT);
-						$prepIns->execute($db, __FILE__, __LINE__);
+						$prepIns->executePlus($db, __FILE__, __LINE__);
 					}
 					else
 					{
 						$prepUpd->bindValue(':persoId',		$perso->getId(),	PDO::PARAM_INT);
 						$prepUpd->bindValue(':statId',		$id,				PDO::PARAM_INT);
 						$prepUpd->bindValue(':xp',			$_POST[$fieldName],	PDO::PARAM_INT);
-						$prepUpd->execute($db, __FILE__, __LINE__);
+						$prepUpd->executePlus($db, __FILE__, __LINE__);
 					}
 				}
 			}
@@ -354,7 +357,7 @@ class Mj_Perso_Mod
 						$prepIns->bindValue(':persoId',		$perso->getId(),	PDO::PARAM_INT);
 						$prepIns->bindValue(':compId',		$id,				PDO::PARAM_INT);
 						$prepIns->bindValue(':xp',			$_POST[$fieldName],	PDO::PARAM_INT);
-						$prepIns->execute($db, __FILE__, __LINE__);
+						$prepIns->executePlus($db, __FILE__, __LINE__);
 					}
 					//Modifier la comp
 					else
@@ -362,7 +365,7 @@ class Mj_Perso_Mod
 						$prepUpd->bindValue(':persoId',		$perso->getId(),	PDO::PARAM_INT);
 						$prepUpd->bindValue(':compId',		$id,				PDO::PARAM_INT);
 						$prepUpd->bindValue(':xp',			$_POST[$fieldName],	PDO::PARAM_INT);
-						$prepUpd->execute($db, __FILE__, __LINE__);
+						$prepUpd->executePlus($db, __FILE__, __LINE__);
 					}
 				}
 				
@@ -371,7 +374,7 @@ class Mj_Perso_Mod
 				{
 					$prepDel->bindValue(':persoId',		$perso->getId(),	PDO::PARAM_INT);
 					$prepDel->bindValue(':compId',		$id,				PDO::PARAM_INT);
-					$prepDel->execute($db, __FILE__, __LINE__);
+					$prepDel->executePlus($db, __FILE__, __LINE__);
 					
 					//Construire le message d'information
 					$msg[] = 'Comp ' . strtoupper($compCode) . ': 0';
@@ -419,7 +422,7 @@ class Mj_Perso_Mod
 				if(isset($_POST['del_caract_' . $row['id']]))
 				{
 					$prepDel->bindValue(':id',	$row['id'],		PDO::PARAM_INT);
-					$prepDel->execute($db, __FILE__, __LINE__);
+					$prepDel->executePlus($db, __FILE__, __LINE__);
 					
 					$msg[] = 'Suppression de la caract ' . stripslashes($row['nom']);
 				}
@@ -432,7 +435,7 @@ class Mj_Perso_Mod
 						//Modifier
 						$prepUpd->bindValue(':description',	$newDesc,		PDO::PARAM_STR);
 						$prepUpd->bindValue(':id',			$row['id'],		PDO::PARAM_INT);
-						$prepUpd->execute($db, __FILE__, __LINE__);
+						$prepUpd->executePlus($db, __FILE__, __LINE__);
 					
 						$msg[] = 'Modification de la caract ' . stripslashes($row['nom']) . ":\n" . $newDesc;
 					}
