@@ -366,7 +366,7 @@ class Member_ModPerso2
 		
 		//Retourner le template complété/rempli
 		$tpl->set('PAGE', 'News');
-		//return $tpl->fetch($account->getSkinRemotePhysicalPath() . 'html/Member/redirect.htm',__FILE__,__LINE__);
+		return $tpl->fetch($account->getSkinRemotePhysicalPath() . 'html/Member/redirect.htm',__FILE__,__LINE__);
 		
 	}
 }
