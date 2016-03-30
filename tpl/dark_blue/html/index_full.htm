@@ -181,7 +181,7 @@
 			
 		</div>
 		<div class="main" id="siteMain">
-			<? if(isset($ERREUR)){ ?>
+			<? if(isset($ERREUR) && !empty($ERREUR)){ ?>
 				<div class="center index_full_erreur">
 					<div class="name index_full_erreurName"><blink>Erreur</blink></div>
 					<?=$ERREUR;?>
