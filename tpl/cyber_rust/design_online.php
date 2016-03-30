@@ -61,6 +61,15 @@ body a:hover, span.fakelink:hover {
 	clear:both;
 }
 
+.infobulle{
+	position: absolute;
+	display:none;
+	background-color:<?=$bgColor1;?>;
+	padding:1px;
+	border:1px solid <?=$borderColor1;?>;
+	z-index:999;
+}
+
 .center{
 	margin:0 auto;
 	text-align:center;
