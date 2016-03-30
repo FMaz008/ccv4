@@ -28,7 +28,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 DROP TABLE IF EXISTS `cc_account`;
 CREATE TABLE IF NOT EXISTS `cc_account` (
   `id` mediumint(5) unsigned NOT NULL auto_increment,
-  `idcookie` varchar(50) NOT NULL,
+  `idcookie` varchar(50) NOT NULL default '',
   `user` varchar(25) NOT NULL,
   `pass` varchar(25) NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `cc_account` (
   `remise` int(10) NOT NULL default '0',
   `remise_tag` varchar(25) default NULL,
   `last_conn` int(10) NOT NULL default '0',
-  `skin` varchar(15) NOT NULL default 'darkblueOLD',
-  `skin_localpath` varchar(200) NOT NULL,
+  `skin` varchar(15) NOT NULL default 'dark_blue',
+  `skin_localpath` varchar(200) NOT NULL default '',
   `heitems` int(3) NOT NULL default '10',
   `bloque` enum('0','1') NOT NULL default '0',
   `code_validation` varchar(15) default NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `cc_account` (
   PRIMARY KEY  (`id`),
   KEY `user` (`user`,`email`),
   KEY `remise_tag` (`remise_tag`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=527 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

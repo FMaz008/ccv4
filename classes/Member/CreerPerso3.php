@@ -228,15 +228,15 @@ class Member_CreerPerso3
 					. ' `userId`, `nom`, `sexe`, `age`, `taille`, `yeux`,'
 					. ' `ethnie`, `cheveux`, `poids`,'
 					. ' `lng1`, `lng1_lvl`, `lng2`, `lng2_lvl`,'
-					. ' `lieu`, `description`, `background`, `inscription_valide`'
-					. ' )'
+					. ' `lieu`, `description`, `background`, `inscription_valide`,'
+					. ' `current_action`, `note_mj`, `imgurl`, `heQte`)'
 					. ' VALUES'
 					. ' ('
 					. ' :userId,  :nom,  :sexe,  :age,  :taille,  :yeux,'
 					. ' :ethnie,  :cheveux,  :poids,'
 					. ' "en",	:lng1_lvl,  :lng2,  :lng2_lvl,'
-					. ' :lieu,  :description,  :background,  :saveType'
-					. ' );';
+					. ' :lieu,   :description,  :background,  :saveType,'
+					. ' "", "", "", 0);';
 			$prep = $db->prepare($query);
 			$saveType = $_POST['SaveType']=='go' ? '0' : 'mod';
 			
