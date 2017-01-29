@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+
+<html lang="fr">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=<?=$SITE_CHARSET;?>" />
+		<title><?=$SITE_NAME;?><?=$SITE_VERSION;?></title>
+		<meta name="description" content="Jeu de rôle cyberpunk et post-apocalyptique par navigateur au tour par tour basé essentiellement sur du rôle-playing au format texte." />
+		<meta name="keyword" lang="fr" content="tholus, jeu de role, apocalyse, cyber, punk,rpg, mmorpg, post-apo" />
+		<meta name="keyword" lang="en" content="tholus, role playing game, apocalyse, cyber, punk, rpg, mmorpg" />
+		<meta name="google-site-verification" content="3SAsBqHXeOkYLXXLjNQ41ykRkIuq2cneZEqsYktjzqw" />
+		
+		<script type="text/javascript">
+			window.defaultStatus="<?=$SITE_NAME;?> <?=$SITE_VERSION;?>";
+		</script>
+		<link rel="stylesheet" type="text/css" href="<?=$SKIN_VIRTUAL_PATH;?>design_<?=$SKIN_ONLINEOFFLINE;?>.php" />
+		<?php
+		if(isset($MJ_CSS)){
+			?>
+			<link rel="stylesheet" type="text/css" href="<?=$SKIN_VIRTUAL_PATH;?>mj.php" />
+			<?php
+		}
+		?>
+		<script type="text/javascript" src="./js/prototype.js"></script>
+		<script type="text/javascript" src="./js/ajaxSubmitPost.js"></script>
+		<script type="text/javascript" src="./js/browser_selector.js"></script>
+		<script type="text/javascript" src="./js/infobulle.js"></script>
+		
+		
+	</head>
+	
+	<body>
+		<!-- AJAX LOGIN -->
+		<div id="ajaxLogin_plzwait1" class="plzwait_ombre">&nbsp;</div>
+		<div id="ajaxLogin_plzwait2" class="plzwait_content">
+			<table style="margin:0 auto;width:400px;height:300px;">
+				<tr><td class="title" style="height:10px;">Déconnecté</td></tr>
+				<tr>
+				<td class="name">
+					<div id="ajaxLogin_request_msgtxt">
+						<div id="ajaxLogin_error">Authentification refusée</div>
+						Votre session sur Cybercity à expirée, afin de ne pas perdre vos
+						données en cours, veuillez vous authentifier à nouveau:
+						<form id="ajaxLogin" method="post" action="?v=Login2&amp;popup=1" onsubmit="return ajaxLogin(this, <?=$GAME_SESSION_LENGHT;?>);">
+							<?php
+							if(isset($CURRENT_PERSO_ID))
+							{
+								?>
+								<input type="hidden" name="persoId" value="<?=$CURRENT_PERSO_ID;?>" />
+								<?php
+							}
+							?>
+							<div class="panel login_panel" style="margin-top:25px;">
+								<div class="title">Identification</div>
+								<div class="content">
+									<div class="login_lineUser">
+										<div class="value login_col1User">User:</div>
+										<div class="value login_col2User">
+											<input class="text" type="text" name="u" style="width:150px;" maxlength="25" value="" />
+										</div>
+									</div>
+									<div class="login_linePass">
+										<div class="value login_col1Pass">Pass:</div>
+										<div class="value login_col2Pass">
+											<input type="password" class="text" name="p" style="width:150px;" maxlength="25" />
+										</div>
+									</div>
+									<div class="login_lineSubmit" style="text-align:right;">
+										<input class="button" type="submit" name="valid_login" value="Ok >>" style="width:50px;" />
+									</div>
+								</div>
+							</div>
+						</form>
+						<br />
+						<div style="text-align:center;">
+							<a href="#" onclick="hideAjaxLogin();return false;">Fermer</a>
+						</div>
+						
+					</div>
+					<div id="request_msg" style="display:none;text-align:center;"><br /><a href="#form" onclick="hideplzwait();">- Fermer -</a></div>
+				</td>
+			</tr>
+			</table>
+		</div>
+		<!-- END AJAX LOGIN -->
+		<div id="siteLogoContainer">		
+			<div id="siteLogo" style="cursor:pointer;" onclick="location.href='<?php echo $SITE_VIRTUAL_PATH; ?>?v=Main';"></div>
+		</div>
+		<div id="bgHeader">
+			<div id="bgHeaderContainer">
+				<?php
+				if (isset($SITE_REVISION))
+				{
+					?>
+					<div id="revision" class="outline">
+						<span>
+							rev
+							&nbsp;&nbsp;
+							<?=$SITE_REVISION;?>
+						</span>
+					</div>
+				<?php
+				}
+				if (DEBUG_MODE)
+				{
+					?>
+					<div id="modedebug">
+						<span>
+							(
+							<a href="?v=debugmodeinfo">MODE DEBUG</a>
+							)
+						</span>
+					</div>
+					<?php
+				}
+				?>
+			</div>
+		</div>
+		<div id="bodySite">
+		<div id="header">
+				<div id="aboutUs" class="outline">
+					<a href="?v=About">&Agrave; propos de</a>
+				</div>
+				<div id="infos" class="outline">
+					<?=$GAME_TIME;?>
+					- Joueurs: <?=$GAME_PLAYERS;?>
+					- En ligne: <?=$GAME_ONLINE;?>
+					- Session: <span id="countdown"></span>
+				</div>
+				<div id="foruminfos">
+					&nbsp;&nbsp;&nbsp;&nbsp;<span class="outline">Quoi de neuf à CyberCity? </span>
+					<div style="font-size:0.65em;">
+						<ul style="margin:2px;overflow-y:scroll;height:40px">
+							<?php
+							if(isset($FORUM_RECENT_TOPIC) && !empty($FORUM_RECENT_TOPIC))
+								foreach($FORUM_RECENT_TOPIC as $topic)
+									echo '<li><a href="' . $topic['url'] . '" onclick="window.open(this.href);return false;">' . $topic['subject'] . '</a></li>';
+							?>
+						</ul>
+					</div>
+				</div>
+				<div id="menu">
+					<div id="menufix">
+						<?=$MENU;?>
+					</div>
+				</div>
+			</div>
+		<div id="bodySiteCentered">
+		
+			
+			<div id="content">
+				<?php
+				if(isset($ERREUR))
+				{
+					?>
+					<div class="center index_full_erreur">
+						<div class="name index_full_erreurName"><blink>Erreur</blink></div>
+						<?=$ERREUR;?>
+					</div><br />
+					<?php
+				}
+				?>
+				<?=$PAGE_SOURCE;?>
+				
+				
+				
+				<hr />
+				<div id="footernote">
+					<div class="name">
+						<?=$SITE_NAME;?> est optimisé pour une résolution Minimale de 1024x768.
+					</div>
+					<p><?=$SITE_NAME;?> décline toute responsabilité envers tous les malheurs qu'il pourrait vous engendrer (perte d'emploi, perte de copine, perte de la garde de vos enfants, perte de votre maison car saisie; faute de temps pour faire les paiements, etc.)</p>
+					<br />
+					<p><strong>Nombre de requêtes: <?=$QUERY_COUNT;?> (<?=$SQL_GEN_TIME;?>sec), Génération de la page: <?=$PAGE_GEN_TIME;?>sec. Usage mémoire: <?=$MEMORY_USAGE;?>.</strong></p>
+				</div>
+				<div style="text-align:center;">
+					<a onclick="window.open(this.href);return false;" href="http://validator.w3.org/check?uri=referer">
+						<img class="index_full_imgAnnuaire" src="http://www.w3.org/QA/Tools/I_heart_validator_lg" alt="Valid HTML 5!" />
+					</a>
+				</div>
+				<?php
+				/*
+				<div id="links">
+					<a onclick="window.open(this.href);return false;" href="http://tourdejeu.net/annu/annuprev.php?cat1=14&amp;cat2=47">
+						<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/TourDeJeu.gif" alt="TourDeJeu.net" />
+					</a>
+					<a onclick="window.open(this.href);return false;" href="http://www.jouer.org/in.php?ID=330">
+						<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/Jouer.gif" alt="Jouer.org" />
+					</a>
+					<a onclick="window.open(this.href);return false;" href="http://www.playjeux.org/?q=fiche&amp;id=1">
+						<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/PlayJeux.gif" alt="PlayJeux.org" />
+					</a>
+					<a onclick="window.open(this.href);return false;" href="http://www.sanktuaire.net">
+						<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/Sanktuaire.gif" alt="Le Sanktuaire" />
+					</a>
+					<a onclick="window.open(this.href);return false;" href="http://www.gamersroom.com/vote.php?num=513">
+						<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/GamersRoom.gif" alt="Gamers'room" />
+					</a>
+					<a onclick="window.open(this.href);return false;" href="http://validator.w3.org/check?uri=referer">
+						<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/valid-xhtml10.png" alt="Valid XHTML 1.0!" />
+					</a>
+					<a onclick="window.open(this.href);return false;" href="http://jigsaw.w3.org/css-validator/">
+						<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/vcss.png" alt="Valid CSS!" />
+					</a>
+			
+					<div id="eXTReMe"><a href="http://extremetracking.com/open?login=cyberc4"> 
+						<img src="http://t1.extreme-dm.com/i.gif" style="border: 0;" 
+						height="38" width="41" id="EXim" alt="eXTReMe Tracker" /></a> 
+						<script type="text/javascript"><!-- 
+						var EXlogin='cyberc4' // Login 
+						var EXvsrv='s11' // VServer 
+						EXs=screen;EXw=EXs.width;navigator.appName!="Netscape"? 
+						EXb=EXs.colorDepth:EXb=EXs.pixelDepth; 
+						navigator.javaEnabled()==1?EXjv="y":EXjv="n"; 
+						EXd=document;EXw?"":EXw="na";EXb?"":EXb="na"; 
+						EXd.write("<img src=http://e2.extreme-dm.com", 
+						"/"+EXvsrv+".g?login="+EXlogin+"&amp;", 
+						"jv="+EXjv+"&amp;j=y&amp;srw="+EXw+"&amp;srb="+EXb+"&amp;", 
+						"l="+escape(EXd.referrer)+" height=1 width=1>");//--> 
+						</script><noscript><div id="neXTReMe"><img height="1" width="1" alt="" 
+						src="http://e2.extreme-dm.com/s11.g?login=cyberc4&amp;j=n&amp;jv=n" /> 
+						</div></noscript> 
+					</div>
+				</div><!--links-->
+				*/
+				?>
+			</div>
+		</div>
+		</div>
+		
+		<div id="footerLeft"></div>
+		<div id="footerCenter"></div>
+		<div id="footerRight"></div>
+		<div id="bgFooter"></div>
+		
+		
+
+		<script type="text/javascript">
+		//<!--
+		var SHOW_AJAX_LOGIN = <?=$IS_LOGGED;?>;
+		countdown(<?=$GAME_SESSION_LENGHT;?>);
+		//-->
+		</script>
+	</body>
+</html>

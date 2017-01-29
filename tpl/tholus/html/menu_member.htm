@@ -1,0 +1,120 @@
+<script type="text/javascript">
+<!--
+pic1= new Image(149,32); 
+pic1.src="/tpl/tholus/img/bouton/btn_action_on.png";
+pic1= new Image(149,32); 
+pic1.src="/tpl/tholus/img/bouton/btn_compte_on.png"; 
+pic1= new Image(149,32); 
+pic1.src="/tpl/tholus/img/bouton/btn_personnage_on.png"; 
+pic1= new Image(149,32); 
+pic1.src="/tpl/tholus/img/bouton/btn_historiquel_on.png"; 
+pic1= new Image(149,32); 
+pic1.src="/tpl/tholus/img/bouton/btn_reglements_on.png";
+pic1= new Image(149,32); 
+pic1.src="/tpl/tholus/img/bouton/btn_faq_on.png";
+pic1= new Image(149,32); 
+pic1.src="/tpl/tholus/img/bouton/btn_clavardage_on.png";
+pic1= new Image(149,32); 
+pic1.src="/tpl/tholus/img/bouton/btn_forum_on.png";
+//-->
+</script>
+
+<div id="menu_actionPJ" class="bouton boutonAction menuTab">
+	<span>Action</span>
+	<!-- Affichage du menu des actions-->
+	<div id="hm_menu_actionPJ" class="hovermenu" style="width:90px;">
+	<div class="menu_action_panel" style="width:200px;">
+		<?php
+		if(isset($PAGE_MENU_ACTIONS))
+		{
+			?>
+			<?=$PAGE_MENU_ACTIONS;?>
+			<?php
+		}
+		else
+		{
+			?>
+			<i>Aucun personnage n'est actuellement sélectionné.</i>
+			<?php
+		}
+		?>
+	</div>
+	</div>
+</div>
+
+
+<div id="menu_compte" class="bouton boutonCompte menuTab">
+	<span>Compte</span>
+	<div id="hm_menu_compte" class="hovermenu" style="width:100px;">
+	<div style="width:200px;" class="name menu_action_panel">
+		<?php
+		if(isset($MENU_MJ))
+		{
+			?>
+			<a href="?mj=index">Administration</a>
+			<?php
+		}
+		?>
+		<a href="?m=News">Accueil compte</a>
+		<a href="?v=Logout" onclick="return confirm('Êtes-vous certain de vouloir vous déconnecter ?');">Déconnexion</a>
+		<div class="title">Configuration</div>
+		<a href="?m=Config_Compte">Options du compte</a>
+		<a href="?m=Config_Perso">Options du personnage</a>
+	</div>
+	</div>
+</div>
+
+		
+
+<?php
+if(!isset($MENU_PERSO) || count($MENU_PERSO)==0)
+{
+	?>
+	<div id="menu_perso" class="bouton boutonPerso menuTab">
+		<span>Perso</span>
+		<div id="hm_menu_perso" class="hovermenu" style="width:100px;">
+		<div style="width:200px;" class="name menu_action_panel">
+			<i>Vous n'avez aucun personnage pour le moment.</i>
+		</div>
+		</div>
+	</div>
+	<?php
+}
+elseif(count($MENU_PERSO)==1)
+{
+	?>
+	<div class="bouton boutonPerso" onclick="location.href='<?=$MENU_PERSO[0]['url'];?>';">
+		<span>Perso</span>
+	</div>
+	<?php
+}
+else
+{
+	?>
+	<div id="menu_perso" class="bouton boutonPerso menuTab">
+		<span>Perso</span>
+		<div id="hm_menu_perso" class="hovermenu">
+		<div style="width:200px;" class="name menu_action_panel">
+			<?php
+			foreach ($MENU_PERSO as $element)
+			{
+				?>
+				<a href="<?=$element['url'];?>"><?=$element['txt'];?></a>
+				<?php
+			}
+			?>
+		</div>
+		</div>
+	</div>
+	<?php
+}
+?>
+
+	
+	
+<div class="bouton boutonBackground" onclick="location.href='?v=Background';"><span>Background</span></div>
+<div class="bouton boutonRegles" onclick="location.href='?v=Regles';"><span>Règles</span></div>
+<div class="bouton boutonFaq" onclick="window.open('http://wiki.cybercity2034.com/index.php/Aide:Accueil');"><span>F.A.Q.</span></div>
+<div class="bouton boutonChat" onclick="location.href='?v=Irc';"><span>Chat IRC</span></div>
+<div class="bouton boutonForum" onclick="window.open('http://forum.cybercity2034.com');"><span>Forum</span></div>
+
