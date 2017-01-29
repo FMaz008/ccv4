@@ -1,0 +1,101 @@
+<script type="text/javascript" src="./js/m_main.js"></script>
+<script type="text/javascript" src="./js/m_inv.js"></script>
+<script type="text/javascript" src="./js/m_inv_actions.js"></script>
+<script type="text/javascript" src="./js/m_inv_draganddrop.js"></script>
+
+
+
+
+
+
+
+
+<!-- Panneau d'information -->
+<table class="infopj">
+	<tr>
+		<td colspan="6" class="title">Info PJ</td>
+	</tr>
+	<tr>
+		<td class="name">Nom</td>
+		<td class="value"><?=$nom;?></td>
+
+		<td class="name"><abbr title="Points d'Action">PA</abbr></td>
+		<td class="value">
+			<span class="<?=$PA_COLORCLASS;?>" id="perso_pa"><?=$pa;?></span>/<?=$paMax;?>
+		</td>
+
+		<td class="name"><abbr title="Points de Nutrition">PN</abbr></td>
+		<td class="value">
+			<span class="<?=$PN_COLORCLASS;?>" id="perso_pn"><?=$pn;?></span>/99
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Lieu</td>
+		<td class="value"><?=$lieu;?></td>
+
+		<td class="name"><abbr title="Points de Vie">PV</abbr></td>
+		<td class="value">
+			<span class="<?=$PV_COLORCLASS;?>" id="perso_pv"><?=$pv;?></span>/<?=$pvMax;?>
+		</td>
+
+		<td class="name" rowspan="2" style="vertical-align:top;">Membre</td>
+		<td class="value" rowspan="2" style="vertical-align:top;">
+			<?=$membre;?>
+		</td>
+	</tr>
+	<tr>
+		<td class="name">Argent</td>
+		<td class="value">
+			<span class="txtStyle_valeur"><span id="perso_cash"><?=$argent;?></span><?=$GAME_DEVISE;?></span>
+		</td>
+
+		<td class="name"><abbr title="Points de Rangement">PR</abbr></td>
+		<td class="value">
+			<span class="<?=$PR_COLORCLASS;?>" id="perso_pr"><?=$pr;?></span>/<?=$prmax;?>
+		</td>
+
+		
+	</tr>
+
+	<!-- Action immédiate -->
+        <form id="formActionImmediate" method="post" action="">
+                <tr><td colspan="6" class="title">Action immédiate</td></tr>
+                <tr><td colspan="6" class="value">
+                        <textarea name="actionImmediate" style="width:90%;height:50px;"><?=$actionImmediate;?></textarea>
+                </td></tr>
+                <tr><td colspan="6" class="name">
+                        <center>
+                                <input type="submit" class="button" name="saveActionImmediate" value="Changer l'action" />
+                        </center>
+                </td></tr>
+        </form>
+</table>
+
+
+
+
+<!-- Affichage du panneau d'action -->
+<div id="actionPanel" class="panel member_index_panel">
+	<div class="title">
+		<div class="member_index_panel_title">
+			<span style="color:#272727;">Panneau d'action</span>
+		</div>
+		<div class="member_index_panel_button">
+			[<a href="#" onclick="toggleActionPanel();">&lt;&gt;</a>]
+		</div>
+		<div class="clearboth"></div>
+	</div>
+	
+	<div id="actionPanelContent"></div>
+</div>
+
+
+<!-- Affichage du HE-->
+<a id="haut"></a>
+
+<form id="he" method="post" action="?m=He_Delete">
+	<?=$PAGE_HE_HEADER;?>
+	<?=$PAGE_HE_MESSAGES;?>
+</form>
+
+<a id="bas"></a>
