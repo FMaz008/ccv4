@@ -1,13 +1,13 @@
 -- Créer un compte test
-INSERT INTO `cc_account` (`id`,`user`,`pass`,`email`,`sexe`,`date_inscr`,`remise`,`code_validation`,`skin`) VALUES
-(1, 'test', 'teH0wLIpW0gyQ', 'test@test.com', 'm', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), NULL, 'dark_blue');
+INSERT INTO `cc_account` (`id`,`user`,`pass`,`email`,`sexe`,`date_inscr`,`remise`,`code_validation`,`skin`)
+VALUES (1, 'test', 'teH0wLIpW0gyQ', 'test@test.com', 'm', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), NULL, 'dark_blue');
 
 -- Ajouter les droits d'accès administrateur.
-INSERT INTO `cc_mj` (`id`, `userId`, `nom`, `poste`, `email_prefix`, `present`, `ax_ppa`, `ax_ej`, `ax_hj`, `ax_admin`, `last_connection`) VALUES
-(1, 1, 'Test', 'Compte test', 'admin', 1, 1, 1, 1, 1, UNIX_TIMESTAMP());
+INSERT INTO `cc_mj` (`id`, `userId`, `nom`, `poste`, `email_prefix`, `present`, `ax_ppa`, `ax_ej`, `ax_hj`, `ax_admin`, `last_connection`)
+VALUES (1, 1, 'Test', 'Compte test', 'admin', 1, 1, 1, 1, 1, NOW());
 
 
-SET FOREIGN_KEY_CHECKS=0;
+-- SET FOREIGN_KEY_CHECKS=0;
 
 -- phpMyAdmin SQL Dump
 -- version 3.2.2.1deb1
