@@ -15,6 +15,9 @@ class Template {
 	private $file;
 	private $account; //Référence à l'account du membre
 	
+	private $arrColor = array('0000FF', '00FF00', 'FF0000', '663300', '006633', '330066', 'FF3366', 'FF6600', '6600FF');
+    private static $currentColorIdx = 0;
+	
 	/** Créer un nouveau template.
 	* 
 	* @param string $file Fichier à charger
@@ -92,8 +95,25 @@ class Template {
 			
 		$contents = ob_get_contents(); // Get the contents of the buffer
 		ob_end_clean();                // End buffering and discard
+		
+		//Petit outil de débuggage pour localiser les fichiers en visualisant une page.
+		if(DEBUG_MODE && isset($_GET['tpl'])){
+			$contents = $this->addDebug($contents, $file, '', $errFile, $errLine);
+		}
 		return $contents;              // Return the contents
 	}
 
+	private function addDebug($contents, $file, $extraStyle, $cFile, $cLine)
+    {
+        $color = $this->arrColor[self::$currentColorIdx];
+
+        $contents = '<div class="debug_template clearfix" style="border:3px solid #' . $color . ';' . $extraStyle . '"><div class="debug_template" style="background-color:#' . $color . ';">' . $file . '<br /><span style="font-size:8pt;">Called from:' . $cFile . ' (L.' . $cLine . ')</span></div>' . $contents . '</div>';
+
+        self::$currentColorIdx++;
+        if(self::$currentColorIdx == count($this->arrColor))
+            self::$currentColorIdx = 0;
+
+        return $contents;
+    }
 }
 
