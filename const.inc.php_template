@@ -14,7 +14,7 @@ define ('DB_HOST',			'localhost');
 define ('DB_USER',			'ccv4');
 define ('DB_PASS',			'passtmp');
 define ('DB_BASE',			'ccv4');
-define ('DB_PREFIX',		'cc_');
+define ('DB_PREFIX',		'cc_'); //Par défaut, toutes les tables du jeu sont préfixée cc_
 
 //Constantes de connexion à une base de données pour un forum (Simple Machine Forum seulement)
 define ('DB_FORUM_HOST',	NULL); //Placer ce champs à NULL pour désactiver
@@ -60,7 +60,11 @@ define ('SITE_DOMAIN', 				'cybercity2034.com');
 define ('SITE_VIRTUAL_PATH',		'http://127.0.0.1/ccv4.git/');
 
 //Chemin physique vers la racine du site
-define ('SITE_PHYSICAL_PATH',		'/home/www/cybercity2034.com/public_html/beta/sandbox/');
+define ('SITE_PHYSICAL_PATH',		getcwd() . DIRECTORY_SEPARATOR);
+
+//Si possible, utilisez une valeur fixe pour la constante (ci-dessous). Utiliser getcwd() (comme ci-dessus) n'est pas une bonne pratique.
+//define ('SITE_PHYSICAL_PATH',		'/home/www/cybercity2034.com/public_html/beta/sandbox/');
+
 
 //Chemin de base des templates (pour les liens d'images)
 // SKIN_ROOT'	-> Défini dans index.php après l'instanciation de la session
@@ -77,11 +81,11 @@ define ('SITE_PHYSICAL_PATH',		'/home/www/cybercity2034.com/public_html/beta/san
 define ('SITE_CHARSET',						'UTF-8');
 
 //Nom du skin à utiliser par défaut
-define ('SITE_DEFAULT_SKIN',				'darkblueOLD');
+define ('SITE_DEFAULT_SKIN',				'tholus');
 
 //Nom du skin de base (100% complet).
 // Si un fichier n'existe pas dans un skin, on charge celui du skin de base.
-define ('SITE_BASE_SKIN',					'darkblueOLD');
+define ('SITE_BASE_SKIN',					'dark_blue');
 
 //Titre du jeu
 define ('SITE_NAME',						'CyberCity 2034');
