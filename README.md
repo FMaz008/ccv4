@@ -18,10 +18,6 @@ Libre à vous de vous amuser avec et à lancer vos propres jeux !
 - INNACTIVITE_VOLUNTARY_LOCATION
 
 <br />
-Assurez-vous que short_open_tag = On dans votre config php.ini !
-<br />
-
-<br />
 Si vous avez des problèmes, contactez-moi directement au email indiqué dans mes commits.<br />
 <br />
 
@@ -29,6 +25,6 @@ Si vous avez des problèmes, contactez-moi directement au email indiqué dans me
 Pour développer un nouveau skin, il suffit de créer un nouveau dossier dans /tpl/.
 Lorsque le moteur tente d'utiliser un fichier de votre skin, si le fichier n'existe pas dans votre skin, le moteur chargera le fichier dans le skin par défaut (dark_blue).
 Autrement dit, il vous suffit de copier les fichiers de dark_blue que vous souhaitez modifier dans le dossier de votre skin. Assurez-vous de conserver l'arborescence des dossiers.
-J'ai laissé cyber_rust pour que vous ayez un exemple de skin additionel.
+J'ai laissé cyber_rust et tholus pour que vous ayez un exemple de skins additionels.
 Pour clarifier, si vous supprimez cyber_rust, dark_blue fonctionnera, mais à l'inverse, si vous supprimez dark_blue, cyber_rust ne fonctionnera pas, puisqu'il contient uniquement les fichiers différents de dark_blue.
 
