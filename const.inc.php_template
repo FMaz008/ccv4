@@ -9,26 +9,26 @@
  */
 
 
-//Constantes de connexion à une base de données pour le jeu
+//Constantes de connexion Ã  une base de donnÃ©es pour le jeu
 define ('DB_HOST',			'localhost');
 define ('DB_USER',			'ccv4');
 define ('DB_PASS',			'passtmp');
 define ('DB_BASE',			'ccv4');
-define ('DB_PREFIX',		'cc_'); //Par défaut, toutes les tables du jeu sont préfixée cc_
+define ('DB_PREFIX',		'cc_'); //Par dÃ©faut, toutes les tables du jeu sont prÃ©fixÃ©e cc_
 
-//Constantes de connexion à une base de données pour un forum (Simple Machine Forum seulement)
-define ('DB_FORUM_HOST',	NULL); //Placer ce champs à NULL pour désactiver
+//Constantes de connexion Ã  une base de donnÃ©es pour un forum (Simple Machine Forum seulement)
+define ('DB_FORUM_HOST',	NULL); //Placer ce champs Ã  NULL pour dÃ©sactiver
 define ('DB_FORUM_USER',	'');
 define ('DB_FORUM_PASS',	'');
 define ('DB_FORUM_BASE',	'');
 define ('DB_FORUM_PREFIX',	'smf_');
 define ('FORUM_URL',		'http://forum.cybercity2034.com/');		//Root path de l'intallation du forum
-define ('FORUM_TITLE_LENGTH', 50);									//Tronquer le titre après X caractères
-define ('FORUM_BOARD_IDS',	'6,5,4,23');							//Piger les sujets les plus récents parmis ces boards
-define ('FORUM_SUBJECT_LIMIT', 4);									//Nombre de sujets à afficher
+define ('FORUM_TITLE_LENGTH', 50);									//Tronquer le titre aprÃ¨s X caractÃ¨res
+define ('FORUM_BOARD_IDS',	'6,5,4,23');							//Piger les sujets les plus rÃ©cents parmis ces boards
+define ('FORUM_SUBJECT_LIMIT', 4);									//Nombre de sujets Ã  afficher
 
-//Connexion à la base de données des redirecteurs email (serveur PostFix seulement)
-define ('DB_EMAIL_HOST',	NULL); //Placer ce champs à NULL pour désactiver
+//Connexion Ã  la base de donnÃ©es des redirecteurs email (serveur PostFix seulement)
+define ('DB_EMAIL_HOST',	NULL); //Placer ce champs Ã  NULL pour dÃ©sactiver
 define ('DB_EMAIL_USER',	'');
 define ('DB_EMAIL_PASS',	'');
 define ('DB_EMAIL_BASE',	'');
@@ -39,21 +39,21 @@ define ('DB_EMAIL_PREFIX',	'');
 
 //CONSTANTES SESSION
 
-//Délais d'expiration (en minutes) d'une session
+//DÃ©lais d'expiration (en minutes) d'une session
 define ('SESSION_TIMEOUT',		45);
 
 //Heure actuelle
 define ('CURRENT_TIME',			time ());
 
-//Active des spécifités pour ce jeu
+//Active des spÃ©cifitÃ©s pour ce jeu
 define('GAME_IS_CYBERCITY', true);
 
 
 
 
-//CONSTANTES D'ACCÈS AUX FICHIERS
+//CONSTANTES D'ACCÃˆS AUX FICHIERS
 
-//Ce qui va après les @ des emails.
+//Ce qui va aprÃ¨s les @ des emails.
 define ('SITE_DOMAIN', 				'cybercity2034.com');
 
 //Chemin virtuel vers la racine du moteur de jeu
@@ -67,20 +67,20 @@ define ('SITE_PHYSICAL_PATH',		getcwd() . DIRECTORY_SEPARATOR);
 
 
 //Chemin de base des templates (pour les liens d'images)
-// SKIN_ROOT'	-> Défini dans index.php après l'instanciation de la session
+// SKIN_ROOT'	-> DÃ©fini dans index.php aprÃ¨s l'instanciation de la session
 
 //Chemin physique vers les templates (pour inclusion des fichiers)
-// SKIN_REAL'	-> Défini dans index.php après l'instanciation de la session
+// SKIN_REAL'	-> DÃ©fini dans index.php aprÃ¨s l'instanciation de la session
 
 
 
 
 //CONSTANTES D'AFFICHAGE
 
-//Charset à utiliser par défaut sur le site
+//Charset Ã  utiliser par dÃ©faut sur le site
 define ('SITE_CHARSET',						'UTF-8');
 
-//Nom du skin à utiliser par défaut
+//Nom du skin Ã  utiliser par dÃ©faut
 define ('SITE_DEFAULT_SKIN',				'tholus');
 
 //Nom du skin de base (100% complet).
@@ -93,10 +93,10 @@ define ('SITE_NAME',						'CyberCity 2034');
 //Version du jeu
 define ('SITE_VERSION',						'v4 O.O.');
 
-//Devise utilisée dans le jeu
+//Devise utilisÃ©e dans le jeu
 define ('GAME_DEVISE',						'Cr');
 
-//Décalage temporel (en année) par rapport à l'année actuelle
+//DÃ©calage temporel (en annÃ©e) par rapport Ã  l'annÃ©e actuelle
 define ('GAMETIME_DECAL',					31);
 
 //Mode debug [true = affiche les erreurs, false = log les erreurs]
@@ -110,37 +110,37 @@ define ('DEBUG_MODE',						true);
 //Lieu (Nom technique) du spawn innitial lors de l'inscription
 define ('LIEU_DEPART',						'A');			
 
-//Considérer une porte tenue pendant X heures
+//ConsidÃ©rer une porte tenue pendant X heures
 define ('TENIRPORTE_TIMEOUT',				48);
 
-//Lieu (Nom technique) vers lequel un perso est téléportée force pour innactivité
+//Lieu (Nom technique) vers lequel un perso est tÃ©lÃ©portÃ©e force pour innactivitÃ©
 define ('INNACTIVITE_TELEPORT_LOCATION',	'A.douanes.innactifs');
 
-//Délais (en heures) avant qu'un perso soit déplacé automatiquement vers le lieu des innactifs
+//DÃ©lais (en heures) avant qu'un perso soit dÃ©placÃ© automatiquement vers le lieu des innactifs
 define ('INNACTIVITE_TELEPORT_DELAY',		72);
 
-//Délais (en jours) avant qu'un perso soit effacé
+//DÃ©lais (en jours) avant qu'un perso soit effacÃ©
 define ('INNACTIVITE_DELETE_DELAY',			30);
 
-//Lieu (Nom technique) d'innactivité désiré. Ce lieu exclu les joueurs de la téléportation automatique pour inactivité
+//Lieu (Nom technique) d'innactivitÃ© dÃ©sirÃ©. Ce lieu exclu les joueurs de la tÃ©lÃ©portation automatique pour inactivitÃ©
 define ('INNACTIVITE_VOLUNTARY_LOCATION',	'A.douanes.salleattente');
 
-//Nombre de PA à donner à un joueur à sa remise
+//Nombre de PA Ã  donner Ã  un joueur Ã  sa remise
 define ('PA_PAR_REMISE',					50);
 
-//Nombre de PPA simultanément ouverts par perso.
+//Nombre de PPA simultanÃ©ment ouverts par perso.
 define ('PPA_MAX',							3);
 
-//Nombre de niveau de compétences à attribuer à l'inscription
+//Nombre de niveau de compÃ©tences Ã  attribuer Ã  l'inscription
 define ('INSCRIPTION_NBR_COMP',				10);
 
-//Nombre de niveau maximal par compétences à attribuer à l'inscription
+//Nombre de niveau maximal par compÃ©tences Ã  attribuer Ã  l'inscription
 define ('INSCRIPTION_MAX_COMP',				5);
 
 
-//CONSTANTES DE FONCTIONNEMENT INTERNE DU SYSTÈME
+//CONSTANTES DE FONCTIONNEMENT INTERNE DU SYSTÃˆME
 
-//Délais (en jours) d'expiration (supression définitive) des messages supprimés
+//DÃ©lais (en jours) d'expiration (supression dÃ©finitive) des messages supprimÃ©s
 define("ENGINE_HE_EXPIRE"		, 30);	
 				
 //Page  accessible par ?m= qui ne requiert une authentification mais pas un perso actif
