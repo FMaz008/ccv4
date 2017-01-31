@@ -107,33 +107,33 @@
 
 
 <form name="form1" action="" method="post">
-	<? if(isset($CASIER)) { ?>
-		<input type="hidden" name="casier" value="<?=$CASIER;?>" />
-	<? } ?>
+	<?php if(isset($CASIER)) { ?>
+		<input type="hidden" name="casier" value="<?php echo $CASIER;?>" />
+	<?php } ?>
 <table style="width:800px;">
 	<tr>
 		<td class="title" colspan="5">
-			<? if(isset($CASIER) && !empty($CASIER)) { ?>
-				Modifier l'inventaire du casier #<?=$CASIER;?> du lieu <?=$LIEU_TECH;?>
-			<? }else{ ?>
-				Modifier l'inventaire du lieu <?=$LIEU_TECH;?>
-			<? } ?>
+			<?php if(isset($CASIER) && !empty($CASIER)) { ?>
+				Modifier l'inventaire du casier #<?php echo $CASIER;?> du lieu <?php echo $LIEU_TECH;?>
+			<?php }else{ ?>
+				Modifier l'inventaire du lieu <?php echo $LIEU_TECH;?>
+			<?php } ?>
 		</td>	
 	</tr>
 	
-	<?
+	<?php
 	$currentCat = '';
 	if(!isset($ITEMS)){
 		?>
 			<i><strong>L'inventaire est vide</strong></i>
-		<?
+		<?php
 	}else{
 		foreach ($ITEMS as $item){
 			$showHeader = false;
 			if($currentCat != $item->getTypeTech()){
 				?> 
 				</table>
-				<?
+				<?php
 				$currentCat = $item->getTypeTech();
 				$showHeader = true;
 			}
@@ -142,7 +142,7 @@
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="16" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="16" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -156,45 +156,45 @@
 						<td class="name">Resistance</td>
 						<td class="name">Tir par tour</td>
 						<td class="name">Munitions</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
 					<td class="value">
-						<? if($item->canRegroupe()){ ?>
-							<input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" />
-						<? } ?>
+						<?php if($item->canRegroupe()){ ?>
+							<input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" />
+						<?php } ?>
 					</td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getResistance();?>/<?=$item->getResistanceMax();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getTirParTour();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getMunition();?>/<?=$item->getMunitionMax();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPrecision();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getResistance();?>/<?php echo $item->getResistanceMax();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getTirParTour();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getMunition();?>/<?php echo $item->getMunitionMax();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'arme_blanche':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="14" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="14" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -206,39 +206,39 @@
 						<td class="name">Portée</td>
 						<td class="name">Précision</td>
 						<td class="name">Resistance</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getResistance();?>/<?=$item->getResistanceMax();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPrecision();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getResistance();?>/<?php echo $item->getResistanceMax();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'arme_lancee':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="13" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="13" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -249,38 +249,38 @@
 						<td class="name">Pa</td>
 						<td class="name">Portée</td>
 						<td class="name">Précision</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPrecision();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'arme_paralysante':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="13" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="13" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -291,38 +291,38 @@
 						<td class="name">Pa</td>
 						<td class="name">Portée</td>
 						<td class="name">Précision</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPrecision();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'arme_explosif':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="13" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="13" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -333,136 +333,136 @@
 						<td class="name">Pa</td>
 						<td class="name">Portée</td>
 						<td class="name">Précision</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getFiabilite();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getForce();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPa();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPortee();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPrecision();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getFiabilite();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getForce();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPa();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPortee();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPrecision();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'autre':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="8" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="8" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'badge':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="8" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="8" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?> (<?=$item->getTitre();?>)</a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?> (<?php echo $item->getTitre();?>)</a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'cartebanque':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="9" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="9" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
 						<td class="name">No Carte</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getNoCarte();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getNoCarte();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'cartememoire':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="12" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="12" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -472,37 +472,37 @@
 						<td class="name">Key</td>
 						<td class="name">Écriture</td>
 						<td class="name">Mémoire</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->isCrypt();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getKey();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getMcWrite();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getMemorySize();?>/<?=$item->getMemorySizeMax();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->isCrypt();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getKey();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getMcWrite();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getMemorySize();?>/<?php echo $item->getMemorySizeMax();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'clef':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="9" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="9" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -510,43 +510,43 @@
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
 						<td class="name" style="width:20px;">Pass</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
 					<td class="value">
-						<?
+						<?php
 						if($item->canEquip()){
 							if (!$item->isEquip()){
 								?>
-								<a href="?mj=Perso_InventaireItemEquiper&id=<?=$item->getInvId();?>&rid=<?=$_GET['id'];?>&equip=1">Équiper</a>
-								<?
+								<a href="?mj=Perso_InventaireItemEquiper&id=<?php echo $item->getInvId();?>&rid=<?php echo $_GET['id'];?>&equip=1">Équiper</a>
+								<?php
 							}else{
 								?>
-								<a href="?mj=Perso_InventaireItemEquiper&id=<?=$item->getInvId();?>&rid=<?=$_GET['id'];?>"&equip=0>Ranger</a>
-								<?
+								<a href="?mj=Perso_InventaireItemEquiper&id=<?php echo $item->getInvId();?>&rid=<?php echo $_GET['id'];?>"&equip=0>Ranger</a>
+								<?php
 							}
 						}
 						?>
 					</td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value"><?=$item->getCode();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value"><?php echo $item->getCode();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'defense_tete':
 				case 'defense_torse':
@@ -557,35 +557,35 @@
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="9" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="9" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
 						<td class="name">Resistance</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getResistance();?>/<?=$item->getResistanceMax();?> Seuil: <?=$item->getResistanceSeuil();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getResistance();?>/<?php echo $item->getResistanceMax();?> Seuil: <?php echo $item->getResistanceSeuil();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				//case 'drogue':
                                 case 'drogue_drogue': 
@@ -595,139 +595,139 @@
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="8" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="8" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'livre':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="8" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="8" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Titre</td>
 						<td class="name" style="width:150px;">Auteur</td>
 						<td class="name" style="width:20px;">Pr</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getTitre();?></a></td>
-					<td class="value"><?=$item->getAuteur();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getTitre();?></a></td>
+					<td class="value"><?php echo $item->getAuteur();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'munition':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="7" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="7" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" value=""/></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" value=""/></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'nourriture':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="9" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="9" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
 						<td class="name">Pn</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPn();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPn();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'ordinateur':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="13" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="13" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -738,72 +738,72 @@
 						<td class="name">Écriture</td>
 						<td class="name">Mémoire</td>
 						<td class="name">Internet</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><? echo ($item->isCrypt()) ? 'Oui' : 'Non'; ?></td>
-					<td class="value" style="text-align:right;"><?=$item->getKey();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getMcWrite();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getMemorySize();?>/<?=$item->getMemorySizeMax();?></td>
-					<td class="value" style="text-align:right;"><?=$item->isInternetCapable();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo ($item->isCrypt()) ? 'Oui' : 'Non'; ?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getKey();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getMcWrite();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getMemorySize();?>/<?php echo $item->getMemorySizeMax();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->isInternetCapable();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'sac':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="9" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="9" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
 						<td class="name">Capacité</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getCapaciteMax();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getCapaciteMax();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'talkiewalkie':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="13" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="13" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -814,38 +814,38 @@
 						<td class="name">Crypt</td>
 						<td class="name">Key</td>
 						<td class="name">Silence</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getFrequence();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getCanTalk();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getCryptCapable();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getClef();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getSilenceCapable();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getFrequence();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getCanTalk();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getCryptCapable();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getClef();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getSilenceCapable();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'telephone':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="14" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="14" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>					
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -857,71 +857,71 @@
 						<td class="name">Anonyme</td>
 						<td class="name">Type Affichage</td>
 						<td class="name">Memoire</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getNotel();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getPrixAppel();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getNobanque();?>-<?=$item->getNocompte();?> (Nip: <?=$item->getNip();?>)</td>
-					<td class="value" style="text-align:right;"><?=$item->getAnonymeCapable();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getTypeAffichage();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getMemorySize();?>/<?=$item->getMemorySizeMax();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getNotel();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPrixAppel();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getNobanque();?>-<?php echo $item->getNocompte();?> (Nip: <?php echo $item->getNip();?>)</td>
+					<td class="value" style="text-align:right;"><?php echo $item->getAnonymeCapable();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getTypeAffichage();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getMemorySize();?>/<?php echo $item->getMemorySizeMax();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'trousse':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="7" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="7" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
 						<td class="name" >Nom</td>
 						<td class="name" style="width:20px;">Pr</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				case 'media':
 					if ($showHeader){
 						?>
 						<table style="width:800px;">
-						<tr><td colspan="9" class="name"><?=$item->getType();?></td></tr>
+						<tr><td colspan="9" class="name"><?php echo $item->getType();?></td></tr>
 						<tr>
 						<td class="name" style="width:15px;">&nbsp;</td>
 						<td class="name" style="width:20px;">Qte</td>
@@ -929,37 +929,37 @@
 						<td class="name" style="width:20px;">Pr</td>
 						<td class="name" style="width:20px;">Média accessible</td>
 						<td class="name" style="width:20px;">Sens d'accès</td>
-						<?if(!isset($CASIER) || empty($CASIER)){?>
+						<?php if(!isset($CASIER) || empty($CASIER)){?>
 							<td class="name" style="width:50px;">Cacher</td>
 							<td class="name" style="width:50px;">Bonus cachette</td>
 							<td class="name" style="width:50px;">Num&eacute;ro cachette</td>
-						<?}?>
+						<?php }?>
 						</tr>
-						<?
+						<?php
 					}
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="value"><? if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?=$item->getInvId();?>" value="<?=$item->getQte();?>" /><? } ?></td>
-					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?=$_GET['id'];?>"><?=$item->getNom();?></a></td>
-					<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-					<td class="value" style="text-align:right;"><?=$item->getMediaTypeAffichable();?></td>
-					<td class="value" style="text-align:right;"><?if($item->isEmetteur()){echo "Emetteur";}else{echo "Récepeteur";}?></td>
-					<?if(!isset($CASIER) || empty($CASIER)){?>
-						<td class="value"><input type="checkbox" <?if($item->iscache()){?> checked="checked" <?}?> name="<?=$item->getInvId();?>_cache" /></td>
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>TauxCache" value="<?=$item->getTauxCache();?>" />
-						<td class="value"><input type="text" class="text" size="4" name="inv<?=$item->getInvId();?>CacheNo" value="<?=$item->getCacheNo();?>" />
-					<?}?>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="value"><?php if($item->canRegroupe()){ ?><input type="text" class="text" size="2" name="inv<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" /><?php } ?></td>
+					<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $item->getInvId();?>&rpage=Lieu_Inventaire&rid=<?php echo $_GET['id'];?>"><?php echo $item->getNom();?></a></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+					<td class="value" style="text-align:right;"><?php echo $item->getMediaTypeAffichable();?></td>
+					<td class="value" style="text-align:right;"><?php if($item->isEmetteur()){echo "Emetteur";}else{echo "Récepeteur";}?></td>
+					<?php if(!isset($CASIER) || empty($CASIER)){?>
+						<td class="value"><input type="checkbox" <?php if($item->iscache()){?> checked="checked" <?php }?> name="<?php echo $item->getInvId();?>_cache" /></td>
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>TauxCache" value="<?php echo $item->getTauxCache();?>" />
+						<td class="value"><input type="text" class="text" size="4" name="inv<?php echo $item->getInvId();?>CacheNo" value="<?php echo $item->getCacheNo();?>" />
+					<?php }?>
 					</tr>
-					<?
+					<?php
 					break;
 				default:
 					?>
 					<tr>
-					<td class="name"><input type="checkbox" name="invId[]" value="<?=$item->getInvId();?>" /></td>
-					<td class="name" colspan="3">Type d'item non pris en charge (<?=$item->getType();?>)</td>
+					<td class="name"><input type="checkbox" name="invId[]" value="<?php echo $item->getInvId();?>" /></td>
+					<td class="name" colspan="3">Type d'item non pris en charge (<?php echo $item->getType();?>)</td>
 					</tr>
-					<?
+					<?php
 			}
 		}
 	}
@@ -976,8 +976,8 @@
 <div id="pan">
 	<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_ajout');">Ajoute un/des item(s) ...</a> &nbsp;&nbsp;&nbsp;
 	<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_transfert');">Transférer la sélection ...</a> &nbsp;&nbsp;&nbsp;
-	<input type="submit" class="button" name="del" style="background-color:#330000;" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_InventaireItemDel&id=<?=$_GET['id'];?>&rpage=Mj_Lieu_Inventaire&rid=<?=$_GET['id'];?>';return (testerCheck(this.form, 'invId[]'));" /> &nbsp;&nbsp;&nbsp;
-	<input type="submit" class="button" name="mod" value="Enregistrer" onClick="document.forms['form1'].action='?mj=Lieu_InventaireItemMod&id=<?=$_GET['id'];?>&rpage=Mj_Lieu_Inventaire&rid=<?=$_GET['id'];?>';" /> &nbsp;&nbsp;&nbsp;
+	<input type="submit" class="button" name="del" style="background-color:#330000;" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_InventaireItemDel&id=<?php echo $_GET['id'];?>&rpage=Mj_Lieu_Inventaire&rid=<?php echo $_GET['id'];?>';return (testerCheck(this.form, 'invId[]'));" /> &nbsp;&nbsp;&nbsp;
+	<input type="submit" class="button" name="mod" value="Enregistrer" onClick="document.forms['form1'].action='?mj=Lieu_InventaireItemMod&id=<?php echo $_GET['id'];?>&rpage=Mj_Lieu_Inventaire&rid=<?php echo $_GET['id'];?>';" /> &nbsp;&nbsp;&nbsp;
 	
 	
 	<div id="pan_ajout" style="display:none;clear:both;">
@@ -988,7 +988,7 @@
 		
 		<div id="pan_ajout_results" style="display:none;clear:both;"></div>
 		<div id="pan_ajout_button" style="text-align:center;display:none;clear:both;">
-			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Lieu_InventaireItemAdd&id=<?=$_GET['id'];?><?php if(isset($_GET['cid'])){ echo '&cid=' . $_GET['cid']; } ?>&rpage=Mj_Lieu_Inventaire&rid=<?=$_GET['id'];?>';return testerCheck(this.form, 'itemId[]');" />
+			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Lieu_InventaireItemAdd&id=<?php echo $_GET['id'];?><?php if(isset($_GET['cid'])){ echo '&cid=' . $_GET['cid']; } ?>&rpage=Mj_Lieu_Inventaire&rid=<?php echo $_GET['id'];?>';return testerCheck(this.form, 'itemId[]');" />
 		</div>
 	</div>
 	
@@ -1002,7 +1002,7 @@
 		<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_transfert_item');">Un item ...</a> &nbsp;&nbsp;&nbsp;
 		
 		
-		<?
+		<?php
 		$arrType = array(
 						array('tech'=>'lieu',		'class'=>'Lieu_InventaireDonnerLieu',		'radio'=>'lieuTech',	'txt'=>'Lieu'),
 						array('tech'=>'boutique',	'class'=>'Lieu_InventaireDonnerBoutique',	'radio'=>'lieuTech',	'txt'=>'Boutique'),
@@ -1012,18 +1012,18 @@
 					);
 		foreach($arrType as $type){
 		?>
-			<div id="pan_transfert_<?=$type['tech'];?>" style="display:none;clear:both;">
+			<div id="pan_transfert_<?php echo $type['tech'];?>" style="display:none;clear:both;">
 				<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;... correspondant à: 
-				<br /> Nom/Id.: <input type="text" class="text" id="pan_transfert_<?=$type['tech'];?>_search" style="width:125px;" onkeypress="return checkEnter(event,'pan_transfert_<?=$type['tech'];?>');" />
-				<input type="button" class="button" onclick="gosearch('pan_transfert_<?=$type['tech'];?>');" value="Rechercher <?=$type['txt'];?>" />
+				<br /> Nom/Id.: <input type="text" class="text" id="pan_transfert_<?php echo $type['tech'];?>_search" style="width:125px;" onkeypress="return checkEnter(event,'pan_transfert_<?php echo $type['tech'];?>');" />
+				<input type="button" class="button" onclick="gosearch('pan_transfert_<?php echo $type['tech'];?>');" value="Rechercher <?php echo $type['txt'];?>" />
 				<br />
 				
-				<div id="pan_transfert_<?=$type['tech'];?>_results" style="display:none;clear:both;"></div>
-				<div id="pan_transfert_<?=$type['tech'];?>_button" style="text-align:center;display:none;clear:both;">
-					<input type="submit" class="button" name="move<?=$type['tech'];?>" value="Déposer/Transférer" onClick="document.forms['form1'].action='?mj=<?=$type['class'];?>&id=<?=$_GET['id'];?>&rpage=Mj_Lieu_Inventaire&rid=<?=$_GET['id'];?>';return (testerRadio(this.form.<?=$type['radio'];?>));" />
+				<div id="pan_transfert_<?php echo $type['tech'];?>_results" style="display:none;clear:both;"></div>
+				<div id="pan_transfert_<?php echo $type['tech'];?>_button" style="text-align:center;display:none;clear:both;">
+					<input type="submit" class="button" name="move<?php echo $type['tech'];?>" value="Déposer/Transférer" onClick="document.forms['form1'].action='?mj=<?php echo $type['class'];?>&id=<?php echo $_GET['id'];?>&rpage=Mj_Lieu_Inventaire&rid=<?php echo $_GET['id'];?>';return (testerRadio(this.form.<?php echo $type['radio'];?>));" />
 				</div>
 			</div>
-		<?
+		<?php
 		}
 		?>
 		

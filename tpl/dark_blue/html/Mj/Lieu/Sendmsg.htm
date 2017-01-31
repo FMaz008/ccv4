@@ -108,7 +108,7 @@
 //-->	
 </script>
 
-<? if(isset($STATUS_MSG)){ echo $STATUS_MSG; } ?>
+<?php if(isset($STATUS_MSG)){ echo $STATUS_MSG; } ?>
 
 
 
@@ -133,7 +133,7 @@
 				<td class="value">
 					À: <div id="listLieux" style="height:7em;overflow:auto;"></div>
 					<br />
-					De <input type="text" class="text" name="from" value="<?=$MJ_NOM;?>" /><br />
+					De <input type="text" class="text" name="from" value="<?php echo $MJ_NOM;?>" /><br />
 					<textarea name="msg" style="width:400px;height:200px;"></textarea>
 				</td>
 			</tr><tr>

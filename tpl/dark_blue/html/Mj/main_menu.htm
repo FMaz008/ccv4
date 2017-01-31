@@ -131,13 +131,13 @@
 
 <div>
 	<div id="tab1" class="ongletOff" onclick="displayTab(1);">
-		<span>PPA</span> (<?=$COUNT_PPA_MJ;?> / <?=$COUNT_PPA;?>)
+		<span>PPA</span> (<?php echo $COUNT_PPA_MJ;?> / <?php echo $COUNT_PPA;?>)
 	</div>
 	<div id="tab2" class="ongletOff" onclick="displayTab(2);">
 		<span>PPA Fermé</span>
 	</div>
 	<div id="tab3" class="ongletOff" onclick="displayTab(3);">
-		<span>Inscriptions</span> (<?=$COUNT_INSCR;?>)
+		<span>Inscriptions</span> (<?php echo $COUNT_INSCR;?>)
 	</div>
 	<div id="tab4" class="ongletOff" onclick="displayTab(4);">
 		<span>Brasser un dé</span>
@@ -171,17 +171,17 @@
 	<div class="title">
 		Panneau de contrôle MJ
 		<form name="StatutMJ" method="post" action="?mj=index">
-		<input type="hidden" name="StatutMJ" value="<?=$STATUT_MJ;?>" />
+		<input type="hidden" name="StatutMJ" value="<?php echo $STATUT_MJ;?>" />
 		[Vous êtes actuellement <a href="#" onclick="document.forms['StatutMJ'].submit();">
-			<?
+			<?php
 			if($STATUT_MJ){
 				?>
 				<span style="color:green;">Actif</span>
-				<?
+				<?php
 			}else{
 				?>
 				<span style="color:red;background-color:black;">/!\ Absent /!\</span>
-				<?
+				<?php
 			}
 			?>
 		</a>]
@@ -194,7 +194,7 @@
 		
 		<fieldset class="mj_left">
 			<a name="gestion_compte"></a>
-			<? if($PAGE_HJ){ ?>
+			<?php if($PAGE_HJ){ ?>
 			<legend>Gestion des comptes</legend>
 			
 			<form name="compte" method="post" onsubmit="gosearch('compte');return false;">
@@ -206,19 +206,19 @@
 				<br />- <a id="Account_Supprimer"	href="#"  onclick="return linkClick(this.href,'Voulez-vous vraiment supprimer ce compte ?');">Supprimer compte</a>
 				<br />- <a id="Account_Doublons"	href="?mj=Compte_Doublons">Liste des doublons</a>
 				<hr />
-				<? if($ACCESS_ADMIN){ ?>
+				<?php if($ACCESS_ADMIN){ ?>
 					<br />- <a id="Account_MjList"	href="?mj=Mj_List">Gestion MJ</a>
 					<br />- <a id="Account_LogMp"	href="?mj=Compte_LogMp">Log Abo M+</a>
-				<? } ?>
+				<?php } ?>
 			</form>
-			<? } ?>
+			<?php } ?>
 		</fieldset>
 		
 		
 		
 		<fieldset class="mj_right">
 			<a name="gestion_perso"></a>
-			<? if($PAGE_HJ){ ?>
+			<?php if($PAGE_HJ){ ?>
 			<legend>Gestion des perso</legend>
 			
 			<form name="perso" method="post" onsubmit="gosearch('perso');return false;">
@@ -234,21 +234,21 @@
 				<br />- <a id="Perso_Supprimer"		href="#"  onclick="return linkClick(this.href,'Voulez-vous vraiment supprimer ce perso ?');">Supprimer perso</a>
 				<br />- <a id="Perso_Listppa"		href="#" onclick="return linkClick(this.href,'');">Historique des PPA</a>
 				<hr />
-				<? if($ACCESS_ADMIN){ ?>
+				<?php if($ACCESS_ADMIN){ ?>
 				<br />- <a id="Perso_GestionCaract" href="?mj=Perso_GestionCaract">Gestion des caractéristiques</a>
 				<br />- <a id="Perso_GestionComp" href="?mj=Perso_GestionComp">Gestion des compétences</a>
 				<br />- <a id="Perso_GestionStat" href="?mj=Perso_GestionStat">Gestion des statistiques</a>
-				<? } ?>
+				<?php } ?>
 				<br />- <a id="Perso_LogMort"		href="?mj=Perso_LogMort">Log Perso morts</a>
 				<br />- <a id="Perso_LogSupression" href="?mj=Perso_LogSuppr">Log Suppression perso</a>
 			</form>
-			<? } ?>
+			<?php } ?>
 		</fieldset>
 		
 		
 		
 		<fieldset class="mj_left">
-			<? if($PAGE_EJ){ ?>
+			<?php if($PAGE_EJ){ ?>
 			<legend>Gestion des lieux</legend>
 			<form name="lieu" method="post" onsubmit="gosearch('lieu');return false;">
 				N. tech.: <input type="text" class="text" name="search" style="width:100px;" />
@@ -275,11 +275,11 @@
 				<br />- <a id="Lieu_Mairie"		href="?mj=Lieu_Mairie">Gestion Mairie</a>
 				<br />- <a id="Lieu_Producteur"	href="?mj=Lieu_Producteur">Gestion des centres de productions</a>
 			</form>
-			<? } ?>
+			<?php } ?>
 		</fieldset>
 		
 		<fieldset class="mj_right">
-			<? if($PAGE_EJ){ ?>
+			<?php if($PAGE_EJ){ ?>
 			<legend>Gestion des items</legend>
 		
 			<form name="Item">
@@ -301,17 +301,17 @@
 				<br />- <a href="?mj=Item_Trousse">Gestion des trousses de soin</a>
 				<br />- <a href="?mj=Item_Listall">Afficher DB</a>
 			</form>
-			<? } ?>
+			<?php } ?>
 		</fieldset>
 		
 		<fieldset class="mj_left">
-			<? if($PAGE_DEV){ ?>
+			<?php if($PAGE_DEV){ ?>
 			<legend>Développement</legend>
 		
 			<form name="Dev">
 				<br />- <a href="?mj=Dev_ErrLog">Log des erreurs</a>
 			</form>
-			<? } ?>
+			<?php } ?>
 		</fieldset>
 		
 		<div class="clearboth"></div>
@@ -324,6 +324,6 @@
 
 <script type="text/javascript">
 //<!--
-displayTab(<?=$DEFAULT_TAB;?>);
+displayTab(<?php echo $DEFAULT_TAB;?>);
 //-->
 </script>

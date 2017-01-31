@@ -19,7 +19,7 @@
 				'?popup=1&m=Action_Item_Sitemod', 
 				{
 					method: 'post', 
-					parameters: 'url=<?=$SITE->getUrl();?>'+
+					parameters: 'url=<?php echo $SITE->getUrl();?>'+
 								'&new_url='+$F('url')+
 								'&accueil='+$F('accueil')+
 								'&user='+$F('header_user')+
@@ -93,7 +93,7 @@
 	</tr>
 	<tr>
 		<td class="value">
-			<input type="text" class="text" name="url" size="50" maxlength="250" id="url" value="<?=$SITE->getUrl();?>" />
+			<input type="text" class="text" name="url" size="50" maxlength="250" id="url" value="<?php echo $SITE->getUrl();?>" />
 		</td>
 	</tr>
 	<tr>
@@ -101,7 +101,7 @@
 	</tr>
 	<tr>
 		<td class="value">
-			<input type="text" class="text" name="titre" size="50" maxlength="250" id="titre" value="<?=$SITE->getTitre();?>" />
+			<input type="text" class="text" name="titre" size="50" maxlength="250" id="titre" value="<?php echo $SITE->getTitre();?>" />
 		</td>
 	</tr>
 	<tr>
@@ -109,8 +109,8 @@
 	</tr>
 	<tr>
 		<td class="value">
-			<input type="radio" class="text" name="acces" id="acces" value="pub" <? echo (($SITE->isPublic()) ? 'CHECKED' : ''); ?> /> Public
-			<input type="radio" class="text" name="acces" id="acces" value="priv"<? echo (($SITE->isPublic()) ? '' : 'CHECKED'); ?> /> Priv&eacute;
+			<input type="radio" class="text" name="acces" id="acces" value="pub" <?php echo (($SITE->isPublic()) ? 'CHECKED' : ''); ?> /> Public
+			<input type="radio" class="text" name="acces" id="acces" value="priv"<?php echo (($SITE->isPublic()) ? '' : 'CHECKED'); ?> /> Priv&eacute;
 		</td>
 	</tr>
 	<tr>
@@ -119,13 +119,13 @@
 	<tr>
 		<td class="value">
 			<select name="accueil" id="accueil">
-				<option value="0" <? if ($SITE->getFirstPageId()==0){ echo 'SELECTED '; } ?>>aucune</option>
-				<?
+				<option value="0" <?php if ($SITE->getFirstPageId()==0){ echo 'SELECTED '; } ?>>aucune</option>
+				<?php
 				foreach($PAGES as $page)
 				{
 					?>
-					<option value="<?=$page->getId();?>" <? if ($SITE->getFirstPageId()==$page->getId()){ echo 'SELECTED '; } ?>><?=$page->getId();?> - <?=$page->getTitre();?></option>
-					<?
+					<option value="<?php echo $page->getId();?>" <?php if ($SITE->getFirstPageId()==$page->getId()){ echo 'SELECTED '; } ?>><?php echo $page->getId();?> - <?php echo $page->getTitre();?></option>
+					<?php
 				}
 				?>
 			</select>

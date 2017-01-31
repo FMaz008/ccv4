@@ -11,24 +11,24 @@
 	<td class="name">Nom</td>
 </tr>
 
-<? if (isset($INV_PERSO) && count($INV_PERSO)>0){
+<?php if (isset($INV_PERSO) && count($INV_PERSO)>0){
 	foreach($INV_PERSO as $item){?>
 		<tr>
 			<td style="width:100px;">
-				<input type="text" class="text" name="drqte_<?=$item->getInvId();?>" value="0" style="width:30px;" />
-				/ <?=$item->getQte();?>
+				<input type="text" class="text" name="drqte_<?php echo $item->getInvId();?>" value="0" style="width:30px;" />
+				/ <?php echo $item->getQte();?>
 			</td>
-			<td class="value" style="text-align:left;"><?=$item->getNom();?></td>
+			<td class="value" style="text-align:left;"><?php echo $item->getNom();?></td>
 		</tr>
-	<? } 
+	<?php } 
 }else{ ?>
 	<tr><td>
 	<i>Vous ne poss&egrave;dez aucune substance &agrave; m&eacute;langer</i>
 	</td></tr>
-<? } ?>
+<?php } ?>
 
 <tr><td colspan="2" class="name" style="text-align:center;">
-	Cout en PA : <?=$COUT_PA;?>
+	Cout en PA : <?php echo $COUT_PA;?>
 </td></tr>
 
 <tr>

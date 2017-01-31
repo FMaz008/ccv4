@@ -32,31 +32,31 @@
 
 <br />
 
-<? if(isset($LIEU_ID)) { ?>
-	<a href="?mj=Lieu_Casiers&id=<?=$LIEU_ID;?>">&lt;&lt; Retour à la liste des casiers</a><br />
-<? } ?>
+<?php if(isset($LIEU_ID)) { ?>
+	<a href="?mj=Lieu_Casiers&id=<?php echo $LIEU_ID;?>">&lt;&lt; Retour à la liste des casiers</a><br />
+<?php } ?>
 
-<form method="post" name="form1" action="?mj=Lieu_Casier<?=$SUBMITNAME;?>">
-	<? if(isset($CASIER['lieuId'])) { ?>
-		<input type="hidden" name="LIEU_ID" value="<?=$CASIER['lieuId'];?>" />
-	<? } ?>
+<form method="post" name="form1" action="?mj=Lieu_Casier<?php echo $SUBMITNAME;?>">
+	<?php if(isset($CASIER['lieuId'])) { ?>
+		<input type="hidden" name="LIEU_ID" value="<?php echo $CASIER['lieuId'];?>" />
+	<?php } ?>
 	<table align="center">
 		<tr>
-			<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> un casier</td>
+			<td class="title" colspan="2"><?php echo $ACTIONTYPETXT;?> un casier</td>
 		</tr>
-		<? if( $SHOWID == true ){ ?>
+		<?php if( $SHOWID == true ){ ?>
 		<tr>
 			<td class="name">ID/# du casier</td>
-			<td class="value"><input type="hidden" name="id_casier" value="<?=$CASIER['id_casier'];?>" /><?=$CASIER['id_casier'];?></td>
+			<td class="value"><input type="hidden" name="id_casier" value="<?php echo $CASIER['id_casier'];?>" /><?php echo $CASIER['id_casier'];?></td>
 		</tr>
-		<? } ?>
+		<?php } ?>
 		
 		<tr>
 			<td class="name">Casier dans le lieu<br />(Nom technique)</td>
 			<td class="value">
 				<div id="div_lieu" style="height:6em;overflow:auto;">
-					<?=$CASIER["lieuTech"];?> (<a href="#" onclick="Changer_Lieu();">Changer</a>)
-					<input type="hidden" name="lieu_id" value="<?=$CASIER["lieuId"];?>" />
+					<?php echo $CASIER["lieuTech"];?> (<a href="#" onclick="Changer_Lieu();">Changer</a>)
+					<input type="hidden" name="lieu_id" value="<?php echo $CASIER["lieuId"];?>" />
 				</div>
 			</td>
 		</tr>
@@ -64,21 +64,21 @@
 		<tr>
 			<td class="name">Nom</td>
 			<td class="value">
-				<input type="text" class="text" name="nom_casier" value="<?=$CASIER["nom_casier"];?>" maxlength="150" />
+				<input type="text" class="text" name="nom_casier" value="<?php echo $CASIER["nom_casier"];?>" maxlength="150" />
 			</td>
 		</tr>
 		
 		<tr>
 			<td class="name">Capacité</td>
 			<td class="value">
-				<input type="text" class="text" name="capacite_casier" value="<?=$CASIER["capacite_casier"];?>" maxlength="4" /> Pr
+				<input type="text" class="text" name="capacite_casier" value="<?php echo $CASIER["capacite_casier"];?>" maxlength="4" /> Pr
 			</td>
 		</tr>
 				
 		<tr>
 			<td class="name">Resistance</td>
 			<td class="value">
-				<input type="text" class="text" name="resistance_casier" value="<?=$CASIER["resistance_casier"];?>" maxlength="4" /> Pv
+				<input type="text" class="text" name="resistance_casier" value="<?php echo $CASIER["resistance_casier"];?>" maxlength="4" /> Pv
 			</td>
 		</tr>
 		
@@ -86,9 +86,9 @@
 			<td class="name">Protection</td>
 			<td class="value">
 				<select name="protection_casier" id="protection_casier" onChange="protection('protection_casier');">
-					<option value="0" <? if(empty($CASIER['protection_casier'])){ echo 'SELECTED'; } ?>>Aucune</option>
-					<option value="pass" <? if($CASIER['protection_casier']=='pass'){ echo 'SELECTED'; } ?>>Pass</option>
-					<option value="clef" <? if($CASIER['protection_casier']=='clef'){ echo 'SELECTED'; } ?>>Clé</option>
+					<option value="0" <?php if(empty($CASIER['protection_casier'])){ echo 'SELECTED'; } ?>>Aucune</option>
+					<option value="pass" <?php if($CASIER['protection_casier']=='pass'){ echo 'SELECTED'; } ?>>Pass</option>
+					<option value="clef" <?php if($CASIER['protection_casier']=='clef'){ echo 'SELECTED'; } ?>>Clé</option>
 				</select>
 			</td>
 		</tr>
@@ -96,7 +96,7 @@
 		<tr id="pass">
 			<td class="name" id="pass_txt">Pass/code clé</td>
 			<td class="value">
-				<input type="text" class="text" name="pass_casier" value="<?=$CASIER["pass_casier"];?>" maxlength="150" />
+				<input type="text" class="text" name="pass_casier" value="<?php echo $CASIER["pass_casier"];?>" maxlength="150" />
 			</td>
 		</tr>
 		

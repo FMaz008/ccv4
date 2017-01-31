@@ -14,23 +14,23 @@
 		<td class="name">Temps</td>
 	</tr>
 	
-	<? if (isset($ITEMS) && count($ITEMS)>0){
+	<?php if (isset($ITEMS) && count($ITEMS)>0){
 		foreach($ITEMS as $item){?>
 			<tr>
 				<td class="name" style="width:25px;">
-					<input type="radio" name="invId" value="<?=$item['item']->getInvId();?>" />
+					<input type="radio" name="invId" value="<?php echo $item['item']->getInvId();?>" />
 				</td>
-				<td class="value" style="text-align:left;"><?=$item['item']->getNom();?></td>
-				<td class="value" style="text-align:left;"><?=$item['complex'];?></td>
-				<td class="value" style="text-align:left;"><?=$item['coutCash'];?><?=GAME_DEVISE;?></td>
-				<td class="value" style="text-align:left;"><?=$item['coutPa'];?> Pa</td>
+				<td class="value" style="text-align:left;"><?php echo $item['item']->getNom();?></td>
+				<td class="value" style="text-align:left;"><?php echo $item['complex'];?></td>
+				<td class="value" style="text-align:left;"><?php echo $item['coutCash'];?><?php echo GAME_DEVISE;?></td>
+				<td class="value" style="text-align:left;"><?php echo $item['coutPa'];?> Pa</td>
 			</tr>
-		<? } 
+		<?php } 
 	}else{ ?>
 		<tr><td class="value" colspan="5">
 			<i>Vous ne poss&egrave;dez aucune arme endommag&eacute;e.</i>
 		</td></tr>
-	<? } ?>
+	<?php } ?>
 	
 	<tr>
 		<td colspan="5" class="send">

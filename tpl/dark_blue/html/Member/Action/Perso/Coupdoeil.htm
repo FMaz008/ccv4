@@ -2,7 +2,7 @@
 //<!--
 	renamePerso = function(persoId, persoName){
 		
-		if (persoId == <?=$id;?>){
+		if (persoId == <?php echo $id;?>){
 			alert('Vous ne pouvez renommer votre propre personnage');
 			return false;
 		}
@@ -49,20 +49,20 @@
 <br />
 <table class="tbl_center">
   <tr>
-    <td class="title" colspan="2">Description de <?=$LIEU_NOM;?></td>
+    <td class="title" colspan="2">Description de <?php echo $LIEU_NOM;?></td>
   </tr>
   <tr>
-	<?
+	<?php
 	if (!empty($LIEU_IMG)){
 	?>
 		<td class="value">
-		<img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/lieux/<?=$LIEU_IMG;?>" style="border:0px;" />
+		<img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/lieux/<?php echo $LIEU_IMG;?>" style="border:0px;" />
 		</td>
-	<?
+	<?php
 	}
 	?>
     <td class="value" style="text-align:left;">
-		<?=$LIEU_DESC;?>
+		<?php echo $LIEU_DESC;?>
 	</td>
   </tr>
 </table>
@@ -72,7 +72,7 @@
 <table class="tbl_center">
   <tr>
     <td class="title" colspan="6">
-      Personnages pr&eacute;sents dans <?=$LIEU_NOM;?>
+      Personnages pr&eacute;sents dans <?php echo $LIEU_NOM;?>
     </td>
   </tr>
   <tr>
@@ -80,22 +80,22 @@
     <td class="name" style="width:80%;">Descriptifs</td>
   </tr>
 
-<?
+<?php
 if (empty($PERSOS)){?>
 	<tr><td colspan="3"><i>- Personne -</i></td></tr>
-<? }else{
+<?php }else{
 	foreach ($PERSOS as $perso) {?>
 		<tr>
 			<td class="name" colspan="2" style="text-align:center;">
-				<?
+				<?php
 				if ($perso['perso']->getAvatar()!='') {
 					?>
-					<img class="imgbg" src="<?=$perso['perso']->getAvatar();?>" />
-					<?
+					<img class="imgbg" src="<?php echo $perso['perso']->getAvatar();?>" />
+					<?php
 				}else{
 					?>
 					<span style="font-style:italic;font-weight:normal;">Aucun avatar</span>
-					<?
+					<?php
 				}
 				?>
 			</td>
@@ -103,16 +103,16 @@ if (empty($PERSOS)){?>
 				<table style="width:100%;border:0px;margin:0px;padding:0px;">
 				<tr><td class="name" style="margin-top:0px;">Description physique:</td></tr>
 				<tr><td class="value">
-					<?=BBCodes($perso['perso']->getDescription(),false,true);?>
+					<?php echo BBCodes($perso['perso']->getDescription(),false,true);?>
 				</td></tr>
-				<?
+				<?php
 				if($perso['perso']->getCurrentAction()!=''){
 				?>
 					<tr><td class="name">Action en ce moment:</td></tr>
 					<tr><td class="value">
-						<?=BBCodes($perso['perso']->getCurrentAction(),false,true);?>
+						<?php echo BBCodes($perso['perso']->getCurrentAction(),false,true);?>
 					</td></tr>
-				<?
+				<?php
 				}
 				?>
 				</table>
@@ -121,22 +121,22 @@ if (empty($PERSOS)){?>
 		<tr>
 			<td class="name" style="height:10px;">Nom</td>
 			<td class="name">
-				<div id="updateZone_<?=$perso['perso']->getId();?>" style="display:bloc;">
-					<?
+				<div id="updateZone_<?php echo $perso['perso']->getId();?>" style="display:bloc;">
+					<?php
 					if($perso['perso']->getSexe() == 'm'){
 						?>
-						<a onclick="renamePerso(<?=$perso['perso']->getId();?>,'<?addslashes($perso['perso']->getNom());?>');" class="txtStyle_homme">
-						<?
+						<a onclick="renamePerso(<?php echo $perso['perso']->getId();?>,'<?phpaddslashes($perso['perso']->getNom());?>');" class="txtStyle_homme">
+						<?php
 					}elseif($perso['perso']->getSexe() == 'f'){
 						?>
-						<a onclick="renamePerso(<?=$perso['perso']->getId();?>,'<?=addslashes($perso['perso']->getNom());?>');" class="txtStyle_femme">
-						<?
+						<a onclick="renamePerso(<?php echo $perso['perso']->getId();?>,'<?php echo addslashes($perso['perso']->getNom());?>');" class="txtStyle_femme">
+						<?php
 					}else{
 						die('ERREUR: F.:' . __FILE__ . ' L.:' . __LINE__ . ' Dump Sexe: ' . $perso['perso']->getSexe());
 					}
 					?>
 						
-						<?=$perso['perso']->getNom();?>
+						<?php echo $perso['perso']->getNom();?>
 						
 					</a>
 				</div>
@@ -144,23 +144,23 @@ if (empty($PERSOS)){?>
 		</tr>
 		<tr>
 			<td class="name" style="height:10px;">Taille</td>
-			<td class="value"><?=$perso['perso']->getTaille();?></td>
+			<td class="value"><?php echo $perso['perso']->getTaille();?></td>
 		</tr>
 		<tr>
 			<td class="name" style="height:10px;">Age</td>
-			<td class="value"><?=$perso['perso']->getAge(); ?></td>
+			<td class="value"><?php echo $perso['perso']->getAge(); ?></td>
 		</tr>
 		<tr>
 			<td class="name" style="height:10px;">Arme</td>
-			<td class="value"><?=$perso['arme'];?></td>
+			<td class="value"><?php echo $perso['arme'];?></td>
 		</tr>
 		<tr>
 			<td class="name" style="height:10px;">Etat</td>
-			<td class="value"><?=$perso['etat']; ?></td>
+			<td class="value"><?php echo $perso['etat']; ?></td>
 		</tr>
 		<tr><td class="name">&nbsp;</td></tr>
 		<tr><td colspan="3"><hr></td></tr>
-	<?}
+	<?php }
 }?>
 
 </table>

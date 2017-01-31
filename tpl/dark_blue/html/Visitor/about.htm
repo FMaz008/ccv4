@@ -42,21 +42,21 @@
 	
 	<div class="about_categorie">Maîtres de Jeu</div>
 	
-<?
+<?php
 foreach($MJ as $mj)
 {
 	if(!empty($mj))
 	{
 		?>
 		<div class="about_poste value">
-			<?=$mj['poste'];?>
-			<?=$mj['present'];?>
+			<?php echo $mj['poste'];?>
+			<?php echo $mj['present'];?>
 		</div>
 		<div class="about_nom value">
-			&laquo; <a href="#" onclick="generateEmail('<?=$mj['email_prefix'];?>','<?=$mj['email_suffix']?>');"><?=$mj['nom'];?></a> &raquo;
+			&laquo; <a href="#" onclick="generateEmail('<?php echo $mj['email_prefix'];?>','<?php echo $mj['email_suffix']?>');"><?php echo $mj['nom'];?></a> &raquo;
 		</div>
 		<div class="clearboth"></div>
-		<?
+		<?php
 	}
 }
 ?>
@@ -136,15 +136,15 @@ foreach($MJ as $mj)
 
 	<div class="about_categorie">Donateurs</div>
 
-<?
+<?php
 foreach($DONATS as $donator)
 {
 		?>
 		<div class="about_nom value">
-			<?=$donator['user'];?>
+			<?php echo $donator['user'];?>
 		</div>
 		<div class="clearboth"></div>
-		<?
+		<?php
 }
 ?>
 

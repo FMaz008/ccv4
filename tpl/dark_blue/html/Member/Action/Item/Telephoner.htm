@@ -88,12 +88,12 @@
 		<tr>
 			<td class="name">T&eacute;l&eacute;phoner avec</td>
 			<td class="value" align="left">
-				<?
+				<?php
 				if (!isset($LIST_TELEPHONES))
 				{
 					?>
 					<i> - Vous ne poss&egrave;dez aucun t&eacute;l&eacute;phone - </i>
-					<?
+					<?php
 				}
 				else
 				{
@@ -105,18 +105,18 @@
 						{
 							?>
 							(bi-directionel)
-							<?
+							<?php
 						}
 						?>
-						<input type="radio" value="<?=$tel->getInvId();?>" name="telephone" onclick="set_anonyme(<?=$tel->getAnonymeCapable();?>);"<?if($tel->getCanCall()==0){ echo 'DISABLED '; }?>/>
-						<span class="txtStyle_valeur"><?=$tel->getPrixAppel();?><?=GAME_DEVISE;?></span>/appel,
+						<input type="radio" value="<?php echo $tel->getInvId();?>" name="telephone" onclick="set_anonyme(<?php echo $tel->getAnonymeCapable();?>);"<?php if($tel->getCanCall()==0){ echo 'DISABLED '; }?>/>
+						<span class="txtStyle_valeur"><?php echo $tel->getPrixAppel();?><?php echo GAME_DEVISE;?></span>/appel,
 						
 						
-						No.: <?=$tel->getNotel();?>, 			
+						No.: <?php echo $tel->getNotel();?>, 			
 						
-						<a href="#" onclick="memoire(<?=$tel->getInvId();?>);return false;">M&eacute;moire</a> |
-						<a href="#" onclick="compte(<?=$tel->getInvId();?>);return false;">Gestion Compte</a><br />
-						<?
+						<a href="#" onclick="memoire(<?php echo $tel->getInvId();?>);return false;">M&eacute;moire</a> |
+						<a href="#" onclick="compte(<?php echo $tel->getInvId();?>);return false;">Gestion Compte</a><br />
+						<?php
 					}
 				}
 				?>

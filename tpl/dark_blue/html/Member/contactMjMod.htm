@@ -1,40 +1,40 @@
-<form id="formPPA" method="post" action="?popup=1&m=ContactMjMod&id=<?=$PPA[0]['id'];?>" onsubmit="return ajaxSubmitForm(this);">
+<form id="formPPA" method="post" action="?popup=1&m=ContactMjMod&id=<?php echo $PPA[0]['id'];?>" onsubmit="return ajaxSubmitForm(this);">
 <input type="hidden" id="form_action" name="form_action" value="" />
 <div class="panel">
 	<div class="title">Suivi d'un contact</div>
 	<div class="clearboth"></div>
 	
 	<div class="name member_contactMjMod_name">
-		De: <?=$PPA[0]['de'];?><br />
-		<?=$PPA[0]['date'];?>
+		De: <?php echo $PPA[0]['de'];?><br />
+		<?php echo $PPA[0]['date'];?>
 	</div>
 	<div class="value">
-		<?=$PPA[0]['msg'];?>
+		<?php echo $PPA[0]['msg'];?>
 	</div>
 	
 
 
 
-<?
+<?php
 if(count($PPA)>1) {
 	for($i=1;$i<count($PPA);$i++){
 	?>
 		<div class="clearboth"><hr /></div>
 		<div class="name member_contactMjMod_name">
-			De: <?=$PPA[$i]['de'];?><br />
-			<?=$PPA[$i]['date'];?>
+			De: <?php echo $PPA[$i]['de'];?><br />
+			<?php echo $PPA[$i]['date'];?>
 		</div>
 		<div class="value">
-			<?=$PPA[$i]['msg'];?>
+			<?php echo $PPA[$i]['msg'];?>
 		</div>
-	<?
+	<?php
 	}
 } 
 ?>
 </div>
 <div class="clearboth"></div>
 
-<? if($PPA[0]['statut']=='ouvert') { ?>
+<?php if($PPA[0]['statut']=='ouvert') { ?>
 	<div class="member_contactMjMod_notice">
 		- Merci de fermer le ticket lorsqu'une conclusion aboutie. -
 	</div>
@@ -53,9 +53,9 @@ if(count($PPA)>1) {
 			<input type="submit" class="button" name="close" value="Fermer le ticket"  onclick="$('form_action').value='del';return confirm('Fermer le ticket?');" />
 		</div>
 	</div>
-<? }else{ ?>
+<?php }else{ ?>
 	<div class="member_contactMjMod_notice">
 		- Ce ticket est fermé. -
 	</div>
-<? } ?>
+<?php } ?>
 </form>

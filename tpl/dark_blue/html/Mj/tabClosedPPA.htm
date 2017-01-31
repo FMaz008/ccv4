@@ -10,31 +10,31 @@
 		<td class="name" style="width:100px;">Joueur</td>
 		<td class="name" style="width:100px;">État</td>
 	</tr>
-	<?
+	<?php
 	if($CLOSED_PPA_MJ != NULL)
 	{
 		foreach($CLOSED_PPA_MJ as $ppa)
 		{
 			?>
 			<tr>
-				<td class="value"><?=$ppa['date'];?></td>
-				<td class="value"><?=$ppa['type'];?></td>
+				<td class="value"><?php echo $ppa['date'];?></td>
+				<td class="value"><?php echo $ppa['type'];?></td>
 				<td class="value">
-					<a href="?mj=Perso_Ppa&id=<?=$ppa['id'];?>">
-						<?=$ppa['titre'];?>
+					<a href="?mj=Perso_Ppa&id=<?php echo $ppa['id'];?>">
+						<?php echo $ppa['titre'];?>
 					</a>
 				</td>
-				<td class="value"><a href="#gestion_perso" onclick="$('perso_search').value='<?=addslashes($ppa['perso']);?>';gosearch('perso');"><?=$ppa['perso'];?></a></td>
+				<td class="value"><a href="#gestion_perso" onclick="$('perso_search').value='<?php echo addslashes($ppa['perso']);?>';gosearch('perso');"><?php echo $ppa['perso'];?></a></td>
 				<td class="value">Fermé</td>
 			</tr>
-			<?
+			<?php
 		}
 	}
 	else
 	{
 		?>
 		<tr><td colspan="5" style="font-style:italic;">- aucun pour le moment -</td></tr>
-		<?
+		<?php
 	}
 	?>
 </table>

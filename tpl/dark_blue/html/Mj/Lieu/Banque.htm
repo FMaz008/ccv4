@@ -13,24 +13,24 @@
 		<td class="name">Action(s)</td>
 	</tr>
 	
-	<?
+	<?php
 	if(isset($BANQUES)){
 		foreach($BANQUES as $banque){
 			?>
 			<tr>
 				<td class="name">
-					<input type="radio" name="id" value="<?=$banque['banque_id'];?>" />
+					<input type="radio" name="id" value="<?php echo $banque['banque_id'];?>" />
 				</td>
-				<td class="value"><?=$banque['banque_no'];?></td>
-				<td class="value"><?=$banque['banque_lieu'];?></td>
-				<td class="value"><?=$banque['banque_nom'];?></td>
-				<td class="value"><?=$banque['comptes'];?></td>
-				<td class="value" style="text-align:right;"><?=$banque['capital'];?></td>
+				<td class="value"><?php echo $banque['banque_no'];?></td>
+				<td class="value"><?php echo $banque['banque_lieu'];?></td>
+				<td class="value"><?php echo $banque['banque_nom'];?></td>
+				<td class="value"><?php echo $banque['comptes'];?></td>
+				<td class="value" style="text-align:right;"><?php echo $banque['capital'];?></td>
 				<td class="value">
-					<a href="?mj=Lieu_BanqueCompte&id=<?=$banque['banque_id'];?>">Voir comptes</a>
+					<a href="?mj=Lieu_BanqueCompte&id=<?php echo $banque['banque_id'];?>">Voir comptes</a>
 				</td>
 			</tr>
-			<?
+			<?php
 		}
 	}else{
 		?>
@@ -39,7 +39,7 @@
 				<i><strong>Aucune banque</strong></i>
 			</td>
 		</tr>
-		<?
+		<?php
 	}
 	?>
 	<tr>

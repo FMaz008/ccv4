@@ -102,14 +102,14 @@
 				<td class="name">Nom</td>
 				<td class="name">Qte</td>
 			</tr>
-		<? if (isset($INV_PERSO)){
+		<?php if (isset($INV_PERSO)){
 			foreach($INV_PERSO as $item){?>
 				<tr>
-					<td class="name" style="width:10px;"><input type="radio" name="perso" value="<?=$item->getInvId();?>" /></td>
-					<td><?=$item->getNom();?></td>
-					<td><input type="text" class="text" name="psqte_<?=$item->getInvId();?>" value="<?=$item->getQte();?>" style="width:25px;" /></td>
+					<td class="name" style="width:10px;"><input type="radio" name="perso" value="<?php echo $item->getInvId();?>" /></td>
+					<td><?php echo $item->getNom();?></td>
+					<td><input type="text" class="text" name="psqte_<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" style="width:25px;" /></td>
 				</tr>
-			<? } 
+			<?php } 
 		}?>
 		</table>
 	</td>
@@ -122,16 +122,16 @@
 				<td class="name">Prix de vente</td>
 				<td class="name">Prix à l'achat</td>
 			</tr>
-		<? if (isset($INV_BOUTIQUE)){
+		<?php if (isset($INV_BOUTIQUE)){
 			foreach($INV_BOUTIQUE as $item){?>
 				<tr>
-					<td class="name" style="width:10px;"><input type="radio" name="boutique" value="<?=$item->getInvId();?>" /></td>
-					<td><?=$item->getNom();?></td>
-					<td><input type="text" class="text" name="btqte_<?=$item->getInvId();?>" value="<?=$item->getQte();?>" style="width:25px;" /></td>
-					<td><input type="text" class="text" name="btvnt_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixVente();?>" style="width:50px;" /></td>
-					<td><input type="text" class="text" name="btach_<?=$item->getInvId();?>" value="<?=$item->getBoutiquePrixAchat();?>" style="width:50px;" /></td>
+					<td class="name" style="width:10px;"><input type="radio" name="boutique" value="<?php echo $item->getInvId();?>" /></td>
+					<td><?php echo $item->getNom();?></td>
+					<td><input type="text" class="text" name="btqte_<?php echo $item->getInvId();?>" value="<?php echo $item->getQte();?>" style="width:25px;" /></td>
+					<td><input type="text" class="text" name="btvnt_<?php echo $item->getInvId();?>" value="<?php echo $item->getBoutiquePrixVente();?>" style="width:50px;" /></td>
+					<td><input type="text" class="text" name="btach_<?php echo $item->getInvId();?>" value="<?php echo $item->getBoutiquePrixAchat();?>" style="width:50px;" /></td>
 				</tr>
-			<? } 
+			<?php } 
 		}?>
 		<tr>
 			<td colspan="5" style="text-align:center;">
@@ -151,7 +151,7 @@
 </tr>
 <tr>
 	<td class="name">Argent en Caisse:</td>
-	<td class="value"><span id="cash"><?=$CASH_CAISSE;?></span><?=GAME_DEVISE;?></td>
+	<td class="value"><span id="cash"><?php echo $CASH_CAISSE;?></span><?php echo GAME_DEVISE;?></td>
 </tr>
 <tr>
 	<td class="name">Montant:</td>

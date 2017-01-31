@@ -8,17 +8,17 @@
 </script>
 
 <form id="action_redirect" method="post" action="?popup=1&m=Action_Lieu_BanqueTransactionAuto">
-	<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+	<input type="hidden" name="compte" value="<?php echo $COMPTE;?>" />
 </form>
 
 <br />
 <form id="action_bank" method="post" action="?popup=1&m=Action_Lieu_BanqueTransactionAutoAdd2" onsubmit="return ajaxSubmitForm(this);">
-<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+<input type="hidden" name="compte" value="<?php echo $COMPTE;?>" />
 
 <table class="center" style="width:600px;">
 	<tr>
 		<td class="title" colspan="3">
-			Création d'une transaction automatique pour le compte: <?=$COMPTE;?>
+			Création d'une transaction automatique pour le compte: <?php echo $COMPTE;?>
 		</td>
 	</tr>
 	<tr>
@@ -36,7 +36,7 @@
 	<tr>
 		<td class="name">Montant</td>
 		<td class="value" style="text-align:left;">
-			<input type="text" class="text" name="value" value="" size="10" /> <?=GAME_DEVISE;?>
+			<input type="text" class="text" name="value" value="" size="10" /> <?php echo GAME_DEVISE;?>
 		</td>
 	</tr>
 	<tr>

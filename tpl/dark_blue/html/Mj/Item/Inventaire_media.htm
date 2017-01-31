@@ -1,9 +1,9 @@
-﻿<?
+﻿<?php
 if ($SHOW_HEADER)
 {
 	?>
-	<table style="width:<?=$TABLE_WIDTH;?>;">
-	<tr><td colspan="12" class="name"><?=$ITEM->getType();?></td></tr>
+	<table style="width:<?php echo $TABLE_WIDTH;?>;">
+	<tr><td colspan="12" class="name"><?php echo $ITEM->getType();?></td></tr>
 	<tr>
 	<td class="name" style="width:15px;">&nbsp;</td>
 	<td class="name" style="width:20px;">Qte</td>
@@ -12,38 +12,38 @@ if ($SHOW_HEADER)
 	<td class="name" style="width:20px;">Pr</td>
 	<td class="name">Médias accessibles</td>
 	</tr>
-	<?
+	<?php
 }
 ?>
 <tr>
 	<td class="name">
-		<input type="checkbox" name="invId[]" value="<?=$ITEM->getInvId();?>" />
+		<input type="checkbox" name="invId[]" value="<?php echo $ITEM->getInvId();?>" />
 		</td>
 	<td class="value">
-		<? if($ITEM->canRegroupe()){ ?>
-			<input type="text" class="text" size="2" name="inv<?=$ITEM->getInvId();?>" value="<?=$ITEM->getQte();?>" />
-		<? } ?>
+		<?php if($ITEM->canRegroupe()){ ?>
+			<input type="text" class="text" size="2" name="inv<?php echo $ITEM->getInvId();?>" value="<?php echo $ITEM->getQte();?>" />
+		<?php } ?>
 	</td>
 	<td class="value">
-		<?
+		<?php
 		if($RETURN_PAGE == 'Perso_Inventaire' && $ITEM->canEquip())
 		{
 			if (!$ITEM->isEquip())
 			{
 				?>
-				<a href="?mj=Perso_InventaireEquip&id=<?=$ITEM->getInvId();?>&rid=<?=$RETURN_ID;?>&equip=1">Équiper</a>
-				<?
+				<a href="?mj=Perso_InventaireEquip&id=<?php echo $ITEM->getInvId();?>&rid=<?php echo $RETURN_ID;?>&equip=1">Équiper</a>
+				<?php
 			}
 			else
 			{
 				?>
-				<a href="?mj=Perso_InventaireEquip&id=<?=$ITEM->getInvId();?>&rid=<?=$RETURN_ID;?>&equip=0">Ranger</a>
-				<?
+				<a href="?mj=Perso_InventaireEquip&id=<?php echo $ITEM->getInvId();?>&rid=<?php echo $RETURN_ID;?>&equip=0">Ranger</a>
+				<?php
 			}
 		}
 		?>
 	</td>
-	<td class="value"><a href="?mj=Item_Inv_Mod&id=<?=$ITEM->getInvId();?>&rpage=<?=$RETURN_PAGE;?>&rid=<?=$RETURN_ID;?>"><?=$ITEM->getNom();?></a></td>
-	<td class="value" style="text-align:right;"><?=$ITEM->getPr();?></td>
-	<td class="value" style="text-align:right;"><?=$ITEM->getMediaType();?></td>
+	<td class="value"><a href="?mj=Item_Inv_Mod&id=<?php echo $ITEM->getInvId();?>&rpage=<?php echo $RETURN_PAGE;?>&rid=<?php echo $RETURN_ID;?>"><?php echo $ITEM->getNom();?></a></td>
+	<td class="value" style="text-align:right;"><?php echo $ITEM->getPr();?></td>
+	<td class="value" style="text-align:right;"><?php echo $ITEM->getMediaType();?></td>
 </tr>

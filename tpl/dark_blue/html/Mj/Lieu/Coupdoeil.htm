@@ -3,20 +3,20 @@
 
 <table class="center">
   <tr>
-    <td class="title" colspan="2">Description de <?=$SHOW_LIEU;?></td>
+    <td class="title" colspan="2">Description de <?php echo $SHOW_LIEU;?></td>
   </tr>
   <tr>
-	<?
+	<?php
 	if (isset($SHOW_LIEU_IMG)){
 	?>
 		<td class="value">
-		<img src="<?=SITEPATH_WEB_TEMPLATE;?>_commun/lieux/<?=$SHOW_LIEU_IMG;?>" style="border:0px;" />
+		<img src="<?php echo SITEPATH_WEB_TEMPLATE;?>_commun/lieux/<?php echo $SHOW_LIEU_IMG;?>" style="border:0px;" />
 		</td>
-	<?
+	<?php
 	}
 	?>
     <td class="value" style="text-align:left;">
-		<?=$SHOW_LIEU_DESC;?>
+		<?php echo $SHOW_LIEU_DESC;?>
 	</td>
   </tr>
 </table>
@@ -26,7 +26,7 @@
 <table class="center">
   <tr>
     <td class="title" colspan="6">
-      Perso présent dans <?=$SHOW_LIEU;?>
+      Perso présent dans <?php echo $SHOW_LIEU;?>
     </td>
   </tr>
   <tr>
@@ -34,30 +34,30 @@
     <td class="name" style="width:80%;">Descriptifs</td>
   </tr>
 
-<?
+<?php
 if (!isset($PERSO_LIST)){?>
 	<tr><td colspan="3"><i>- Personne -</i></td></tr>
-<? }else{
+<?php }else{
 	foreach ($PERSO_LIST as $perso) {?>
 		<tr>
 			<td class="name" style="height:10px;">Nom</td>
 			<td class="name">
-				<?=$perso["nom"];?>
+				<?php echo $perso["nom"];?>
 			</td>
 			<td class="value" rowspan="6" style="text-align:left;vertical-align:top;padding:0px;margin:0px;">
 				<table style="width:100%;border:0px;margin:0px;padding:0px;">
 				<tr><td class="name" style="margin-top:0px;">Description physique:</td></tr>
 				<tr><td class="value">
-					<?=$perso["description"];?>
+					<?php echo $perso["description"];?>
 				</td></tr>
-				<?
+				<?php
 				if($perso["current_action"] != ''){
 				?>
 					<tr><td class="name">Action en ce moment:</td></tr>
 					<tr><td class="value">
-						<?=$perso["current_action"];?>
+						<?php echo $perso["current_action"];?>
 					</td></tr>
-				<?
+				<?php
 				}
 				?>
 				</table>
@@ -65,23 +65,23 @@ if (!isset($PERSO_LIST)){?>
 		</tr>
 		<tr>
 			<td class="name" style="height:10px;">Taille</td>
-			<td class="value"><?=$perso["taille"];?></td>
+			<td class="value"><?php echo $perso["taille"];?></td>
 		</tr>
 		<tr>
 			<td class="name" style="height:10px;">Age</td>
-			<td class="value"><?=$perso["age"]; ?></td>
+			<td class="value"><?php echo $perso["age"]; ?></td>
 		</tr>
 		<tr>
 			<td class="name" style="height:10px;">Arme</td>
-			<td class="value"><?=$perso["arme"]; ?></td>
+			<td class="value"><?php echo $perso["arme"]; ?></td>
 		</tr>
 		<tr>
 			<td class="name" style="height:10px;">Etat</td>
-			<td class="value"><?=$perso["pv"].'/'.$perso["pvmax"]; ?></td>
+			<td class="value"><?php echo $perso["pv"].'/'.$perso["pvmax"]; ?></td>
 		</tr>
 		<tr><td class="name">&nbsp;</td></tr>
 		<tr><td colspan="3"><hr></td></tr>
-	<?}
+	<?php }
 }?>
 
 </table>

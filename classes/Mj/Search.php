@@ -45,15 +45,15 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<a href="#" onclick="lieuSelect('<?=$arr["id"];?>', '<?=$arr["nom_technique"];?>', '<?=addslashes($arr["nom_affiche"]);?>')"><?=$arr["nom_technique"];?></a> (<?=$arr['nbr_perso'];?>)<br />
-						<?
+						<a href="#" onclick="lieuSelect('<?php echo $arr["id"];?>', '<?php echo $arr["nom_technique"];?>', '<?php echo addslashes($arr["nom_affiche"]);?>')"><?php echo $arr["nom_technique"];?></a> (<?php echo $arr['nbr_perso'];?>)<br />
+						<?php
 					}
 				}
 				break;
@@ -76,20 +76,20 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<a href="#" onclick="Changer_Lieu2('<?=$arr["nom_technique"];?>')"><?=$arr["nom_technique"];?></a><br />
-						<?
+						<a href="#" onclick="Changer_Lieu2('<?php echo $arr["nom_technique"];?>')"><?php echo $arr["nom_technique"];?></a><br />
+						<?php
 					}
 				}
 				?>
 				... <a href="#" onclick="Changer_Lieu();">Chercher</a> ...
-				<?
+				<?php
 				break;
 				
 			//Rercherche selon un nom du lieu (Avec utilisation de l'ID du lieu)
@@ -110,20 +110,20 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<a href="#" onclick="Changer_Lieu2(<?=$arr['id'];?>, '<?=$arr["nom_technique"];?>')"><?=$arr["nom_technique"];?></a><br />
-						<?
+						<a href="#" onclick="Changer_Lieu2(<?php echo $arr['id'];?>, '<?php echo $arr["nom_technique"];?>')"><?php echo $arr["nom_technique"];?></a><br />
+						<?php
 					}
 				}
 				?>
 				... <a href="#" onclick="Changer_Lieu();">Chercher</a> ...
-				<?
+				<?php
 				break;
 				
 			//Rercherche selon un nom de compte (Pour la modification du compte auquel un perso est associé
@@ -144,20 +144,20 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<a href="#" onclick="Changer_Compte2('<?=$arr["id"];?>','<?=$arr["user"];?>')"><?=$arr["user"];?></a><br />
-						<?
+						<a href="#" onclick="Changer_Compte2('<?php echo $arr["id"];?>','<?php echo $arr["user"];?>')"><?php echo $arr["user"];?></a><br />
+						<?php
 					}
 				}
 				?>
 				... <a href="#" onclick="Changer_Compte();">Chercher</a> ...
-				<?
+				<?php
 				break;
 				
 			//Rercherche selon un nom de perso
@@ -178,20 +178,20 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<a href="#" onclick="Ajouter_Perso2('<?=$arr["id"];?>','<?=$arr["nom"];?>')"><?=$arr["nom"];?></a><br />
-						<?
+						<a href="#" onclick="Ajouter_Perso2('<?php echo $arr["id"];?>','<?php echo $arr["nom"];?>')"><?php echo $arr["nom"];?></a><br />
+						<?php
 					}
 				}
 				?>
 				... <a href="#" onclick="Ajouter_Perso();">Chercher</a> ...
-				<?
+				<?php
 				break;
 			
 			
@@ -222,9 +222,9 @@ class Mj_Search
 					//BUG?: Nécéssaire de $arr = $arrAll[0] ?
 					$arrAll = $arrAll[0];
 					?>
-					<?=$arrAll['id'];?>|
-					<input type="radio" name="id" value="<?=$arrAll['id'];?>" onclick="setLinkAccount(<?=$arrAll['id'];?>);" CHECKED /><?=$arrAll['user'];?><br />
-					<?
+					<?php echo $arrAll['id'];?>|
+					<input type="radio" name="id" value="<?php echo $arrAll['id'];?>" onclick="setLinkAccount(<?php echo $arrAll['id'];?>);" CHECKED /><?php echo $arrAll['user'];?><br />
+					<?php
 				}
 				else
 				{
@@ -232,8 +232,8 @@ class Mj_Search
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<input type="radio" name="id" value="<?=$arr['id'];?>" onclick="setLinkAccount(<?=$arr['id'];?>);" /><?=$arr['user'];?><br />
-						<?
+						<input type="radio" name="id" value="<?php echo $arr['id'];?>" onclick="setLinkAccount(<?php echo $arr['id'];?>);" /><?php echo $arr['user'];?><br />
+						<?php
 					}
 				}
 				break;
@@ -263,9 +263,9 @@ class Mj_Search
 					$arrAll = $arrAll[0];
 					echo $arrAll['id'];
 					?>|
-					<input type="button" class="button" style="width:20px;" value="<" onclick="document.forms['compte'].search.value='<?=$arrAll['user'];?>';gosearch('compte')" />
-					<input type="radio" name="id" value="<?=$arrAll['id'];?>" onclick="setLinkPerso(<?=$arrAll['id'];?>);" checked="checked" /><?=$arrAll['nom'];?><br />
-					<?
+					<input type="button" class="button" style="width:20px;" value="<" onclick="document.forms['compte'].search.value='<?php echo $arrAll['user'];?>';gosearch('compte')" />
+					<input type="radio" name="id" value="<?php echo $arrAll['id'];?>" onclick="setLinkPerso(<?php echo $arrAll['id'];?>);" checked="checked" /><?php echo $arrAll['nom'];?><br />
+					<?php
 				}
 				else
 				{
@@ -273,9 +273,9 @@ class Mj_Search
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<input type="button" class="button" style="width:20px;" value="<" onclick="document.forms['compte'].search.value='<?=$arr['user'];?>';gosearch('compte')" />
-						<input type="radio" name="id" value="<?=$arr['id'];?>" onclick="setLinkPerso(<?=$arr['id'];?>);" /><?=$arr['nom'];?><br />
-						<?
+						<input type="button" class="button" style="width:20px;" value="<" onclick="document.forms['compte'].search.value='<?php echo $arr['user'];?>';gosearch('compte')" />
+						<input type="radio" name="id" value="<?php echo $arr['id'];?>" onclick="setLinkPerso(<?php echo $arr['id'];?>);" /><?php echo $arr['nom'];?><br />
+						<?php
 					}
 				}
 				break;
@@ -303,9 +303,9 @@ class Mj_Search
 				{
 					$arrAll = $arrAll[0];
 					?>
-					<?=$arrAll['id'];?>|
-					<input type="radio" name="id" value="<?=$arrAll['id'];?>" onclick="setLinkLieu(<?=$arrAll['id'];?>);" checked="checked" /><?=$arrAll['nom_technique'];?><br />
-					<?
+					<?php echo $arrAll['id'];?>|
+					<input type="radio" name="id" value="<?php echo $arrAll['id'];?>" onclick="setLinkLieu(<?php echo $arrAll['id'];?>);" checked="checked" /><?php echo $arrAll['nom_technique'];?><br />
+					<?php
 				}
 				else
 				{
@@ -313,8 +313,8 @@ class Mj_Search
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<input type="radio" name="id" value="<?=$arr['id'];?>" onclick="setLinkLieu(<?=$arr['id'];?>);" /><?=$arr['nom_technique'];?><br />
-						<?
+						<input type="radio" name="id" value="<?php echo $arr['id'];?>" onclick="setLinkLieu(<?php echo $arr['id'];?>);" /><?php echo $arr['nom_technique'];?><br />
+						<?php
 					}
 				}
 				break;
@@ -347,11 +347,11 @@ class Mj_Search
 				foreach($arrAll as &$arr)
 				{
 					?>
-					<input type="radio" name="persoId" value="<?=$arr['id'];?>" <?=$checked;?>/>
-						<strong><?=$arr['nom'];?></strong>
-						 <i>(<?=$arr['lieu'];?>)</i>
+					<input type="radio" name="persoId" value="<?php echo $arr['id'];?>" <?php echo $checked;?>/>
+						<strong><?php echo $arr['nom'];?></strong>
+						 <i>(<?php echo $arr['lieu'];?>)</i>
 						<br />
-					<?
+					<?php
 				}
 				break;
 				
@@ -379,12 +379,12 @@ class Mj_Search
 				foreach($arrAll as &$arr)
 				{
 					?>
-					<input type="radio" name="casierId" value="<?=$arr['id'];?>" <?=$checked;?>/>
-						<strong><?=$arr['lieu_casier'];?></strong>; 
-						<i><?=$arr['nom_casier'];?></i>
-						(Id# <?=$arr['id_casier'];?>)
+					<input type="radio" name="casierId" value="<?php echo $arr['id'];?>" <?php echo $checked;?>/>
+						<strong><?php echo $arr['lieu_casier'];?></strong>; 
+						<i><?php echo $arr['nom_casier'];?></i>
+						(Id# <?php echo $arr['id_casier'];?>)
 						<br />
-					<?
+					<?php
 				}
 				break;
 			
@@ -410,7 +410,7 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
@@ -421,11 +421,11 @@ class Mj_Search
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<input type="radio" name="lieuTech" value="<?=$arr['nom_technique'];?>" <?=$checked;?>/>
-							<strong><?=$arr['nom_technique'];?></strong>; 
-							<i><?=$arr['nom_affiche'];?></i>
+						<input type="radio" name="lieuTech" value="<?php echo $arr['nom_technique'];?>" <?php echo $checked;?>/>
+							<strong><?php echo $arr['nom_technique'];?></strong>; 
+							<i><?php echo $arr['nom_affiche'];?></i>
 							<br />
-						<?
+						<?php
 					}
 				}
 				break;
@@ -451,7 +451,7 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
@@ -461,10 +461,10 @@ class Mj_Search
 							if(is_string($e))
 								$e = stripslashes($e);
 						?>
-						<input type="checkbox" name="itemId[]" value="<?=$arr['db_id'];?>" />
-						Qte.: <input type="text" class="text" name="item<?=$arr['db_id'];?>" value="1" size="2" />
-						<?=$arr['db_type'];?>; <?=$arr['db_nom'];?><br />
-						<?
+						<input type="checkbox" name="itemId[]" value="<?php echo $arr['db_id'];?>" />
+						Qte.: <input type="text" class="text" name="item<?php echo $arr['db_id'];?>" value="1" size="2" />
+						<?php echo $arr['db_type'];?>; <?php echo $arr['db_nom'];?><br />
+						<?php
 					}
 				}
 				break;
@@ -494,20 +494,20 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<a href="#" onclick="Changer_Perso2('<?=$arr['id'];?>','<?=mysql_real_escape_string($arr['nom']);?>')"><?=$arr['nom'];?></a><br />
-						<?
+						<a href="#" onclick="Changer_Perso2('<?php echo $arr['id'];?>','<?php echo mysql_real_escape_string($arr['nom']);?>')"><?php echo $arr['nom'];?></a><br />
+						<?php
 					}
 				}
 				?>
 				... <a href="#" onclick="Changer_Perso();">Chercher</a> ...
-				<?
+				<?php
 				break;
 				
 				
@@ -530,20 +530,20 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<a href="#" onclick="Changer_Lieu2('<?=$arr['nom_technique'];?>','<?=mysql_real_escape_string($arr['nom_affiche']);?>')"><?=$arr['nom_affiche'];?></a><br />
-						<?
+						<a href="#" onclick="Changer_Lieu2('<?php echo $arr['nom_technique'];?>','<?php echo mysql_real_escape_string($arr['nom_affiche']);?>')"><?php echo $arr['nom_affiche'];?></a><br />
+						<?php
 					}
 				}
 				?>
 				... <a href="#" onclick="Changer_Lieu();">Chercher</a> ...
-				<?
+				<?php
 				break;
 				
 				
@@ -569,20 +569,20 @@ class Mj_Search
 				{
 					?>
 					Aucun résultat<br />
-					<?
+					<?php
 				}
 				else
 				{
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<a href="#" onclick="Changer_Lieu2('<?=$arr['nom_technique'];?>','<?=mysql_real_escape_string($arr['nom_affiche']);?>')"><?=$arr['nom_affiche'];?></a><br />
-						<?
+						<a href="#" onclick="Changer_Lieu2('<?php echo $arr['nom_technique'];?>','<?php echo mysql_real_escape_string($arr['nom_affiche']);?>')"><?php echo $arr['nom_affiche'];?></a><br />
+						<?php
 					}
 				}
 				?>
 				... <a href="#" onclick="Changer_Boutique();">Chercher</a> ...
-				<?
+				<?php
 				break;
 				
 			// ### Mj_Item -> Requete AJAX de recherche d'item en circulation
@@ -598,7 +598,7 @@ class Mj_Search
 				</tr>
 				<tr>
 					<td class="value">
-						<?
+						<?php
 						$query = 'SELECT DISTINCT id, inv_lieutech, nom_technique, nom_affiche'
 								. ' FROM ' . DB_PREFIX . 'item_inv'
 								. ' LEFT JOIN ' . DB_PREFIX . 'lieu ON (nom_technique=inv_lieutech)'
@@ -632,7 +632,7 @@ class Mj_Search
 					?>
 					</td>
 					<td class="value">
-						<?
+						<?php
 						$query = 'SELECT DISTINCT id, inv_boutiquelieutech, nom_technique, nom_affiche'
 								. ' FROM ' . DB_PREFIX . 'item_inv'
 								. ' LEFT JOIN ' . DB_PREFIX . 'lieu ON (nom_technique=inv_boutiquelieutech)'
@@ -662,7 +662,7 @@ class Mj_Search
 					?>
 					</td>
 					<td class="value">
-						<?
+						<?php
 						$query = 'SELECT DISTINCT id_casier, inv_idcasier, nom_casier'
 								. ' FROM ' . DB_PREFIX . 'item_inv'
 								. ' LEFT JOIN ' . DB_PREFIX . 'lieu_casier ON (id_casier=inv_idcasier)'
@@ -692,7 +692,7 @@ class Mj_Search
 					?>
 					</td>
 					<td class="value">
-						<?
+						<?php
 						$query = 'SELECT DISTINCT db_id, inv_itemid, db_nom'
 								. ' FROM ' . DB_PREFIX . 'item_inv'
 								. ' LEFT JOIN ' . DB_PREFIX . 'item_db ON (db_id=inv_itemid)'
@@ -722,7 +722,7 @@ class Mj_Search
 					?>
 					</td>
 					<td class="value">
-						<?
+						<?php
 						$query = 'SELECT nom, id'
 								. ' FROM ' . DB_PREFIX . 'item_inv'
 								. ' LEFT JOIN ' . DB_PREFIX . 'perso ON (id=inv_persoid)'
@@ -748,14 +748,14 @@ class Mj_Search
 					</td>
 				</tr>
 				</table>
-				<?
+				<?php
 				
 				
 				break;
 			default:
 				?>
 				Erreur !
-				<?
+				<?php
 				break;
 		}
 		

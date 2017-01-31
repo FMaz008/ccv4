@@ -17,7 +17,7 @@
 		if($INTERNET) {
 			?>
 			<form id="www" action="?popup=1&m=Action_Item_Navigateur" method="post" onsubmit="return ajaxSubmitForm(this);">
-					<input type="hidden" name="ordiId" value="<?=$PC_ID;?>" />
+					<input type="hidden" name="ordiId" value="<?php echo $PC_ID;?>" />
 			
 					
 					<input type="submit" value="Accéder" name="post" class="button" />
@@ -29,13 +29,13 @@
 	</td>
 	<td style="vertical-align:bottom;">
 		<form id="memInt" action="?popup=1&m=Action_Item_OrdinateurMemoire" method="post" onsubmit="return ajaxSubmitForm(this);">
-			<input type="hidden" name="ordiId" value="<?=$PC_ID;?>" />
+			<input type="hidden" name="ordiId" value="<?php echo $PC_ID;?>" />
 			
 			<?php
 			if($PC_IS_CRYPT){
 				?>
 				<i>Clé encryption requise</i>:
-				<br /><input type="text" class="text" name="<?=$PC_ID;?>_cle" value="" />
+				<br /><input type="text" class="text" name="<?php echo $PC_ID;?>_cle" value="" />
 				<br />
 				<br />
 				<?php
@@ -51,28 +51,28 @@
 		if($MCREAD){
 			?>
 			<form id="memExt" action="?popup=1&m=Action_Item_CarteMemoire" method="post" onsubmit="return ajaxSubmitForm(this);">
-			<input type="hidden" name="ordiId" value="<?=$PC_ID;?>" />
+			<input type="hidden" name="ordiId" value="<?php echo $PC_ID;?>" />
 			<table>
-				<?
+				<?php
 				foreach($CARTES as $carte)
 				{
 					?>
 					<tr>
 						<td align="left">
-							<input type="radio" name="carteId" value="<?=$carte->getInvId();?>"/>
-							<?=$carte->getNom();?> #<?=$carte->getInvId();?>
+							<input type="radio" name="carteId" value="<?php echo $carte->getInvId();?>"/>
+							<?php echo $carte->getNom();?> #<?php echo $carte->getInvId();?>
 			
-							<?
+							<?php
 							if($carte->isCrypt()){
 								?>
 								<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Clé encryption requise</i>:
-								<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="text" name="<?=$carte->getInvId();?>_cle" value="" />
-								<?
+								<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="text" name="<?php echo $carte->getInvId();?>_cle" value="" />
+								<?php
 							}
 							?>
 						</td>
 					</tr>
-					<?
+					<?php
 				}
 				?>
 				

@@ -16,11 +16,11 @@
 </script>
 <br />
 <form id="action_redirect" method="post" onsubmit="return ajaxSubmitForm(this)" action="?popup=1&m=Action_Lieu_BanqueTransactionAutoDel">
-<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+<input type="hidden" name="compte" value="<?php echo $COMPTE;?>" />
 <table class="center" style="width:600px;">
 	<tr>
 		<td class="title" colspan="5">
-			Gestion des transactions automatiques pour le compte: <?=$COMPTE;?>
+			Gestion des transactions automatiques pour le compte: <?php echo $COMPTE;?>
 		</td>
 	</tr>
 	<tr>
@@ -30,18 +30,18 @@
 		<td class="name">Montant</td>
 		<td class="name">prochaine transaction</td>
 	</tr>
-	<?
+	<?php
 	if(isset($TRANSACTIONS)){
 		foreach($TRANSACTIONS as $transaction){
 		?>
 			<tr>
-				<td class="value" style="width:10px;"><input type="radio" name="tid" value="<?=$transaction->getId();?>" /></td>
-				<td class="value"><?=$transaction->getCompteNoTo();?></td>
-				<td class="value"><?=$transaction->getDescription();?></td>
-				<td class="value"><?=$transaction->getValue();?></td>
-				<td class="value"><?=$transaction->getDateTxt();?></td>
+				<td class="value" style="width:10px;"><input type="radio" name="tid" value="<?php echo $transaction->getId();?>" /></td>
+				<td class="value"><?php echo $transaction->getCompteNoTo();?></td>
+				<td class="value"><?php echo $transaction->getDescription();?></td>
+				<td class="value"><?php echo $transaction->getValue();?></td>
+				<td class="value"><?php echo $transaction->getDateTxt();?></td>
 			</tr>
-		<?
+		<?php
 		}
 	}else{
 	?>
@@ -50,7 +50,7 @@
 				<i>-aucune transaction-</i>
 			</td>
 		</tr>
-	<?
+	<?php
 	}
 	?>
 	<tr>

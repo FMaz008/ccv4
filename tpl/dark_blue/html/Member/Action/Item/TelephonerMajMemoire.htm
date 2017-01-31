@@ -14,36 +14,36 @@
 		<td class="name"></td>
 	</tr>
 
-	<?
+	<?php
 	$i=0;
 	foreach($contenuMemoire as $mem){
 		?>	
 		<tr>
 			<td class="value">
-				<input type="text" class="text" name="nom_<?=$i;?>" id="nom_<?=$i;?>" value="<?=$mem[0];?>" maxlength="18" size="18"/>
+				<input type="text" class="text" name="nom_<?php echo $i;?>" id="nom_<?php echo $i;?>" value="<?php echo $mem[0];?>" maxlength="18" size="18"/>
 			</td>
 			<td class="value">
-				<input type="text" class="text" name="no_<?=$i;?>" id="no_<?=$i;?>" value="<?=$mem[1];?>" maxlength="8" size="8"/>
+				<input type="text" class="text" name="no_<?php echo $i;?>" id="no_<?php echo $i;?>" value="<?php echo $mem[1];?>" maxlength="8" size="8"/>
 			</td>
 			<td class="value">
-				<span class="fakelink" onclick="$('numero_destinataire').value=$F('no_<?=$i;?>');">Composer</span>
+				<span class="fakelink" onclick="$('numero_destinataire').value=$F('no_<?php echo $i;?>');">Composer</span>
 			</td>
 		</tr>
-		<?
+		<?php
 		$i++;
 	}
 	?>	
 
 	
 	<tr>
-		<td colspan="3" class="center">	<input type="button"  OnClick="SaveChange(<?
+		<td colspan="3" class="center">	<input type="button"  OnClick="SaveChange(<?php
 																				$z=0;
 																				while($z < $telephone->getMemorySizeMax()) 
 																				{
-																					?>'nom_<?=$z;?>=' + encodeURIComponent($F('nom_<?=$z;?>')) +<?
-																					?>'&no_<?=$z;?>=' + encodeURIComponent($F('no_<?=$z;?>')) + '&' +<?
+																					?>'nom_<?php echo $z;?>=' + encodeURIComponent($F('nom_<?php echo $z;?>')) +<?php
+																					?>'&no_<?php echo $z;?>=' + encodeURIComponent($F('no_<?php echo $z;?>')) + '&' +<?php
 																					$z++;
-																				}?>'idtelephone=<?=$telephone->getInvId(); ?>&post=1')<?
+																				}?>'idtelephone=<?php echo $telephone->getInvId(); ?>&post=1')<?php
 																?>" value="Enregistrer" class="button" name="submit"/>
 			<input type="button" class="button" onclick="showhidediv('none');" value="Annuler" />
 		</td>

@@ -9,17 +9,17 @@
 				<input type="hidden" name="nextstep" value="asknip" />
 				<table class="subcenter">
 					<tr><td class="title">Ins&eacute;rez votre carte</td></tr>
-					<?
+					<?php
 					if (isset($LIST_CARTE)){
 						foreach($LIST_CARTE as $carte){
 						?>
 							<tr>
 								<td>
-									<input type="radio" name="carteid" value="<?=$carte->getNoCarte();?>" />
-									<?=$carte->getNoBanque();?>-<?=$carte->getNoCompte();?>-<?=$carte->getNoCarte();?> <?=$carte->getNote();?>
+									<input type="radio" name="carteid" value="<?php echo $carte->getNoCarte();?>" />
+									<?php echo $carte->getNoBanque();?>-<?php echo $carte->getNoCompte();?>-<?php echo $carte->getNoCarte();?> <?php echo $carte->getNote();?>
 								</td>
 							</tr>
-						<?
+						<?php
 						}
 					}else{
 					?>
@@ -28,7 +28,7 @@
 								<i>Vous n'avez pas de carte de guichet</i>
 							</td>
 						</tr>
-					<?
+					<?php
 					}
 					?>
 					<tr>

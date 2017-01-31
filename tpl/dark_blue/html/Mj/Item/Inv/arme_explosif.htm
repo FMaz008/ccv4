@@ -97,14 +97,14 @@ notvalid = function(msg){
 </script>
 
 <br />
-<form name="form1" id="form1" method="post" action="?mj=Item_Inv_ArmeExplosif&id=<?=$ITEM['inv_id'];?>&rpage=<?=$_GET['rpage'];?>&rid=<?=$_GET['rid'];?>" onsubmit="return validateForm();">
+<form name="form1" id="form1" method="post" action="?mj=Item_Inv_ArmeExplosif&id=<?php echo $ITEM['inv_id'];?>&rpage=<?php echo $_GET['rpage'];?>&rid=<?php echo $_GET['rid'];?>" onsubmit="return validateForm();">
 <table class="subcenter">
 	<tr>
 		<td class="title" colspan="8">Gestion d'un explosif</td>
 	</tr>
 	<tr>
 		<td class="name">Id</td>
-		<td class="value"><?=$ITEM['inv_id'];?></td>
+		<td class="value"><?php echo $ITEM['inv_id'];?></td>
 	</tr>
 	<tr>
 		<td class="name">Associé à</td>
@@ -121,38 +121,38 @@ notvalid = function(msg){
 			<tr id='tr_perso' style="display:none;">
 				<td colspan="3">
 					<div id="div_perso" style="height:6em;overflow:auto;">
-						<?=$ITEM['perso'];?> (<a href="#" onclick="Changer_Perso();">Changer</a>)
-						<input type="hidden" name="inv_persoid" value="<?=$ITEM['inv_persoid'];?>" />
+						<?php echo $ITEM['perso'];?> (<a href="#" onclick="Changer_Perso();">Changer</a>)
+						<input type="hidden" name="inv_persoid" value="<?php echo $ITEM['inv_persoid'];?>" />
 					</div>
 				</td>
 			</tr>
 			<tr id='tr_lieu' style="display:none;">
 				<td colspan="3">
 					<div id="div_lieu" style="height:6em;overflow:auto;">
-						<?=$ITEM['lieu'];?> (<a href="#" onclick="Changer_Lieu();">Changer</a>)
-						<input type="hidden" name="inv_lieutech" value="<?=$ITEM['inv_lieutech'];?>" />
+						<?php echo $ITEM['lieu'];?> (<a href="#" onclick="Changer_Lieu();">Changer</a>)
+						<input type="hidden" name="inv_lieutech" value="<?php echo $ITEM['inv_lieutech'];?>" />
 					</div>
 				</td>
 			</tr>
 			<tr id='tr_boutique' style="display:none;">
 				<td colspan="3">
 					<div id="div_boutique" style="height:6em;overflow:auto;">
-						<?=$ITEM['boutique'];?> (<a href="#" onclick="Changer_Boutique();">Changer</a>)
-						<input type="hidden" name="inv_boutiquelieutech" value="<?=$ITEM['inv_boutiquelieutech'];?>" />
+						<?php echo $ITEM['boutique'];?> (<a href="#" onclick="Changer_Boutique();">Changer</a>)
+						<input type="hidden" name="inv_boutiquelieutech" value="<?php echo $ITEM['inv_boutiquelieutech'];?>" />
 					</div>
 				</td>
 			</tr>
 			<tr id='tr_casier' style="display:none;">
 				<td colspan="3">
 					<div id="div_casier" style="height:6em;overflow:auto;">
-						Id Casier: <input type="text" class="text" name="inv_idcasier" value="<?=$ITEM['inv_idcasier'];?>" />
+						Id Casier: <input type="text" class="text" name="inv_idcasier" value="<?php echo $ITEM['inv_idcasier'];?>" />
 					</div>
 				</td>
 			</tr>
 			<tr id='tr_item' style="display:none;">
 				<td colspan="3">
 					<div id="div_item" style="height:6em;overflow:auto;">
-						Id Item: <input type="text" class="text" name="inv_itemid" value="<?=$ITEM['inv_itemid'];?>" />
+						Id Item: <input type="text" class="text" name="inv_itemid" value="<?php echo $ITEM['inv_itemid'];?>" />
 					</div>
 				</td>
 			</tr>
@@ -161,23 +161,23 @@ notvalid = function(msg){
 	</tr>
 	<tr>
 		<td class="name">Actuellement consommée</td>
-		<td class="value"><input type="checkbox" name="inv_equip" value="1" <? if($ITEM['inv_equip']=='1'){ echo 'CHECKED'; } ?> /> Oui, cette arme est équipée.</td>
+		<td class="value"><input type="checkbox" name="inv_equip" value="1" <?php if($ITEM['inv_equip']=='1'){ echo 'CHECKED'; } ?> /> Oui, cette arme est équipée.</td>
 	</tr>
 	<tr>
 		<td class="name">Résistance</td>
-		<td class="value"><input type="text" class="text" name="inv_resistance" value="<?=$ITEM['inv_resistance'];?>" /> / <?=$ITEM['db_resistance'];?></td>
+		<td class="value"><input type="text" class="text" name="inv_resistance" value="<?php echo $ITEM['inv_resistance'];?>" /> / <?php echo $ITEM['db_resistance'];?></td>
 	</tr>
 	<tr>
 		<td class="name">Complément de description spécifique à l'objet</td>
-		<td class="value"><textarea name="inv_extradesc" style="width:300px;height:100px;"><?=$ITEM['inv_extradesc'];?></textarea></td>
+		<td class="value"><textarea name="inv_extradesc" style="width:300px;height:100px;"><?php echo $ITEM['inv_extradesc'];?></textarea></td>
 	</tr>
 	<tr>
 		<td class="name">Note MJ sur cet item</td>
-		<td class="value"><textarea name="inv_notemj" style="width:300px;height:100px;"><?=$ITEM['inv_notemj'];?></textarea></td>
+		<td class="value"><textarea name="inv_notemj" style="width:300px;height:100px;"><?php echo $ITEM['inv_notemj'];?></textarea></td>
 	</tr>
 	<tr>
 		<td class="name">Note MJ sur ces items (base de données)</td>
-		<td class="value"><div style="overflow:auto;width:300px;height:100px;"><?=$ITEM['db_notemj'];?></div></td>
+		<td class="value"><div style="overflow:auto;width:300px;height:100px;"><?php echo $ITEM['db_notemj'];?></div></td>
 	</tr>
 	
 	<tr>
@@ -189,5 +189,5 @@ notvalid = function(msg){
 </form>
 
 <script type="text/javascript">
-showHideTypeAsso('<?=$ITEM['att_type'];?>');
+showHideTypeAsso('<?php echo $ITEM['att_type'];?>');
 </script>

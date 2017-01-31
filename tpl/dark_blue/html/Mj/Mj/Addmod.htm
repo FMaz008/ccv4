@@ -19,70 +19,70 @@
 
 <br />
 <a href="?mj=Mj_List">&lt;&lt; Retour à la liste des MJ</a><br />
-<form method="post" action="?mj=Mj_<?=$SUBMITNAME;?>">
+<form method="post" action="?mj=Mj_<?php echo $SUBMITNAME;?>">
 <table class="center">
 	
 	<tr>
-		<td class="title" colspan="6"><?=$ACTIONTYPETXT;?> l'accès MJ</td>
+		<td class="title" colspan="6"><?php echo $ACTIONTYPETXT;?> l'accès MJ</td>
 	</tr>
 
-	<? if( $SHOWID == true ){ ?>
+	<?php if( $SHOWID == true ){ ?>
 	<tr>
 		<td class="name">ID de l'accès</td>
-		<td class="value"><input type="hidden" name="id" value="<?=$MJ['id'];?>" /><?=$MJ['id'];?></td>
+		<td class="value"><input type="hidden" name="id" value="<?php echo $MJ['id'];?>" /><?php echo $MJ['id'];?></td>
 	</tr>
-	<? } ?>
+	<?php } ?>
 
 	<td class="name">Associé au compte :</td>
 	<td class="value">
 		<div id="div_compte" style="height:6em;overflow:auto;">
-			<? if(isset($MJ['user'])){ ?>
-				<?=$MJ['user'];?> (<a href="#" onclick="Changer_Compte();">Changer</a>)
-			<? }else{ ?>
+			<?php if(isset($MJ['user'])){ ?>
+				<?php echo $MJ['user'];?> (<a href="#" onclick="Changer_Compte();">Changer</a>)
+			<?php }else{ ?>
 				<a href="#" onclick="Changer_Compte();">Ajouter</a>
-			<? } ?>
-			<input type="hidden" name="userId" value="<?=$MJ['userId'];?>" />
+			<?php } ?>
+			<input type="hidden" name="userId" value="<?php echo $MJ['userId'];?>" />
 		</div>
 	</td>
 
 	<tr>
 		<td class="name">Nom du MJ :</td>
-		<td class="value"><input type="text" class="text" name="nom" value="<?=$MJ['nom'];?>" maxlength="25" /></td>
+		<td class="value"><input type="text" class="text" name="nom" value="<?php echo $MJ['nom'];?>" maxlength="25" /></td>
 	</tr>
 	
 	<tr>
 		<td class="name">Poste :</td>
-		<td class="value"><input type="text" class="text" name="poste" value="<?=$MJ['poste'];?>" maxlength="100" /></td>
+		<td class="value"><input type="text" class="text" name="poste" value="<?php echo $MJ['poste'];?>" maxlength="100" /></td>
 	</tr>
 	
-	<? if($SHOWEMAILFORWARDER){ ?>
+	<?php if($SHOWEMAILFORWARDER){ ?>
 		<tr>
 			<td class="name">Email :</td>
 			<td class="value">
-				<input type="text" class="text" name="email_prefix" value="<?=$MJ['email_prefix'];?>" maxlength="25" />
-				@<?=$SITE_DOMAIN;?>
+				<input type="text" class="text" name="email_prefix" value="<?php echo $MJ['email_prefix'];?>" maxlength="25" />
+				@<?php echo $SITE_DOMAIN;?>
 			</td>
 		</tr>
-	<? }else{ ?>
+	<?php }else{ ?>
 		<input type="hidden" name="email_prefix" value="" />
-	<? } ?>
+	<?php } ?>
 	
 	<tr>
 		<td class="name">Présent :</td>
 		<td class="value">
-			<input type="radio" name="present" value="1" <?if($MJ['present']==1){ echo "CHECKED"; }?> /> Présent<br />
-			<input type="radio" name="present" value="0" <?if($MJ['present']!=1){ echo "CHECKED"; }?> /> Absent
+			<input type="radio" name="present" value="1" <?php if($MJ['present']==1){ echo "CHECKED"; }?> /> Présent<br />
+			<input type="radio" name="present" value="0" <?php if($MJ['present']!=1){ echo "CHECKED"; }?> /> Absent
 		</td>
 	</tr>
 
 	<tr>
 		<td class="name">Accès :</td>
 		<td class="value" style="text-align:left;">
-			<input type="checkbox" name="ax_hj" value="1" <?if($MJ['ax_hj']==1){ echo "CHECKED"; }?> />Accès HJ<br />
-			<input type="checkbox" name="ax_ej" value="1" <?if($MJ['ax_ej']==1){ echo "CHECKED"; }?> />Accès IJ<br />
-			<input type="checkbox" name="ax_ppa" value="1" <?if($MJ['ax_ppa']==1){ echo "CHECKED"; }?> />Accès PPA<br />
-			<input type="checkbox" name="ax_dev" value="1" <?if($MJ['ax_dev']==1){ echo "CHECKED"; }?> />Accès Développeur<br />
-			<input type="checkbox" name="ax_admin" value="1" <?if($MJ['ax_admin']==1){ echo "CHECKED"; }?> />ADMINISTRATEUR<br />
+			<input type="checkbox" name="ax_hj" value="1" <?php if($MJ['ax_hj']==1){ echo "CHECKED"; }?> />Accès HJ<br />
+			<input type="checkbox" name="ax_ej" value="1" <?php if($MJ['ax_ej']==1){ echo "CHECKED"; }?> />Accès IJ<br />
+			<input type="checkbox" name="ax_ppa" value="1" <?php if($MJ['ax_ppa']==1){ echo "CHECKED"; }?> />Accès PPA<br />
+			<input type="checkbox" name="ax_dev" value="1" <?php if($MJ['ax_dev']==1){ echo "CHECKED"; }?> />Accès Développeur<br />
+			<input type="checkbox" name="ax_admin" value="1" <?php if($MJ['ax_admin']==1){ echo "CHECKED"; }?> />ADMINISTRATEUR<br />
 		</td>
 	</tr>
 

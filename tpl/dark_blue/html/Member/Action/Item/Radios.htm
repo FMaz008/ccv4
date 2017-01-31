@@ -104,43 +104,43 @@
 			Utiliser la radio:
 		</td>
 		<td class="value" style="text-align:left;">
-			<?
+			<?php
 			if (!isset($LIST_RADIOS)){
 				?>
 				<i> - Vous ne poss&egrave;dez aucun Talkie walkie- </i>
-				<?
+				<?php
 			}else{
 				foreach ($LIST_RADIOS as $talk){
 					?>
-					<input type="radio" id="radio_<?=$talk->getInvId();?>" value="<?=$talk->getInvId();?>" name="radio" <?if($talk->getCanTalk()=== false){ echo 'DISABLED '; }?>/>
-					<?=$talk->getNom();?> 
+					<input type="radio" id="radio_<?php echo $talk->getInvId();?>" value="<?php echo $talk->getInvId();?>" name="radio" <?php if($talk->getCanTalk()=== false){ echo 'DISABLED '; }?>/>
+					<?php echo $talk->getNom();?> 
 					
 					[Fr&eacute;quence.:
-					<a href="#" onclick="chgFreq(<?=$talk->getInvId();?>)" id="freq_<?=$talk->getInvId();?>">
-					<?
+					<a href="#" onclick="chgFreq(<?php echo $talk->getInvId();?>)" id="freq_<?php echo $talk->getInvId();?>">
+					<?php
 					if($talk->getCanTalk()){
 						echo $talk->getFrequence();
 					}else{
 						?>
-						<font color="red">aucune</font><?
+						<font color="red">aucune</font><?php
 					}
 					?></a>
-					<span id="ecoute_<?=$talk->getInvId();?>" style="font-style:italic;">
-					<?if($talk->getCanTalk()=== false){?>
+					<span id="ecoute_<?php echo $talk->getInvId();?>" style="font-style:italic;">
+					<?php if($talk->getCanTalk()=== false){?>
 						 - Ã©coute seulement
-					<? } ?>
+					<?php } ?>
 					</span>
 					]
 					
-					<?
+					<?php
 					if($talk->getCryptCapable() == 1){
 						?>
-						| <a href="#" onclick="chgClef(<?=$talk->getInvId();?>)">Clef de cryptage</a>
-						<?
+						| <a href="#" onclick="chgClef(<?php echo  $talk->getInvId();?>)">Clef de cryptage</a>
+						<?php
 					}
 					?>
 					<br />
-				<?
+				<?php
 				}
 			}
 			?>
@@ -163,7 +163,7 @@
 
 
 
-<!-- Zone ombragée -->
+<!-- Zone ombrage -->
 <div id="plzwait1" class="plzwait_ombre">&nbsp;</div>
 <div id="plzwait2" class="plzwait_content">
 	<table style="margin:0 auto;width:300px;height:150px;">

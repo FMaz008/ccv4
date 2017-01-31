@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
 //<!--
-	switch(<?=$ERRORNO;?>){
+	switch(<?php echo $ERRORNO;?>){
 		case 1: // 1: Erreur dans la requête
 			$('raison').innerHTML="Erreur système (#1), merci de contacter un MJ Technique.";
 			break;

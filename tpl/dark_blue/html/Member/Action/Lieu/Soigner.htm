@@ -15,7 +15,7 @@
 		<tr>
 			<td colspan="4">--Personne &agrave; soigner--</td>
 		</tr>
-		<?
+		<?php
 		}
 		else
 		{
@@ -23,17 +23,17 @@
 			{
 			?>
 				<tr>
-					<td class="value"><input type="radio" name="blesse" value="<?=$blesse['perso']->getid();?>" <?php if($blesse['perso']->getCoeffSoinNecessaire() > $LIEU->getCoeffSoin()){ echo 'disabled';}?>/></td>
-					<td class="value"><?=$blesse['perso']->getNom();?></td>
-					<td class="value"><?=$blesse['etat'];?></td>
-					<td class="value"><?if($blesse['perso']->getSoin()){echo "OUI";}?></td>
+					<td class="value"><input type="radio" name="blesse" value="<?php echo $blesse['perso']->getid();?>" <?php if($blesse['perso']->getCoeffSoinNecessaire() > $LIEU->getCoeffSoin()){ echo 'disabled';}?>/></td>
+					<td class="value"><?php echo $blesse['perso']->getNom();?></td>
+					<td class="value"><?php echo $blesse['etat'];?></td>
+					<td class="value"><?php if($blesse['perso']->getSoin()){echo "OUI";}?></td>
 				</tr>
-			<?
+			<?php
 			}
 		}
 		?>
 		<tr>
-				<td class="name" colspan="4">Quantit&eacute; de mat&eacute;riel m&eacute;dical restant sur les lieux: <?=$LIEU->getQteMateriel();?></td>
+				<td class="name" colspan="4">Quantit&eacute; de mat&eacute;riel m&eacute;dical restant sur les lieux: <?php echo $LIEU->getQteMateriel();?></td>
 		</tr>
 		<tr>
 				<td class="name" colspan="4">Pa que vous voulez utiliser dans le soin: <input type="text" class="text" size="2" name="paSoin" value="0"/></td>

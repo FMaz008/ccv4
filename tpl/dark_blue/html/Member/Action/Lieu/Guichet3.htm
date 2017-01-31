@@ -27,7 +27,7 @@
 				'?popup=1&m=Action_Lieu_Guichet3Retrait', 
 				{
 					method: 'post', 
-					parameters: 'montant='+$('montant').value+'&carteid=<?=$_POST['carteid'];?>&nip=<?=$_POST['nip'];?>', 
+					parameters: 'montant='+$('montant').value+'&carteid=<?php echo $_POST['carteid'];?>&nip=<?php echo $_POST['nip'];?>', 
 					onComplete: operation_confirm,
 					onFailure: fail
 				});
@@ -70,8 +70,8 @@
 
 <br />
 <form id="action_guichet3Histo" method="post" action="?popup=1&m=Action_Lieu_Guichet3historique" onsubmit="return ajaxSubmitForm(this);">
-	<input type="hidden" name="carteid" value="<?=$CARD_ID;?>" />
-	<input type="hidden" name="nip" id="pass" value="<?=$NIP;?>" />
+	<input type="hidden" name="carteid" value="<?php echo $CARD_ID;?>" />
+	<input type="hidden" name="nip" id="pass" value="<?php echo $NIP;?>" />
 	<table class="center" style="width:300px;">
 		<tr>
 			<td class="title">
@@ -91,8 +91,8 @@
 
 <br />
 <form id="action_guichet3Retrait" method="post" action="?popup=1&m=Action_Lieu_Guichet3Retrait" onsubmit="return ajaxSubmitForm(this);">
-	<input type="hidden" name="carteid" value="<?=$CARD_ID;?>" />
-	<input type="hidden" name="nip" value="<?=$NIP;?>" />
+	<input type="hidden" name="carteid" value="<?php echo $CARD_ID;?>" />
+	<input type="hidden" name="nip" value="<?php echo $NIP;?>" />
 	<input type="hidden" name="nextstep" value="retrait" />
 	
 	<table class="center" style="width:300px;">
@@ -103,7 +103,7 @@
 		</tr>
 		<tr>
 			<td class="name">Solde</td>
-			<td class="value"><span class="valeur" id="cash"><?=$SOLDE;?></span></td>
+			<td class="value"><span class="valeur" id="cash"><?php echo $SOLDE;?></span></td>
 		</tr>
 		<tr>
 			<td class="name">Retrait</td>

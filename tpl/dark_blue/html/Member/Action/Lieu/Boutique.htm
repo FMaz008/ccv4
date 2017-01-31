@@ -13,7 +13,7 @@
 		<td class="name" style="width:50px;">Pr</td>
 		<td class="name" style="width:75px;">Prix</td>
 	</tr>
-	<?
+	<?php
 	if(empty($INV_BOUTIQUE)){
 		?>
 		<tr>
@@ -21,25 +21,25 @@
 				<i>-aucun item en inventaire pour le moment-</i>
 			</td>
 		</tr>
-		<?
+		<?php
 	}else{
 		foreach($INV_BOUTIQUE as $item){
 		?>
 			<tr>
 				<td class="value" style="text-align:left;width:75px;">
-					<input type="text" class="text" name="itema<?=$item->getInvId();?>" value="0" size="3" /> /<?=$item->getQte();?>
+					<input type="text" class="text" name="itema<?php echo $item->getInvId();?>" value="0" size="3" /> /<?php echo $item->getQte();?>
 				</td>
 				<td class="value" style="text-align:left;">
-					<span class="fakelink" id="item_<?=$item->getInvId();?>" onmousemove="infobulle(this, event);"><?=$item->getNom();?></span>
-					<div id="ib_item_<?=$item->getInvId();?>" style="width:300px;" class="infobulle">
-						<img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/items/<?=$item->getImage();?>" align="left" style="border:0px;margin:3px;" />
-						<?=$item->getDescription();?>
+					<span class="fakelink" id="item_<?php echo $item->getInvId();?>" onmousemove="infobulle(this, event);"><?php echo $item->getNom();?></span>
+					<div id="ib_item_<?php echo $item->getInvId();?>" style="width:300px;" class="infobulle">
+						<img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/items/<?php echo $item->getImage();?>" align="left" style="border:0px;margin:3px;" />
+						<?php echo $item->getDescription();?>
 					</div>
 				</td>
-				<td class="value" style="text-align:right;"><?=$item->getPr();?></td>
-				<td class="value" style="text-align:right;"><?=$item->getBoutiquePrixVente();?> <?=$GAME_DEVISE?></td>
+				<td class="value" style="text-align:right;"><?php echo $item->getPr();?></td>
+				<td class="value" style="text-align:right;"><?php echo $item->getBoutiquePrixVente();?> <?php echo $GAME_DEVISE?></td>
 			</tr>
-		<?
+		<?php
 		}
 	}
 	?>
@@ -64,7 +64,7 @@
 		<td class="name" style="width:50px;">Pr</td>
 		<td class="name" style="width:75px;">Prix</td>
 	</tr>
-	<?
+	<?php
 	if(empty($INV_BOUTIQUE)){
 		?>
 		<tr>
@@ -72,25 +72,25 @@
 				<i>-aucun de vos items actuels int&eacute;resse la boutique pour le moment-</i>
 			</td>
 		</tr>
-		<?
+		<?php
 	}else{
 		foreach($INV_PERSO as $item){
 		?>
 			<tr>
 				<td class="value" style="text-align:left;width:75px;">
-					<input type="text" class="text" name="itemv<?=$item['inv']->getInvId();?>" value="0" size="3" /> /<?=$item['inv']->getQte();?>
+					<input type="text" class="text" name="itemv<?php echo $item['inv']->getInvId();?>" value="0" size="3" /> /<?php echo $item['inv']->getQte();?>
 				</td>
 				<td class="value" style="text-align:left;">
-					<span class="fakelink" id="item_<?=$item['inv']->getInvId();?>" onmousemove="infobulle(this, event);"><?=$item['inv']->getNom();?></span>
-					<div id="ib_item_<?=$item['inv']->getInvId();?>" style="width:300px;" class="infobulle">
-						<img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/items/<?=$item['inv']->getImage();?>" align="left" style="border:0px;margin:3px;" />
-						<?=$item['inv']->getDescription();?>
+					<span class="fakelink" id="item_<?php echo $item['inv']->getInvId();?>" onmousemove="infobulle(this, event);"><?php echo $item['inv']->getNom();?></span>
+					<div id="ib_item_<?php echo $item['inv']->getInvId();?>" style="width:300px;" class="infobulle">
+						<img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/items/<?php echo $item['inv']->getImage();?>" align="left" style="border:0px;margin:3px;" />
+						<?php echo $item['inv']->getDescription();?>
 					</div>
 				</td>
-				<td class="value" style="text-align:right;"><?=$item['inv']->getPr();?></td>
-				<td class="value" style="text-align:right;"><?=$item['boutique']->getBoutiquePrixAchat();?> <?=$GAME_DEVISE?></td>
+				<td class="value" style="text-align:right;"><?php echo $item['inv']->getPr();?></td>
+				<td class="value" style="text-align:right;"><?php echo $item['boutique']->getBoutiquePrixAchat();?> <?php echo $GAME_DEVISE?></td>
 			</tr>
-		<?
+		<?php
 		}
 	}
 	?>
@@ -114,13 +114,13 @@
 		</tr>
 		<tr>
 			<td class="name" style="width:15px;"><input type="radio" name="achat_type" value="achat" checked="checked" /></td>
-			<td class="value" style="text-align:left;">Acheter et/ou vendre(<?=$PA_COST['achat'];?> PA)</td>
+			<td class="value" style="text-align:left;">Acheter et/ou vendre(<?php echo $PA_COST['achat'];?> PA)</td>
 		</tr>
 		<tr>
 			<td class="name"><input type="radio" name="achat_type" value="nego" /></td>
-			<td class="value" style="text-align:left;">N&eacute;gocier le prix de l'achat/vente (<?=$PA_COST['nego'];?> PA)</td>
+			<td class="value" style="text-align:left;">N&eacute;gocier le prix de l'achat/vente (<?php echo $PA_COST['nego'];?> PA)</td>
 		</tr>
-		<?
+		<?php
 		if($CAN_VOL)
 		{
 			?>	
@@ -131,10 +131,10 @@
 						<div style="margin-left:90px;" class="infobulle">
 							Si vous ratez le vol, le vendeur aura votre description physique. Vous serez aussi banni de ce lieu pour un certain temps et t&eacute;l&eacute;port&eacute; au centre de police.
 						</div>
-					</a> (<?=$PA_COST['vol'];?> PA)
+					</a> (<?php echo $PA_COST['vol'];?> PA)
 				</td>
 			</tr>
-			<?
+			<?php
 		}
 		?>
 		</table>
@@ -145,12 +145,12 @@
 		<tr>
 			<td class="title" colspan="2">
 				Type de paiement
-				<?
+				<?php
 				if($CAN_VOL)
 				{
 					?>
 					(non requis pour le vol)
-					<?
+					<?php
 				}
 				?>
 			</td>
@@ -161,7 +161,7 @@
 			<td class="value" style="text-align:left;">Argent comptant</td>
 		</tr>
 		
-		<?
+		<?php
 		if(isset($PAIEMENT_DIRECT))
 		{
 			?>
@@ -169,27 +169,27 @@
 				<td class="name" style="vertical-align:top;"><input type="radio" name="pay_type" value="card" /></td>
 				<td class="value" style="text-align:left;">
 					Carte bancaire:
-					<?
+					<?php
 					if (!isset($CARTES)){
 					?>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<i>Vous ne poss&eacute;dez aucune carte bancaire.</i>
-					<? }else{
+					<?php }else{
 						foreach($CARTES as $carte){
 						?>
 							<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="radio" name="cardid" value="<?=$carte->getInvId();?>" /> <?=$carte->getNoBanque();?>-<?=$carte->getNoCompte();?>-<?=$carte->getNoCarte();?> <?=$carte->getNote();?>
-						<?
+							<input type="radio" name="cardid" value="<?php echo $carte->getInvId();?>" /> <?php echo $carte->getNoBanque();?>-<?php echo $carte->getNoCompte();?>-<?php echo $carte->getNoCarte();?> <?php echo $carte->getNote();?>
+						<?php
 						}
 						?>
 						<br />
 						<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						NIP: <input type="text" class="text" name="nip" maxlength="5" size="6" value="" />
-						<?
+						<?php
 					}?>
 				</td>
 			</tr>
-			<?
+			<?php
 		}
 		else
 		{
@@ -197,7 +197,7 @@
 			<tr>
 				<td colspan="2"><i>Paiement par carte non disponible.</i></td>
 			</tr>
-			<?
+			<?php
 		}
 		?>
 		</table>
@@ -212,9 +212,9 @@
 <tr>
 	<td style="text-align:center;" colspan="4">
 		<input type="submit" class="button" style="width:120px;" name="buy" value="Achat/Vente" />
-		<? if(isset($admin)){ ?>
+		<?php if(isset($admin)){ ?>
 		<input type="button" class="button" style="width:120px;" name="admin" value="Administrer" onclick="actionLink('Action_Lieu_BoutiqueAdmin');" />
-		<? } ?>
+		<?php } ?>
 	</td>
 </tr>
 </table>

@@ -21,35 +21,35 @@ confirmdel = function(){
 		<td class="name">Modifié par</td>
 		<td class="name">Inscription</td>
 	</tr>
-<?
+<?php
 foreach($COMP as $comp){ 
 	?>
 		
 		<tr>
 			<td class="name">
-				<input type="radio" name="id" value="<?=$comp['id'];?>" />
+				<input type="radio" name="id" value="<?php echo $comp['id'];?>" />
 			</td>
 			<td class="value">
-				<?=$comp['nom'];?>
+				<?php echo $comp['nom'];?>
 			</td>
 			<td class="value">
-				<a href="?mj=Perso_GestionCompModStat&amp;id=<?=$comp['id'];?>">
-					<? if(!empty($comp['stats'])){ ?>
-						<?=$comp['stats'];?>
-					<? }else{ ?>
+				<a href="?mj=Perso_GestionCompModStat&amp;id=<?php echo $comp['id'];?>">
+					<?php if(!empty($comp['stats'])){ ?>
+						<?php echo $comp['stats'];?>
+					<?php }else{ ?>
 						<i>- aucune -</i>
-					<? } ?>
+					<?php } ?>
 				</a>
 			</td>
 			<td class="value">
-				<? if ($comp['inscription']=='1') { ?>
+				<?php if ($comp['inscription']=='1') { ?>
 					Oui
-				<? }else{ ?>
+				<?php }else{ ?>
 					<i>Non</i>
-				<? } ?>
+				<?php } ?>
 			</td>
 		</tr>
-	<?
+	<?php
 }
 ?>
 	<tr>

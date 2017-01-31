@@ -1,4 +1,4 @@
-<form method="post" action="?m=DelPerso2&id=<?=$PERSO['id'];?>">
+<form method="post" action="?m=DelPerso2&id=<?php echo $PERSO['id'];?>">
 <div class="panel">
 	<div class="title">Suppression d'un personnage</div>
 	<div class="clearboth"></div>
@@ -6,7 +6,7 @@
 	<div class="value member_delPerso">
 		Êtes-vous bien certain(e) de vouloir
 		<span style="color:red;">supprimer</span>
-		le personnage <?=$PERSO['nom'];?> ?
+		le personnage <?php echo $PERSO['nom'];?> ?
 	</div>
 	<div class="clearboth"></div>
 	

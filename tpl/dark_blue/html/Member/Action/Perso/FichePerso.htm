@@ -11,7 +11,7 @@
 		<tr>
 			<td class="title" colspan="2">Comp&eacute;tences</td>
 		</tr>
-		<?
+		<?php
 		foreach($COMP as $comp)
 		{
 			if($comp["xp"]>0)
@@ -28,18 +28,18 @@
 				?>
 				<tr>
 					<td class="name">
-						<?=$comp["nom"];?>
+						<?php echo $comp["nom"];?>
 						<br />
 						<span style="font-size:8pt;font-family:courier new;color: #EEEEDD;">
 							<abbr title="Progression d'XP avant de gagner un niveau.">
-								<?=$comp["currentXp"];?>/<?=$TotalXP;?>
+								<?php echo $comp["currentXp"];?>/<?php echo $TotalXP;?>
 							</abbr>
 						</span>
 					</td>
 					<td class="value" style="text-align:center;">
 						<table style="width:240px;margin-left:auto;margin-right:auto;">
 						<tr>
-							<?
+							<?php
 							for($i=1;$i<=12;$i++)
 							{
 								$caption = $i;
@@ -65,14 +65,14 @@
 									$className .= ' current';
 								}
 								?>
-								<td class="name lvl <?=$className;?>"><?=$caption;?></td>
-								<?
+								<td class="name lvl <?php echo $className;?>"><?php echo $caption;?></td>
+								<?php
 							}
 							?>
 						</tr>
 						<tr>
 							<td colspan="12">
-								<?
+								<?php
 								if (!is_numeric($TotalXP)) //Infini
 								{
 									$percent = 100;
@@ -86,8 +86,8 @@
 								?>
 								<table style="width:100%;background-color:#555599;padding:1px;" cellspacing="0">
 								<tr>
-									<td style="background-color:#999999;width:<?=$percent;?>%;"></td>
-									<td style="background-color:#001632;width:<?=$percent2;?>%;"></td>
+									<td style="background-color:#999999;width:<?php echo $percent;?>%;"></td>
+									<td style="background-color:#001632;width:<?php echo $percent2;?>%;"></td>
 								</tr>
 								</table>
 							</td>
@@ -95,7 +95,7 @@
 						</table>
 					</td>
 				</tr>
-			<?
+			<?php
 			}
 		}
 		?>
@@ -108,20 +108,20 @@
 		<tr>
 			<td class="title" colspan="2">Statistiques</td>
 		</tr>
-		<?
+		<?php
 		foreach($STAT as $stat)
 		{
 		?>
 			<tr>
 				<td class="name">
-					<?=$stat["nom"];?>
-					<br /><span style="font-size:8pt;font-family:courier new;color: #EEEEDD;">XP: <?=$stat["xp"];?></span>
-					<br /><span style="font-size:8pt;font-family:courier new;color: #EEEEDD;">LVL: <?=$stat["lvl"];?></span>
+					<?php echo $stat["nom"];?>
+					<br /><span style="font-size:8pt;font-family:courier new;color: #EEEEDD;">XP: <?php echo $stat["xp"];?></span>
+					<br /><span style="font-size:8pt;font-family:courier new;color: #EEEEDD;">LVL: <?php echo $stat["lvl"];?></span>
 				</td>
 				<td class="value" style="text-align:center;">
 					<table style="margin-left:auto;margin-right:auto;">
 					<tr>
-						<?
+						<?php
 						//Afficher la barre des niveaux négatifs
 						for($i=-5;$i<0;$i++)
 						{
@@ -129,21 +129,21 @@
 							{
 								$bgcolor = $statcolors[$i+5];
 								?>
-								<td class="name lvl" style="background-color:<?=$bgcolor;?>;"></td>
-								<?
+								<td class="name lvl" style="background-color:<?php echo $bgcolor;?>;"></td>
+								<?php
 							}
 							else
 							{
 								?>
 								<td class="name lvl"></td>
-								<?
+								<?php
 							}
 						}
 						?>
 						
-						<td class="name lvl" style="background-color:<?=$statcolors[5];?>;"></td>
+						<td class="name lvl" style="background-color:<?php echo $statcolors[5];?>;"></td>
 	
-						<?
+						<?php
 						//Afficher la barre des niveaux positifs
 						for($i=1;$i<6;$i++)
 						{
@@ -151,21 +151,21 @@
 							{
 								$bgcolor = $statcolors[$i+5];
 								?>
-								<td class="name lvl" style="background-color:<?=$bgcolor;?>;"></td>
-								<?
+								<td class="name lvl" style="background-color:<?php echo $bgcolor;?>;"></td>
+								<?php
 							}
 							else
 							{
 								?>
 								<td class="name lvl"></td>
-								<?
+								<?php
 							}
 						}
 						?>
 					</tr>
 					<tr>
 						<td colspan="5">
-							<?
+							<?php
 							//Afficher la barre de progression vers le niveau précédent
 						
 							$TotalXP = $stat['prevBarMax'];
@@ -185,19 +185,19 @@
 							?>
 							<table style="width:100%;">
 							<tr>
-								<td style="width:<?=$percent2;?>%;"></td>
-								<td style="background-color:#FF0000;width:<?=$percent;?>%;"></td>
+								<td style="width:<?php echo $percent2;?>%;"></td>
+								<td style="background-color:#FF0000;width:<?php echo $percent;?>%;"></td>
 							</tr>
 							</table>
 							<abbr title="Progression d'XP avant de perdre un niveau.">
-								<?=$CurrentXP;?>/<?=$TotalXP;?>
+								<?php echo $CurrentXP;?>/<?php echo $TotalXP;?>
 							</abbr>
 						</td>
 					
 						<td></td>
 					
 						<td colspan="5">
-							<?
+							<?php
 							//Afficher la barre de progression vers le niveau suivant
 						
 							$TotalXP = $stat['nextBarMax'];
@@ -217,19 +217,19 @@
 							?>
 							<table style="width:100%;">
 							<tr>
-								<td style="background-color:#FFFF00;width:<?=$percent;?>%;"></td>
-								<td style="width:<?=$percent2;?>%;"></td>
+								<td style="background-color:#FFFF00;width:<?php echo $percent;?>%;"></td>
+								<td style="width:<?php echo $percent2;?>%;"></td>
 							</tr>
 							</table>
 							<abbr title="Progression d'XP avant de gagner un niveau.">
-								<?=$CurrentXP;?>/<?=$TotalXP;?>
+								<?php echo $CurrentXP;?>/<?php echo $TotalXP;?>
 							</abbr>
 						</td>
 					</tr>
 					</table>
 				</td>
 			</tr>
-		<?
+		<?php
 		}
 		?>
 	</table>
@@ -243,20 +243,20 @@
 			<tr>
 				<td class="title">Caractéristiques</td>
 			</tr>
-			<?
+			<?php
 			if(isset($CARACT)){
 				foreach($CARACT as $caract){ ?>
 					<tr>
 						<td class="name">
-							<?=$caract['nom'];?> <span style="font-style:italic;font-weight:normal;">(<?=$caract['cat'];?>)</span>
+							<?php echo $caract['nom'];?> <span style="font-style:italic;font-weight:normal;">(<?php echo $caract['cat'];?>)</span>
 						</td>
 					</tr>
 					<tr>
 						<td class="value" style="text-align:left;padding-bottom:15px;">
-							<?=$caract['desc'];?>
+							<?php echo $caract['desc'];?>
 						</td>
 					</tr>
-				<?	}
+				<?php	}
 			} ?>
 		</table>
 	</td>

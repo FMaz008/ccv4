@@ -46,13 +46,13 @@ body {
 }
 
 body a, span.fakelink {
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 	text-decoration:none;
 	cursor:pointer;
 }
 
 body a:hover, span.fakelink:hover {
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 	text-decoration:underline;
 }
 
@@ -63,9 +63,9 @@ body a:hover, span.fakelink:hover {
 .infobulle{
 	position: absolute;
 	display:none;
-	background-color:<?=$bgColor1;?>;
+	background-color:<?php echo $bgColor1;?>;
 	padding:1px;
-	border:1px solid <?=$borderColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
 	z-index:999;
 }
 .hovermenu
@@ -89,13 +89,13 @@ div.menu a {
 	margin:0px;
 	padding-right:5px;
 	
-	border-left:1px solid <?=$borderColor3;?>;
-	border-bottom:1px solid <?=$borderColor3;?>;
+	border-left:1px solid <?php echo $borderColor3;?>;
+	border-bottom:1px solid <?php echo $borderColor3;?>;
 }
 
 div.menu a:hover {
 	text-align:right;
-	color:<?=$valueColor;?>;
+	color:<?php echo $valueColor;?>;
 	background-image: url('img/design_menusel.gif');
 	background-repeat: no-repeat;
 	background-position: 120px 0px;
@@ -117,7 +117,7 @@ div.forumtitre
 }
 div.forumsujet
 {
-    color:<?=$valueColor;?>;
+    color:<?php echo $valueColor;?>;
 	text-decoration:none;
 }
 hr.forumsep
@@ -169,10 +169,10 @@ div.menu {
 	margin-left:10px;
 
 	background-image: url('img/design_menubg.gif');
-	background-color: <?=$bgColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
 	background-position: -10px 0px;
 	background-repeat: no-repeat;
-	border:2px solid <?=$borderColor1;?>;
+	border:2px solid <?php echo $borderColor1;?>;
 }
 
 
@@ -188,8 +188,8 @@ div.info {
 	text-align:right;
 	background-image:url('img/design_leftbarbg_darken.gif');
 	background-position: 3px 0px;
-	/*background-color: <?=$bgColor1;?>;*/
-	border:2px solid <?=$borderColor1;?>;
+	/*background-color: <?php echo $bgColor1;?>;*/
+	border:2px solid <?php echo $borderColor1;?>;
 }
 
 div.time {
@@ -204,8 +204,8 @@ div.time {
 	text-align:left;
 	background-image:url('img/design_leftbarbg_darken.gif');
 	background-position: 3px 0px;
-	/*background-color: <?=$bgColor1;?>;*/
-	border:2px solid <?=$borderColor1;?>;
+	/*background-color: <?php echo $bgColor1;?>;*/
+	border:2px solid <?php echo $borderColor1;?>;
 	
 }
 
@@ -222,8 +222,8 @@ div.forum {
 	text-align:left;
 	background-image:url('img/design_leftbarbg_darken.gif');
 	background-position: 3px 0px;
-	/*background-color: <?=$bgColor1;?>;*/
-	border:2px solid <?=$borderColor1;?>;
+	/*background-color: <?php echo $bgColor1;?>;*/
+	border:2px solid <?php echo $borderColor1;?>;
 	
 }
 
@@ -239,8 +239,8 @@ div.certification {
 	margin-left:10px;
 
 	text-align:center;
-	background-color: <?=$bgColor1;?>;
-	border:2px solid <?=$borderColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
+	border:2px solid <?php echo $borderColor1;?>;
 	
 }
 
@@ -283,8 +283,8 @@ div.footer{
 /** Positionnement, style et taille par défaut d'un tableau
 */
 div.tlb_center, table.tbl_center{
-	border:1px solid <?=$borderColor1;?>;
-	background-color:<?=$bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
+	background-color:<?php echo $bgColor1;?>;
 	font-size:10pt;
 	margin-right:auto;
 	margin-left:auto;
@@ -296,8 +296,8 @@ div.tlb_center, table.tbl_center{
 /** Style d'un titre de tableau (généralement la 1iere ligne du tableau)
 */
 div.title, td.title {
-	color:<?=$valueColor;?>;
-	border:1px solid <?=$borderColor1;?>;
+	color:<?php echo $valueColor;?>;
+	border:1px solid <?php echo $borderColor1;?>;
 	background-color: #070f25;
 	font-size:10px;
 	font-weight:bold;
@@ -311,7 +311,7 @@ div.title, td.title {
 /** Style d'une cellule qui identifie une valeur
 */
 div.name, td.name {
-	border:1px solid <?=$borderColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
 	background-color: #001632;
 	font-size:12px;
 	font-weight:bold;
@@ -344,8 +344,8 @@ div.send, td.send {
 /** Style générale d'une zone ( menu, he, panel, etc..)
 */
 div.panel {
-	background-color:<?=$bgColor1;?>;
-	border:1px solid <?=$borderColor1;?>;
+	background-color:<?php echo $bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
 	margin:0px auto 0px auto;
 	padding:2px;
 }
@@ -390,7 +390,7 @@ input[type="button"], input[type="submit"] {
 	font-size: 10px;
 	color: #FFFFFF;
 	background-color: #001632;
-	border: solid 1px <?=$borderColor1;?>;
+	border: solid 1px <?php echo $borderColor1;?>;
 	-moz-border-radius:15px 2px;
 	-webkit-border-radius:15px 2px;
 	
@@ -404,7 +404,7 @@ input[type="button"]:hover, input[type="submit"]:hover {
 
 
 input[type="text"], input[type="password"] {
-	border: 1px <?=$borderColor1;?> solid;
+	border: 1px <?php echo $borderColor1;?> solid;
 	font: bold 11px Georgia, "MS Serif", "New York", serif;
 	color: #CCCCCC;
 	padding: 2px;
@@ -426,7 +426,7 @@ input:disabled {
 */
 
 textarea {
-	border: 1px <?=$borderColor1;?> solid;
+	border: 1px <?php echo $borderColor1;?> solid;
 	font: 11px Georgia, "MS Serif", "New York", serif;
 	color: #CCCCCC;
 	padding: 2px;
@@ -438,13 +438,13 @@ textarea:hover {
 }
 
 select {
-	border: 2px <?=$borderColor1;?> solid;
+	border: 2px <?php echo $borderColor1;?> solid;
 	color: #FFddaa;
 	background-color: #000000;
 }
 
 option { /* Elements de la select list */
-	border: 1px <?=$borderColor1;?> solid;
+	border: 1px <?php echo $borderColor1;?> solid;
 	border-top:0px;
 	padding:0px;
 	margin:0px;
@@ -498,12 +498,12 @@ option { /* Elements de la select list */
 	text-decoration:none;
 	font-size:8pt;
 	font-family:courier new;
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 }
 .txtStyle_valeur, .txtStyle_valeur:hover {
 	text-decoration:none;
 	font-size: 11pt;
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 }
 
 .txtStyle_heHj, .txtStyle_heHj:hover {
@@ -726,7 +726,7 @@ div.background_menu, div.faq_menu{
 }
 span.faq_highligh
 {
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 	font-weight:bold;
 }
 div.background_warning{
@@ -886,10 +886,10 @@ div.menu_action_panel a, div.member_index_topmenu_options_menu a{
 	font-size: 10pt;
 	text-decoration: none;
 	text-align:left;
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 
 	border-top:1px solid #000000;
-	border-bottom:1px solid <?=$borderColor3;?>;
+	border-bottom:1px solid <?php echo $borderColor3;?>;
 }
 
 div.menu_action_panel a:hover, div.member_index_topmenu_options_menu a:hover{
@@ -974,7 +974,7 @@ div.ongletOn, div.ongletOff
 	border:2px solid;
 	border-bottom:0px;
 	cursor:pointer;
-	border:1px solid <?=$borderColor3;?>;
+	border:1px solid <?php echo $borderColor3;?>;
 }
 div.ongletOn
 {
@@ -995,7 +995,7 @@ div.ongletOff
 {
 	height:15px;
 	margin-top:5px;
-	background-color: <?=$bgColor3;?>;
+	background-color: <?php echo $bgColor3;?>;
 	
 	-moz-border-radius-topleft:5px;
 	-moz-border-radius-topright:5px;
@@ -1004,7 +1004,7 @@ div.ongletOff
 }
 div.ongletOff:hover
 {
-	background-color:<?=$bgColor2;?>;
+	background-color:<?php echo $bgColor2;?>;
 }
 div.ongletOff span
 {
@@ -1013,7 +1013,7 @@ div.ongletOff span
 
 div.member_contactMj_content{
 	clear:both;
-	border:2px solid <?=$borderColor3;?>;
+	border:2px solid <?php echo $borderColor3;?>;
 	width:700px;
 	height:500px;
 	margin: 0px auto 0px auto;
@@ -1083,7 +1083,7 @@ div.member_he_header_gauche {
 	width:140px;
 	height:100px;
 	padding:5px;
-	border:1px solid <?=$borderColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
 	background-color: #001632;
 	overflow-y:scroll;
 }
@@ -1123,7 +1123,7 @@ div.member_he_header_bouttons_droit{
 table.member_he_header_bar {
 	width:100%;
 	margin:10px 0px 10px 0px;
-	border: 1px solid <?=$borderColor1;?>;
+	border: 1px solid <?php echo $borderColor1;?>;
 	height:10px;
 }
 td.member_he_header_bar_full{
@@ -1143,7 +1143,7 @@ div.he_leftbar{
 	float:left;
 	width:150px;
 	
-	border:1px solid <?=$borderColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
 	background-color: #001632;
 	font-size:12px;
 	font-weight:bold;
@@ -1154,7 +1154,7 @@ div.he_rightbar{
 	margin-left:5px;
 	width:535px;
 
-	border-top:1px solid <?=$borderColor1;?>;
+	border-top:1px solid <?php echo $borderColor1;?>;
 	font-size:12px;
 	vertical-align: top;
 	text-align:justify;
@@ -1187,7 +1187,7 @@ div.he_type_parlerbadge{
 /* ### Infobulles du header du HE */
 
 img.imgbg { /* INFO-BULLE, cadrage de l'image */
-	border:1px solid <?=$borderColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
 	padding:3px;
 	margin-right:5px;
 	background-color: #001632;
@@ -1229,7 +1229,7 @@ img.imgbg { /* INFO-BULLE, cadrage de l'image */
 			/*background-repeat:no-repeat;/
 			/*background-image:url(darkblue/inventaire/slot.gif);/
 			/*Propriétés de td.name/
-			border:1px solid <?=$borderColor1;?>;
+			border:1px solid <?php echo $borderColor1;?>;
 			background-color: #001632;
 			font-size:12px;
 			font-weight:bold;
@@ -1239,8 +1239,8 @@ img.imgbg { /* INFO-BULLE, cadrage de l'image */
 
 
 div.inv_fiche { /*Anciennement #subcenter*/
-	border:1px solid <?=$borderColor1;?>;
-	background-color:<?=$bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
+	background-color:<?php echo $bgColor1;?>;
 	font-size:10pt;
 	margin-right:auto;
 	margin-left:auto;
@@ -1306,7 +1306,7 @@ div.member_action_sac_right{
 }
 
 div.member_action_sac_linkoff{
-	border-left:4px solid <?=$borderColor1;?>;
+	border-left:4px solid <?php echo $borderColor1;?>;
 	cursor:pointer;
 	padding-left:10px;
 }
@@ -1314,13 +1314,13 @@ div.member_action_sac_linkoff:hover{
 	background-color:#222266;
 }
 div.member_action_sac_linkon{
-	background-color:<?=$borderColor1;?>;
+	background-color:<?php echo $borderColor1;?>;
 	padding-left:10px;
 	font-weight:bold;
 }
 
 div.member_action_sac_itemContainer{
-	border:4px solid <?=$borderColor1;?>;
+	border:4px solid <?php echo $borderColor1;?>;
 	padding:10px;
 }
 

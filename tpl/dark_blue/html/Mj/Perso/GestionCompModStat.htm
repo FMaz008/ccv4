@@ -1,4 +1,4 @@
-<form name="form1" method="post" action="?mj=Perso_GestionCompModStat&amp;id=<?=$COMP_ID;?>">
+<form name="form1" method="post" action="?mj=Perso_GestionCompModStat&amp;id=<?php echo $COMP_ID;?>">
 <table>
 	<tr>
 		<td class="name">
@@ -11,22 +11,22 @@
 			Influence
 		</td>
 	</tr>
-<?
+<?php
 foreach($STAT as $stat)
 { 
 	?>
 		<tr>
 			<td class="value">
-				<?=$stat['abbr'];?>
+				<?php echo $stat['abbr'];?>
 			</td>
 			<td class="value">
-				<?=$stat['nom'];?>
+				<?php echo $stat['nom'];?>
 			</td>
 			<td class="value">
-				<input type="text" name="multi_<?=$stat['abbr'];?>" value="<?=$stat['stat_multi'];?>" size="3" maxlenght="1" />
+				<input type="text" name="multi_<?php echo $stat['abbr'];?>" value="<?php echo $stat['stat_multi'];?>" size="3" maxlenght="1" />
 			</td>
 		</tr>
-	<?
+	<?php
 }
 ?>
 	<tr>

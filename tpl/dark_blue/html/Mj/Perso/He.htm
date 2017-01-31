@@ -12,13 +12,13 @@
 //-->
 </script>
 <strong>Pages:</strong><br />
-<? for ($i=1;$i-1<$HE_SIZE/$HE_MSGPERPAGE;$i++) {
+<?php for ($i=1;$i-1<$HE_SIZE/$HE_MSGPERPAGE;$i++) {
 	if ($i == $HE_PAGE) { ?>
-		[<?=$i;?>]
-	<? }else{ ?>
-		[<a href="?mj=Perso_He&amp;id=<?=$_GET['id'];?>&amp;hepage=<?=$i;?>"><?=$i;?></a>]
-	<? }
+		[<?php echo $i;?>]
+	<?php }else{ ?>
+		[<a href="?mj=Perso_He&amp;id=<?php echo $_GET['id'];?>&amp;hepage=<?php echo $i;?>"><?php echo $i;?></a>]
+	<?php }
 } ?>
 <hr />
 
-<?=$HE_MESSAGES;?>
+<?php echo $HE_MESSAGES;?>

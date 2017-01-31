@@ -1,8 +1,8 @@
 <form name="form1" action="" method="post">
-	<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+	<input type="hidden" name="LIEU_ID" value="<?php echo $LIEU_ID;?>" />
 <table class="center">
 	<tr>
-		<td class="title" colspan="5">Gestion des livres accessibles dans le lieu <?=$LIEU_TECH;?> (via le module de bibliothèque)</td>	
+		<td class="title" colspan="5">Gestion des livres accessibles dans le lieu <?php echo $LIEU_TECH;?> (via le module de bibliothèque)</td>	
 	</tr>
 	
 	<tr>
@@ -13,17 +13,17 @@
 		<td class="name">Taille</td>
 	</tr>
 	
-	<? foreach($LIVRES as $livre){ ?>
+	<?php foreach($LIVRES as $livre){ ?>
 		<tr>
 			<td class="name" style="width:10px;">
-				<input type="radio" name="id_livre" value="<?=$LIEU_ID;?>;<?=$livre->getDbId();?>" />
+				<input type="radio" name="id_livre" value="<?php echo $LIEU_ID;?>;<?php echo $livre->getDbId();?>" />
 			</td>
-			<td class="value"><?=$livre->getDbId();?></td>
-			<td class="value"><a href="?mj=Item_LivreMod&id=<?=$livre->getDbId();?>&rpage=Lieu_Biblio&rid=<?=$LIEU_ID;?>"><?=$livre->getTitre();?></a></td>
-			<td class="value"><?=$livre->getAuteur();?></td>
-			<td class="value"><?=$livre->getTaille();?> Kb</td>
+			<td class="value"><?php echo $livre->getDbId();?></td>
+			<td class="value"><a href="?mj=Item_LivreMod&id=<?php echo $livre->getDbId();?>&rpage=Lieu_Biblio&rid=<?php echo $LIEU_ID;?>"><?php echo $livre->getTitre();?></a></td>
+			<td class="value"><?php echo $livre->getAuteur();?></td>
+			<td class="value"><?php echo $livre->getTaille();?> Kb</td>
 		</tr>
-	<? } ?>
+	<?php } ?>
 	
 	<tr>
 		<td colspan="5" class="send">

@@ -26,9 +26,9 @@
 	function fct_step1(who){
 		if(who=="me"){
 			$('panel_searchUser').style.display='none';
-			$('userId').value='<?=$ACCOUNT_ID;?>';
-			$('userName').value='<?=$ACCOUNT_USER;?>';
-			$('userMp').value='<?=$MP_LVL;?>';
+			$('userId').value='<?php echo $ACCOUNT_ID;?>';
+			$('userName').value='<?php echo $ACCOUNT_USER;?>';
+			$('userMp').value='<?php echo $MP_LVL;?>';
 		}else{
 			$('panel_searchUser').style.display='inline';
 			$('userId').value='';
@@ -110,7 +110,7 @@
 
 
 
-<?if(false){?>
+<?php if(false){?>
 
 <hr />
 <table id="abo_progress">
@@ -138,7 +138,7 @@
 <div style="width:100%;">
 	<form name="myform" id="myform" onsubmit="return false;">
 		<strong>Abonnement concernant :</strong>
-		<br /><input type="radio" name="who" value="me" onclick="fct_step1(this.value);" CHECKED /> Ce compte (<?=$ACCOUNT_USER;?>)
+		<br /><input type="radio" name="who" value="me" onclick="fct_step1(this.value);" CHECKED /> Ce compte (<?php echo $ACCOUNT_USER;?>)
 		<br /><input type="radio" name="who" value="friend" onclick="fct_step1(this.value);" /> Un ami
 	</form>
 </div>
@@ -162,11 +162,11 @@
 <br />
 <div style="text-align:right;width:100%;">
 	<form name="myform" method="post" action="?m=Mp_Abo2" onsubmit="return validate();">
-		<input type="hidden" name="userId" id="userId" value="<?=$ACCOUNT_ID;?>" />
-		<input type="hidden" name="userName" id="userName" value="<?=$ACCOUNT_USER;?>" />
-		<input type="hidden" name="userMp" id="userMp" value="<?=$MP_LVL;?>" />
+		<input type="hidden" name="userId" id="userId" value="<?php echo $ACCOUNT_ID;?>" />
+		<input type="hidden" name="userName" id="userName" value="<?php echo $ACCOUNT_USER;?>" />
+		<input type="hidden" name="userMp" id="userMp" value="<?php echo $MP_LVL;?>" />
 		<input type="submit" class="button" name="next" value="Suivant >>" />
 	</form>
 </div>
-<?}?>
+<?php }?>
 Page obsolète !

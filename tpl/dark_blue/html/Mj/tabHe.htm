@@ -3,62 +3,62 @@
 		<tr>
 			<td class="title" colspan="2">HE MJ </td>
 		</tr>
-		<? if($HE != NULL){
+		<?php if($HE != NULL){
 			foreach($HE as $he){?>
 				<tr>
 					<td class="name">
-						<? /*
-						<input type="checkbox" name="<?='ppa_suppr_'.$he['id'];?>" value="<?=$he['id'];?>">
+						<?php /*
+						<input type="checkbox" name="<?php echo 'ppa_suppr_'.$he['id'];?>" value="<?php echo $he['id'];?>">
 						*/ ?>
 						
-						<?
+						<?php
 						switch ($he['type'])
 						{
 							case 'perso':
 								?>
-								Perso: <a href="#gestion_perso" onclick="document.forms['perso'].search.value='<?=addslashes($he['concernant']);?>';gosearch('perso');"><?=$he['concernant'];?></a>, 
-								<?
+								Perso: <a href="#gestion_perso" onclick="document.forms['perso'].search.value='<?php echo addslashes($he['concernant']);?>';gosearch('perso');"><?php echo $he['concernant'];?></a>, 
+								<?php
 								break;
 							case 'compte':
 								?>
-								Compte: <a href="#gestion_compte" onclick="document.forms['compte'].search.value='<?=addslashes($he['concernant']);?>';gosearch('compte');"><?=$he['concernant'];?></a>, 
-								<?
+								Compte: <a href="#gestion_compte" onclick="document.forms['compte'].search.value='<?php echo addslashes($he['concernant']);?>';gosearch('compte');"><?php echo $he['concernant'];?></a>, 
+								<?php
 								break;
 							case 'lieu':
 								?>
-								Lieu: <a href="#gestion_lieu" onclick="document.forms['lieu'].search.value='<?=addslashes($he['concernant']);?>';gosearch('lieu');"><?=$he['concernant'];?></a>, 
-								<?
+								Lieu: <a href="#gestion_lieu" onclick="document.forms['lieu'].search.value='<?php echo addslashes($he['concernant']);?>';gosearch('lieu');"><?php echo $he['concernant'];?></a>, 
+								<?php
 								break;
 							case 'item':
 								?>
-								Item: <?=$he['concernant'];?>, 
-								<?
+								Item: <?php echo $he['concernant'];?>, 
+								<?php
 								break;
 							case 'mj':
 								?>
-								Mj: <?=$he['concernant'];?>, 
-								<?
+								Mj: <?php echo $he['concernant'];?>, 
+								<?php
 								break;
 							case 'system':
 								?>
-								Système/Autre: <?=$he['concernant'];?>, 
-								<?
+								Système/Autre: <?php echo $he['concernant'];?>, 
+								<?php
 								break;
 						}
 						?>
-						le <?=$he['date']?> :
+						le <?php echo $he['date']?> :
 					</td>
 				</tr>
 				<tr>
-					<td class="value" style="text-align:left;"><?=$he['msg'];?><br /><br /></td>
+					<td class="value" style="text-align:left;"><?php echo $he['msg'];?><br /><br /></td>
 				</tr>
-			<? }
+			<?php }
 		}else{ ?>
 			<tr><td colspan="5" style="font-style:italic;">- aucun pour le moment -</td></tr>
-		<? } ?>
+		<?php } ?>
 	</table>
 	
-	<? /*
+	<?php /*
 	<input type="submit" class="button" name="ppa_suppr_save" value="Supprimer"/>
 	*/ ?>
 </form>

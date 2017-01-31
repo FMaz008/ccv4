@@ -9,17 +9,17 @@
 		<td class="name">Circonstance</td>
 	</tr>
 	
-	<?
+	<?php
 	foreach ($donnees as $log)
 	{
 		?>
 		<tr>
-			<td class="value"><?=$log['timestamp'];?></td>
-			<td class="value"><?=$log['perso'];?></td>
-			<td class="value"><?=$log['from'];?></td>
-			<td class="value"><?=$log['action'];?></td>
+			<td class="value"><?php echo $log['timestamp'];?></td>
+			<td class="value"><?php echo $log['perso'];?></td>
+			<td class="value"><?php echo $log['from'];?></td>
+			<td class="value"><?php echo $log['action'];?></td>
 		</tr>
-		<?
+		<?php
 	}
 	?>
 

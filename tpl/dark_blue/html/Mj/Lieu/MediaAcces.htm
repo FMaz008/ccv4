@@ -1,8 +1,8 @@
 ﻿<form name="form1" action="" method="post">
-	<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+	<input type="hidden" name="LIEU_ID" value="<?php echo $LIEU_ID;?>" />
 <table class="center">
 	<tr>
-		<td class="title" colspan="6">Gestion des accès média du lieu <?=$LIEU_TECH;?></td>	
+		<td class="title" colspan="6">Gestion des accès média du lieu <?php echo $LIEU_TECH;?></td>	
 	</tr>
 	
 	<tr>
@@ -14,18 +14,18 @@
 		<td class="name">Sens</td>
 	</tr>
 	
-	<? foreach($MEDIA_ACCES as $media){ ?>
+	<?php foreach($MEDIA_ACCES as $media){ ?>
 		<tr>
 			<td class="name" style="width:10px;">
-				<input type="radio" name="id_mediaAcces" value=<?=$media->getId();?> />
+				<input type="radio" name="id_mediaAcces" value=<?php echo $media->getId();?> />
 			</td>
-			<td class="value"><?=$media->getId();?></td>
-			<td class="value"><?=$media->getNom();?></td>
-			<td class="value"><?=$media->getMediaTypeAffichable();?></td>
-			<td class="value"><?=$media->getChannelId();?></td>
-			<td class="value"><? if($media->isRecepteur()) {?>Récepteur<? } else {?>Emetteur<?}?></td>
+			<td class="value"><?php echo $media->getId();?></td>
+			<td class="value"><?php echo $media->getNom();?></td>
+			<td class="value"><?php echo $media->getMediaTypeAffichable();?></td>
+			<td class="value"><?php echo $media->getChannelId();?></td>
+			<td class="value"><?php if($media->isRecepteur()) {?>Récepteur<?php } else {?>Emetteur<?php }?></td>
 		</tr>
-	<? } ?>
+	<?php } ?>
 	
 	<tr>
 		<td colspan="6" class="send">

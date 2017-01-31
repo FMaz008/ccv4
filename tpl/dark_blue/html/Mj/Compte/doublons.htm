@@ -6,11 +6,11 @@
 		<td class="name">Nom de compte</td>
 		<td class="name">Date de connexion</td>
 	</tr>
-	<?
+	<?php
 	if (empty($DOUBLONS)) {
 	?>
 		<tr><td class="value" colspan="2">Pas de doublon détecté</td></tr>
-	<?
+	<?php
 	}
 	else {
 		$currentIp = '';
@@ -20,15 +20,15 @@
 			{
 				$currentIp = $doublon['ip'];
 				?>
-				<tr><td class="name" colspan="2"> IP : <?=$currentIp;?></td></tr>
-				<?
+				<tr><td class="name" colspan="2"> IP : <?php echo $currentIp;?></td></tr>
+				<?php
 			}
 			?>
 			<tr>
-				<td class="value"><?=$doublon['user'];?></td>
-				<td class="value"><?=  fctToGameTime($doublon['timestamp']);?></td>
+				<td class="value"><?php echo $doublon['user'];?></td>
+				<td class="value"><?php echo   fctToGameTime($doublon['timestamp']);?></td>
 			</tr>
-			<?
+			<?php
 		}
 	}
 	?>

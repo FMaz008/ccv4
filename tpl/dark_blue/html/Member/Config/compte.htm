@@ -10,7 +10,7 @@
 		<p class="inscription_note">Tout changement nécessitera une confirmation du email ainsi qu'une réactivation du mot de passe.</p>
 	</div>
 	<div class="value inscription_value">
-			<input type="text" name="email" value="<?=$EMAIL;?>" />
+			<input type="text" name="email" value="<?php echo $EMAIL;?>" />
 	</div>
 	<div class="clearboth"></div>
 
@@ -44,12 +44,12 @@
 	<div class="value inscription_value">
 			<select name="adv_rem">
 				<option value="0">Inchangée</option>
-				<? foreach($REMISE_ADV as $remise){ ?>
-					<option value="<?=$remise["brut"];?>"><?=$remise["formated"];?></option>
-				<? } ?>
+				<?php foreach($REMISE_ADV as $remise){ ?>
+					<option value="<?php echo $remise["brut"];?>"><?php echo $remise["formated"];?></option>
+				<?php } ?>
 			</select>
 			<br />
-			Actuellement (approx.): <?=$NEXT_REMISE;?>
+			Actuellement (approx.): <?php echo $NEXT_REMISE;?>
 	</div>
 	<div class="clearboth"></div>
 
@@ -60,9 +60,9 @@
 	</div>
 	<div class="value inscription_value">
 			<select name="skinname" size="1">
-			<? foreach($SKINS as $skin){ ?>
-				<option value="<?=$skin["name"];?>" <?if(isset($skin["set"])){?> SELECTED<?}?>><?=$skin["title"];?></option>
-			<? } ?>
+			<?php foreach($SKINS as $skin){ ?>
+				<option value="<?php echo $skin["name"];?>" <?php if(isset($skin["set"])){?> SELECTED<?php }?>><?php echo $skin["title"];?></option>
+			<?php } ?>
 			</select>
 	</div>
 	<div class="clearboth"></div>
@@ -75,9 +75,9 @@
 	</div>
 	<div class="value inscription_value">
 			<select name="heitems" size="1">
-				<? foreach($HEITEMS as $item){ ?>
-					<option value="<?=$item["value"];?>" <?if(isset($item["set"])){?> SELECTED<?}?>><?=$item["value"];?></option>
-				<? } ?>
+				<?php foreach($HEITEMS as $item){ ?>
+					<option value="<?php echo $item["value"];?>" <?php if(isset($item["set"])){?> SELECTED<?php }?>><?php echo $item["value"];?></option>
+				<?php } ?>
 			</select>
 	</div>
 	<div class="clearboth"></div>

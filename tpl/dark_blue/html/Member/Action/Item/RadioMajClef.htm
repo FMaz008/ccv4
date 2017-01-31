@@ -6,12 +6,12 @@
 		<tr>
 			<td class="name">Clef de cryptage</td>
 			<td class="value">
-				<input type="text" class="text" name="clef" id="clef" value="<?=$radio->getClef();?>" maxlength="5" size="7"/>
+				<input type="text" class="text" name="clef" id="clef" value="<?php echo $radio->getClef();?>" maxlength="5" size="7"/>
 			</td>
 		</tr>		
 		<tr>
 			<td class="send" colspan="2">
-				<input type="button" class="button" onclick="saveClef('clef=' + escape($F('clef')) + '&idradio=<?=$radio->getInvId(); ?>&post=1')" value="Enregistrer" />
+				<input type="button" class="button" onclick="saveClef('clef=' + escape($F('clef')) + '&idradio=<?php echo $radio->getInvId(); ?>&post=1')" value="Enregistrer" />
 			</td>
 		</tr>
 	</table>

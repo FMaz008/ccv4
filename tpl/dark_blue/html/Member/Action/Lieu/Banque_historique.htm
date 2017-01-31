@@ -1,6 +1,6 @@
 <script type="text/javascript">
 //<!--
-<? if(isset($NIP)){ ?>
+<?php if(isset($NIP)){ ?>
 	goBack = function() {
 		$("action_redirect").action = "?popup=1&m=Action_Lieu_Guichet3";
 		ajaxSubmitForm($("action_redirect"));
@@ -10,7 +10,7 @@
 		$("action_redirect").action = "?popup=1&m=Action_Lieu_Guichet3historiquedetails";
 		ajaxSubmitForm($("action_redirect"));
 	}
-<? }else{ ?>
+<?php }else{ ?>
 	goBack = function() {
 		$("action_redirect").action = "?popup=1&m=Action_Lieu_Banque";
 		ajaxSubmitForm($("action_redirect"));
@@ -20,25 +20,25 @@
 		$("action_redirect").action = "?popup=1&m=Action_Lieu_BanqueHistoriqueDetails";
 		ajaxSubmitForm($("action_redirect"));
 	}
-<? } ?>
+<?php } ?>
 //-->
 </script>
 <form id="action_redirect" method="post" action="">
-<? if(isset($NIP)){ ?>
-	<input type="hidden" name="carteid" value="<?=$CARD_ID;?>" />
-	<input type="hidden" name="nip" value="<?=$NIP;?>" />
+<?php if(isset($NIP)){ ?>
+	<input type="hidden" name="carteid" value="<?php echo $CARD_ID;?>" />
+	<input type="hidden" name="nip" value="<?php echo $NIP;?>" />
 	<input type="hidden" name="trsid" id="trsid" value="" />
-<? }else{ ?>
-	<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+<?php }else{ ?>
+	<input type="hidden" name="compte" value="<?php echo $COMPTE;?>" />
 	<input type="hidden" name="trsid" id="trsid" value="" />
-<? } ?>
+<?php } ?>
 </form>
 
 <br />
 <table class="center" style="width:600px;">
 	<tr>
 		<td class="title" colspan="6">
-			Relev&eacute; du compte: <?=$COMPTE;?>
+			Relev&eacute; du compte: <?php echo $COMPTE;?>
 		</td>
 	</tr>
 	<tr>
@@ -49,19 +49,19 @@
 		<td class="name">Solde</td>
 		<td class="name"></td>
 	</tr>
-	<?
+	<?php
 	if(isset($HISTORIQUE)){
 		foreach($HISTORIQUE as $transaction){
 		?>
 			<tr>
-				<td class="value" style="width:150px;text-align:left;"><?=$transaction['date'];?></td>
-				<td class="value" style="width:100px;"><?=$transaction['code'];?></td>
-				<td class="value" style="width:75px;text-align:right;"><?=$transaction['retrait'];?></td>
-				<td class="value" style="width:75px;text-align:right;"><?=$transaction['depot'];?></td>
-				<td class="value" style="width:150px;text-align:right;"><?=$transaction['solde'];?></td>
-				<td class="value" style="width:50px;"><a href="#" onclick="goDetails(<?=$transaction['id'];?>);">details</a></td>
+				<td class="value" style="width:150px;text-align:left;"><?php echo $transaction['date'];?></td>
+				<td class="value" style="width:100px;"><?php echo $transaction['code'];?></td>
+				<td class="value" style="width:75px;text-align:right;"><?php echo $transaction['retrait'];?></td>
+				<td class="value" style="width:75px;text-align:right;"><?php echo $transaction['depot'];?></td>
+				<td class="value" style="width:150px;text-align:right;"><?php echo $transaction['solde'];?></td>
+				<td class="value" style="width:50px;"><a href="#" onclick="goDetails(<?php echo $transaction['id'];?>);">details</a></td>
 			</tr>
-		<?
+		<?php
 		}
 	}else{
 	?>
@@ -70,7 +70,7 @@
 				<i>-aucune transaction effectu&eacute;e-</i>
 			</td>
 		</tr>
-	<?
+	<?php
 	}
 	?>
 </table>

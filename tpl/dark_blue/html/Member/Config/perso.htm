@@ -1,6 +1,6 @@
-<div class="visitor_titre">Option du personnage (<?=$PERSO_NAME;?>)</div>
+<div class="visitor_titre">Option du personnage (<?php echo $PERSO_NAME;?>)</div>
 
-<form id="form1" id="form1" method="post" action="?m=Config_Perso2" enctype="multipart/form-data" accept-charset="<?=$SITE_CHARSET;?>">
+<form id="form1" id="form1" method="post" action="?m=Config_Perso2" enctype="multipart/form-data" accept-charset="<?php echo $SITE_CHARSET;?>">
 <div class="panel">
 	<div class="title">Configuration</div>
 
@@ -14,11 +14,11 @@
 		<br />
 	</div>
 	<div class="value inscription_value">
-		<input type="radio" name="reaction" value="rien" <?if($REACTION=='rien'){echo 'CHECKED ';}?>/>Ne rien faire<br />
-		<input type="radio" name="reaction" value="riposte" <?if($REACTION=='riposte'){echo 'CHECKED ';}?>/>Riposter<br />
-		<input type="radio" name="reaction" value="fuir" <?if($REACTION=='fuir'){echo 'CHECKED ';}?> />Fuir<br />
+		<input type="radio" name="reaction" value="rien" <?php if($REACTION=='rien'){echo 'CHECKED ';}?>/>Ne rien faire<br />
+		<input type="radio" name="reaction" value="riposte" <?php if($REACTION=='riposte'){echo 'CHECKED ';}?>/>Riposter<br />
+		<input type="radio" name="reaction" value="fuir" <?php if($REACTION=='fuir'){echo 'CHECKED ';}?> />Fuir<br />
 		
-		<input type="checkbox" name="esquive" value="1" <?if($ESQUIVE=='1'){echo 'CHECKED ';}?>/> Toujours tenter d'esquiver les attaques
+		<input type="checkbox" name="esquive" value="1" <?php if($ESQUIVE=='1'){echo 'CHECKED ';}?>/> Toujours tenter d'esquiver les attaques
 	</div>
 	<div class="clearboth"></div>
 
@@ -36,7 +36,7 @@
 		<br />
 	</div>
 	<div class="value inscription_value">
-		<textarea name="current_action" cols="70" rows="6" tabindex="1"><?=$CURRENT_ACTION;?></textarea>
+		<textarea name="current_action" cols="70" rows="6" tabindex="1"><?php echo $CURRENT_ACTION;?></textarea>
 	</div>
 	<div class="clearboth"></div>
 
@@ -54,7 +54,7 @@
 		<br />
 	</div>
 	<div class="value inscription_value">
-		<textarea name="description" cols="70" rows="6" tabindex="1"><?=$DESCRIPTION;?></textarea>
+		<textarea name="description" cols="70" rows="6" tabindex="1"><?php echo $DESCRIPTION;?></textarea>
 	</div>
 	<div class="clearboth"></div>
 
@@ -72,7 +72,7 @@
 		<br />
 	</div>
 	<div class="value inscription_value">
-		<textarea name="background" cols="70" rows="6" tabindex="1"><?=$BACKGROUND;?></textarea>
+		<textarea name="background" cols="70" rows="6" tabindex="1"><?php echo $BACKGROUND;?></textarea>
 	</div>
 	<div class="clearboth"></div>
 
@@ -94,23 +94,23 @@
 	</div>
 	<div class="value inscription_value">
 		
-		<input type="radio" name="imgtype" id="imgtype" value="none"<?if($IMG_SEL==0){?> CHECKED<?}?> />Aucune image
+		<input type="radio" name="imgtype" id="imgtype" value="none"<?php if($IMG_SEL==0){?> CHECKED<?php }?> />Aucune image
 		<hr />
 		
-		<input type="radio" name="imgtype" id="imgtype1" value="remote"<?if($IMG_SEL==1){?> CHECKED<?}?> />Image externe<br />
+		<input type="radio" name="imgtype" id="imgtype1" value="remote"<?php if($IMG_SEL==1){?> CHECKED<?php }?> />Image externe<br />
 		http://<input onclick="document.getElementById('imgtype1').checked=1;" type="text" class="text" name="imgurl" value="<?php if (isset($AVATAR_URL) && substr($AVATAR_URL,0,4)=="http") {echo substr($AVATAR_URL,7,strlen($AVATAR_URL)-7);} ?>" size="50" maxlength="200" />
 		<br />Max: <?php echo $IMG_MAXSIZE; ?>Kb, <?php echo $IMG_MAXW; ?>x<?php echo $IMG_MAXH; ?>px.
 		<hr />
 		
-		<? if(isset($UPLOAD_ACCESS)){ ?>
-			<input type="radio" name="imgtype" id="imgtype2" value="local"<?if($IMG_SEL==2){?> CHECKED<?}?> />Héberger une image:<br />
+		<?php if(isset($UPLOAD_ACCESS)){ ?>
+			<input type="radio" name="imgtype" id="imgtype2" value="local"<?php if($IMG_SEL==2){?> CHECKED<?php }?> />Héberger une image:<br />
 			Chemin local: <input onclick="document.getElementById('imgtype2').checked=1;" type="file" class="text" name="imgfile">
 			<br />Max: <?php echo $IMG_MAXSIZE; ?>Kb, <?php echo $IMG_MAXW; ?>x<?php echo $IMG_MAXH; ?>px.
 			
-		<? }else{ ?>
-			<?=$PAGE_PUB;?>
+		<?php }else{ ?>
+			<?php echo $PAGE_PUB;?>
 			
-		<? } ?>
+		<?php } ?>
 		
 	</div>
 	<div class="clearboth"></div>

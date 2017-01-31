@@ -15,33 +15,33 @@ confirmdel = function (){
 			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Perso_GestionCaractDel';return confirmdel();" />
 		</td>
 	</tr>
-<?
+<?php
 foreach($CAT as $cat){ 
 	?>
 	<tr>
 		<td class="title">
-			<input type="radio" name="id" value="<?=$cat['id'];?>" />
+			<input type="radio" name="id" value="<?php echo $cat['id'];?>" />
 		</td>
 		<td class="name" colspan="2">
-			<?=$cat['nom'];?>
+			<?php echo $cat['nom'];?>
 		</td>
 	</tr>
-	<?
+	<?php
 	foreach($CARACT as $caract){
 		if($caract['catid'] == $cat['id']){
 			?>			
 			<tr>
 				<td class="name">
-					<input type="radio" name="id" value="<?=$caract['id'];?>" />
+					<input type="radio" name="id" value="<?php echo $caract['id'];?>" />
 				</td>
 				<td class="value">
-					<?=$caract['nom'];?>
+					<?php echo $caract['nom'];?>
 				</td>
 				<td class="value">
-					<?=$caract['desc'];?>
+					<?php echo $caract['desc'];?>
 				</td>
 			</tr>
-	<? 	}
+	<?php 	}
 	}
 } ?>
 	<tr>

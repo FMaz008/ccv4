@@ -17,7 +17,7 @@
 		<td class="value" style="width:400px;vertical-align:top;padding-top:10px;">
 				<table class="center" style="width:400px;">
 					<tr>
-					<?
+					<?php
 					$CurrentType='';
 					$ItemCounter=0;
 					$maxcol=3;
@@ -36,9 +36,9 @@
 							
 							?>
 							</tr>
-							<tr><td class="name" colspan="<?=$maxcol;?>"><?=$item->getGroup();?></td></tr>
+							<tr><td class="name" colspan="<?php echo $maxcol;?>"><?php echo $item->getGroup();?></td></tr>
 							<tr>
-							<?
+							<?php
 							$ItemCounter=1;
 						}
 						if($ItemCounter>$maxcol)
@@ -47,7 +47,7 @@
 							?>
 							</tr>
 							<tr>
-							<?
+							<?php
 						}
 						$itemHeight = '60';
 						$itemAction='';
@@ -60,35 +60,35 @@
 						}
 						?>
 							<td class="value" style='width:33%;text-align:center;'>
-								<div id="dz_<?=$item->getInvId();?>"
+								<div id="dz_<?php echo $item->getInvId();?>"
 									class="dropable_off"
 									style="width:60px;
-										height:<?=$itemHeight;?>px;
-										background-image:url('<?=$SKIN_VIRTUAL_PATH;?>../_common/items/<?=$item->getImage();?>');
+										height:<?php echo $itemHeight;?>px;
+										background-image:url('<?php echo $SKIN_VIRTUAL_PATH;?>../_common/items/<?php echo $item->getImage();?>');
 										background-repeat:no-repeat;
 										opacity:0.15;"></div>
-								<div id="dg_<?=$item->getInvId();?>"
+								<div id="dg_<?php echo $item->getInvId();?>"
 									class="dragable"
 									style="width:60px;
-											height:<?=$itemHeight;?>px;
-											background-image:url('<?=$SKIN_VIRTUAL_PATH;?>../_common/items/<?=$item->getImage();?>');
+											height:<?php echo $itemHeight;?>px;
+											background-image:url('<?php echo $SKIN_VIRTUAL_PATH;?>../_common/items/<?php echo $item->getImage();?>');
 											background-repeat:no-repeat;"></div>
 								
 								
-								<div id="fiche_<?=$item->getInvId();?>" class="inv_fiche" style="position:absolute;display:none;overflow:hidden;">
-									<table id="table_<?=$item->getInvId();?>">
+								<div id="fiche_<?php echo $item->getInvId();?>" class="inv_fiche" style="position:absolute;display:none;overflow:hidden;">
+									<table id="table_<?php echo $item->getInvId();?>">
 									<tr>
-										<td class="value" id="tableimg_<?=$item->getInvId();?>" style="width:60px;">
+										<td class="value" id="tableimg_<?php echo $item->getInvId();?>" style="width:60px;">
 											<!--Espace réservée pour l'image-->
 										</td>
 										<td style="text-align:left;vertical-align:top;">
-											<div id="fiche_<?=$item->getInvId();?>_actions"><!--Espace réservée pour les actions--></div><br />
-											<div id="fiche_<?=$item->getInvId();?>_specs"><!--Espace réservé pour les spec--></div>
+											<div id="fiche_<?php echo $item->getInvId();?>_actions"><!--Espace réservée pour les actions--></div><br />
+											<div id="fiche_<?php echo $item->getInvId();?>_specs"><!--Espace réservé pour les spec--></div>
 										</td>
 									</tr>
 										<td style="text-align:left;vertical-align:top;" colspan="2">
-											<strong><div id="fiche_<?=$item->getInvId();?>_nom"><!--Espace réservé pour le nom--></div></strong><br />
-											<div id="fiche_<?=$item->getInvId();?>_description"><!--Espace réservé pour la description--></div>
+											<strong><div id="fiche_<?php echo $item->getInvId();?>_nom"><!--Espace réservé pour le nom--></div></strong><br />
+											<div id="fiche_<?php echo $item->getInvId();?>_description"><!--Espace réservé pour la description--></div>
 										</td>
 									</tr>
 									</table>
@@ -97,7 +97,7 @@
 								
 								<br />
 							</td>
-					<?
+					<?php
 					}
 					}
 					?>
@@ -111,7 +111,7 @@
 		
 		
 		
-			<table class="center" style="width:350px;background-image:url('<?=$SKIN_VIRTUAL_PATH;?>/img/<?=$SILOUHET_IMG;?>.png');background-repeat:no-repeat;">
+			<table class="center" style="width:350px;background-image:url('<?php echo $SKIN_VIRTUAL_PATH;?>/img/<?php echo $SILOUHET_IMG;?>.png');background-repeat:no-repeat;">
 				<tr style="height:1%;">
 				
 				
@@ -281,7 +281,7 @@
 		arrDz[arrDz.length] = new Dz('dos');
 		arrDz[arrDz.length] = new Dz('jeter');
 		arrDz[arrDz.length] = new Dz('consommer');
-	<?
+	<?php
 	
 	if(isset($INVENTAIRE)){
 	foreach($INVENTAIRE as $item){
@@ -351,24 +351,24 @@
 		
 		
 		?>
-		arrDz[arrDz.length] = new Dz("<?=$item->getInvId();?>");
+		arrDz[arrDz.length] = new Dz("<?php echo $item->getInvId();?>");
 		
 		arrItemFiches[arrItemFiches.length] = new FicheItem( 
-										<?=$item->getInvId();?>,
-										"<?=rawurlencode($item->getNom());?>",
-										"<?=rawurlencode($item->getDescription());?>",
-										Array(<?=$arrActions;?>),
-										"<?=$item->getPr();?>",
-										"<?=$qte;?>"
+										<?php echo $item->getInvId();?>,
+										"<?php echo rawurlencode($item->getNom());?>",
+										"<?php echo rawurlencode($item->getDescription());?>",
+										Array(<?php echo $arrActions;?>),
+										"<?php echo $item->getPr();?>",
+										"<?php echo $qte;?>"
 									);
 		
 		arrItems[arrItems.length] = new Item( 
-										<?=$item->getInvId();?>,
-										"<?=$baseDz;?>",
-										"<?=$equipDz;?>"
+										<?php echo $item->getInvId();?>,
+										"<?php echo $baseDz;?>",
+										"<?php echo $equipDz;?>"
 									);
 		
-		<?
+		<?php
 	}
 	}
 	?>

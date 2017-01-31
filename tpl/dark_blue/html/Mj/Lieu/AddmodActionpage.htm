@@ -1,12 +1,12 @@
-<select name="<?=$ACTION_IDX;?>_actionpage_add">
-	<?
+<select name="<?php echo $ACTION_IDX;?>_actionpage_add">
+	<?php
 	foreach($ACTION as $action)
 	{
 		?>
-		<option value="<?=$action['url'];?>" <?if (isset($action['sel'])){ echo 'SELECTED '; } ?>><?=$action['url'];?></option>
-		<?
+		<option value="<?php echo $action['url'];?>" <?php if (isset($action['sel'])){ echo 'SELECTED '; } ?>><?php echo $action['url'];?></option>
+		<?php
 	}
 	?>
 </select>
-<input type="text" id="caption_<?=$ACTION_IDX;?>" class="text" name="<?=$ACTION_IDX;?>_actioncaption_add" value="" />
-<div id="add_action_<?=$ACTION_IDX;?>"></div>
+<input type="text" id="caption_<?php echo $ACTION_IDX;?>" class="text" name="<?php echo $ACTION_IDX;?>_actioncaption_add" value="" />
+<div id="add_action_<?php echo $ACTION_IDX;?>"></div>

@@ -6,35 +6,35 @@
 	<tr>
 		<td class="name">Taux offert:</td>
 		<td class="value">
-			<?=round($PROD['pa_cash_ratio']*10,2);?> <?=GAME_DEVISE;?> pour 10 PA
+			<?php echo round($PROD['pa_cash_ratio']*10,2);?> <?php echo GAME_DEVISE;?> pour 10 PA
 		</td>
 	</tr>
 	<tr>
 		<td class="name">Pendant combien de temps voulez-vous travailler ?</td>
 		<td class="value">
-			<?
+			<?php
 			if($PROD['cash']<$PROD['pa_cash_ratio'])
 			{
 				?>
 				<i>- Ce producteur n'offre actuellement pas de travail. -</i>
-				<?
+				<?php
 			}
 			else
 			{
 				?>
 				<select name="pa">
-				<?
+				<?php
 				for($i=10;
 					$i <= $PERSO->getPa() && $i*$PROD['pa_cash_ratio'] <= $PROD['cash'];
 					$i=$i+10)
 				{
 					?>
-					<option value="<?=$i;?>"><?=$i;?> PA =&gt; environ <?=fctCreditFormat($i*$PROD['pa_cash_ratio'],true);?></option>
+					<option value="<?php echo $i;?>"><?php echo $i;?> PA =&gt; environ <?php echo fctCreditFormat($i*$PROD['pa_cash_ratio'],true);?></option>
 					<?php
 				}
 				?>
 				</select>
-				<?
+				<?php
 			}
 			?>
 		</td>

@@ -15,7 +15,7 @@
 
 
 
-<?
+<?php
 if(false)
 {
 ?>
@@ -52,8 +52,8 @@ if(false)
 	<td class="name">Statut Actuel</td>
 </tr>
 <tr>
-	<td class="value"><?=$ACCOUNT_USER;?></td>
-	<td class="value"><?=$MP_TXT;?></td>
+	<td class="value"><?php echo $ACCOUNT_USER;?></td>
+	<td class="value"><?php echo $MP_TXT;?></td>
 </tr>
 </table>
 
@@ -63,31 +63,31 @@ if(false)
 <tr>
 	<td class="title" colspan="3">Abonnements disponibles</td>
 </tr>
-<? foreach($ABO as $abo){ ?>
+<?php foreach($ABO as $abo){ ?>
 	<tr>
-		<td class="name"><?=$abo['cat'];?></td>
-		<td class="value"><?=$abo['txt'];?></td>
+		<td class="name"><?php echo $abo['cat'];?></td>
+		<td class="value"><?php echo $abo['txt'];?></td>
 		<td class="value" style="text-align:center;vertical-align:center;">
-			<span style="font-size:16pt;"><?=$abo['prix'];?></span>
+			<span style="font-size:16pt;"><?php echo $abo['prix'];?></span>
 			<span style="font-size:12pt;">.00&euro;</span>
 			<br />
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 			<!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">-->
 			<input type="hidden" name="cmd" value="_xclick">
 			<input type="hidden" name="business" value="admin@cybercity2034.com">
-			<input type="hidden" name="item_name" value="<?=$abo['txt'];?>, pour <?=$ACCOUNT_USER;?>">
-			<input type="hidden" name="item_number" value="<?=$abo['code'];?><?=$ACCOUNT_ID;?>">
-			<input type="hidden" name="amount" value="<?=$abo['prix'];?>">
+			<input type="hidden" name="item_name" value="<?php echo $abo['txt'];?>, pour <?php echo $ACCOUNT_USER;?>">
+			<input type="hidden" name="item_number" value="<?php echo $abo['code'];?><?php echo $ACCOUNT_ID;?>">
+			<input type="hidden" name="amount" value="<?php echo $abo['prix'];?>">
 			<input type="hidden" name="no_shipping" value="1">
 			
 			<input type="hidden" name="rm" value="2">
-			<input type="hidden" name="return" value="<?=$SITE_VIRTUAL_PATH;?>?m=Mp_AboSuccess">
+			<input type="hidden" name="return" value="<?php echo $SITE_VIRTUAL_PATH;?>?m=Mp_AboSuccess">
 			<input type="hidden" name="cbt" value="Retourner sur CyberCity 2034 >>">
 			
-			<input type="hidden" name="cancel_return" value="<?=$SITE_VIRTUAL_PATH;?>?m=Mp_AboCancel">
+			<input type="hidden" name="cancel_return" value="<?php echo $SITE_VIRTUAL_PATH;?>?m=Mp_AboCancel">
 			<input type="hidden" name="no_note" value="1">
 			<input type="hidden" name="currency_code" value="EUR">
-			<input type="hidden" name="notify_url" value="<?=$SITE_VIRTUAL_PATH;?>?v=PaypalIPN" />
+			<input type="hidden" name="notify_url" value="<?php echo $SITE_VIRTUAL_PATH;?>?v=PaypalIPN" />
 			<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but01.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 			</form>
 		</td>
@@ -97,10 +97,10 @@ if(false)
 		</td>
 		<td colspan="2"><hr /></td>
 	</tr>
-<? } ?>
+<?php } ?>
 </table>
 
-<?
+<?php
 }
 ?>
 Page obsolète !

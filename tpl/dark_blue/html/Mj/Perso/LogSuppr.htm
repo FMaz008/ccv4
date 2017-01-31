@@ -7,16 +7,16 @@
 		<td class="name">Perso</td>
 		<td class="name">MJ</td>
 	</tr>
-	<?
+	<?php
 	foreach ($donnees as $log)
 	{
 		?>
 		<tr>
-			<td class="value"><?=$log['timestamp'];?></td>
-			<td class="value"><?=$log['perso'];?></td>
-			<td class="value"><?=$log['mj'];?></td>
+			<td class="value"><?php echo $log['timestamp'];?></td>
+			<td class="value"><?php echo $log['perso'];?></td>
+			<td class="value"><?php echo $log['mj'];?></td>
 		</tr>
-		<?
+		<?php
 	}
 	?>
 

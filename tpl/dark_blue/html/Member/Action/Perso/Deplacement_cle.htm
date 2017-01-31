@@ -1,61 +1,61 @@
 <br />
 <form id="action_deplacementCle" method="post" action="?popup=1&m=Action_Perso_Deplacement2" onsubmit="return ajaxSubmitForm(this);">
 <input type="hidden" name="pass" id="pass" value="" />
-<input type="hidden" name="moveto" value="<?=$moveto;?>" />
-<input type="hidden" name="RAD_typeaction" value="<?=$RAD_typeaction;?>" />
+<input type="hidden" name="moveto" value="<?php echo $moveto;?>" />
+<input type="hidden" name="RAD_typeaction" value="<?php echo $RAD_typeaction;?>" />
 
-<?if(isset($CHK_furtif)){
+<?php if(isset($CHK_furtif)){
 	?>
-	<input type="hidden" name="CHK_furtif" value="<?=$CHK_furtif;?>" />
-	<?
+	<input type="hidden" name="CHK_furtif" value="<?php echo $CHK_furtif;?>" />
+	<?php
 	}
 ?>
 
-<?if(isset($CHK_keepcurrentaction)){
+<?php if(isset($CHK_keepcurrentaction)){
 	?>
-	<input type="hidden" name="CHK_keepcurrentaction" value="<?=$CHK_keepcurrentaction;?>" />
-	<?
+	<input type="hidden" name="CHK_keepcurrentaction" value="<?php echo $CHK_keepcurrentaction;?>" />
+	<?php
 	}
 ?>
 
 
-<?
+<?php
 if(isset($arrPorteTenuA)){
 	foreach($arrPorteTenuA as $perso){
 		?>
-		<input type="hidden" name="t_<?=$perso;?>" value="on" />
-		<?
+		<input type="hidden" name="t_<?php echo $perso;?>" value="on" />
+		<?php
 	}
 }?>
 
-<?
+<?php
 if(isset($arrPorteForcerA)){
 	foreach($arrPorteForcerA as $perso){
 		?>
-		<input type="hidden" name="f_<?=$perso;?>" value="on" />
-		<?
+		<input type="hidden" name="f_<?php echo $perso;?>" value="on" />
+		<?php
 	}
 }?>
 
-<? if(isset($WRONGPASS)) { ?>
+<?php if(isset($WRONGPASS)) { ?>
 	<font color="red">/!\ Cette cl&eacute; n'ouvre par cette serrure. /!\</font>
-<? } ?>
+<?php } ?>
 
 <table class="tbl_center">
 	<tr>
 		<td class="title">Sélectionner la clé à utiliser</td>
 	</tr>
-	<?
+	<?php
 	if (isset($CLES)){
 		foreach($CLES as $cle){
 		?>
 			<tr>
 				<td>
-					<input type="radio" name="cle" value="<?=$cle->getInvId();?>" />
-					<?=$cle->getNom(); ?>
+					<input type="radio" name="cle" value="<?php echo $cle->getInvId();?>" />
+					<?php echo $cle->getNom(); ?>
 				</td>
 			</tr>
-		<?
+		<?php
 		}
 	}else{
 	?>
@@ -64,7 +64,7 @@ if(isset($arrPorteForcerA)){
 				<i>Vous n'avez pas de clé</i>
 			</td>
 		</tr>
-	<?
+	<?php
 	}
 	?>
 	<tr>

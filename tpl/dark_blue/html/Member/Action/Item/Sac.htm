@@ -10,8 +10,8 @@
 	}
 	
 	//Mettre a jour les infos
-	$('perso_pr').innerHTML="<?=$PERSO_PR;?>";
-	$('perso_pa').innerHTML="<?=$PERSO_PA;?>";
+	$('perso_pr').innerHTML="<?php echo $PERSO_PR;?>";
+	$('perso_pa').innerHTML="<?php echo $PERSO_PA;?>";
 //-->
 </script>
 
@@ -28,7 +28,7 @@
 	
 	<div class="member_action_sac_left">
 		<div class="name">Ouvrir le sac:</div>
-		<?
+		<?php
 		if (isset($SACS)){
 		
 			//Liste des sacs
@@ -36,88 +36,88 @@
 				?>
 				<script type="text/javascript">
 				//<!--
-					arrTabs[arrTabs.length] = <?=$sac['sac']->getInvId();?>;
+					arrTabs[arrTabs.length] = <?php echo $sac['sac']->getInvId();?>;
 				//-->
 				</script>
-				<div class="member_action_sac_linkoff" id="<?=$sac['sac']->getInvId();?>" onclick="showInv(this.id);">
-					<span class="fakelink"><?=$sac['sac']->getNom();?></span>
-					(<?=$sac['sac']->getInvPr();?>/<?=$sac['sac']->getCapaciteMax();?> PR)
+				<div class="member_action_sac_linkoff" id="<?php echo $sac['sac']->getInvId();?>" onclick="showInv(this.id);">
+					<span class="fakelink"><?php echo $sac['sac']->getNom();?></span>
+					(<?php echo $sac['sac']->getInvPr();?>/<?php echo $sac['sac']->getCapaciteMax();?> PR)
 				</div>
-				<?
+				<?php
 			}
 			
 			//Liste des items dans les sacs
 			foreach($SACS as $sac){
 				?>
-				<div id="tab_<?=$sac['sac']->getInvId();?>" class="member_action_sac_itemContainer" style="display:none;">
+				<div id="tab_<?php echo $sac['sac']->getInvId();?>" class="member_action_sac_itemContainer" style="display:none;">
 					<table>
 						<tr>
 							<td class="name" style="width:60px;">Qte</td>
 							<td class="name" style="width:170px;">Nom</td>
 							<td class="name" style="width:10px;">PR</td>
 						</tr>
-					<?
+					<?php
 					if(isset($sac['inv'])){
 						foreach($sac['inv'] as $item){
 							?>
 							<tr>
 								<td class="value">
-									<input type="text" class="text" name="<?=$item->getInvId();?>_qte" value="0" style="width:25px;" /> /<?=$item->getQte();?>
+									<input type="text" class="text" name="<?php echo $item->getInvId();?>_qte" value="0" style="width:25px;" /> /<?php echo $item->getQte();?>
 								</td>
-								<td class="value"><?=$item->getNom();?></td>
-								<td class="value"><?=$item->getPr();?></td>
+								<td class="value"><?php echo $item->getNom();?></td>
+								<td class="value"><?php echo $item->getPr();?></td>
 							</tr>
-							<?
+							<?php
 						}
 					}else{
 						?>
 						<td colspan="4">
 							<i>- Ce sac est vide -</i>
 						</td>
-						<?
+						<?php
 
 					}
 					?>
 					</table>
 				</div>
-				<?
+				<?php
 			}
 		}else{
 		?>
 			<i>- Vous ne possédez aucun sac -</i>
-		<?
+		<?php
 		}
 		?>
 	</div>
 	
 	<div class="member_action_sac_right">
-		<div class="name">Inventaire du perso (<?=$PERSO_PR;?>/<?=$PERSO_PR_MAX;?> PR):</div>
+		<div class="name">Inventaire du perso (<?php echo $PERSO_PR;?>/<?php echo $PERSO_PR_MAX;?> PR):</div>
 		<table>
 		<tr>
 			<td class="name" style="width:60px;">Qte</td>
 			<td class="name" style="width:170px;">Nom</td>
 			<td class="name" style="width:10px;">PR</td>
 		</tr>
-		<? if (isset($INV_PERSO)){
+		<?php if (isset($INV_PERSO)){
 			foreach($INV_PERSO as $elem){
 				$item = &$elem['item'];
 				$grayed = $elem['class'];
 				?>
 				<tr>
-					<td class="value <?=$grayed;?>">
-						<? if($grayed==''){ ?>
-							<input type="text" class="text" name="<?=$item->getInvId();?>_qte" value="0" style="width:25px;" /> /<?=$item->getQte();?>
-						<? } ?>
-						<? if($item->isEquip()){ ?>
+					<td class="value <?php echo $grayed;?>">
+						<?php if($grayed==''){ ?>
+							<input type="text" class="text" name="<?php echo $item->getInvId();?>_qte" value="0" style="width:25px;" /> /<?php echo $item->getQte();?>
+						<?php } ?>
+						<?php if($item->isEquip()){ ?>
 							<div style="width:100%;text-align:center;">
 								[Équipé]
 							</div>
-						<? } ?>
+						<?php } ?>
 					</td>
-					<td class="value <?=$grayed;?>"><?=$item->getNom();?></td>
-					<td class="value <?=$grayed;?>"><?=$item->getPr();?></td>
+					<td class="value <?php echo $grayed;?>"><?php echo $item->getNom();?></td>
+					<td class="value <?php echo $grayed;?>"><?php echo $item->getPr();?></td>
 				</tr>
-			<? } 
+			<?php } 
 		}else{
 			?>
 			<tr>
@@ -125,7 +125,7 @@
 					<i>-Vous n'avez rien en inventaire-</i>
 				</td>
 			</tr>
-			<?
+			<?php
 		}
 		?>
 		</table>
@@ -140,14 +140,14 @@
 </div>
 
 </form>
-<?
+<?php
 if(isset($SHOW_SAC_ID)){
 	?>
 	<script type="text/javascript">
 	//<!--
-		showInv(<?=$SHOW_SAC_ID;?>);
+		showInv(<?php echo $SHOW_SAC_ID;?>);
 	//-->
 	</script>
-	<?
+	<?php
 }
 ?>

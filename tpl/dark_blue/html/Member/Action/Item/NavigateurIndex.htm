@@ -2,23 +2,23 @@
 <tr>
 	<td class="title">
 		Index du site
-		<? if(isset($canPost)){ ?>
-			[<a href="#" onclick="goTo('dom.net/addpage?<?=$site->getUrl();?>');">Nouvelle page</a>]
-		<? } ?>
-		<? if(isset($admin)){ ?>
-			[<a href="#" onclick="goTo('dom.net/modsite?<?=$site->getUrl();?>');">Modifier Site</a>]
-			[<a href="#" onclick="goTo('dom.net/modacces?<?=$site->getUrl();?>');">Gestion des acc&egrave;s</a>]
-		<? } ?>
+		<?php if(isset($canPost)){ ?>
+			[<a href="#" onclick="goTo('dom.net/addpage?<?php echo $site->getUrl();?>');">Nouvelle page</a>]
+		<?php } ?>
+		<?php if(isset($admin)){ ?>
+			[<a href="#" onclick="goTo('dom.net/modsite?<?php echo $site->getUrl();?>');">Modifier Site</a>]
+			[<a href="#" onclick="goTo('dom.net/modacces?<?php echo $site->getUrl();?>');">Gestion des acc&egrave;s</a>]
+		<?php } ?>
 	</td>
 </tr>
 <tr>
 	<td class="value">
-		<?
+		<?php
 		if (isset($arrPages)){
 			foreach($arrPages as $page){
 			?>
-				<a href="#" onclick="goTo('<?=$site->getUrl();?>/<?=$page->getId();?>');" style="display:block;"><?=$page->getTitre();?></a>
-			<? 
+				<a href="#" onclick="goTo('<?php echo $site->getUrl();?>/<?php echo $page->getId();?>');" style="display:block;"><?php echo $page->getTitre();?></a>
+			<?php 
 			}
 		} 
 		?>

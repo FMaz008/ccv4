@@ -1,8 +1,8 @@
 <form name="form1" action="" method="post">
-	<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+	<input type="hidden" name="LIEU_ID" value="<?php echo $LIEU_ID;?>" />
 <table class="center">
 	<tr>
-		<td class="title" colspan="5">Gestion des casiers du lieu <?=$LIEU_TECH;?></td>	
+		<td class="title" colspan="5">Gestion des casiers du lieu <?php echo $LIEU_TECH;?></td>	
 	</tr>
 	
 	<tr>
@@ -13,17 +13,17 @@
 		<td class="name">Capacité</td>
 	</tr>
 	
-	<? foreach($CASIERS as $casier){ ?>
+	<?php foreach($CASIERS as $casier){ ?>
 		<tr>
 			<td class="name" style="width:10px;">
-				<input type="radio" name="id_casier" value="<?=$casier['id_casier'];?>" />
+				<input type="radio" name="id_casier" value="<?php echo $casier['id_casier'];?>" />
 			</td>
-			<td class="value"><?=$casier['id_casier'];?></td>
-			<td class="value"><a href="?mj=Lieu_Inventaire&id=<?=$_GET['id'];?>&cid=<?=$casier['id_casier'];?>"><?=$casier['nom_casier'];?></a></td>
-			<td class="value"><?=$casier['nbr_items'];?></td>
-			<td class="value"><?=$casier['items_pr'];?> / <?=$casier['capacite_casier'];?></td>
+			<td class="value"><?php echo $casier['id_casier'];?></td>
+			<td class="value"><a href="?mj=Lieu_Inventaire&id=<?php echo $_GET['id'];?>&cid=<?php echo $casier['id_casier'];?>"><?php echo $casier['nom_casier'];?></a></td>
+			<td class="value"><?php echo $casier['nbr_items'];?></td>
+			<td class="value"><?php echo $casier['items_pr'];?> / <?php echo $casier['capacite_casier'];?></td>
 		</tr>
-	<? } ?>
+	<?php } ?>
 	
 	<tr>
 		<td colspan="5" class="send">

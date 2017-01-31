@@ -16,7 +16,7 @@
 					method: 'post', 
 					parameters: 'titre='+encodeURIComponent($F('page_titre'))+
 								'&content='+encodeURIComponent($F('page_content'))+
-								'&no='+<?=$PAGE->getId();?>+
+								'&no='+<?php echo $PAGE->getId();?>+
 								'&user='+$F('header_user')+
 								'&pass='+$F('header_pass')+
 								'&acces='+$('acces').checked+
@@ -87,7 +87,7 @@
 	</tr>
 	<tr>
 		<td class="value">
-			<input type="text" class="text" name="page_titre" size="50" maxlength="250" id="page_titre" value="<?=$PAGE->getTitre();?>" />
+			<input type="text" class="text" name="page_titre" size="50" maxlength="250" id="page_titre" value="<?php echo $PAGE->getTitre();?>" />
 		</td>
 	</tr>
 	<tr>
@@ -95,7 +95,7 @@
 	</tr>
 	<tr>
 		<td class="value">
-			<textarea id="page_content" name="page_content" style="width:600px;height:400px;"><?=$PAGE->getContentRaw();?></textarea>
+			<textarea id="page_content" name="page_content" style="width:600px;height:400px;"><?php echo $PAGE->getContentRaw();?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -110,12 +110,12 @@
 			</tr>
 			<tr>
 				<td class="value">
-					<input type="radio" id="acces" name="acces" value="pub" <? echo (($PAGE->isPublic()) ? 'CHECKED' : ''); ?> /> Public<br />
-					<input type="radio" 			name="acces" value="priv" <? echo (($PAGE->isPublic()) ? '' : 'CHECKED'); ?> /> Privé
+					<input type="radio" id="acces" name="acces" value="pub" <?php echo (($PAGE->isPublic()) ? 'CHECKED' : ''); ?> /> Public<br />
+					<input type="radio" 			name="acces" value="priv" <?php echo (($PAGE->isPublic()) ? '' : 'CHECKED'); ?> /> Privé
 				</td>
 				<td class="value">
-					<input type="radio" id="showIndex" name="showIndex" value="1" <? echo (($PAGE->getShowIndex()=='1') ? 'CHECKED' : ''); ?> /> Oui<br />
-					<input type="radio"					name="showIndex" value="0" <? echo (($PAGE->getShowIndex()=='0') ? 'CHECKED' : ''); ?> /> Non (Via URL seulement)
+					<input type="radio" id="showIndex" name="showIndex" value="1" <?php echo (($PAGE->getShowIndex()=='1') ? 'CHECKED' : ''); ?> /> Oui<br />
+					<input type="radio"					name="showIndex" value="0" <?php echo (($PAGE->getShowIndex()=='0') ? 'CHECKED' : ''); ?> /> Non (Via URL seulement)
 				</td>
 			</tr>
 			</table>

@@ -2,7 +2,7 @@
 <table class="center">
 
 <tr>
-	<td class="title" colspan="2">Connaissance de <?=$pseudo;?></td>
+	<td class="title" colspan="2">Connaissance de <?php echo $pseudo;?></td>
 </tr>
 
 <tr>
@@ -12,17 +12,17 @@
 </tr>
 
 
-<?foreach($connu as $c){?>
-		<?
+<?php foreach($connu as $c){?>
+		<?php
 		$id = $c['id'];
 		?>
-		<form method="post" action="?mj=Perso_Connaissance&id=<?=$id_get;?>">
+		<form method="post" action="?mj=Perso_Connaissance&id=<?php echo $id_get;?>">
 		<tr>
-			<td class="value"><?=$c['vrai_nom'];?></td>
-			<td class="value"><input type="text" class="text" name="<?=$id;?>" value="<?=$c['nom']; ?>" /></td>
+			<td class="value"><?php echo $c['vrai_nom'];?></td>
+			<td class="value"><input type="text" class="text" name="<?php echo $id;?>" value="<?php echo $c['nom']; ?>" /></td>
 			
 			
-		</tr><? } ?>
+		</tr><?php } ?>
 		<tr>
 
 			<td class="value"> </td>

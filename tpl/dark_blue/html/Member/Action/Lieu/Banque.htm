@@ -1,7 +1,7 @@
 <script type="text/javascript">
 //<!--
-	$('perso_pa').innerHTML="<?=$PA;?>";
-	$('perso_cash').innerHTML="<?=$CASH;?>";
+	$('perso_pa').innerHTML="<?php echo $PA;?>";
+	$('perso_cash').innerHTML="<?php echo $CASH;?>";
 	
 	//Fonction generales
 	fail = function(){
@@ -114,32 +114,32 @@
 <table class="tbl_center">
 	<tr>
 		<td class="title" colspan="2">
-			Banque <?=$BANQUE->getNom();?>
+			Banque <?php echo $BANQUE->getNom();?>
 		</td>
 	</tr>
-	<?
+	<?php
 	foreach($BANK_ACCOUNTS as $account){
 	?>
 		<tr><td class="title" colspan="2">
-			Compte: <?=$account->getNoBanque();?>-<?=$account->getNoCompte();?> au nom de <?=$account->getNom();?>.<br />
-			<?
+			Compte: <?php echo $account->getNoBanque();?>-<?php echo $account->getNoCompte();?> au nom de <?php echo $account->getNom();?>.<br />
+			<?php
 			if (!$BANQUE->canRetrait()){
 			?>
 				(compte pour d&eacute;pot uniquement)<br />
-			<?
+			<?php
 			}
 			?>
 		</td></tr>
 		<tr>
 			<td class="value" colspan="2">
-				<form id="action_redirect<?=$account->getId();?>" method="post" action="">
-					<input type="hidden" name="compte" id="compte" value="<?=$account->getNoBanque();?>-<?=$account->getNoCompte();?>" />
+				<form id="action_redirect<?php echo $account->getId();?>" method="post" action="">
+					<input type="hidden" name="compte" id="compte" value="<?php echo $account->getNoBanque();?>-<?php echo $account->getNoCompte();?>" />
 				</form>
-				[<span class="fakelink" onclick="goTo('<?=$account->getId();?>','?popup=1&m=Action_Lieu_BanqueCarte');">Gestion des cartes de guichet</span>]
-				[<span class="fakelink" onclick="goTo('<?=$account->getId();?>','?popup=1&m=Action_Lieu_BanqueHistorique');">Relev&eacute; des transactions</span>]
-				<?if($account->authAutoTransactions()){?>
-					[<span class="fakelink" onclick="goTo('<?=$account->getId();?>','?popup=1&m=Action_Lieu_BanqueTransactionAuto');">Gestion des transactions automatiques</span>]
-				<?}?>
+				[<span class="fakelink" onclick="goTo('<?php echo $account->getId();?>','?popup=1&m=Action_Lieu_BanqueCarte');">Gestion des cartes de guichet</span>]
+				[<span class="fakelink" onclick="goTo('<?php echo $account->getId();?>','?popup=1&m=Action_Lieu_BanqueHistorique');">Relev&eacute; des transactions</span>]
+				<?php if($account->authAutoTransactions()){?>
+					[<span class="fakelink" onclick="goTo('<?php echo $account->getId();?>','?popup=1&m=Action_Lieu_BanqueTransactionAuto');">Gestion des transactions automatiques</span>]
+				<?php }?>
 			</td>
 		</tr>
 		<tr>
@@ -151,25 +151,25 @@
 				<table>
 					<tr>
 						<td class="name">Solde du compte:</td>
-						<td class="valeur"><span id="cash<?=$account->getId();?>"><?=($account->getCash() != -1)? $account->getCash() . GAME_DEVISE : 'illimité';?></td>
+						<td class="valeur"><span id="cash<?php echo $account->getId();?>"><?php echo ($account->getCash() != -1)? $account->getCash() . GAME_DEVISE : 'illimité';?></td>
 					</tr>
 					<tr>
 						<td class="name">Montant de la transaction:</td>
-						<td class="value"><input type="text" class="text" id="o_montant<?=$account->getId();?>" value="0" size="6" maxlength="12" /><?=GAME_DEVISE;?></td>
+						<td class="value"><input type="text" class="text" id="o_montant<?php echo $account->getId();?>" value="0" size="6" maxlength="12" /><?php echo GAME_DEVISE;?></td>
 					</tr>
 					<tr>
 						<td class="name">Type de transaction:</td>
 						<td class="value">
-							<?
+							<?php
 							//if (!isset($BANK_VIA_ITEM)){
 							?>
-								<input type="button" class="button" name="depot" value="D&eacute;pot" onclick="operation_depot(<?=$account->getId();?>);" />
-							<?
+								<input type="button" class="button" name="depot" value="D&eacute;pot" onclick="operation_depot(<?php echo $account->getId();?>);" />
+							<?php
 							//}
 							if($BANQUE->canRetrait()){
 							?>
-								<input type="button" class="button" name="retrait" value="Retrait" onclick="operation_retrait(<?=$account->getId();?>);" />
-							<?
+								<input type="button" class="button" name="retrait" value="Retrait" onclick="operation_retrait(<?php echo $account->getId();?>);" />
+							<?php
 							}
 							?>
 						</td>
@@ -180,25 +180,25 @@
 				<table>
 					<tr>
 						<td class="name">Verser dans le compte #:</td>
-						<td class="value"><input type="text" class="text" id="t_compte<?=$account->getId();?>" value="" size="19" maxlength="19" /></td>
+						<td class="value"><input type="text" class="text" id="t_compte<?php echo $account->getId();?>" value="" size="19" maxlength="19" /></td>
 					</tr>
 					<tr>
 						<td class="name">Montant de la transaction:</td>
-						<td class="value"><input type="text" class="text" id="t_montant<?=$account->getId();?>" value="0" size="6" maxlength="12" /><?=GAME_DEVISE;?></td>
+						<td class="value"><input type="text" class="text" id="t_montant<?php echo $account->getId();?>" value="0" size="6" maxlength="12" /><?php echo GAME_DEVISE;?></td>
 					</tr>
 						<td class="name">Type de transaction:</td>
 						<td class="value">
-							<?
+							<?php
 							if ($BANQUE->canRetrait()){
 							?>
-								<input type="button" class="button" name="transfert" value="Transfert" onclick="operation_transfert(<?=$account->getId();?>);" />
-							<?
+								<input type="button" class="button" name="transfert" value="Transfert" onclick="operation_transfert(<?php echo $account->getId();?>);" />
+							<?php
 							}
 							else
 							{
 							?>
 							<i>- Ceci n'est pas un compte autorisant les opérations banquaires -</i>
-							<?
+							<?php
 							}
 							?>
 						</td>
@@ -208,20 +208,20 @@
 		</tr>
 		<tr>
 			<td class="value" colspan="2">
-				<form id="action_bank_nip<?=$account->getId();?>" method="post" action="?popup=1&m=Action_Lieu_Banque" onsubmit="return ajaxSubmitForm(this);">
-					<input type="hidden" name="compte_id" value="<?=$account->getId();?>" />
-					NIP : <input type="text" class="text" name="nip" size="5" maxlength="5" value="<?=$account->getNip();?>" />
+				<form id="action_bank_nip<?php echo $account->getId();?>" method="post" action="?popup=1&m=Action_Lieu_Banque" onsubmit="return ajaxSubmitForm(this);">
+					<input type="hidden" name="compte_id" value="<?php echo $account->getId();?>" />
+					NIP : <input type="text" class="text" name="nip" size="5" maxlength="5" value="<?php echo $account->getNip();?>" />
 					<input type="submit" name="changeNIP" class="button" value="Changer" />
 				</form>
 				<br />
-				<form id="action_bank_close<?=$account->getId();?>" method="post" action="?popup=1&m=Action_Lieu_Banque" onsubmit="return ajaxSubmitForm(this);">
-					<input type="hidden" name="compte_id" value="<?=$account->getId();?>" />
+				<form id="action_bank_close<?php echo $account->getId();?>" method="post" action="?popup=1&m=Action_Lieu_Banque" onsubmit="return ajaxSubmitForm(this);">
+					<input type="hidden" name="compte_id" value="<?php echo $account->getId();?>" />
 					<input type="checkbox" name="c_check" value="checked" />Je d&eacute;sire fermer ce compte.<br />
 					<input type="submit" name="close" class="button" style="width:200px;" value="Fermer ce compte maintenant" onclick="return confirm('Fermer ce compte ?');" />
 				</form>
 			</td>
 		</tr>
-		<?
+		<?php
 	}
 	?>
 </table>

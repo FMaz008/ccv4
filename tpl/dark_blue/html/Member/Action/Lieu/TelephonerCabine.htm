@@ -1,11 +1,11 @@
-<?if(!isset($_POST['numero_destinataire'])){?>
+<?php if(!isset($_POST['numero_destinataire'])){?>
 	<form id="action_TelephonerCabine" action="?popup=1&m=Action_Lieu_TelephonerCabine" method="post" onsubmit="return ajaxSubmitForm(this);">
 	<table class="tbl_center">
 		<tr>
 			<td class="title" colspan="2">Cabine t&eacute;l&eacute;phonique</td>
 		</tr>
 		<tr>
-			<td class="value" colspan="2">Coût d'un appel: 2<?=GAME_DEVISE;?></td>
+			<td class="value" colspan="2">Coût d'un appel: 2<?php echo GAME_DEVISE;?></td>
 		</tr>
 		<tr>
 			<td class="name" width="150px">T&eacute;l&eacute;phoner au #</td>
@@ -25,4 +25,4 @@
 		</tr>
 	</table>
 	</form>
-<?}?>
+<?php }?>

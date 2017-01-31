@@ -1,12 +1,12 @@
 <br />
 <form id="action_casierInv" method="post" action="" onsubmit="return ajaxSubmitForm(this);">
-	<input type="hidden" name="id_casier" value="<?=$ID_CASIER;?>" />
-	<? if(isset($PASS)){ ?>
-		<input type="hidden" name="pass" value="<?=$PASS;?>" />
-	<? } ?>
-	<? if(isset($CLEF)){ ?>
-		<input type="hidden" name="clef" value="<?=$CLEF;?>" />
-	<? } ?>
+	<input type="hidden" name="id_casier" value="<?php echo $ID_CASIER;?>" />
+	<?php if(isset($PASS)){ ?>
+		<input type="hidden" name="pass" value="<?php echo $PASS;?>" />
+	<?php } ?>
+	<?php if(isset($CLEF)){ ?>
+		<input type="hidden" name="clef" value="<?php echo $CLEF;?>" />
+	<?php } ?>
 
 
 
@@ -31,21 +31,21 @@
 					<td class="name" style="width:150px;">Nom</td>
 					<td class="name">Pr (/chq)</td>
 				</tr>
-			<? if (isset($INV_PERSO)){
+			<?php if (isset($INV_PERSO)){
 				foreach($INV_PERSO as $item){?>
 					<tr>
 						<td class="name">
-							<input type="text" class="text" name="qte_<?=$item->getInvId();?>" value="0" style="width:25px;" />
-							&nbsp;&nbsp;/ <?=$item->getQte();?>
+							<input type="text" class="text" name="qte_<?php echo $item->getInvId();?>" value="0" style="width:25px;" />
+							&nbsp;&nbsp;/ <?php echo $item->getQte();?>
 						</td>
-						<td class="value"><?=$item->getNom();?></td>
-						<td class="value"><?=$item->getPr();?></td>
+						<td class="value"><?php echo $item->getNom();?></td>
+						<td class="value"><?php echo $item->getPr();?></td>
 					</tr>
-				<? } 
+				<?php } 
 			}else{
 			?>
 				<tr><td class="send" colspan="3"><i>- aucun item en inventaire -</i></td></tr>
-			<?
+			<?php
 			}
 			?>
 			</table>
@@ -57,24 +57,24 @@
 					<td class="name" style="width:150px;">Nom</td>
 					<td class="name">Pr (/chq)</td>
 				</tr>
-		<?
+		<?php
 		if (isset($ITEMS)){
 			foreach($ITEMS as $item){
 			?>
 				<tr>
 					<td class="name" style="width:80px;">
-						<input type="text" class="text" name="qte_<?=$item->getInvId();?>" value="0" style="width:25px;" />
-						&nbsp;&nbsp;/ <?=$item->getQte();?>
+						<input type="text" class="text" name="qte_<?php echo $item->getInvId();?>" value="0" style="width:25px;" />
+						&nbsp;&nbsp;/ <?php echo $item->getQte();?>
 					</td>
-					<td class="value"><?=$item->getNom();?></td>
-					<td style="width:80px;"><?=$item->getPr();?></td>
+					<td class="value"><?php echo $item->getNom();?></td>
+					<td style="width:80px;"><?php echo $item->getPr();?></td>
 				</tr>
-			<?
+			<?php
 			} 
 		}else{
 		?>
 			<tr><td class="send" colspan="3"><i>- aucun item dans le casier -</i></td></tr>
-		<?
+		<?php
 		}
 		?>
 			</table>

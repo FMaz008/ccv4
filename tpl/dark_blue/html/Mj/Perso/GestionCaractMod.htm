@@ -19,7 +19,7 @@ AjouterIncompatible_completed = function(originalRequest){
 }
 </script>
 <form name="form1" method="post" action="?mj=Perso_GestionCaractMod">
-<input type="hidden" name="id" value="<?=$CARACT['id'];?>" />
+<input type="hidden" name="id" value="<?php echo $CARACT['id'];?>" />
 <table>
 
 <tr>
@@ -29,19 +29,19 @@ AjouterIncompatible_completed = function(originalRequest){
 <tr>
 	<td class="name">Nom</td>
 	<td class="value">
-		<input type="text" class="text" name="nom" value="<?=$CARACT['nom'];?>" />
+		<input type="text" class="text" name="nom" value="<?php echo $CARACT['nom'];?>" />
 	</td>
 </tr>
 <tr>
 	<td class="name">Catégorie</td>
 	<td class="value">
 		<select name="catId">
-			<option value="0" <? if($CARACT['catid']==0){ echo 'SELECTED'; } ?>>Est une catégorie</option>
-		<?
+			<option value="0" <?php if($CARACT['catid']==0){ echo 'SELECTED'; } ?>>Est une catégorie</option>
+		<?php
 		foreach($CAT as $cat){
 			?>
-			<option value="<?=$cat['id'];?>" <? if($CARACT['catid']==$cat['id']){ echo 'SELECTED'; } ?>><?=$cat['nom'];?></option>
-			<?
+			<option value="<?php echo $cat['id'];?>" <?php if($CARACT['catid']==$cat['id']){ echo 'SELECTED'; } ?>><?php echo $cat['nom'];?></option>
+			<?php
 		}
 		?>
 		</select>
@@ -50,13 +50,13 @@ AjouterIncompatible_completed = function(originalRequest){
 <tr>
 	<td class="name">Description</td>
 	<td class="value">
-		<textarea name="desc"><?=$CARACT['desc'];?></textarea>
+		<textarea name="desc"><?php echo $CARACT['desc'];?></textarea>
 	</td>
 </tr>
 <tr>
 	<td class="name">Type</td>
 	<td class="value">
-		<input type="text" class="text" name="type" value="<?=$CARACT['type'];?>" />
+		<input type="text" class="text" name="type" value="<?php echo $CARACT['type'];?>" />
 	</td>
 </tr>
 <tr>
@@ -72,9 +72,9 @@ AjouterIncompatible_completed = function(originalRequest){
 			?>
 			<tr>
 				<td class="name">
-					<input type="checkbox" name="del[]" value="<?=$caract['id'];?>" />
+					<input type="checkbox" name="del[]" value="<?php echo $caract['id'];?>" />
 				</td>
-				<td class="value"><?=$caract['nom'];?></td>
+				<td class="value"><?php echo $caract['nom'];?></td>
 			</tr>
 			<?php
 		}

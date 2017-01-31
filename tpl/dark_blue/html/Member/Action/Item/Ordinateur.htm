@@ -4,14 +4,14 @@
 	if(!isset($LIST_PC)){
 		?>
 		<i> - Vous ne poss&egrave;dez aucun appareil informatique - </i>
-		<?
+		<?php
 	}else{
 		foreach($LIST_PC as $pc){
 			?>
 			<tr>
 				<td class="value" align="left">
-					<span class="fakelink" onclick="actionLink('Action_Item_Ordinateur2&amp;id=<?=$pc->getInvId();?>');">
-						<?=$pc-> getNom();?> #<?=$pc->getInvId();?>
+					<span class="fakelink" onclick="actionLink('Action_Item_Ordinateur2&amp;id=<?php echo $pc->getInvId();?>');">
+						<?php echo $pc-> getNom();?> #<?php echo $pc->getInvId();?>
 					</span>
 				</td>
 			</tr>

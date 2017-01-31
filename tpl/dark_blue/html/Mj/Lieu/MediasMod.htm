@@ -1,17 +1,17 @@
 ﻿<br />
 <a href="?mj=Lieu_Medias">&lt;&lt; Retour à la liste des médias</a><br />
 <form method="post" name="form1" action="?mj=Lieu_MediasMod">
-	<input type="hidden" name="id" value=<?=$ID;?> />
-	<input type="hidden" name=<?=$ID . '_mediaType';?> value=<?=$MEDIA_TYPE;?> />
-	<input type="hidden" name=<?=$ID . '_canalId';?> value=<?=$CANAL_ID;?> />
+	<input type="hidden" name="id" value=<?php echo $ID;?> />
+	<input type="hidden" name=<?php echo $ID . '_mediaType';?> value=<?php echo $MEDIA_TYPE;?> />
+	<input type="hidden" name=<?php echo $ID . '_canalId';?> value=<?php echo $CANAL_ID;?> />
 	<table align="center">
 		<tr><td class="title" colspan="2">
-			Emissions sur le canal <?=$CANAL_ID;?> du média <?=$MEDIA_TYPE_AFF;?>.
+			Emissions sur le canal <?php echo $CANAL_ID;?> du média <?php echo $MEDIA_TYPE_AFF;?>.
 		</td></tr>
 		<tr><td class="value" colspan="2"><br />
-			<?if(empty($MEDIA_MESSAGES)){?>
+			<?php if(empty($MEDIA_MESSAGES)){?>
 				<center><i>Aucune émission.</i></center><br/>
-			<?}else{
+			<?php }else{
 				$emission = '';
 				$first = false;
 				foreach($MEDIA_MESSAGES as $msg){ 
@@ -19,22 +19,22 @@
 					{
 						if($first){?>
 							</table><br />
-						<?}	$first = true;
+						<?php }	$first = true;
 						$emission = $msg['titre']; ?>
 						<table class="tbl_center">
-						<tr><td class="title" colspan="2"><?=$emission;?></td></tr>
-					<?}?>
+						<tr><td class="title" colspan="2"><?php echo $emission;?></td></tr>
+					<?php }?>
 					<tr>
 						<td class="name"></td>
-						<td class="name"><?=$msg['date'];?></td>
+						<td class="name"><?php echo $msg['date'];?></td>
 					</tr>
 					<tr>
-						<td class="name" width="10px"><input type="checkbox" name=<?=$msg['id'];?> value=<?=$msg['id'];?> /></td>
-						<td class="value" colspan="2"><?=$msg['message'];?></td>
+						<td class="name" width="10px"><input type="checkbox" name=<?php echo $msg['id'];?> value=<?php echo $msg['id'];?> /></td>
+						<td class="value" colspan="2"><?php echo $msg['message'];?></td>
 					</tr>
-				<?}?>
+				<?php }?>
 				</table><br/>
-			<?}?>
+			<?php }?>
 		</td></tr>
 		<tr><td colspan="2">
 			<center><input type="submit" class="button" name="delete" value="Supprimer les messages" /></center>
@@ -48,10 +48,10 @@
 			</td>
 			<td class="value">
 				<select name="old_emissionNom">
-					<?foreach($TITRE_LISTE as $titre)
+					<?php foreach($TITRE_LISTE as $titre)
 					{?>
-						<option value="<?=$titre['titre'];?>"><?=$titre['titre'];?></option>
-					<?}?>
+						<option value="<?php echo $titre['titre'];?>"><?php echo $titre['titre'];?></option>
+					<?php }?>
 				</select>
 			</td>
 		</tr>

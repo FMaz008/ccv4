@@ -19,14 +19,14 @@ foreach($OBJETS as $item)
 ?>
 		<tr>
 			<td class="value">
-				<input type="text" name="<?=$item->getInvId();?>_qte" value="0" size="2" />
-				/<?=$item->getQte();?>
+				<input type="text" name="<?php echo $item->getInvId();?>_qte" value="0" size="2" />
+				/<?php echo $item->getQte();?>
 			</td>
-			<td class="value"><?=$item->getType();?></td>
-			<td class="value"><?=$item->getNom();?></td>
-			<td class="value"><?=$item->getDbPrix();?></td>			
+			<td class="value"><?php echo $item->getType();?></td>
+			<td class="value"><?php echo $item->getNom();?></td>
+			<td class="value"><?php echo $item->getDbPrix();?></td>			
 		</tr>
-<?
+<?php
 $i++;
 }
 ?>

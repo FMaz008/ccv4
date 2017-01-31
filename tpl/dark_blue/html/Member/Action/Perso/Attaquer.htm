@@ -22,15 +22,15 @@
 	</tr>
 	<tr>
 		<td class="value">
-			<?=$ARME_NOM;?><br />
+			<?php echo $ARME_NOM;?><br />
 			<br />
 			<div style="text-align:left;width:100%;">
 				<strong>Portée&nbsp;:</strong><br />
 			</div>
 			<select name="portee">
-				<? foreach($PORTEE as $portee) { ?>
-					<option value="<?=$portee['code'];?>"><?=$portee['txt'];?></option>
-				<? } ?>
+				<?php foreach($PORTEE as $portee) { ?>
+					<option value="<?php echo $portee['code'];?>"><?php echo $portee['txt'];?></option>
+				<?php } ?>
 			</select>
 			
 		</td>
@@ -57,11 +57,11 @@
 						</tr>
 						<tr>
 							<td class="value">
-								<? foreach ($TOURS as $tour) {?>
-									<input type="radio" name="tours" id="att_tours_tours<?=$tour['no'];?>" value="<?=$tour['no'];?>" <?=$tour['statut'];?> <? if($tour['no']==1) {echo 'CHECKED';} ?> />
-									<?=$tour['no'];?> tour(s): <?=$tour['pa'];?> PA
+								<?php foreach ($TOURS as $tour) {?>
+									<input type="radio" name="tours" id="att_tours_tours<?php echo $tour['no'];?>" value="<?php echo $tour['no'];?>" <?php echo $tour['statut'];?> <?php if($tour['no']==1) {echo 'CHECKED';} ?> />
+									<?php echo $tour['no'];?> tour(s): <?php echo $tour['pa'];?> PA
 									<br />
-								<? } ?>
+								<?php } ?>
 							</td>
 						</tr>
 						</table>
@@ -75,15 +75,15 @@
 						</tr>
 						<tr>
 							<td class="value">
-								<input type="radio" name="tours" id="att_cible_tours1" value="1" <?=$TOURS[0]['statut'];?> />
-								1 tour: <?=$tour_cible['pa'];?> PA<br />
+								<input type="radio" name="tours" id="att_cible_tours1" value="1" <?php echo $TOURS[0]['statut'];?> />
+								1 tour: <?php echo $tour_cible['pa'];?> PA<br />
 								<br />
 								<strong>Zone ciblée:</strong><br />
-								<? foreach ($ZONES as $zone) {?>
-									<input type="radio" name="zones" value="<?=$zone['tech'];?>" />
-									<?=$zone['nom'];?>
+								<?php foreach ($ZONES as $zone) {?>
+									<input type="radio" name="zones" value="<?php echo $zone['tech'];?>" />
+									<?php echo $zone['nom'];?>
 									<br />
-								<? } ?>
+								<?php } ?>
 							</td>
 						</tr>
 						</table>
@@ -110,30 +110,30 @@
 	<tr>
 		<td class="value" align="left" valign="top" style="width:150px;height:100%;">
 		<div style="">
-			<? if (!isset($PERSOS)){?>
+			<?php if (!isset($PERSOS)){?>
 				<i>Il n'y a personne dans ce lieu.</i>
-			<? }else{?>
-				<? foreach ($PERSOS as $perso) {?>
-					<input type="radio" name="perso_id" value="<?=$perso['perso']->getId();?>" <?=$perso['disabled'];?> />
-					<?if ($perso['perso']->getSexe()=='m'){?>
-						<span id="perso_<?=$perso['perso']->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
-					<?}else{?>
-						<span id="perso_<?=$perso['perso']->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
-					<?}?>
-						<?=$perso['perso']->getNom();?>
+			<?php }else{?>
+				<?php foreach ($PERSOS as $perso) {?>
+					<input type="radio" name="perso_id" value="<?php echo $perso['perso']->getId();?>" <?php echo $perso['disabled'];?> />
+					<?php if ($perso['perso']->getSexe()=='m'){?>
+						<span id="perso_<?php echo $perso['perso']->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+					<?php }else{?>
+						<span id="perso_<?php echo $perso['perso']->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+					<?php }?>
+						<?php echo $perso['perso']->getNom();?>
 					</span>
-					<div id="ib_perso_<?=$perso['perso']->getId();?>" class="infobulle" style="width:300px;">
+					<div id="ib_perso_<?php echo $perso['perso']->getId();?>" class="infobulle" style="width:300px;">
 						<div class="title">Infos</div>
-						<?if ($perso['perso']->getAvatar()!='') {?>
-							<img class="imgbg" align="left" src="<?=$perso['perso']->getAvatar();?>" />
-						<? } ?>
-						<strong>État&nbsp;:</strong> <?=$perso['etat'];?> <br />
-						<strong>Arme&nbsp;:</strong> <?=$perso['arme'];?> <br />
+						<?php if ($perso['perso']->getAvatar()!='') {?>
+							<img class="imgbg" align="left" src="<?php echo $perso['perso']->getAvatar();?>" />
+						<?php } ?>
+						<strong>État&nbsp;:</strong> <?php echo $perso['etat'];?> <br />
+						<strong>Arme&nbsp;:</strong> <?php echo $perso['arme'];?> <br />
 						<strong>Description&nbsp;:</strong><br />
-						<?=$perso['perso']->getDescription();?>
+						<?php echo $perso['perso']->getDescription();?>
 					</div>
 					<br />
-				<?
+				<?php
 				}
 			}
 			?>

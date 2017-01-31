@@ -1,11 +1,11 @@
-<div class="he_item" style="<?=$MSG->getStyle();?>">
-	<div class="he_leftbar" id="gauche<?=$MSG->getId();?>">
+<div class="he_item" style="<?php echo $MSG->getStyle();?>">
+	<div class="he_leftbar" id="gauche<?php echo $MSG->getId();?>">
 		<span class="member_he_item_de">
-					<input type='checkbox' name='del[]' value='<?=$MSG->getId();?>'>
+					<input type='checkbox' name='del[]' value='<?php echo $MSG->getId();?>'>
 					<strong>De:</strong>
 		</span>
 		<div class="member_he_item_de_liste">
-			<?
+			<?php
 			$first = true;
 			foreach($MSG->getFrom() as $perso)
 			{
@@ -16,38 +16,38 @@
 				
 				if ($perso['sexe']=='m')
 				{
-					?><span id="<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_homme" onmousemove="infobulle(this, event);"><?
+					?><span id="<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_homme" onmousemove="infobulle(this, event);"><?php
 				}
 				elseif($perso['sexe']=='f')
 				{
-					?><span id="<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_femme" onmousemove="infobulle(this, event);"><?
+					?><span id="<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_femme" onmousemove="infobulle(this, event);"><?php
 				}
 				elseif($perso['sexe']=='s')
 				{
-					?><span class="txtStyle_system"><?
+					?><span class="txtStyle_system"><?php
 				}
 				else
 				{
-					?><span class="txtStyle_autre"><?
+					?><span class="txtStyle_autre"><?php
 				}
-				?><?=$perso['nom'];?></span><?
+				?><?php echo $perso['nom'];?></span><?php
 				
 				if($perso['id']!=0)
 				{
 					?>
-					<div id="ib_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="infobulle">
+					<div id="ib_<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="infobulle">
 						<div class="title">Infos - Cliquez pour nommer</div>
-						<?
+						<?php
 						if (isset($perso['imgurl']))
 						{
 							?>
-							<img class="imgbg" align="left" src="<?=$perso['imgurl'];?>" />
-							<?
+							<img class="imgbg" align="left" src="<?php echo $perso['imgurl'];?>" />
+							<?php
 						}
 						?>
-						<?=$perso['description'];?>
+						<?php echo $perso['description'];?>
 					</div>
-					<?
+					<?php
 				}
 			}
 			?>
@@ -59,7 +59,7 @@
 			A&nbsp;:
 		</span>
 		<div class="member_he_item_a_liste">
-			<?
+			<?php
 			$first = true;
 			foreach($MSG->getTo() as $perso)
 			{
@@ -70,48 +70,48 @@
 
 				if ($perso['sexe']=='m')
 				{
-					?><span id="<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_homme" onmousemove="infobulle(this, event);"><?
+					?><span id="<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_homme" onmousemove="infobulle(this, event);"><?php
 				}
 				elseif($perso['sexe']=='f')
 				{
-					?><span id="<?=$MSG->getId();?>_<?=$perso['id'];?>" class="txtStyle_femme" onmousemove="infobulle(this, event);"><?
+					?><span id="<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_femme" onmousemove="infobulle(this, event);"><?php
 				}
 				elseif($perso['sexe']=='s')
 				{
-					?><span class="txtStyle_system"><?
+					?><span class="txtStyle_system"><?php
 				}
 				else
 				{
-					?><span class="txtStyle_autre"><?
+					?><span class="txtStyle_autre"><?php
 				}
-				?><?=$perso['nom'];?></span><?
+				?><?php echo $perso['nom'];?></span><?php
 				
 				
 				if($perso['id']!=0)
 				{
 					?>
-					<div id="ib_<?=$MSG->getId();?>_<?=$perso['id'];?>" class="infobulle">
+					<div id="ib_<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="infobulle">
 						<div class="title">Infos - Cliquez pour nommer</div>
-						<?if (isset($perso['imgurl'])) {?>
-							<img class="imgbg" align="left" src="<?=$perso['imgurl'];?>" />
-						<? } ?>
-						<?=$perso['description'];?>
+						<?php if (isset($perso['imgurl'])) {?>
+							<img class="imgbg" align="left" src="<?php echo $perso['imgurl'];?>" />
+						<?php } ?>
+						<?php echo $perso['description'];?>
 					</div>
-					<?
+					<?php
 				}
 			}
 			?>
 		</div>
 		<br />
-		Statut:<?=($MSG->getShow()) ? 'Présent' : '<span style="color:#f00;">Effacé</span>';?>
-		<br /><span class="color_date"><?=$MSG->getDateTxt();?></span>
+		Statut:<?php echo ($MSG->getShow()) ? 'Présent' : '<span style="color:#f00;">Effacé</span>';?>
+		<br /><span class="color_date"><?php echo $MSG->getDateTxt();?></span>
 	</div>
-	<div class="he_rightbar" id="droite<?=$MSG->getId();?>">
+	<div class="he_rightbar" id="droite<?php echo $MSG->getId();?>">
 		<div class="member_he_toplink">
-			<a href="#bas"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>tpl/_common/down.png" alt="Aller en bas de la page" /></a>
-			<a href="#haut"><img border="0" src="<?=$SKIN_VIRTUAL_PATH;?>tpl/_common/up.png" alt="Aller en haut de la page" /></a>
+			<a href="#bas"><img border="0" src="<?php echo $SKIN_VIRTUAL_PATH;?>tpl/_common/down.png" alt="Aller en bas de la page" /></a>
+			<a href="#haut"><img border="0" src="<?php echo $SKIN_VIRTUAL_PATH;?>tpl/_common/up.png" alt="Aller en haut de la page" /></a>
 		</div>
-		<?=$MSG->getMsg();?>
+		<?php echo $MSG->getMsg();?>
 	</div>
 	<div class="clearboth"></div>
 </div>
@@ -121,6 +121,6 @@
 
 <script type="text/javascript">
 //<!--
-	heItemAutoHeight(<?=$MSG->getId();?>);
+	heItemAutoHeight(<?php echo $MSG->getId();?>);
 //-->
 </script>

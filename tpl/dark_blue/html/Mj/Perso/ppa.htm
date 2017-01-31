@@ -6,7 +6,7 @@ function toggleNote(id){
 }
 
 function validateMj(e){
-	if(e.value!=0 && e.value!=<?=$MJID;?>)
+	if(e.value!=0 && e.value!=<?php echo $MJID;?>)
 		alert("Attention, effectuer ce changement d'attribution rendra ce PPA hors de votre contrôle.");
 }
 </script>
@@ -14,7 +14,7 @@ function validateMj(e){
 <a href="?mj=index&amp;tab=1">&lt;&lt; Retour à l'onglet PPA</a><br />
 <br />
 
-<form method="post" action="?mj=Perso_Ppa&id=<?=$PPA[0]['id'];?>">
+<form method="post" action="?mj=Perso_Ppa&id=<?php echo $PPA[0]['id'];?>">
 <table class="tbl_center">
 <tr>
 	<td colspan="2" class="title">Suivi du PPA</td>
@@ -23,43 +23,43 @@ function validateMj(e){
 
 <tr>
 	<td class="name">Nom du perso</td>
-	<td class="value"><?=$PPA[0]['perso'];?></td>
+	<td class="value"><?php echo $PPA[0]['perso'];?></td>
 </tr>
 <tr>
 	<td class="name">Lieu</td>
-	<td class="value"><?=$PPA[0]['lieu'];?></td>
+	<td class="value"><?php echo $PPA[0]['lieu'];?></td>
 </tr>
 <tr>
 	<td class="name">Pa</td>
-	<td class="value"><?=$PPA[0]['pa'];?> / <?=$PPA[0]['paMax'];?></td>
+	<td class="value"><?php echo $PPA[0]['pa'];?> / <?php echo $PPA[0]['paMax'];?></td>
 </tr>
 <tr>
 	<td class="name">Pv</td>
-	<td class="value"><?=$PPA[0]['pv'];?> / <?=$PPA[0]['pvMax'];?></td>
+	<td class="value"><?php echo $PPA[0]['pv'];?> / <?php echo $PPA[0]['pvMax'];?></td>
 </tr>
 <tr>
 	<td class="name">Saisi par</td>
 	<td class="value">
-		<? if($CAN_REPLY){ ?>
+		<?php if($CAN_REPLY){ ?>
 		<select name="mj" onchange="validateMj(this);">
 			<option
 				value="0"
-				<? if(0==$PPA[0]['mjid']){ echo 'SELECTED '; } ?>
+				<?php if(0==$PPA[0]['mjid']){ echo 'SELECTED '; } ?>
 				>Aucun / Liste globale</option>
-			<?
+			<?php
 			foreach($MJ as $mj){
 			?>
 				<option
-					value="<?=$mj['id'];?>"
-					<? if($mj['id']==$PPA[0]['mjid']){ echo 'SELECTED '; } ?>
-					<? if($mj['id']==$MJID){ echo 'style="background-color:#333366;" '; } ?>
-					><?=$mj['nom'];?></option>
-			<?
+					value="<?php echo $mj['id'];?>"
+					<?php if($mj['id']==$PPA[0]['mjid']){ echo 'SELECTED '; } ?>
+					<?php if($mj['id']==$MJID){ echo 'style="background-color:#333366;" '; } ?>
+					><?php echo $mj['nom'];?></option>
+			<?php
 			}
 			?>
 		</select>
 		<input type="submit" class="button" name="save_saisi" value="Déléguer l'attribution" />
-		<?
+		<?php
 		}else{
 			if($PPA[0]['mjid'] == 0)
 				echo 'Mj inconnu';
@@ -74,18 +74,18 @@ function validateMj(e){
 </tr>
 <tr>
 	<td class="name">Type PPA</td>
-	<td class="value"><?=$PPA[0]['type'];?></td>
+	<td class="value"><?php echo $PPA[0]['type'];?></td>
 </tr>
 <tr>
 	<td class="name">Statut</td>
 	<td class="value">
-		<?=$PPA[0]['statut'];?>
-		<?
+		<?php echo $PPA[0]['statut'];?>
+		<?php
 		if($CAN_CLOSE)
 		{
 			?>
 			<input type="submit" name="close" value="Fermer le PPA" />
-			<?
+			<?php
 		}
 		?>
 	</td>
@@ -95,15 +95,15 @@ function validateMj(e){
 <br />
 <br />
 <div class="panel">
-	<div class="title">Message innitial, le <?=$PPA[0]['datetxt'];?></div>
-	<div class="value mj_ppa_message"><?=$PPA[0]['msg'];?></div>
+	<div class="title">Message innitial, le <?php echo $PPA[0]['datetxt'];?></div>
+	<div class="value mj_ppa_message"><?php echo $PPA[0]['msg'];?></div>
 	<div class="value">
 		<hr />
 		<strong>&gt;</strong>
 		<span class="fakelink" onclick="toggleNote(0);">Note MJ générale</span>
 	</div>
 	<div id="note_0" style="<?php if(empty($PPA[0]['notemj'])){ echo 'display:none;'; } ?>" class="value mj_ppa_message">
-		<textarea class="mj_ppa_textarea" name="notemjbase"><?=$PPA[0]['notemj'];?></textarea>
+		<textarea class="mj_ppa_textarea" name="notemjbase"><?php echo $PPA[0]['notemj'];?></textarea>
 		<input type="submit" class="button" name="save_comment" value="Modifier la note MJ" style="float:right;" />
 	</div>
 </div>
@@ -115,27 +115,27 @@ function validateMj(e){
 
 
 
-<?
+<?php
 if(count($PPA)>1) {
 	for($i=1;$i<count($PPA);$i++){
 	?>
 		<br />
 		<br />
 		<div class="panel">
-			<div class="title">Message de <?=$PPA[$i]['mjnom'];?>, le <?=$PPA[$i]['datetxt'];?></div>
-			<div class="value mj_ppa_message"><?=$PPA[$i]['msg'];?></div>
+			<div class="title">Message de <?php echo $PPA[$i]['mjnom'];?>, le <?php echo $PPA[$i]['datetxt'];?></div>
+			<div class="value mj_ppa_message"><?php echo $PPA[$i]['msg'];?></div>
 			<div class="value">
 				<hr />
-				<? if($PPA[$i]['mjid']!=0){ ?>
+				<?php if($PPA[$i]['mjid']!=0){ ?>
 					<strong>&gt;</strong> 
-					<span class="fakelink" onclick="toggleNote(<?=$i;?>);">Note MJ explicative de la réponse</span>
-				<? } ?>
+					<span class="fakelink" onclick="toggleNote(<?php echo $i;?>);">Note MJ explicative de la réponse</span>
+				<?php } ?>
 			</div>
-			<div id="note_<?=$i;?>" style="<?php if(empty($PPA[$i]['notemj'])){ echo 'display:none;'; } ?>" class="value mj_ppa_message">
-				<?=$PPA[$i]['notemj'];?>
+			<div id="note_<?php echo $i;?>" style="<?php if(empty($PPA[$i]['notemj'])){ echo 'display:none;'; } ?>" class="value mj_ppa_message">
+				<?php echo $PPA[$i]['notemj'];?>
 			</div>
 		</div>
-	<?
+	<?php
 	}
 } 
 ?>
@@ -144,12 +144,12 @@ if(count($PPA)>1) {
 <br />
 <br />
 <br />
-<?
+<?php
 if($CAN_REPLY){
 	if($PPA[0]['mjid'] ==0){
 	?>
 		<center><strong>Vous devez vous saisir du cas pour pouvoir y répondre</strong></center>
-	<?
+	<?php
 	}else{
 	?>
 		<div class="panel">
@@ -160,7 +160,7 @@ if($CAN_REPLY){
 			<div class="value"><textarea class="mj_ppa_textarea" name="notemj"></textarea></div>
 			<div class="send"><input type="submit" class="button" name="reply" value="Envoyer la réponse" /></div>
 		</div>
-	<? 
+	<?php 
 	} 
 }
 ?>

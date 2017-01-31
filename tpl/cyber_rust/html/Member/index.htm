@@ -17,42 +17,42 @@
 	</tr>
 	<tr>
 		<td class="name">Nom</td>
-		<td class="value"><?=$nom;?></td>
+		<td class="value"><?php echo $nom;?></td>
 
 		<td class="name"><abbr title="Points d'Action">PA</abbr></td>
 		<td class="value">
-			<span class="txtStyle_valeur" id="perso_pa"><?=$pa;?></span>/<?=$paMax;?>
+			<span class="txtStyle_valeur" id="perso_pa"><?php echo $pa;?></span>/<?php echo $paMax;?>
 		</td>
 
 		<td class="name"><abbr title="Points de Nutrition">PN</abbr></td>
 		<td class="value">
-			<span class="txtStyle_valeur" id="perso_pn"><?=$pn;?></span>/99
+			<span class="txtStyle_valeur" id="perso_pn"><?php echo $pn;?></span>/99
 		</td>
 	</tr>
 	<tr>
 		<td class="name">Lieu</td>
-		<td class="value"><?=$lieu;?></td>
+		<td class="value"><?php echo $lieu;?></td>
 
 		<td class="name"><abbr title="Points de Vie">PV</abbr></td>
 		<td class="value">
-			<span class="txtStyle_valeur" id="perso_pv"><?=$pv;?></span>/<?=$pvMax;?>
+			<span class="txtStyle_valeur" id="perso_pv"><?php echo $pv;?></span>/<?php echo $pvMax;?>
 		</td>
 
 		<td class="name" rowspan="2" style="vertical-align:top;">Membre</td>
 		<td class="value" rowspan="2" style="vertical-align:top;">
-			<?=$membre;?>
+			<?php echo $membre;?>
 			<br /> (<a href="?m=Mp_Index">+ détails</a>)
 		</td>
 	</tr>
 	<tr>
 		<td class="name">Argent</td>
 		<td class="value">
-			<span class="txtStyle_valeur"><span id="perso_cash"><?=$argent;?></span></span>
+			<span class="txtStyle_valeur"><span id="perso_cash"><?php echo $argent;?></span></span>
 		</td>
 
 		<td class="name"><abbr title="Points de Rangement">PR</abbr></td>
 		<td class="value">
-			<span class="txtStyle_valeur" id="perso_pr"><?=$pr;?></span>/<?=$prmax;?>
+			<span class="txtStyle_valeur" id="perso_pr"><?php echo $pr;?></span>/<?php echo $prmax;?>
 		</td>
 
 		
@@ -62,7 +62,7 @@
 	<form id="formActionImmediate" method="post" action="">
 		<tr><td colspan="6" class="title">Action immédiate</td></tr>
 		<tr><td colspan="6" class="value">
-			<textarea name="actionImmediate" style="width:90%;height:50px;"><?=$actionImmediate;?></textarea>
+			<textarea name="actionImmediate" style="width:90%;height:50px;"><?php echo $actionImmediate;?></textarea>
 		</td></tr>
 		<tr><td colspan="6" class="name">
 			<center>
@@ -91,8 +91,8 @@
 
 <!-- Affichage du HE-->
 <form id="he" method="post" action="?m=He_Delete">
-	<?=$PAGE_HE_HEADER;?>
-	<?=$PAGE_HE_MESSAGES;?>
+	<?php echo $PAGE_HE_HEADER;?>
+	<?php echo $PAGE_HE_MESSAGES;?>
 </form>
 
 <a id="bas"></a>

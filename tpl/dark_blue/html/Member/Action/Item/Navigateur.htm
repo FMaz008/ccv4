@@ -4,36 +4,36 @@
 	<td class="title">Navigateur</td>
 </tr>
 <tr>
-	<td class="name"><?=$HEADER;?></td>
+	<td class="name"><?php echo $HEADER;?></td>
 </tr>
 <tr>
 	<td class="value">
 		<br />
 		<br />
 		<h1>
-			<?
+			<?php
 			if(isset($site)){
 				echo $site->getTitre();
 			}
 			?>
 		</h1>
-		<? if(isset($TITRE)){ ?>
-			<h2>&nbsp;&nbsp;<?=$TITRE;?></h2>
-		<? } ?>
-		<? if(isset($PAGE)){ ?>
+		<?php if(isset($TITRE)){ ?>
+			<h2>&nbsp;&nbsp;<?php echo $TITRE;?></h2>
+		<?php } ?>
+		<?php if(isset($PAGE)){ ?>
 			<br />
-			<?=$PAGE;?>
+			<?php echo $PAGE;?>
 			<br />
-		<? } ?>
+		<?php } ?>
 	</td>
 </tr>
 <tr>
 	<td class="value">
-		<? if(isset($INDEX)){ ?>
+		<?php if(isset($INDEX)){ ?>
 			<br />
 			<br />
-			<?=$INDEX;?>
-		<? } ?>
+			<?php echo $INDEX;?>
+		<?php } ?>
 	</td>
 </tr>
 </table>

@@ -8,30 +8,30 @@ function BuildNoCompte(){
 </script>
 
 <br />
-<form method="post" name="form1" action="?mj=Lieu_BanqueCompteCarte<?=$SUBMITNAME;?>&id=<?=$_GET['id'];?>">
+<form method="post" name="form1" action="?mj=Lieu_BanqueCompteCarte<?php echo $SUBMITNAME;?>&id=<?php echo $_GET['id'];?>">
 	<table align="center">
 		<tr>
-			<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> une carte</td>
+			<td class="title" colspan="2"><?php echo $ACTIONTYPETXT;?> une carte</td>
 		</tr>
-		<? if( $SHOWID == true ){ ?>
+		<?php if( $SHOWID == true ){ ?>
 			<tr>
 				<td class="name">ID de la carte</td>
-				<td class="value"><input type="hidden" name="id" value="<?=$CARTE['carte_id'];?>" /><?=$CARTE['carte_id'];?></td>
+				<td class="value"><input type="hidden" name="id" value="<?php echo $CARTE['carte_id'];?>" /><?php echo $CARTE['carte_id'];?></td>
 			</tr>
-		<? } ?>
+		<?php } ?>
 		
 		
 		
 		<tr>
 			<td class="name">Numéro de la banque</td>
 			<td class="value">
-				<input type="text" class="text" id="carte_banque" name="carte_banque" onChange="BuildNoCompte();" value="<? if(isset($CARTE['carte_banque'])) { echo $CARTE['carte_banque']; } ?>" maxlength="4" size="4"/>
+				<input type="text" class="text" id="carte_banque" name="carte_banque" onChange="BuildNoCompte();" value="<?php if(isset($CARTE['carte_banque'])) { echo $CARTE['carte_banque']; } ?>" maxlength="4" size="4"/>
 			</td>
 		</tr>
 		<tr>
 			<td class="name">Numéro de compte</td>
 			<td class="value">
-				<input type="text" class="text" id="carte_compte" onChange="BuildNoCompte();" name="carte_compte" value="<? if(isset($CARTE['carte_compte'])) { echo $CARTE['carte_compte']; } ?>" maxlength="14" size="14"/>
+				<input type="text" class="text" id="carte_compte" onChange="BuildNoCompte();" name="carte_compte" value="<?php if(isset($CARTE['carte_compte'])) { echo $CARTE['carte_compte']; } ?>" maxlength="14" size="14"/>
 			</td>
 		</tr>
 		<tr>
@@ -43,20 +43,20 @@ function BuildNoCompte(){
 		<tr>
 			<td class="name">Nom</td>
 			<td class="value">
-				<input type="text" class="text" name="carte_nom" value="<?=$CARTE['carte_nom'];?>" maxlength="25" size="25" />
+				<input type="text" class="text" name="carte_nom" value="<?php echo $CARTE['carte_nom'];?>" maxlength="25" size="25" />
 			</td>
 		</tr>
 		<tr>
 			<td class="name">N.I.P.</td>
 			<td class="value">
-				<input type="text" class="text" name="carte_nip" value="<? if(isset($CARTE['carte_nip'])) { echo $CARTE['carte_nip']; } ?>" maxlength="5" size="5" />
+				<input type="text" class="text" name="carte_nip" value="<?php if(isset($CARTE['carte_nip'])) { echo $CARTE['carte_nip']; } ?>" maxlength="5" size="5" />
 			</td>
 		</tr>
 		<tr>
 			<td class="name">Valide</td>
 			<td class="value">
-				<input type="radio" name="carte_valid" value="1" <? if($CARTE['carte_valid']==1){ echo 'CHECKED'; } ?> /> Oui<br />
-				<input type="radio" name="carte_valid" value="0" <? if($CARTE['carte_valid']!=1){ echo 'CHECKED'; } ?> /> Non
+				<input type="radio" name="carte_valid" value="1" <?php if($CARTE['carte_valid']==1){ echo 'CHECKED'; } ?> /> Oui<br />
+				<input type="radio" name="carte_valid" value="0" <?php if($CARTE['carte_valid']!=1){ echo 'CHECKED'; } ?> /> Non
 			</td>
 		</tr>
 		

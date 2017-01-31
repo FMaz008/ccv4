@@ -16,11 +16,11 @@
 </script>
 <br />
 <form id="action_redirect" method="post" onsubmit="return ajaxSubmitForm(this)" action="?popup=1&m=Action_Lieu_BanqueCarteDel">
-<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+<input type="hidden" name="compte" value="<?php echo $COMPTE;?>" />
 <table class="center" style="width:600px;">
 	<tr>
 		<td class="title" colspan="4">
-			Gestion des acc&egrave;s par carte pour le compte: <?=$COMPTE;?>
+			Gestion des acc&egrave;s par carte pour le compte: <?php echo $COMPTE;?>
 		</td>
 	</tr>
 	<tr>
@@ -29,29 +29,29 @@
 		<td class="name">Nom</td>
 		<td class="name" style="width:75px;">Statut</td>
 	</tr>
-	<?
+	<?php
 	if(isset($LIST_CARTE)){
 		foreach($LIST_CARTE as $carte){
 		?>
 			<tr>
-				<td class="value" style="width:10px;"><input type="radio" name="cid" value="<?=$carte->getNo();?>" /></td>
-				<td class="value" style="width:75px;"><?=$carte->getNo();?></td>
-				<td class="value" style="text-align:left;"><?=$carte->getNom();?></td>
+				<td class="value" style="width:10px;"><input type="radio" name="cid" value="<?php echo $carte->getNo();?>" /></td>
+				<td class="value" style="width:75px;"><?php echo $carte->getNo();?></td>
+				<td class="value" style="text-align:left;"><?php echo $carte->getNom();?></td>
 				<td class="value" style="text-align:center;">
-					<?
+					<?php
 					if($carte->isValid()){
 					?>
 						Activ&eacute;
-					<?
+					<?php
 					}else{
 					?>
 						Innactive
-					<?
+					<?php
 					}
 					?>
 				</td>
 			</tr>
-		<?
+		<?php
 		}
 	}else{
 	?>
@@ -60,7 +60,7 @@
 				<i>-aucune carte-</i>
 			</td>
 		</tr>
-	<?
+	<?php
 	}
 	?>
 	<tr>

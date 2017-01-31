@@ -86,57 +86,57 @@ confirmdel = function(msg){
 
 <br />
 <a href="?mj=Lieu">&lt;&lt; Retour à la liste des lieux</a><br />
-<form method="post" name="form1" action="?mj=Lieu_<?=$SUBMITNAME;?>">
+<form method="post" name="form1" action="?mj=Lieu_<?php echo $SUBMITNAME;?>">
 	<table align="center">
 		<tr>
-			<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> un lieu</td>
+			<td class="title" colspan="2"><?php echo $ACTIONTYPETXT;?> un lieu</td>
 		</tr>
-		<? if( $SHOWID == true ){ ?>
+		<?php if( $SHOWID == true ){ ?>
 		<tr>
 			<td class="name">ID du lieu</td>
-			<td class="value"><input type="hidden" name="id" value="<?=$LIEU['id'];?>" /><?=$LIEU['id'];?></td>
+			<td class="value"><input type="hidden" name="id" value="<?php echo $LIEU['id'];?>" /><?php echo $LIEU['id'];?></td>
 		</tr>
-		<? } ?>
+		<?php } ?>
 		
 		<tr>
 			<td class="name">Nom Technique</td>
 			<td class="value">
-				<?
+				<?php
 				if ($SUBMITNAME=='Add'){
 				?>
 					<select name="pre" style="text-align:right;">
 						<option value=""></option>
-						<? foreach($PAGE_LIEUX as $plieu){ ?>
-							<option value="<?=$plieu[0];?>."><?=$plieu[0];?>.</option>
-						<? } ?>
+						<?php foreach($PAGE_LIEUX as $plieu){ ?>
+							<option value="<?php echo $plieu[0];?>."><?php echo $plieu[0];?>.</option>
+						<?php } ?>
 					</select>
 					<input type="text" class="text" name="nom_technique" id="nom_technique" value="" maxlength="100" />
-				<?
+				<?php
 				}else{
 				?>
-					<input type="text" class="text" name="nom_technique" id="nom_technique" value="<?=$LIEU["nom_technique"];?>" onfocus="alert('ATTENTION, changer ce champs incorrectement signifie que plusieurs déplacements seront en erreur.');" /></td>
-				<?
+					<input type="text" class="text" name="nom_technique" id="nom_technique" value="<?php echo $LIEU["nom_technique"];?>" onfocus="alert('ATTENTION, changer ce champs incorrectement signifie que plusieurs déplacements seront en erreur.');" /></td>
+				<?php
 				}
 				?>
 			</td>
 		</tr>
 		<tr>
 			<td class="name">Nom Affiché</td>
-			<td class="value"><input type="text" class="text" name="nom_affiche" value="<?=$LIEU["nom_affiche"];?>" maxlength="50" /></td>
+			<td class="value"><input type="text" class="text" name="nom_affiche" value="<?php echo $LIEU["nom_affiche"];?>" maxlength="50" /></td>
 		</tr>
 		<tr>
 			<td class="name">Description</td>
-			<td class="value"><textarea name="description" style="width:300px;height:100px;"><?=$LIEU["description"];?></textarea></td>
+			<td class="value"><textarea name="description" style="width:300px;height:100px;"><?php echo $LIEU["description"];?></textarea></td>
 		</tr>
 		<tr>
 			<td class="name">Taille du lieu<br />(En lien avec la porté des armes)</td>
 			<td class="value">
 				<select name="dimension">
-					<option value="TC" <? if($LIEU['dimension']=='TC'){ echo 'SELECTED'; } ?>>TC : Très Court (Très petit)</option>
-					<option value="C" <? if($LIEU['dimension']=='C'){ echo 'SELECTED'; } ?>>C : Court (Petit)</option>
-					<option value="M" <? if($LIEU['dimension']=='M'){ echo 'SELECTED'; } ?>>M : Moyen (Moyen)</option>
-					<option value="L" <? if($LIEU['dimension']=='L'){ echo 'SELECTED'; } ?>>L : Longue (Grand)</option>
-					<option value="TL" <? if($LIEU['dimension']=='TL'){ echo 'SELECTED'; } ?>>TL : Très Longue (Très grand)</option>
+					<option value="TC" <?php if($LIEU['dimension']=='TC'){ echo 'SELECTED'; } ?>>TC : Très Court (Très petit)</option>
+					<option value="C" <?php if($LIEU['dimension']=='C'){ echo 'SELECTED'; } ?>>C : Court (Petit)</option>
+					<option value="M" <?php if($LIEU['dimension']=='M'){ echo 'SELECTED'; } ?>>M : Moyen (Moyen)</option>
+					<option value="L" <?php if($LIEU['dimension']=='L'){ echo 'SELECTED'; } ?>>L : Longue (Grand)</option>
+					<option value="TL" <?php if($LIEU['dimension']=='TL'){ echo 'SELECTED'; } ?>>TL : Très Longue (Très grand)</option>
 				</select>
 			</td>
 		</tr>
@@ -144,10 +144,10 @@ confirmdel = function(msg){
 			<td class="name">Image</td>
 			<td class="value">
 				<select name="image">
-					<option value=""<?if($LIEU['image']==''){?> SELECTED<?}?>>-aucune-</option>
-					<? foreach($IMGS as $image){ ?>
-						<option value="<?=$image;?>"<?if($image==$LIEU["image"]){?> SELECTED<?}?>><?=$image;?></option>
-					<? } ?>
+					<option value=""<?php if($LIEU['image']==''){?> SELECTED<?php }?>>-aucune-</option>
+					<?php foreach($IMGS as $image){ ?>
+						<option value="<?php echo $image;?>"<?php if($image==$LIEU["image"]){?> SELECTED<?php }?>><?php echo $image;?></option>
+					<?php } ?>
 				</select>
 			</td>
 		</tr>
@@ -155,13 +155,13 @@ confirmdel = function(msg){
 			<td class="name">Proprio ID</td>
 			<td class="value">
 				<div id="div_proprio1" style="height:6em;overflow:auto;">
-					<?if(!empty($GERANTS)){ 
+					<?php if(!empty($GERANTS)){ 
 						foreach($GERANTS as $gerant){?>
-							<?=$gerant["nom"];?> (Supprimer : <input type="checkbox" name="delGerant_<?=$gerant["id"];?>" value="true" />)<br />
-						<?}?>
-					<?}else{?>
+							<?php echo $gerant["nom"];?> (Supprimer : <input type="checkbox" name="delGerant_<?php echo $gerant["id"];?>" value="true" />)<br />
+						<?php }?>
+					<?php }else{?>
 						<i>- Aucun -</i>
-					<?}?>
+					<?php }?>
 				</div>
 				<div id="div_proprio2">
 					<a href="#" onclick="Ajouter_Perso();">Ajouter un gérant</a>
@@ -171,11 +171,11 @@ confirmdel = function(msg){
 		<tr>
 			<td class="name">Boutique<br />(Si applicable)</td>
 			<td class="value">
-				Cash en caisse: <input type="text" class="text" name="boutique_cash" value="<?=$LIEU['boutique_cash'];?>" size="6" style="text-align:right;" /><?=GAME_DEVISE;?><br />
-				# de compte: <input type="text" class="text" name="boutique_compte" value="<?=$LIEU['boutique_compte'];?>" size="19" /><br />
+				Cash en caisse: <input type="text" class="text" name="boutique_cash" value="<?php echo $LIEU['boutique_cash'];?>" size="6" style="text-align:right;" /><?php echo GAME_DEVISE;?><br />
+				# de compte: <input type="text" class="text" name="boutique_compte" value="<?php echo $LIEU['boutique_compte'];?>" size="19" /><br />
 				Vol possible:<br />
-					<input type="radio" name="boutique_vol" value="1" <? if($LIEU['boutique_vol']=='1'){ echo 'CHECKED'; } ?> /> Oui
-					<input type="radio" name="boutique_vol" value="0" <? if($LIEU['boutique_vol']=='0'){ echo 'CHECKED'; } ?> /> Non
+					<input type="radio" name="boutique_vol" value="1" <?php if($LIEU['boutique_vol']=='1'){ echo 'CHECKED'; } ?> /> Oui
+					<input type="radio" name="boutique_vol" value="0" <?php if($LIEU['boutique_vol']=='0'){ echo 'CHECKED'; } ?> /> Non
 			</td>
 		</tr>
 		<tr>
@@ -183,18 +183,18 @@ confirmdel = function(msg){
 			<td class="value">
 				Capacité technique du lieu: <br />
 				<select name="coeff_soin">
-					<option value="0" <? if($LIEU['coeff_soin']==0){ echo 'SELECTED'; } ?>>0 - Soin de blessés légés</option>
-					<option value="1" <? if($LIEU['coeff_soin']==1){ echo 'SELECTED'; } ?>>1 - Soin des non-autonomes</option>
-					<option value="2" <? if($LIEU['coeff_soin']==2){ echo 'SELECTED'; } ?>>2 - Soin des inconscients</option>
-					<option value="3" <? if($LIEU['coeff_soin']==3){ echo 'SELECTED'; } ?>>3 - Ré-animation possible</option>
+					<option value="0" <?php if($LIEU['coeff_soin']==0){ echo 'SELECTED'; } ?>>0 - Soin de blessés légés</option>
+					<option value="1" <?php if($LIEU['coeff_soin']==1){ echo 'SELECTED'; } ?>>1 - Soin des non-autonomes</option>
+					<option value="2" <?php if($LIEU['coeff_soin']==2){ echo 'SELECTED'; } ?>>2 - Soin des inconscients</option>
+					<option value="3" <?php if($LIEU['coeff_soin']==3){ echo 'SELECTED'; } ?>>3 - Ré-animation possible</option>
 				</select>
 				<br />
 				<br />Quantité Matériel médical:
 				<br/>(1=3PV)
-				<br/><input type="text" name="qteMateriel" value="<?=$LIEU['qteMateriel'];?>" size="1" />
+				<br/><input type="text" name="qteMateriel" value="<?php echo $LIEU['qteMateriel'];?>" size="1" />
 			</td>
 		</tr>
-<?
+<?php
 if ($SUBMITNAME=='Mod'){
 ?>
 		<tr>
@@ -206,32 +206,32 @@ if ($SUBMITNAME=='Mod'){
 					<td class="name">Module</td>
 					<td class="name">Titre menu</td>
 				</tr>
-				<?
+				<?php
 				if(isset($ACTIONS)){
 					foreach($ACTIONS as $action){
 						?>
 						<tr>
 							<td class="value">
-								<input type="checkbox" name="delAction_<?=$action['id'];?>" value="true" />
+								<input type="checkbox" name="delAction_<?php echo $action['id'];?>" value="true" />
 							</td>
 							<td class="name">
-								<?=$action['url'];?>
+								<?php echo $action['url'];?>
 							</td>
 							<td class="value">
-								<input type="text" class="text" name="<?=$action['id'];?>_actioncaption" value="<?=$action['caption'];?>" />
+								<input type="text" class="text" name="<?php echo $action['id'];?>_actioncaption" value="<?php echo $action['caption'];?>" />
 							</td>
 							<td>
 								<?php
 								if(isset($action['config_url']))
 								{
 									?>
-									<input type="button" value="configurer >>" onclick="location.href='?mj=<?=$action['config_url']; ?>&id=<?=$LIEU['id'];?>';" />
+									<input type="button" value="configurer >>" onclick="location.href='?mj=<?php echo $action['config_url']; ?>&id=<?php echo $LIEU['id'];?>';" />
 									<?php
 								}
 								?>
 							</td>
 						</tr>
-						<?
+						<?php
 					}
 				}
 				?>
@@ -242,12 +242,12 @@ if ($SUBMITNAME=='Mod'){
 				<div id="add_action_0"></div>
 			</td>
 		</tr>
-<?
+<?php
 }
 ?>
 		<tr>
 			<td class="name">Note MJ</td>
-			<td class="value"><textarea name="notemj" style="width:300px;height:75px;"><?=$LIEU['notemj'];?></textarea></td>
+			<td class="value"><textarea name="notemj" style="width:300px;height:75px;"><?php echo $LIEU['notemj'];?></textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2" class="send">
@@ -258,13 +258,13 @@ if ($SUBMITNAME=='Mod'){
 </form>
 <br />
 <br />
-<?
+<?php
 if ($SUBMITNAME=='Mod'){
 ?>
 	<form id="liens" method="post" action="?mj=Lieu_Mod">
 		<input type="hidden" name="liens" value="1" />
 		<input type="hidden" name="total_add" id="total_add" value="0" />
-		<input type="hidden" name="id" value="<?=$LIEUID;?>" />
+		<input type="hidden" name="id" value="<?php echo $LIEUID;?>" />
 		
 		<div style="width:900px;margin-left:auto;margin-right:auto;text-align:center;">
 			<table>
@@ -283,7 +283,7 @@ if ($SUBMITNAME=='Mod'){
 					<td class="name" style="width:130px;">bloque</td>
 				</tr>
 				
-				<? foreach($LIENS2 as $lien){
+				<?php foreach($LIENS2 as $lien){
 					echo $lien;
 				}?>
 				
@@ -292,7 +292,7 @@ if ($SUBMITNAME=='Mod'){
 					<td colspan="8"><hr /></td>
 				</tr>
 				
-				<? foreach($LIENS1 as $lien){
+				<?php foreach($LIENS1 as $lien){
 					echo $lien;
 				}?>
 				
@@ -335,7 +335,7 @@ if ($SUBMITNAME=='Mod'){
 		
 		
 	</form>
-<?
+<?php
 }
 ?>
 		

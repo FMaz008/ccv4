@@ -9,7 +9,7 @@ TESTESTES<script type="text/javascript">
 				{
 					method: 'post', 
 					parameters: '&userid='+id+
-								'&no='+<?=$PAGE->getId();?>+
+								'&no='+<?php echo $PAGE->getId();?>+
 								'&adddel=' + $('ax_'+id).checked+
 								'&user='+$F('header_user')+
 								'&pass='+$F('header_pass'), 
@@ -77,15 +77,15 @@ TESTESTES<script type="text/javascript">
 		<td class="name">User</td>
 	</tr>
 	
-	<?
+	<?php
 	foreach($ACCES as $ax)
 	{
 		?>
 		<tr>
-			<td class="value"><input type="checkbox" id="ax_<?=$ax['obj']->getId();?>" <? if($ax['ax'])	{ echo 'checked="checked" '; } ?> onclick="saveAccess(<?=$ax['obj']->getId();?>);"/></td>
-			<td class="value"><?=$ax['obj']->getUser();?></td>
+			<td class="value"><input type="checkbox" id="ax_<?php echo $ax['obj']->getId();?>" <?php if($ax['ax'])	{ echo 'checked="checked" '; } ?> onclick="saveAccess(<?php echo $ax['obj']->getId();?>);"/></td>
+			<td class="value"><?php echo $ax['obj']->getUser();?></td>
 		</tr>
-		<?
+		<?php
 	}
 	?>
 	</table>

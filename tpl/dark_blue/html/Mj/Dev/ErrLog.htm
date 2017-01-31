@@ -11,18 +11,18 @@
 		<td class="name">ligne</td>
 		<td class="name"></td>
 	</tr>
-	<? if(empty($ERRORS)) {?>
+	<?php if(empty($ERRORS)) {?>
 		<tr><td class="value" colspan="6"><i>- Aucune erreur -</i></td></tr>
-	<? } else { 
+	<?php } else { 
 		foreach($ERRORS as $error) { ?>
 			<tr>
-				<td class="value"><?=$error['id'];?></td>
-				<td class="value"><?=fctToGameTime($error['date']);?></td>
-				<td class="value"><?=$error['msg'];?></td>
-				<td class="value"><?=$error['file'];?></td>
-				<td class="value"><?=$error['line'];?></td>
-				<td class="value"><a href="?mj=Dev_ErrLogDetails&id=<?=$error['id'];?>">détails</a></td>
+				<td class="value"><?php echo $error['id'];?></td>
+				<td class="value"><?php echo fctToGameTime($error['date']);?></td>
+				<td class="value"><?php echo $error['msg'];?></td>
+				<td class="value"><?php echo $error['file'];?></td>
+				<td class="value"><?php echo $error['line'];?></td>
+				<td class="value"><a href="?mj=Dev_ErrLogDetails&id=<?php echo $error['id'];?>">détails</a></td>
 			</tr>
-		<? }
+		<?php }
 		} ?>
 </table>

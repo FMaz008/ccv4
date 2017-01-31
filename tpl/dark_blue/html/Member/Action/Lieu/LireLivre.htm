@@ -1,19 +1,19 @@
-<? if(isset($URL_RETOUR)) { ?>
-	<a href="#" onclick="actionLink('<?=$URL_RETOUR;?>');">&lt;&lt Retour</a><br /><br />
-<? } ?>
+<?php if(isset($URL_RETOUR)) { ?>
+	<a href="#" onclick="actionLink('<?php echo $URL_RETOUR;?>');">&lt;&lt Retour</a><br /><br />
+<?php } ?>
 
 <table class="tbl_center">
 	<tr>
-		<td class="title"><?=$LIVRE->getTitre();?> (<?=$LIVRE->getAuteur();?>)</td>
+		<td class="title"><?php echo $LIVRE->getTitre();?> (<?php echo $LIVRE->getAuteur();?>)</td>
 	</tr><tr>
 		<td class="txtvalue">
 			<p align="justify">
-				<?=$LIVRE->getContenuHTML();?>
+				<?php echo $LIVRE->getContenuHTML();?>
 			</p>
 		</td>
 	</tr>
 </table><br />
 
-<? if(isset($URL_RETOUR)) { ?>
-	<a href="#" onclick="actionLink('<?=$URL_RETOUR;?>');">&lt;&lt Retour</a><br /><br />
-<? } ?>
+<?php if(isset($URL_RETOUR)) { ?>
+	<a href="#" onclick="actionLink('<?php echo $URL_RETOUR;?>');">&lt;&lt Retour</a><br /><br />
+<?php } ?>

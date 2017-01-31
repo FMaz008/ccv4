@@ -38,21 +38,21 @@ function submitForm(id) {
 		<td class="name"><a href="?&mj=Lieu&qte_perso=1">Qte perso.</a></td>
 		<td class="name">Boutique</td>
 	</tr>
-	<? if (!isset($LIEUX)){ ?>
+	<?php if (!isset($LIEUX)){ ?>
 		<tr><td class="value" colspan='6'><i>- Aucun lieu -</i></td></tr>
-	<?}else {
+	<?php }else {
 		foreach($LIEUX as $lieu){ 
 		?>
 			<tr>
-				<td class="value"><input type="radio" name="id" id="id<?=$lieu['id'];?>" value="<?=$lieu['id'];?>" /></td>
-				<td class="value"><?=$lieu['id'];?></td>
-				<td class="value"><a href="#" onclick="submitForm(<?=$lieu['id'];?>);"><?=$lieu['nom_technique'];?></a></td>
-				<td class="value"><?=$lieu['nom_affiché'];?></td>
-				<td class="value"><? if(isset($lieu['qte_item'])){ echo $lieu['qte_item']; }else{ echo '-'; }?></td>
-				<td class="value"><? if(isset($lieu['qte_perso'])){ echo $lieu['qte_perso']; }else{ echo '-'; }?></td>
-				<td class="value"><? if(isset($lieu['boutique']) && $lieu['boutique']==1){ echo "Boutique"; }?></td>
+				<td class="value"><input type="radio" name="id" id="id<?php echo $lieu['id'];?>" value="<?php echo $lieu['id'];?>" /></td>
+				<td class="value"><?php echo $lieu['id'];?></td>
+				<td class="value"><a href="#" onclick="submitForm(<?php echo $lieu['id'];?>);"><?php echo $lieu['nom_technique'];?></a></td>
+				<td class="value"><?php echo $lieu['nom_affiché'];?></td>
+				<td class="value"><?php if(isset($lieu['qte_item'])){ echo $lieu['qte_item']; }else{ echo '-'; }?></td>
+				<td class="value"><?php if(isset($lieu['qte_perso'])){ echo $lieu['qte_perso']; }else{ echo '-'; }?></td>
+				<td class="value"><?php if(isset($lieu['boutique']) && $lieu['boutique']==1){ echo "Boutique"; }?></td>
 			</tr>
-	<?
+	<?php
 		}
 	}
 	?>

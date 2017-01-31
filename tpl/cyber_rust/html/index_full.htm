@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0  Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 	<head>
-		<meta http-equiv="content-type" content="text/html;charset=<?=$SITE_CHARSET;?>" />
-		<title><?=$SITE_NAME;?><?=$SITE_VERSION;?></title>
+		<meta http-equiv="content-type" content="text/html;charset=<?php echo $SITE_CHARSET;?>" />
+		<title><?php echo $SITE_NAME;?><?php echo $SITE_VERSION;?></title>
 		<script type="text/javascript">
-			window.defaultStatus="<?=$SITE_NAME;?> <?=$SITE_VERSION;?>";
+			window.defaultStatus="<?php echo $SITE_NAME;?> <?php echo $SITE_VERSION;?>";
 		</script>
-		<link rel="stylesheet" type="text/css" href="<?=$SKIN_VIRTUAL_PATH;?>design_<?=$SKIN_ONLINEOFFLINE;?>.php" />
-		<?
+		<link rel="stylesheet" type="text/css" href="<?php echo $SKIN_VIRTUAL_PATH;?>design_<?php echo $SKIN_ONLINEOFFLINE;?>.php" />
+		<?php
 		if(isset($MJ_CSS)){
 			?>
-			<link rel="stylesheet" type="text/css" href="<?=$SKIN_VIRTUAL_PATH;?>mj.php" />
-			<?
+			<link rel="stylesheet" type="text/css" href="<?php echo $SKIN_VIRTUAL_PATH;?>mj.php" />
+			<?php
 		}
 		?>
 		<script type="text/javascript" src="./js/prototype.js"></script>
@@ -46,7 +46,7 @@
 				<div id="aboutus">
 					<a href="?v=About">À propos de</a>
 				</div>
-				<?
+				<?php
 				if (isset($SITE_REVISION))
 				{
 					?>
@@ -54,10 +54,10 @@
 						<span>
 							rev
 							&nbsp;&nbsp;
-							<?=$SITE_REVISION;?>
+							<?php echo $SITE_REVISION;?>
 						</span>
 					</div>
-				<?
+				<?php
 				}
 				if (DEBUG_MODE)
 				{
@@ -69,12 +69,12 @@
 							)
 						</span>
 					</div>
-					<?
+					<?php
 				}
 				?>
 				
 				<div id="infos">
-					<div class="titre center"><?=$GAME_TIME;?></div>
+					<div class="titre center"><?php echo $GAME_TIME;?></div>
 					<div class="titre center">
 						Session:
 						<span id="countdown"></span>
@@ -82,31 +82,31 @@
 					
 					<div class="sep"></div>
 					<div class="titre propname">Joueurs:</div>
-					<div class="valeur"><?=$GAME_PLAYERS;?></div>				
+					<div class="valeur"><?php echo $GAME_PLAYERS;?></div>				
 					<div class="titre propname">En ligne:</div>
-					<div class="valeur"><?=$GAME_ONLINE;?></div>
+					<div class="valeur"><?php echo $GAME_ONLINE;?></div>
 				</div>
 				<div id="foruminfos">
-					<?=$LEFTBAR_FORUM;?>
+					<?php echo $LEFTBAR_FORUM;?>
 				</div>
 			</div><!-- header -->
 			<div id="content">
 				<div id="menu">
-					<?=$MENU;?>
+					<?php echo $MENU;?>
 				</div>
 				<div id="content2">
-					<?
+					<?php
 					if(isset($ERREUR))
 					{
 						?>
 						<div class="center index_full_erreur">
 							<div class="name index_full_erreurName"><blink>Erreur</blink></div>
-							<?=$ERREUR;?>
+							<?php echo $ERREUR;?>
 						</div><br />
-						<?
+						<?php
 					}
 					?>
-					<?=$PAGE_SOURCE;?>
+					<?php echo $PAGE_SOURCE;?>
 				</div>
 			
 				<div id="footer">
@@ -117,29 +117,29 @@
 						</div>
 						<p>CyberCity 2034 décline toute responsabilité envers tous les malheurs qu'il pourrait vous engendrer (perte d'emploi, perte de copine, perte de la garde de vos enfant, perte de votre maison car saisie faute de temps pour faire les paiements, etc.)</p>
 						<br />
-						<p><strong>Nombre de requêtes: <?=$QUERY_COUNT;?> (<?=$SQL_GEN_TIME;?>sec), Génération de la page: <?=$PAGE_GEN_TIME;?>sec</strong></p>
+						<p><strong>Nombre de requêtes: <?php echo $QUERY_COUNT;?> (<?php echo $SQL_GEN_TIME;?>sec), Génération de la page: <?php echo $PAGE_GEN_TIME;?>sec</strong></p>
 					</div>
 					<div id="links">
 						<a onclick="window.open(this.href);return false;" href="http://tourdejeu.net/annu/annuprev.php?cat1=14&amp;cat2=47">
-							<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/TourDeJeu.gif" alt="TourDeJeu.net" />
+							<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/TourDeJeu.gif" alt="TourDeJeu.net" />
 						</a>
 						<a onclick="window.open(this.href);return false;" href="http://www.jouer.org/in.php?ID=330">
-							<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/Jouer.gif" alt="Jouer.org" />
+							<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/Jouer.gif" alt="Jouer.org" />
 						</a>
 						<a onclick="window.open(this.href);return false;" href="http://www.playjeux.org/?q=fiche&amp;id=1">
-							<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/PlayJeux.gif" alt="PlayJeux.org" />
+							<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/PlayJeux.gif" alt="PlayJeux.org" />
 						</a>
 						<a onclick="window.open(this.href);return false;" href="http://www.sanktuaire.net">
-							<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/Sanktuaire.gif" alt="Le Sanktuaire" />
+							<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/Sanktuaire.gif" alt="Le Sanktuaire" />
 						</a>
 						<a onclick="window.open(this.href);return false;" href="http://www.gamersroom.com/vote.php?num=513">
-							<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/GamersRoom.gif" alt="Gamers'room" />
+							<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/GamersRoom.gif" alt="Gamers'room" />
 						</a>
 						<a onclick="window.open(this.href);return false;" href="http://validator.w3.org/check?uri=referer">
-							<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/valid-xhtml10.png" alt="Valid XHTML 1.0!" />
+							<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/valid-xhtml10.png" alt="Valid XHTML 1.0!" />
 						</a>
 						<a onclick="window.open(this.href);return false;" href="http://jigsaw.w3.org/css-validator/">
-							<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/vcss.png" alt="Valid CSS!" />
+							<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/vcss.png" alt="Valid CSS!" />
 						</a>
 				
 						<div id="eXTReMe"><a href="http://extremetracking.com/open?login=cyberc4"> 
@@ -167,11 +167,11 @@
 			<div id="realfooter"></div>
 		</div><!-- site -->
 		
-		<? /*
+		<?php /*
 		<div class="topbar"></div>
 		<div class="leftbar">
 			<div class="menu">
-				<?=$MENU;?>
+				<?php echo $MENU;?>
 			</div>
 			
 			
@@ -179,7 +179,7 @@
 			<div class="time">
 				Nous sommes le:<br />
 				<div class="time_gametime">
-					<span class="txtStyle_valeur"><?=$GAME_TIME;?></span>
+					<span class="txtStyle_valeur"><?php echo $GAME_TIME;?></span>
 				</div>
 				<br/>Temps session:
 				<div class="time_sessioncountdown">
@@ -189,13 +189,13 @@
 			</div>
 
 			<div class="leftbarseparator"></div>
-			<? if(isset($LEFTBAR_FORUM)){ ?>
+			<?php if(isset($LEFTBAR_FORUM)){ ?>
 				<div class="forum">
 					Forum:<br />
-					<?=$LEFTBAR_FORUM;?>
+					<?php echo $LEFTBAR_FORUM;?>
 				</div>
 				<div class="leftbarseparator"></div>
-			<? } ?>
+			<?php } ?>
 			
 			
 			
@@ -206,7 +206,7 @@
 	</body>
 	<script type="text/javascript">
 		//<!--
-		countdown(<?=$GAME_SESSION_LENGHT;?>);
+		countdown(<?php echo $GAME_SESSION_LENGHT;?>);
 		//-->
 	</script>
 </html>

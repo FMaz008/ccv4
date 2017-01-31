@@ -1,6 +1,6 @@
 <script>
 imgpreviewgo = function(){
-		frames['imgpreview'].location.href = "<?=SITE_VIRTUAL_PATH;?>tpl/_common/items/" + document.getElementById("db_img").value;
+		frames['imgpreview'].location.href = "<?php echo SITE_VIRTUAL_PATH;?>tpl/_common/items/" + document.getElementById("db_img").value;
 }
 
 var nbr_action_ajout=0;
@@ -9,7 +9,7 @@ AjouterAction = function(){
 		'?mj=Item_AddActionpage&popup=1', 
 		{
 			method: 'post', 
-			parameters: 'divid='+ (nbr_action_ajout+1) + '&db_id=<?=$ITEM['db_id'];?>',
+			parameters: 'divid='+ (nbr_action_ajout+1) + '&db_id=<?php echo $ITEM['db_id'];?>',
 			onComplete: AjouterAction_completed
 		});
 }
@@ -23,57 +23,57 @@ AjouterAction_completed = function(originalRequest){
 }
 </script>
 
-<form method="post" action="?mj=Item_Badge<?=$SUBMITNAME;?>">
+<form method="post" action="?mj=Item_Badge<?php echo $SUBMITNAME;?>">
 	
 	<table class="center">
 	<tr>
-		<td class="title" colspan="2"><?=$ACTIONTYPETXT;?> un badge</td>
+		<td class="title" colspan="2"><?php echo $ACTIONTYPETXT;?> un badge</td>
 	</tr>
 	
-	<? if( $SHOWID == true ){ ?>
+	<?php if( $SHOWID == true ){ ?>
 	<tr>
 		<td class="name">ID l'item</td>
-		<td class="value"><input type="hidden" name="db_id" value="<?=$ITEM['db_id'];?>" /><?=$ITEM['db_id'];?></td>
+		<td class="value"><input type="hidden" name="db_id" value="<?php echo $ITEM['db_id'];?>" /><?php echo $ITEM['db_id'];?></td>
 	</tr>
-	<? } ?>
+	<?php } ?>
 	
 	<tr>
 		<td class="name">Nom de l'item</td>
-		<td class="value"><input type="text" class="text" name="db_nom" value="<?=$ITEM['db_nom'];?>" /></td>
+		<td class="value"><input type="text" class="text" name="db_nom" value="<?php echo $ITEM['db_nom'];?>" /></td>
 	</tr>
 	
 	<tr>
 		<td class="name">Description</td>
-		<td class="value"><textarea name="db_desc"><?=$ITEM['db_desc'];?></textarea></td>
+		<td class="value"><textarea name="db_desc"><?php echo $ITEM['db_desc'];?></textarea></td>
 	</tr>
 	
 	<tr>
 		<td class="name">Valeur</td>
-		<td class="value"><input type="text" class="text" name="db_valeur" value="<?=$ITEM['db_valeur'];?>" size="6" /><?=GAME_DEVISE;?></td>
+		<td class="value"><input type="text" class="text" name="db_valeur" value="<?php echo $ITEM['db_valeur'];?>" size="6" /><?php echo GAME_DEVISE;?></td>
 	</tr>
 	
 	<tr>
 		<td class="name">
 			Image<br />
-			<iframe src="<?=SITE_VIRTUAL_PATH;?>tpl/_common/items/<?=$ITEM['db_img'];?>" name="imgpreview" style="width:80px;height:120px;" scrolling="no"></iframe>
+			<iframe src="<?php echo SITE_VIRTUAL_PATH;?>tpl/_common/items/<?php echo $ITEM['db_img'];?>" name="imgpreview" style="width:80px;height:120px;" scrolling="no"></iframe>
 		</td>
 		<td class="value">
 			<select name="db_img" id="db_img" onchange="imgpreviewgo();">
-				<? foreach($IMGS as $IMG){ ?>
-					<option value="<?=$IMG;?>" <?if($IMG==$ITEM['db_img']){?> SELECTED <? } ?>><?=$IMG;?></option>
-				<? } ?>
+				<?php foreach($IMGS as $IMG){ ?>
+					<option value="<?php echo $IMG;?>" <?php if($IMG==$ITEM['db_img']){?> SELECTED <?php } ?>><?php echo $IMG;?></option>
+				<?php } ?>
 			</select>
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="name">PR</td>
-		<td class="value"><input type="text" class="text" name="db_pr" value="<?=$ITEM['db_pr'];?>" size="6" /></td>
+		<td class="value"><input type="text" class="text" name="db_pr" value="<?php echo $ITEM['db_pr'];?>" size="6" /></td>
 	</tr>
 		
 	<tr>
 		<td class="name">Résistance Maximum</td>
-		<td class="value"><input type="text" class="text" name="db_resistance" value="<?=$ITEM['db_resistance'];?>" size="3" maxlength="3" /></td>
+		<td class="value"><input type="text" class="text" name="db_resistance" value="<?php echo $ITEM['db_resistance'];?>" size="3" maxlength="3" /></td>
 	</tr>
 	
 	<tr>
@@ -85,22 +85,22 @@ AjouterAction_completed = function(originalRequest){
 				<td class="name">Module</td>
 				<td class="name">Titre menu</td>
 			</tr>
-			<?
+			<?php
 			if(isset($ACTIONS)){
 				foreach($ACTIONS as $action){
 					?>
 					<tr>
 						<td class="value">
-							<input type="checkbox" name="delAction_<?=$action['id'];?>" value="true" />
+							<input type="checkbox" name="delAction_<?php echo $action['id'];?>" value="true" />
 						</td>
 						<td class="name">
-							<?=$action['url'];?>
+							<?php echo $action['url'];?>
 						</td>
 						<td class="value">
-							<input type="text" class="text" name="<?=$action['id'];?>_actioncaption" value="<?=$action['caption'];?>" />
+							<input type="text" class="text" name="<?php echo $action['id'];?>_actioncaption" value="<?php echo $action['caption'];?>" />
 						</td>
 					</tr>
-					<?
+					<?php
 				}
 			}
 			?>
@@ -114,7 +114,7 @@ AjouterAction_completed = function(originalRequest){
 	
 	<tr>
 		<td class="name">Note MJ</td>
-		<td class="value"><textarea name="db_notemj"><?=$ITEM['db_notemj'];?></textarea></td>
+		<td class="value"><textarea name="db_notemj"><?php echo $ITEM['db_notemj'];?></textarea></td>
 	</tr>
 	
 	

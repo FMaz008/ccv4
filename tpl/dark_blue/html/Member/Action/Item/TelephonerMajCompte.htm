@@ -9,7 +9,7 @@
 			<td colspan="2" class="title">Gestion compte t&eacute;l&eacute;phonique</td>
 		</tr><tr>
 			<td class="name"># du compte</td>
-			<td class="value"><input type="text" class="text" name="compte" id="compte" value="<?=$numCompte;?>" maxlength="19" size="20"/></td>
+			<td class="value"><input type="text" class="text" name="compte" id="compte" value="<?php echo $numCompte;?>" maxlength="19" size="20"/></td>
 		</tr><tr>
 			<td class="name">Nip</td>
 			<td class="value"><input type="text" class="text" name="nip" id="nip" value="" maxlength="5" size="5"/></td>
@@ -17,7 +17,7 @@
 		
 		<tr><td colspan="2" class="center">(Laisser 'Nip' vide si inchang&eacute;)</td></tr>
 		<tr><td colspan="2" class="center">
-				<input type="button"  OnClick="SaveChange2('compte=' + escape($F('compte')) + '&nip=' + escape($F('nip')) + '&telephone=<?=$idTel; ?>&post=1')" value="Enregistrer" class="button" />
+				<input type="button"  OnClick="SaveChange2('compte=' + escape($F('compte')) + '&nip=' + escape($F('nip')) + '&telephone=<?php echo $idTel; ?>&post=1')" value="Enregistrer" class="button" />
 				<input type="button" class="button" onclick="showhidediv('none');" value="Annuler" />
 			</td>
 		</tr>

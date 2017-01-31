@@ -1,19 +1,19 @@
 <a href="?m=News">Mon compte</a>
-<?
+<?php
 if(isset($MENU_PERSO))
 {
 	foreach ($MENU_PERSO as $element)
 	{
 		?>
-		<a href="<?=$element['url'];?>"><?=$element['txt'];?></a>
-		<?
+		<a href="<?php echo $element['url'];?>"><?php echo $element['txt'];?></a>
+		<?php
 	}
 }
 if(isset($MENU_MJ))
 {
 	?>
 	<a href="?mj=index">Panneau MJ</a>
-	<?
+	<?php
 }
 ?>
 <a href="?v=Logout" onclick="return confirm('Êtes-vous certain de vouloir vous déconnecter ?');">Déconnexion</a>

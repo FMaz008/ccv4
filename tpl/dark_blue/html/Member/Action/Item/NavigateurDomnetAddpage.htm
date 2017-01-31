@@ -16,7 +16,7 @@
 					method: 'post', 
 					parameters: 'titre='+encodeURIComponent($F('page_titre'))+
 								'&content='+encodeURIComponent($F('page_content'))+
-								'&url=<?=$SITE->getUrl();?>'+
+								'&url=<?php echo $SITE->getUrl();?>'+
 								'&user='+$F('header_user')+
 								'&pass='+$F('header_pass')+
 								'&acces='+$('acces').checked+

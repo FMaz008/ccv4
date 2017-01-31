@@ -28,7 +28,7 @@ pic1.src="/tpl/tholus/img/bouton/btn_forum_on.png";
 		if(isset($PAGE_MENU_ACTIONS))
 		{
 			?>
-			<?=$PAGE_MENU_ACTIONS;?>
+			<?php echo $PAGE_MENU_ACTIONS;?>
 			<?php
 		}
 		else
@@ -83,7 +83,7 @@ if(!isset($MENU_PERSO) || count($MENU_PERSO)==0)
 elseif(count($MENU_PERSO)==1)
 {
 	?>
-	<div class="bouton boutonPerso" onclick="location.href='<?=$MENU_PERSO[0]['url'];?>';">
+	<div class="bouton boutonPerso" onclick="location.href='<?php echo $MENU_PERSO[0]['url'];?>';">
 		<span>Perso</span>
 	</div>
 	<?php
@@ -99,7 +99,7 @@ else
 			foreach ($MENU_PERSO as $element)
 			{
 				?>
-				<a href="<?=$element['url'];?>"><?=$element['txt'];?></a>
+				<a href="<?php echo $element['url'];?>"><?php echo $element['txt'];?></a>
 				<?php
 			}
 			?>

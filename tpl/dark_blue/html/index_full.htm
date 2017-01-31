@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0  Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 	<head>
-		<meta http-equiv="content-type" content="text/html;charset=<?=$SITE_CHARSET;?>" />
-		<title><?=$SITE_NAME;?><?=$SITE_VERSION;?></title>
+		<meta http-equiv="content-type" content="text/html;charset=<?php echo $SITE_CHARSET;?>" />
+		<title><?php echo $SITE_NAME;?><?php echo $SITE_VERSION;?></title>
 		<script type="text/javascript">
-			window.defaultStatus="<?=$SITE_NAME;?> <?=$SITE_VERSION;?>";
+			window.defaultStatus="<?php echo $SITE_NAME;?> <?php echo $SITE_VERSION;?>";
 		</script>
-		<link rel="stylesheet" type="text/css" href="<?=$SKIN_VIRTUAL_PATH;?>design_<?=$SKIN_ONLINEOFFLINE;?>.php" />
-		<?
+		<link rel="stylesheet" type="text/css" href="<?php echo $SKIN_VIRTUAL_PATH;?>design_<?php echo $SKIN_ONLINEOFFLINE;?>.php" />
+		<?php
 		if(isset($MJ_CSS)){
 			?>
-			<link rel="stylesheet" type="text/css" href="<?=$SKIN_VIRTUAL_PATH;?>mj.php" />
-			<?
+			<link rel="stylesheet" type="text/css" href="<?php echo $SKIN_VIRTUAL_PATH;?>mj.php" />
+			<?php
 		}
 		?>
 		<script type="text/javascript" src="./js/prototype.js"></script>
@@ -32,12 +32,12 @@
 						<div id="ajaxLogin_error">Authentification refusée</div>
 						Votre session a expiré, afin de ne pas perdre vos
 						données en cours, veuillez vous authentifier à nouveau:
-						<form id="ajaxLogin" method="post" action="?v=Login2&popup=1" onsubmit="return ajaxLogin(this, <?=$GAME_SESSION_LENGHT;?>);">
+						<form id="ajaxLogin" method="post" action="?v=Login2&popup=1" onsubmit="return ajaxLogin(this, <?php echo $GAME_SESSION_LENGHT;?>);">
 							<?php
 							if(isset($CURRENT_PERSO_ID))
 							{
 								?>
-								<input type="hidden" name="persoId" value="<?=$CURRENT_PERSO_ID;?>" />
+								<input type="hidden" name="persoId" value="<?php echo $CURRENT_PERSO_ID;?>" />
 								<?php
 							}
 							?>
@@ -77,21 +77,21 @@
 		<!-- END AJAX LOGIN -->
 
 		
-		<?if (isset($SITE_VERSION)) {?>
+		<?php if (isset($SITE_VERSION)) {?>
 			<div class="version">
-				<?=$SITE_VERSION;?>
-				<? if(isset($SITE_REVISION)){ ?>
-					<span style="font-size:12pt;">(rev. <?=$SITE_REVISION;?>)</span>
-				<? } ?>
-				<? if (DEBUG_MODE){ ?>
+				<?php echo $SITE_VERSION;?>
+				<?php if(isset($SITE_REVISION)){ ?>
+					<span style="font-size:12pt;">(rev. <?php echo $SITE_REVISION;?>)</span>
+				<?php } ?>
+				<?php if (DEBUG_MODE){ ?>
 					&gt;&gt; SITE EN MODE DEBUG &lt;&lt;
-				<? } ?>
+				<?php } ?>
 			</div>
-		<? } ?>
+		<?php } ?>
 		<div class="topbar"></div>
 		<div class="leftbar">
 			<div class="menu">
-				<?=$MENU;?>
+				<?php echo $MENU;?>
 			</div>
 			
 			<div class="leftbarseparator"></div>
@@ -100,13 +100,13 @@
 				<table style="border-width:0px; width:100%; border-spacing: 0pt; border-collapse: separate; border: outset 0pt; border: inset 0pt;">
 				<tr>
 					<td>Joueurs:</td>
-					<td><span class="txtStyle_valeur"><?=$GAME_PLAYERS;?></span></td>
+					<td><span class="txtStyle_valeur"><?php echo $GAME_PLAYERS;?></span></td>
 				</tr><tr>
 					<td>Inscription(s):</td>
-					<td><span class="txtStyle_valeur"><?=$GAME_SUBSCR;?></span></td>
+					<td><span class="txtStyle_valeur"><?php echo $GAME_SUBSCR;?></span></td>
 				</tr><tr>
 					<td>Online:</td>
-					<td><span class="txtStyle_valeur"><?=$GAME_ONLINE;?></span></td>
+					<td><span class="txtStyle_valeur"><?php echo $GAME_ONLINE;?></span></td>
 				</tr>
 				</table>
 			</div>
@@ -116,7 +116,7 @@
 			<div class="time">
 				Nous sommes le:<br />
 				<div class="time_gametime">
-					<span class="txtStyle_valeur"><?=$GAME_TIME;?></span>
+					<span class="txtStyle_valeur"><?php echo $GAME_TIME;?></span>
 				</div>
 				<br/>Temps session:
 				<div class="time_sessioncountdown">
@@ -125,37 +125,37 @@
 			</div>
 
 			<div class="leftbarseparator"></div>
-			<? if(isset($LEFTBAR_FORUM)){ ?>
+			<?php if(isset($LEFTBAR_FORUM)){ ?>
 				<div class="forum">
 					Forum:<br />
-					<?=$LEFTBAR_FORUM;?>
+					<?php echo $LEFTBAR_FORUM;?>
 				</div>
 				<div class="leftbarseparator"></div>
-			<? } ?>
+			<?php } ?>
 			
 			
 			<div class="certification">
 				<a onclick="window.open(this.href);return false;" href="http://tourdejeu.net/annu/annuprev.php?cat1=14&amp;cat2=47">
-					<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/TourDeJeu.gif" alt="TourDeJeu.net" />
+					<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/TourDeJeu.gif" alt="TourDeJeu.net" />
 				</a><br />
 				<a onclick="window.open(this.href);return false;" href="http://www.jouer.org/in.php?ID=330">
-					<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/Jouer.gif" alt="Jouer.org" />
+					<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/Jouer.gif" alt="Jouer.org" />
 				</a><br />
 				<a onclick="window.open(this.href);return false;" href="http://www.playjeux.org/?q=fiche&amp;id=1">
-					<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/PlayJeux.gif" alt="PlayJeux.org" />
+					<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/PlayJeux.gif" alt="PlayJeux.org" />
 				</a><br />
 				<a onclick="window.open(this.href);return false;" href="http://www.sanktuaire.net">
-					<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/Sanktuaire.gif" alt="Le Sanktuaire" />
+					<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/Sanktuaire.gif" alt="Le Sanktuaire" />
 				</a><br />
 				<a onclick="window.open(this.href);return false;" href="http://www.gamersroom.com/vote.php?num=513">
-					<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/GamersRoom.gif" alt="Gamers'room" />
+					<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/GamersRoom.gif" alt="Gamers'room" />
 				</a><hr />
 				
 				<a onclick="window.open(this.href);return false;" href="http://validator.w3.org/check?uri=referer">
-					<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/valid-xhtml10.png" alt="Valid XHTML 1.0!" />
+					<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/valid-xhtml10.png" alt="Valid XHTML 1.0!" />
 				</a><br />
 				<a onclick="window.open(this.href);return false;" href="http://jigsaw.w3.org/css-validator/">
-					<img class="index_full_imgAnnuaire" src="<?=$SKIN_VIRTUAL_PATH;?>../_common/pub/vcss.png" alt="Valid CSS!" />
+					<img class="index_full_imgAnnuaire" src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/pub/vcss.png" alt="Valid CSS!" />
 				</a><hr />
 				
 				<div id="eXTReMe"><a href="http://extremetracking.com/open?login=cyberc4"> 
@@ -179,13 +179,13 @@
 			
 		</div>
 		<div class="main" id="siteMain">
-			<? if(isset($ERREUR) && !empty($ERREUR)){ ?>
+			<?php if(isset($ERREUR) && !empty($ERREUR)){ ?>
 				<div class="center index_full_erreur">
 					<div class="name index_full_erreurName"><blink>Erreur</blink></div>
-					<?=$ERREUR;?>
+					<?php echo $ERREUR;?>
 				</div><br />
-			<? } ?>
-			<?=$PAGE_SOURCE;?>
+			<?php } ?>
+			<?php echo $PAGE_SOURCE;?>
 	
 			<div class="footer">
 				<div class="name">
@@ -195,14 +195,14 @@
 				
 				<p>CyberCity 2034 décline toute responsabilité envers tous les malheurs qu'il pourrait vous engendrer (perte d'emploi, perte de copine, perte de la garde de vos enfant, perte de votre maison car saisie faute de temps pour faire les paiements, etc.)</p>
 				<br />
-				<p><strong>Nombre de requêtes: <?=$QUERY_COUNT;?> (<?=$SQL_GEN_TIME;?>sec), Génération de la page: <?=$PAGE_GEN_TIME;?>sec. Usage mémoire: <?=$MEMORY_USAGE;?>.</strong></p>
+				<p><strong>Nombre de requêtes: <?php echo $QUERY_COUNT;?> (<?php echo $SQL_GEN_TIME;?>sec), Génération de la page: <?php echo $PAGE_GEN_TIME;?>sec. Usage mémoire: <?php echo $MEMORY_USAGE;?>.</strong></p>
 			</div>
 		</div>
 	</body>
 	<script type="text/javascript">
 		//<!--
-		var SHOW_AJAX_LOGIN = <?=$IS_LOGGED;?>;
-		countdown(<?=$GAME_SESSION_LENGHT;?>);
+		var SHOW_AJAX_LOGIN = <?php echo $IS_LOGGED;?>;
+		countdown(<?php echo $GAME_SESSION_LENGHT;?>);
 		//-->
 	</script>
 </html>

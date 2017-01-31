@@ -2,18 +2,18 @@
 	<span>Action</span>
 	<!-- Affichage du menu des actions-->
 	<div style="width:200px;" class="infobulle name">
-		<?
+		<?php
 		if(isset($PAGE_MENU_ACTIONS))
 		{
 			?>
-			<?=$PAGE_MENU_ACTIONS;?>
-			<?
+			<?php echo $PAGE_MENU_ACTIONS;?>
+			<?php
 		}
 		else
 		{
 			?>
 			<i>Aucun personnage n'est actuellement sélectionné.</i>
-			<?
+			<?php
 		}
 		?>
 	</div>
@@ -23,12 +23,12 @@
 <div class="bouton menuTab">
 	<span>Compte</span>
 	<div style="width:200px;" class="infobulle name">
-		<?
+		<?php
 		if(isset($MENU_MJ))
 		{
 			?>
 			<a href="?mj=index">Paneau MJ</a>
-			<?
+			<?php
 		}
 		?>
 		<a href="?m=News">Mon compte</a>
@@ -42,7 +42,7 @@
 
 		
 
-<?
+<?php
 if(!isset($MENU_PERSO) || count($MENU_PERSO)==0)
 {
 	?>
@@ -52,15 +52,15 @@ if(!isset($MENU_PERSO) || count($MENU_PERSO)==0)
 			<i>Vous n'avez aucun personnage pour le moment.</i>
 		</div>
 	</div>
-	<?
+	<?php
 }
 elseif(count($MENU_PERSO)==1)
 {
 	?>
-	<div class="bouton" onclick="location.href='<?=$MENU_PERSO[0]['url'];?>';">
+	<div class="bouton" onclick="location.href='<?php echo $MENU_PERSO[0]['url'];?>';">
 		<span>Perso</span>
 	</div>
-	<?
+	<?php
 }
 else
 {
@@ -68,17 +68,17 @@ else
 	<div class="bouton menuTab" >
 		<span>Perso</span>
 		<div style="width:200px;" class="infobulle name">
-			<?
+			<?php
 			foreach ($MENU_PERSO as $element)
 			{
 				?>
-				<a href="<?=$element['url'];?>"><?=$element['txt'];?></a>
-				<?
+				<a href="<?php echo $element['url'];?>"><?php echo $element['txt'];?></a>
+				<?php
 			}
 			?>
 		</div>
 	</div>
-	<?
+	<?php
 }
 ?>
 

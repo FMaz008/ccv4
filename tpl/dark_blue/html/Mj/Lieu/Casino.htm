@@ -10,19 +10,19 @@
 		<td class="name">Capital</td>
 	</tr>
 	
-	<?
+	<?php
 	if(isset($CASINOS)){
 		foreach($CASINOS as $casino){
 			?>
 			<tr>
 				<td class="name">
-					<input type="radio" name="id" value="<?=$casino->getId();?>" />
+					<input type="radio" name="id" value="<?php echo $casino->getId();?>" />
 				</td>
-				<td class="value"><?=$casino->getLieuTech();?></td>
-				<td class="value"><?=$casino->getNom();?></td>
-				<td class="value" style="text-align:right;"><?=$casino->getCash();?></td>
+				<td class="value"><?php echo $casino->getLieuTech();?></td>
+				<td class="value"><?php echo $casino->getNom();?></td>
+				<td class="value" style="text-align:right;"><?php echo $casino->getCash();?></td>
 			</tr>
-			<?
+			<?php
 		}
 	}else{
 		?>
@@ -31,7 +31,7 @@
 				<i><strong>Aucun casino</strong></i>
 			</td>
 		</tr>
-		<?
+		<?php
 	}
 	?>
 	<tr>

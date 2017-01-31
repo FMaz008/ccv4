@@ -18,17 +18,17 @@
 		<td class="name">Supprimer</td>
 	</tr>
 	
-	<? foreach($ACCES as $ax) { ?>
+	<?php foreach($ACCES as $ax) { ?>
 		<tr>
-			<td class="value"><input type="text" class="text" name="ax_<?=$ax->getId();?>_user" value="<?=$ax->getUser();?>" /></td>
-			<td class="value"><input type="text" class="text" name="ax_<?=$ax->getId();?>_pass" value="<?=$ax->getPass();?>" /></td>
-			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_accede"	<? if($ax->canAccede())		{ echo 'CHECKED '; } ?>value="1" /></td>
-			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_poste"		<? if($ax->canPoste())		{ echo 'CHECKED '; } ?>value="1"/></td>
-			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_modifier"	<? if($ax->canModifier())	{ echo 'CHECKED '; } ?>value="1"/></td>
-			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_admin"		<? if($ax->isAdmin())		{ echo 'CHECKED '; } ?>value="1"/></td>
-			<td class="value"><input type="checkbox" name="ax_<?=$ax->getId();?>_del" style="border:1px solid red;" /></td>
+			<td class="value"><input type="text" class="text" name="ax_<?php echo $ax->getId();?>_user" value="<?php echo $ax->getUser();?>" /></td>
+			<td class="value"><input type="text" class="text" name="ax_<?php echo $ax->getId();?>_pass" value="<?php echo $ax->getPass();?>" /></td>
+			<td class="value"><input type="checkbox" name="ax_<?php echo $ax->getId();?>_accede"	<?php if($ax->canAccede())		{ echo 'CHECKED '; } ?>value="1" /></td>
+			<td class="value"><input type="checkbox" name="ax_<?php echo $ax->getId();?>_poste"		<?php if($ax->canPoste())		{ echo 'CHECKED '; } ?>value="1"/></td>
+			<td class="value"><input type="checkbox" name="ax_<?php echo $ax->getId();?>_modifier"	<?php if($ax->canModifier())	{ echo 'CHECKED '; } ?>value="1"/></td>
+			<td class="value"><input type="checkbox" name="ax_<?php echo $ax->getId();?>_admin"		<?php if($ax->isAdmin())		{ echo 'CHECKED '; } ?>value="1"/></td>
+			<td class="value"><input type="checkbox" name="ax_<?php echo $ax->getId();?>_del" style="border:1px solid red;" /></td>
 		</tr>
-	<? } ?>
+	<?php } ?>
 	
 	</table>
 	<input type="submit" class="button" name="add" onclick="$('action').value=this.name;" value="Ajouter un acc&egrave;s !" />

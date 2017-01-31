@@ -12,16 +12,16 @@
 		<td class="name">Protection</td>
 	</tr>
 	
-	<? if (isset($CASIERS)){
+	<?php if (isset($CASIERS)){
 		foreach($CASIERS as $casier){?>
 			<tr>
 				<td class="name" style="width:25px;">
-					<input type="radio" name="id_casier" value="<?=$casier->getId();?>" />
+					<input type="radio" name="id_casier" value="<?php echo $casier->getId();?>" />
 				</td>
-				<td><?=$casier->getNom();?></td>
-				<td><?=$casier->getProtectionTxt();?></td>
+				<td><?php echo $casier->getNom();?></td>
+				<td><?php echo $casier->getProtectionTxt();?></td>
 			</tr>
-		<? }
+		<?php }
 	}else{
 		?>
 		<tr>
@@ -29,7 +29,7 @@
 				<i>- Aucun casier dans ce lieu -</i>
 			</td>
 		</tr>
-		<?
+		<?php
 	}
 	?>
 	<tr>

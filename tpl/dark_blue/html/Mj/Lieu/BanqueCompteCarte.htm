@@ -11,7 +11,7 @@ function confirmdel(msg){
 <form name="form1" action="" method="post">
 <table class="center">
 	<tr>
-		<td class="title" colspan="7">Liste des carte du compte <?=$COMPTE;?></td>	
+		<td class="title" colspan="7">Liste des carte du compte <?php echo $COMPTE;?></td>	
 	</tr>
 	<tr>
 		<td class="name" style="width:15px;"></td>
@@ -21,20 +21,20 @@ function confirmdel(msg){
 		<td class="name">Valide</td>
 	</tr>
 	
-	<?
+	<?php
 	if(isset($CARTES)){
 		foreach($CARTES as $carte){
 			?>
 			<tr>
 				<td class="name">
-					<input type="radio" name="id" value="<?=$carte['id'];?>" />
+					<input type="radio" name="id" value="<?php echo $carte['id'];?>" />
 				</td>
-				<td class="value"><?=$carte['carte_no'];?></td>
-				<td class="value"><?=$carte['nom'];?></td>
-				<td class="value"><?=$carte['nip'];?></td>
-				<td class="value"><?=$carte['valide'];?></td>
+				<td class="value"><?php echo $carte['carte_no'];?></td>
+				<td class="value"><?php echo $carte['nom'];?></td>
+				<td class="value"><?php echo $carte['nip'];?></td>
+				<td class="value"><?php echo $carte['valide'];?></td>
 			</tr>
-			<?
+			<?php
 		}
 	}else{
 		?>
@@ -43,13 +43,13 @@ function confirmdel(msg){
 				<i><strong>Le compte possède aucune carte</strong></i>
 			</td>
 		</tr>
-		<?
+		<?php
 	}
 	?>
 	<tr>
 		<td colspan="7" value="name">
-			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Lieu_BanqueCompteCarteAdd&id=<?=$_GET['id'];?>';" />
-			<input type="submit" class="button" name="mod" value="Modifier" onClick="document.forms['form1'].action='?mj=Lieu_BanqueCompteCarteMod&id=<?=$_GET['id'];?>';"/>
+			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Lieu_BanqueCompteCarteAdd&id=<?php echo $_GET['id'];?>';" />
+			<input type="submit" class="button" name="mod" value="Modifier" onClick="document.forms['form1'].action='?mj=Lieu_BanqueCompteCarteMod&id=<?php echo $_GET['id'];?>';"/>
 			<input type="submit" class="button" name="del" value="Supprimer" onClick="document.forms['form1'].action='?mj=Lieu_BanqueCompteCarteDel';return confirmdel('Effacer le lieu ?\n\nCETTE ACTION SUPPRIMERA L\'ACCESS.');" />
 		</td>
 	</tr>

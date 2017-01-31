@@ -1,32 +1,32 @@
 
 <div class="main_zoneAll">
-	<?
+	<?php
 	if(isset($WARNING_MESSAGE))
 	{
 		?>
 		<table class="center" style="border:3px dashed #c9cb00;background-color:#4b5200;width:600px;">
 			<tr>
-					<td style="width:50px;text-align:center;"><img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/warning.gif" /></td>
+					<td style="width:50px;text-align:center;"><img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/warning.gif" /></td>
 					<td style="font-size:10pt;color:#CCCCCC;">
 							<strong>Attention: </strong>
-							<?=$WARNING_MESSAGE;?>
+							<?php echo $WARNING_MESSAGE;?>
 							<br /><br />
 					</td>
 			</tr>
 		</table>
 		<br />
-		<?
+		<?php
 	}
 	?>
 	<div class="main_zoneLogo">
-		<img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/ville_animated.gif" alt="Logo Ville Animé" />
+		<img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/ville_animated.gif" alt="Logo Ville Animé" />
 	</div>
 	
 	<div class="main_zoneTxt">
 		CyberCity, 10 ans après l'annonce de 2034...
 		<br />
 		<br />
-		<?=$PAGE_CONTENU;?>
+		<?php echo $PAGE_CONTENU;?>
 	</div>
 	
 	<div class="panel main_zoneCitation">

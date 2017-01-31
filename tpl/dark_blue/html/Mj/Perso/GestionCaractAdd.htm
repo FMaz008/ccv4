@@ -36,11 +36,11 @@ AjouterIncompatible_completed = function(originalRequest){
 	<td class="value">
 		<select name="catId">
 			<option value="0">Est une catégorie</option>
-		<?
+		<?php
 		foreach($CAT as $cat){
 			?>
-			<option value="<?=$cat['id'];?>"><?=$cat['nom'];?></option>
-			<?
+			<option value="<?php echo $cat['id'];?>"><?php echo $cat['nom'];?></option>
+			<?php
 		}
 		?>
 		</select>

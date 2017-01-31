@@ -31,23 +31,23 @@ function submitForm(id) {
 		<td class="name" style="width:25px;">DEV</td>
 		<td class="name" style="width:25px;">ADMIN</td>
 	</tr>
-	<? foreach($MJ as $mj){ ?>
+	<?php foreach($MJ as $mj){ ?>
 		<tr>
 			<td class="name">
-				<input type="radio" name="id" id="id<?=$mj['id'];?>" value="<?=$mj['id'];?>" />
+				<input type="radio" name="id" id="id<?php echo $mj['id'];?>" value="<?php echo $mj['id'];?>" />
 			</td>
 			<td class="value" style="text-align:left;">
-				<a href="#" onclick="submitForm(<?=$mj['id'];?>);"><?=$mj['nom'];?></a>
+				<a href="#" onclick="submitForm(<?php echo $mj['id'];?>);"><?php echo $mj['nom'];?></a>
 			</td>
-			<td class="value" style="text-align:left;"><?=$mj['user'];?></td>
-			<td class="value" style="text-align:left;"><?=$mj['poste'];?></td>
-			<td class="value"><?=$mj['ax_ppa'];?></td>
-			<td class="value"><?=$mj['ax_ej'];?></td>
-			<td class="value"><?=$mj['ax_hj'];?></td>
-			<td class="value"><?=$mj['ax_dev'];?></td>
-			<td class="value"><?=$mj['ax_admin'];?></td>
+			<td class="value" style="text-align:left;"><?php echo $mj['user'];?></td>
+			<td class="value" style="text-align:left;"><?php echo $mj['poste'];?></td>
+			<td class="value"><?php echo $mj['ax_ppa'];?></td>
+			<td class="value"><?php echo $mj['ax_ej'];?></td>
+			<td class="value"><?php echo $mj['ax_hj'];?></td>
+			<td class="value"><?php echo $mj['ax_dev'];?></td>
+			<td class="value"><?php echo $mj['ax_admin'];?></td>
 		</tr>
-	<? } ?>
+	<?php } ?>
 	<tr>
 		<td class="send" colspan="8">
 			<input type="submit" class="button" name="add" value="Ajouter" onclick="document.forms['form1'].action='?mj=Mj_Add';" />

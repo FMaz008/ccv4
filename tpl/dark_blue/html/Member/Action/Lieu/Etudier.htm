@@ -6,19 +6,19 @@
 	<tr>
 		<td class="name">Quelle mati&egrave;re&nbsp;?</td>
 		<td class="value">
-			<?
+			<?php
 			if (isset($COMPS)){
 				foreach($COMPS as $etude){
 					?>
-					<input type="radio" name="comp" value="<?=$etude['comp'];?>" />
-					<?=$etude['matiere'];?> (<?=$etude['cout_pa'];?>pa + <?=$etude['cout_cash'];?><?=GAME_DEVISE;?>)
+					<input type="radio" name="comp" value="<?php echo $etude['comp'];?>" />
+					<?php echo $etude['matiere'];?> (<?php echo $etude['cout_pa'];?>pa + <?php echo $etude['cout_cash'];?><?php echo GAME_DEVISE;?>)
 					<br />
-					<?
+					<?php
 				}
 			}else{
 			?>
 				<i>- aucune mati&egrave;re &agrave; &eacute;tudier dans ce lieu -</i>
-			<?
+			<?php
 			}
 			?>
 		</td>

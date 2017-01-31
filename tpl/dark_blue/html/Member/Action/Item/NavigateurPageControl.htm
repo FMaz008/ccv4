@@ -11,7 +11,7 @@
 				'?popup=1&m=Action_Item_SitePagedel', 
 				{
 					method: 'post', 
-					parameters: 'url=<?=$site->getUrl();?>/<?=$page->getId();?>'+
+					parameters: 'url=<?php echo $site->getUrl();?>/<?php echo $page->getId();?>'+
 								'&user='+$F('header_user')+
 								'&pass='+$F('header_pass'),
 					onComplete: operation_confirmdel,
@@ -44,7 +44,7 @@
 		if (params[0]=="OK"){
 			hideplzwait();
 			$('perso_pa').innerHTML=params[1];
-			goTo("<?=$site->getUrl();?>");
+			goTo("<?php echo $site->getUrl();?>");
 		}else{
 			$('request_msg').style.display="block";
 			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
@@ -75,11 +75,11 @@
 <tr>
 	<td class="name" style="text-align:right;">
 		<div style="width:100%;">
-			<? if(isset($SHOW_GESTION_ACCES)) { ?>
-				<a href="#" onclick="goTo('dom.net/modpageacces?<?=$page->getId();?>');">Gestion des acc&egrave;s</a> -
-			<? } ?>
+			<?php if(isset($SHOW_GESTION_ACCES)) { ?>
+				<a href="#" onclick="goTo('dom.net/modpageacces?<?php echo $page->getId();?>');">Gestion des acc&egrave;s</a> -
+			<?php } ?>
 			
-			<a href="#" onclick="goTo('dom.net/modpage?<?=$page->getId();?>');">Modifier</a> -
+			<a href="#" onclick="goTo('dom.net/modpage?<?php echo $page->getId();?>');">Modifier</a> -
 			<a href="#" onclick="confirmDel();">Supprimer</a>
 		</div>
 	</td>

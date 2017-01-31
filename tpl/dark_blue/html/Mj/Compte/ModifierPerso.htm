@@ -9,16 +9,16 @@
 	<td class="name">Argent</td>
 </tr>
 
-<?if (!isset($PERSO)){?>
+<?php if (!isset($PERSO)){?>
 	<tr><td colspan="3"><i>- aucun perso -</i></td></tr>
-<?}else{
+<?php }else{
 	foreach($PERSO as $p){?>
 		<tr>
-			<td class="value"><input type="radio" name="persoid" value="<?=$p['id'];?>" /></td>
-			<td class="value"><?=$p['nom'];?></td>
-			<td class="value"><?=$p['cash'];?></td>
+			<td class="value"><input type="radio" name="persoid" value="<?php echo $p['id'];?>" /></td>
+			<td class="value"><?php echo $p['nom'];?></td>
+			<td class="value"><?php echo $p['cash'];?></td>
 		</tr>
-	<? }
+	<?php }
 }?>
 
 <tr>

@@ -9,7 +9,7 @@
 		<td class="name">canal</td>
 	</tr>
 	
-	<?
+	<?php
 	if(isset($MEDIA_LIST)){
 		$id = 0;
 		foreach($MEDIA_LIST as $media){
@@ -17,12 +17,12 @@
 			?>
 			<tr>
 				<td class="name">
-					<input type="radio" name="id" value="<?=$id;?>" />
+					<input type="radio" name="id" value="<?php echo $id;?>" />
 				</td>
-				<td class="value"><input type="hidden" name=<?=$id . '_mediaType';?> value=<?=$media['mediaType'];?> /><?=$media['mediaTypeAff'];?></td>
-				<td class="value"><input type="hidden" name=<?=$id . '_canalId';?> value=<?=$media['canalId'];?> /><?=$media['canalId'];?></td>
+				<td class="value"><input type="hidden" name=<?php echo $id . '_mediaType';?> value=<?php echo $media['mediaType'];?> /><?php echo $media['mediaTypeAff'];?></td>
+				<td class="value"><input type="hidden" name=<?php echo $id . '_canalId';?> value=<?php echo $media['canalId'];?> /><?php echo $media['canalId'];?></td>
 			</tr>
-			<?
+			<?php
 		}
 	}else{
 		?>
@@ -31,7 +31,7 @@
 				<i><strong>Aucun média actif</strong></i>
 			</td>
 		</tr>
-		<?
+		<?php
 	}
 	?>
 	<tr>

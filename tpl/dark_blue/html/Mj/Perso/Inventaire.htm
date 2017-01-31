@@ -132,17 +132,17 @@
 <form name="form1" action="" method="post">
 <table class="tbl_center">
 	<tr>
-		<td class="title">Modifier l'inventaire de <?=$PERSO->getNom();?> Pr : <?=$PERSO->getPr();?>/ Pr max : <?=$PERSO->getPrMax();?></td>	
+		<td class="title">Modifier l'inventaire de <?php echo $PERSO->getNom();?> Pr : <?php echo $PERSO->getPr();?>/ Pr max : <?php echo $PERSO->getPrMax();?></td>	
 	</tr>
 </table>
 
-<?
+<?php
 $currentCat = '';
 if(!isset($ITEMS_TABLE))
 {
 	?>
 		<i><strong>L'inventaire est vide</strong></i>
-	<?
+	<?php
 }
 else
 {
@@ -152,8 +152,8 @@ else
 
 <hr />
 
-<input type="submit" class="button" name="mod" value="Enregistrer" onClick="document.forms['form1'].action='?mj=Perso_InventaireItemMod&id=<?=$_GET['id'];?>&rpage=Mj_Perso_Inventaire&rid=<?=$_GET['id'];?>';" /> &nbsp;&nbsp;&nbsp;
-<input type="submit" class="button" name="del" style="background-color:#330000;" value="Supprimer" onClick="document.forms['form1'].action='?mj=Perso_InventaireItemDel&id=<?=$_GET['id'];?>&rpage=Mj_Perso_Inventaire&rid=<?=$_GET['id'];?>';return (testerCheck(this.form, 'invId[]'));" /> &nbsp;&nbsp;&nbsp;
+<input type="submit" class="button" name="mod" value="Enregistrer" onClick="document.forms['form1'].action='?mj=Perso_InventaireItemMod&id=<?php echo $_GET['id'];?>&rpage=Mj_Perso_Inventaire&rid=<?php echo $_GET['id'];?>';" /> &nbsp;&nbsp;&nbsp;
+<input type="submit" class="button" name="del" style="background-color:#330000;" value="Supprimer" onClick="document.forms['form1'].action='?mj=Perso_InventaireItemDel&id=<?php echo $_GET['id'];?>&rpage=Mj_Perso_Inventaire&rid=<?php echo $_GET['id'];?>';return (testerCheck(this.form, 'invId[]'));" /> &nbsp;&nbsp;&nbsp;
 
 
 
@@ -176,7 +176,7 @@ else
 		
 		<div id="pan_ajout_results" style="display:none;clear:both;"></div>
 		<div id="pan_ajout_button" style="text-align:center;display:none;clear:both;">
-			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Perso_InventaireItemAdd&id=<?=$_GET['id'];?>&rpage=Mj_Perso_Inventaire&rid=<?=$_GET['id'];?>';return testerCheck(this.form, 'itemId[]');" />
+			<input type="submit" class="button" name="add" value="Ajouter" onClick="document.forms['form1'].action='?mj=Perso_InventaireItemAdd&id=<?php echo $_GET['id'];?>&rpage=Mj_Perso_Inventaire&rid=<?php echo $_GET['id'];?>';return testerCheck(this.form, 'itemId[]');" />
 		</div>
 	</div>
 	
@@ -190,7 +190,7 @@ else
 		<strong>&gt;</strong> <a href="#pan" onclick="showPanel('pan_transfert_item');">Un item ...</a> &nbsp;&nbsp;&nbsp;
 		
 		
-		<?
+		<?php
 		$arrType = array(
 						array('tech'=>'lieu',		'class'=>'Perso_InventaireDonnerLieu',		'radio'=>'lieuTech',	'txt'=>'Lieu'),
 						array('tech'=>'boutique',	'class'=>'Perso_InventaireDonnerBoutique',	'radio'=>'lieuTech',	'txt'=>'Boutique'),
@@ -200,18 +200,18 @@ else
 					);
 		foreach($arrType as $type){
 		?>
-			<div id="pan_transfert_<?=$type['tech'];?>" style="display:none;clear:both;">
+			<div id="pan_transfert_<?php echo $type['tech'];?>" style="display:none;clear:both;">
 				<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;... correspondant à: 
-				<br /> Nom/Id.: <input type="text" class="text" id="pan_transfert_<?=$type['tech'];?>_search" style="width:125px;" onkeypress="return checkEnter(event,'pan_transfert_<?=$type['tech'];?>');" />
-				<input type="button" class="button" onclick="gosearch('pan_transfert_<?=$type['tech'];?>');" value="Rechercher <?=$type['txt'];?>" />
+				<br /> Nom/Id.: <input type="text" class="text" id="pan_transfert_<?php echo $type['tech'];?>_search" style="width:125px;" onkeypress="return checkEnter(event,'pan_transfert_<?php echo $type['tech'];?>');" />
+				<input type="button" class="button" onclick="gosearch('pan_transfert_<?php echo $type['tech'];?>');" value="Rechercher <?php echo $type['txt'];?>" />
 				<br />
 				
-				<div id="pan_transfert_<?=$type['tech'];?>_results" style="display:none;clear:both;"></div>
-				<div id="pan_transfert_<?=$type['tech'];?>_button" style="text-align:center;display:none;clear:both;">
-					<input type="submit" class="button" name="move<?=$type['tech'];?>" value="Déposer/Transférer" onclick="document.forms['form1'].action='?mj=<?=$type['class'];?>&id=<?=$_GET['id'];?>&rpage=Mj_Lieu_Inventaire&rid=<?=$_GET['id'];?>';return (testerRadio(this.form,'<?=$type['radio'];?>'));" />
+				<div id="pan_transfert_<?php echo $type['tech'];?>_results" style="display:none;clear:both;"></div>
+				<div id="pan_transfert_<?php echo $type['tech'];?>_button" style="text-align:center;display:none;clear:both;">
+					<input type="submit" class="button" name="move<?php echo $type['tech'];?>" value="Déposer/Transférer" onclick="document.forms['form1'].action='?mj=<?php echo $type['class'];?>&id=<?php echo $_GET['id'];?>&rpage=Mj_Lieu_Inventaire&rid=<?php echo $_GET['id'];?>';return (testerRadio(this.form,'<?php echo $type['radio'];?>'));" />
 				</div>
 			</div>
-		<?
+		<?php
 		}
 		?>
 		

@@ -1,14 +1,14 @@
-<?
+<?php
 foreach($MESSAGES as $msg)
 {
-?><? echo "\r\n"; ?>
-<?=$msg['date'];?><? echo "\r\n"; ?>
-De: <?=$msg['from'];?> <? echo "\r\n"; ?>
-A: <?=$msg['to'];?> <? echo "\r\n"; ?>
-<? echo "\r\n"; ?>
-<?=$msg['msg'];?> <? echo "\r\n"; ?>
-<? echo "\r\n"; ?>
-=================================<? echo "\r\n"; ?>
-<?
+?><?php echo "\r\n"; ?>
+<?php echo $msg['date'];?><?php echo "\r\n"; ?>
+De: <?php echo $msg['from'];?> <?php echo "\r\n"; ?>
+A: <?php echo $msg['to'];?> <?php echo "\r\n"; ?>
+<?php echo "\r\n"; ?>
+<?php echo $msg['msg'];?> <?php echo "\r\n"; ?>
+<?php echo "\r\n"; ?>
+=================================<?php echo "\r\n"; ?>
+<?php
 }
 ?>

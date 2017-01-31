@@ -10,14 +10,14 @@ function heItemAutoHeight(itemNo){
 -->
 </script>
 
-<strong>He du lieu: </strong><?=$LIEU_NOM;?>
+<strong>He du lieu: </strong><?php echo $LIEU_NOM;?>
 <div align="right">
-<a href="?mj=Lieu_He&id=<?=$LIEU_ID;?>">Première page</a> | <a href="?mj=Lieu_He&id=<?=$LIEU_ID;?>&page=<?=($PAGE == 1)? $PAGE : $PAGE-1;?>"><<</a> Page <?=$PAGE;?> <a href="?mj=Lieu_He&id=<?=$LIEU_ID;?>&page=<?=$PAGE+1;?>">>></a>
+<a href="?mj=Lieu_He&id=<?php echo $LIEU_ID;?>">Première page</a> | <a href="?mj=Lieu_He&id=<?php echo $LIEU_ID;?>&page=<?php echo ($PAGE == 1)? $PAGE : $PAGE-1;?>"><<</a> Page <?php echo $PAGE;?> <a href="?mj=Lieu_He&id=<?php echo $LIEU_ID;?>&page=<?php echo $PAGE+1;?>">>></a>
 </div>
 
-<?=$HE_ITEMS;?>
+<?php echo $HE_ITEMS;?>
 
-<?if(empty($HE_ITEMS))
+<?php if(empty($HE_ITEMS))
 {?>
 	<i>Pas de messages.</i>
-<?}?>
+<?php }?>

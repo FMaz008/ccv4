@@ -9,25 +9,25 @@
 	<td class="name" style="width:100px;">Saisi par</td>
 	<td class="name" style="width:100px;">Statut</td>
 </tr>
-<? if(isset($PPA)){ 
+<?php if(isset($PPA)){ 
 	foreach($PPA as $ppa){ ?>
 		<tr>
-			<td class="value"><?=$ppa['date'];?></td>
-			<td class="value"><?=$ppa['type'];?></td>
+			<td class="value"><?php echo $ppa['date'];?></td>
+			<td class="value"><?php echo $ppa['type'];?></td>
 			<td class="value">
-				<a href="?mj=Perso_Ppa&id=<?=$ppa['id'];?>">
-					<?=$ppa['titre'];?>
+				<a href="?mj=Perso_Ppa&id=<?php echo $ppa['id'];?>">
+					<?php echo $ppa['titre'];?>
 				</a>
 			</td>
-			<td class="value"><?=$ppa['mjnom'];?></td>
-			<td class="value"><?=$ppa['statut'];?></td>
+			<td class="value"><?php echo $ppa['mjnom'];?></td>
+			<td class="value"><?php echo $ppa['statut'];?></td>
 		</tr>				
-	<? }
+	<?php }
 }else{ ?>
 	<tr>
 		<td class="value" colspan="5">
 			<i>Aucun contact avec les MJ a été ouvert.</i>
 		</td>
 	</tr>
-<? } ?>
+<?php } ?>
 </table>

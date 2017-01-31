@@ -26,7 +26,7 @@ class Mj_Item_Inv_Ordinateur
 					. ' WHERE `inv_id` = :inv_id;';
 		$prep = $db->prepare($query);
 
-		//Déterminer qui a ou non l'item en sa possession (qui = lieu, casier, perso, boutique, etc.)
+		//DÃ©terminer qui a ou non l'item en sa possession (qui = lieu, casier, perso, boutique, etc.)
 		switch($_POST['attacheA'])
 		{
 			case 'perso':
@@ -75,7 +75,7 @@ class Mj_Item_Inv_Ordinateur
 		$prep->closeCursor();
 		$prep = NULL;
 		
-		//Retourner le template complété/rempli
+		//Retourner le template complÃ©tÃ©/rempli
 		$tpl->set('PAGE', $_GET['rpage'] . '&id=' . $_GET['rid']);
 		return $tpl->fetch($account->getSkinRemotePhysicalPath() . 'html/Mj/redirect.htm',__FILE__,__LINE__);
 	}

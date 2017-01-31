@@ -1,8 +1,8 @@
 <form name="form1" action="" method="post">
-	<input type="hidden" name="LIEU_ID" value="<?=$LIEU_ID;?>" />
+	<input type="hidden" name="LIEU_ID" value="<?php echo $LIEU_ID;?>" />
 <table class="center">
 	<tr>
-		<td class="title" colspan="5">Gestion des compétences étudiables dans le lieu <?=$LIEU_TECH;?> (via le module d'étude)</td>	
+		<td class="title" colspan="5">Gestion des compétences étudiables dans le lieu <?php echo $LIEU_TECH;?> (via le module d'étude)</td>	
 	</tr>
 	
 	<tr>
@@ -13,17 +13,17 @@
 		<td class="name">Efficacité de l'étude</td>
 	</tr>
 	
-	<? foreach($COMPS as $comp){ ?>
+	<?php foreach($COMPS as $comp){ ?>
 		<tr>
 			<td class="name" style="width:10px;">
-				<input type="checkbox" name="<?=$comp['comp'];?>" value="<?=$comp['comp'];?>" <? if(isset($comp['chk'])){ echo 'CHECKED '; } ?>/>
+				<input type="checkbox" name="<?php echo $comp['comp'];?>" value="<?php echo $comp['comp'];?>" <?php if(isset($comp['chk'])){ echo 'CHECKED '; } ?>/>
 			</td>
-			<td class="value"><?=$comp['compTxt'];?></td>
-			<td class="value"><input type="text" class="text" name="<?=$comp['comp'];?>_pa" value="<? if(isset($comp['chk'])){ echo $comp['cout_pa']; }else{ echo '3'; } ?>" size="2" maxlength="8" /></td>
-			<td class="value"><input type="text" class="text" name="<?=$comp['comp'];?>_cash" value="<? if(isset($comp['chk'])){ echo $comp['cout_cash']; }else{ echo '0'; } ?>" size="8" maxlength="8" /> <?=GAME_DEVISE;?></td>
-			<td class="value"><input type="text" class="text" name="<?=$comp['comp'];?>_qualite" value="<? if(isset($comp['chk'])){ echo $comp['qualite_lieu']; }else{ echo '70'; } ?>" size="3" maxlength="3" /> %</td>
+			<td class="value"><?php echo $comp['compTxt'];?></td>
+			<td class="value"><input type="text" class="text" name="<?php echo $comp['comp'];?>_pa" value="<?php if(isset($comp['chk'])){ echo $comp['cout_pa']; }else{ echo '3'; } ?>" size="2" maxlength="8" /></td>
+			<td class="value"><input type="text" class="text" name="<?php echo $comp['comp'];?>_cash" value="<?php if(isset($comp['chk'])){ echo $comp['cout_cash']; }else{ echo '0'; } ?>" size="8" maxlength="8" /> <?php echo GAME_DEVISE;?></td>
+			<td class="value"><input type="text" class="text" name="<?php echo $comp['comp'];?>_qualite" value="<?php if(isset($comp['chk'])){ echo $comp['qualite_lieu']; }else{ echo '70'; } ?>" size="3" maxlength="3" /> %</td>
 		</tr>
-	<? } ?>
+	<?php } ?>
 	
 	<tr>
 		<td colspan="5" class="send">

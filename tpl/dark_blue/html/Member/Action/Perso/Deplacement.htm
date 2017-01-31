@@ -41,34 +41,34 @@ showPannel = function(what)
 				<td class="name" style="width:10%;">PA</td>
 				<td class="name" style="width:10%;">Coût</td>
 			</tr>
-			<? foreach ($LIEUX as $lieu) {?>
+			<?php foreach ($LIEUX as $lieu) {?>
 				<tr>
 				<td class="value" style="width:5%;">
 					<?php
 					if($lieu->isAccessible())
 					{
 						?>
-						<input type="radio" name="moveto" value="<?=$lieu->getId();?>" id="r<?=$lieu->getId();?>" />
+						<input type="radio" name="moveto" value="<?php echo $lieu->getId();?>" id="r<?php echo $lieu->getId();?>" />
 						<?php
 					}
 					?>
 				</td>
 				<td class="value" style="width:5%;">
-					<?if ($lieu->getIcon()!=null){?>
-						<img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/deplacements/<?=$lieu->getIcon();?>" />
-					<? } ?>
+					<?php if ($lieu->getIcon()!=null){?>
+						<img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/deplacements/<?php echo $lieu->getIcon();?>" />
+					<?php } ?>
 				</td>
 				
 				<td class="value" colspan="2">
-					<a onclick="checkradio('<?=$lieu->getId();?>');" style="text-decoration:none;">
-						<?=$lieu->getNom();?>
+					<a onclick="checkradio('<?php echo $lieu->getId();?>');" style="text-decoration:none;">
+						<?php echo $lieu->getNom();?>
 					</a>
 				</td>
-				<td class="value"><?=$lieu->getProtectionTxt();?></td>
-				<td class="value"><?=$lieu->getPa();?></td>
-				<td class="value"><?=$lieu->getCout();?><?=$GAME_DEVISE;?></td>
+				<td class="value"><?php echo $lieu->getProtectionTxt();?></td>
+				<td class="value"><?php echo $lieu->getPa();?></td>
+				<td class="value"><?php echo $lieu->getCout();?><?php echo $GAME_DEVISE;?></td>
 			</tr>		
-			<? } ?>
+			<?php } ?>
 	
 	
 			<tr>
@@ -78,46 +78,46 @@ showPannel = function(what)
 				<td colspan="3" class="value" style="text-align:left;vertical-align:top;">
 					<div style="">
 						<strong>Tenir la porte &agrave; (+0 pa/chq)</strong><br />
-						<? foreach ($PERSOS as $perso) {?>
-							<input type="checkbox" name="t_<?=$perso->getId();?>" />
-							<?if ($perso->getSexe()=='m'){?>
-								<span id="perso_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
-							<?}else{?>
-								<span id="perso_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
-							<?}?>
-								<?=$perso->getNom();?>
+						<?php foreach ($PERSOS as $perso) {?>
+							<input type="checkbox" name="t_<?php echo $perso->getId();?>" />
+							<?php if ($perso->getSexe()=='m'){?>
+								<span id="perso_<?php echo $perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+							<?php }else{?>
+								<span id="perso_<?php echo $perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+							<?php }?>
+								<?php echo $perso->getNom();?>
 							</span>
-							<div class="infobulle" id="ib_perso_<?=$perso->getId();?>" style="width:300px;">
+							<div class="infobulle" id="ib_perso_<?php echo $perso->getId();?>" style="width:300px;">
 								<div class="title">Infos</div>
-								<?if ($perso->getAvatar()!='') {?>
-									<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
-								<? } ?>
-								<?=$perso->getDescription();?>
+								<?php if ($perso->getAvatar()!='') {?>
+									<img class="imgbg" align="left" src="<?php echo $perso->getAvatar();?>" />
+								<?php } ?>
+								<?php echo $perso->getDescription();?>
 							</div>
 							<br />
-						<? } ?>
+						<?php } ?>
 					</div>
 				
 					<div style="margin-top:15px;">
 						<strong>Forcer quelqu'un à entrer avec soi (+10 pa/chq)</strong><br />
-						<? foreach ($PERSOS_DEPLACABLE as $perso) {?>
-							<input type="checkbox" name="f_<?=$perso->getId();?>" />
-							<?if ($perso->getSexe()=='m'){?>
-								<span id="perso2_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
-							<?}else{?>
-								<span id="perso2_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
-							<?}?>
-								<?=$perso->getNom();?>
+						<?php foreach ($PERSOS_DEPLACABLE as $perso) {?>
+							<input type="checkbox" name="f_<?php echo $perso->getId();?>" />
+							<?php if ($perso->getSexe()=='m'){?>
+								<span id="perso2_<?php echo $perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+							<?php }else{?>
+								<span id="perso2_<?php echo $perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+							<?php }?>
+								<?php echo $perso->getNom();?>
 							</span>
-							<div class="infobulle" id="ib_perso2_<?=$perso->getId();?>" style="width:300px;">
+							<div class="infobulle" id="ib_perso2_<?php echo $perso->getId();?>" style="width:300px;">
 								<div class="title">Infos</div>
-								<?if ($perso->getAvatar()!='') {?>
-									<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
-								<? } ?>
-								<?=$perso->getDescription();?>
+								<?php if ($perso->getAvatar()!='') {?>
+									<img class="imgbg" align="left" src="<?php echo $perso->getAvatar();?>" />
+								<?php } ?>
+								<?php echo $perso->getDescription();?>
 							</div>
 							<br />
-						<? } ?>
+						<?php } ?>
 					</div>
 				</td>
 				<td colspan="4" class="value" style="text-align:left;vertical-align:top;">
@@ -149,25 +149,25 @@ showPannel = function(what)
 				<td class="name">&nbsp;</td>
 				<td class="name" colspan="5">Lieu</td>
 			</tr>
-				<? foreach ($LIEUX as $lieu) {
+				<?php foreach ($LIEUX as $lieu) {
 					if($lieu->getDimension()!='TC' || $perso->getLieu()->getDimension()!='TC'){?>
 						<tr>
 							<td class="value" style="width:5%;">
-								<input type="radio" name="frapto" value="<?=$lieu->getId();?>" id="r<?=$lieu->getId();?>" <?php if(!$lieu->isAccessible()){ echo 'DISABLED '; } ?>/>
+								<input type="radio" name="frapto" value="<?php echo $lieu->getId();?>" id="r<?php echo $lieu->getId();?>" <?php if(!$lieu->isAccessible()){ echo 'DISABLED '; } ?>/>
 							</td>
 							<td class="value" style="width:5%;">
-								<?if ($lieu->getIcon()!=null){?>
-									<img src="<?=$SKIN_VIRTUAL_PATH;?>../_common/deplacements/<?=$lieu->getIcon();?>" />
-								<? } ?>
+								<?php if ($lieu->getIcon()!=null){?>
+									<img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/deplacements/<?php echo $lieu->getIcon();?>" />
+								<?php } ?>
 							</td>
 				
 							<td class="value" colspan="2">
-								<a href="#" onclick="checkradio('<?=$lieu->getId();?>');" style="text-decoration:none;">
-									<?=$lieu->getNom();?>
+								<a href="#" onclick="checkradio('<?php echo $lieu->getId();?>');" style="text-decoration:none;">
+									<?php echo $lieu->getNom();?>
 								</a>
 							</td>
 						</tr>		
-					<? } 
+					<?php } 
 				} ?>
 			<tr>
 				<td class="name" colspan="7">

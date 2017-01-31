@@ -54,34 +54,34 @@ selectType = function(){
 			<td class="name" style="width:100px;">Saisi par</td>
 			<td class="name" style="width:100px;">Répondu le</td>
 		</tr>
-		<? if(isset($PPA)){ 
+		<?php if(isset($PPA)){ 
 			foreach($PPA as $ppa){ ?>
-				<tr <? if($ppa['statut']=='ferme') { echo 'style="color:#666666;"'; } ?>>
-					<td class="value"><?=$ppa['date'];?></td>
-					<td class="value"><?=$ppa['type'];?></td>
+				<tr <?php if($ppa['statut']=='ferme') { echo 'style="color:#666666;"'; } ?>>
+					<td class="value"><?php echo $ppa['date'];?></td>
+					<td class="value"><?php echo $ppa['type'];?></td>
 					<td class="value">
-						<a href="#" onclick="actionLink('ContactMjMod&id=<?=$ppa['id'];?>')">
-							<?=$ppa['titre'];?>
+						<a href="#" onclick="actionLink('ContactMjMod&id=<?php echo $ppa['id'];?>')">
+							<?php echo $ppa['titre'];?>
 						</a>
 					</td>
-					<td class="value"><?=$ppa['mjnom'];?></td>
-					<td class="value"><?=$ppa['replyDate'];?></td>
+					<td class="value"><?php echo $ppa['mjnom'];?></td>
+					<td class="value"><?php echo $ppa['replyDate'];?></td>
 				</tr>				
-			<? }
+			<?php }
 		}else{ ?>
 			<tr>
 				<td class="value" colspan="5">
 					<i>Aucun contact avec les MJ n'est actif en ce moment.</i>
 				</td>
 			</tr>
-		<? } ?>
+		<?php } ?>
 		</table>
 	</div>
 	
 	
 	
 	<div id="nouv" class="member_contactMj_content" style="display:none;overflow-y:scroll;">
-		<? if(isset($CAN_POST)){ ?>
+		<?php if(isset($CAN_POST)){ ?>
 			<form id="contactMJ" method="post" action="?popup=1&m=ContactMjNew" onsubmit="return ajaxSubmitForm(this);">
 			<table align="center">
 				<tr><td class="title" colspan="2">Contacter un MJ</td></tr>
@@ -119,9 +119,9 @@ selectType = function(){
 				</tr>
 			</table>
 			</form>
-		<? }else{ ?>
-			<center><strong><i>- Vous avez atteint votre maximum de tickets ouverts simultanément (<?=PPA_MAX;?>). -</i></strong></center>
-		<? } ?>
+		<?php }else{ ?>
+			<center><strong><i>- Vous avez atteint votre maximum de tickets ouverts simultanément (<?php echo PPA_MAX;?>). -</i></strong></center>
+		<?php } ?>
 	</div>
 		
 		

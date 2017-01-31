@@ -6,31 +6,31 @@
 	</table>
 	
 	
-	<?
+	<?php
 	foreach($SECTIONS as $section){
 		?>
 		<br />
 		<hr />
-		<strong><?=$section['section'];?></strong>
+		<strong><?php echo $section['section'];?></strong>
 		<hr />
 		
-		<?
+		<?php
 		foreach($section['questions'] as $question){
 			?>
 			<table class="center">
 			<tr>
 				<td class="name" style="width:10px;" rowspan="2">
-					<input type="radio" name="questionId" value="<?=$question['id'];?>" />
+					<input type="radio" name="questionId" value="<?php echo $question['id'];?>" />
 				</td>
 				<td class="name" style="width:25px;">Q</td>
-				<td class="value" style="text-align:left;"><?=$question['question'];?></td>
+				<td class="value" style="text-align:left;"><?php echo $question['question'];?></td>
 			</tr>
 			<tr>
 				<td class="name" style="width:25px;">R</td>
-				<td class="value" style="text-align:left;"><?=$question['reponse'];?></td>
+				<td class="value" style="text-align:left;"><?php echo $question['reponse'];?></td>
 			</tr>
 			</table>
-			<? 
+			<?php 
 		}
 	}
 	?>

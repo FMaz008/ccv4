@@ -12,19 +12,19 @@
 		<td class="name">Pr (par unit&eacute;)</td>
 	</tr>
 	
-	<? if (isset($INV_LIEU)){
+	<?php if (isset($INV_LIEU)){
 		foreach($INV_LIEU as $item){?>
 			<tr>
 				<td class="name" style="width:80px;">
-					<input type="text" class="text" name="<?=$item->getInvId();?>_qte" value="0" style="width:25px;" />&nbsp;&nbsp;/ <?=$item->getQte();?>
+					<input type="text" class="text" name="<?php echo $item->getInvId();?>_qte" value="0" style="width:25px;" />&nbsp;&nbsp;/ <?php echo $item->getQte();?>
 				</td>
-				<td colspan="2"><?=$item->getNom();?></td>
-				<td style="width:80px;"><?=$item->getPr();?></td>
+				<td colspan="2"><?php echo $item->getNom();?></td>
+				<td style="width:80px;"><?php echo $item->getPr();?></td>
 			</tr>
-		<? } 
+		<?php } 
 	}?>
 	
-	<? if (isset($INV_LIEU_CACHE)){?>
+	<?php if (isset($INV_LIEU_CACHE)){?>
 	<tr>
 		<td class="title" colspan="4">Objets cach&eacute;s</td>
 	</tr>
@@ -35,22 +35,22 @@
 		<td class="name">Num&eacute;ro de cachette</td>
 	</tr>
 	
-	<?	if(empty($INV_LIEU_CACHE)){ ?>
+	<?php	if(empty($INV_LIEU_CACHE)){ ?>
 			<tr>
 				<td colspan="8" > Aucun objet a &eacute;t&eacute; trouv&eacute;. </td>
 			</tr>
-	<?	} 
+	<?php	} 
 		else{
 			foreach($INV_LIEU_CACHE as $item){?>
 			<tr>
 				<td class="name" style="width:80px;">
-					<input type="text" class="text" name="<?=$item->getInvId();?>_qte" value="0" style="width:25px;" />&nbsp;&nbsp;/ <?=$item->getQte();?>
+					<input type="text" class="text" name="<?php echo $item->getInvId();?>_qte" value="0" style="width:25px;" />&nbsp;&nbsp;/ <?php echo $item->getQte();?>
 				</td>
-				<td><?=$item->getNom();?></td>
-				<td style="width:80px;"><?=$item->getPr();?></td>
-				<td><?=$item->getCacheNo();?></td>
+				<td><?php echo $item->getNom();?></td>
+				<td style="width:80px;"><?php echo $item->getPr();?></td>
+				<td><?php echo $item->getCacheNo();?></td>
 			</tr>
-		<? } 
+		<?php } 
 		}
 	}?>
 	
@@ -85,6 +85,6 @@
 
 <script type="text/javascript">
 //<!--
-	$("perso_pa").innerHTML = <?=$PERSO->getPa();?>;
+	$("perso_pa").innerHTML = <?php echo $PERSO->getPa();?>;
 //-->
 </script>

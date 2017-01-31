@@ -2,7 +2,7 @@
 //<!--
 	renamePerso = function(prefix, msgId, persoId, persoName){
 	
-		if (persoId == <?=$id;?>){
+		if (persoId == <?php echo $id;?>){
 			alert('Vous ne pouvez renommer votre propre personnage');
 			return false;
 		}
@@ -68,16 +68,16 @@
 	<div class="member_he_header_gauche">
 		<strong>Pages:</strong>
 		<p>
-			<?
+			<?php
 			for ($i=1;$i-1<$HE_SIZE/$HE_MSGPERPAGE;$i++) {
 				if ($i == $HE_PAGE) {
 				?>
-					[<?=$i;?>]
-				<?
+					[<?php echo $i;?>]
+				<?php
 				}else{
 				?>
-					[<a href="?m=index&amp;hepage=<?=$i;?>"><?=$i;?></a>]
-				<?
+					[<a href="?m=index&amp;hepage=<?php echo $i;?>"><?php echo $i;?></a>]
+				<?php
 				}
 			}
 			?>
@@ -91,7 +91,7 @@
 		
 		<div class="member_he_header_droite_pub">
 			<a href="?m=Mp_Index" id="he_size_info" onmousemove="persoinfo(this, event);">
-				<?=$HE_SIZE;?> / <?=$HE_MAXSPACE;?> msg
+				<?php echo $HE_SIZE;?> / <?php echo $HE_MAXSPACE;?> msg
 			</a>
 		</div>
 		<div id="ib_he_size_info" class="infobulle" style="width:200px;">
@@ -104,8 +104,8 @@
 		<!-- Barre de l'espace utilisé -->
 		<table class="member_he_header_bar">
 		<tr>
-			<td class="member_he_header_bar_full" style="width:<?=($HE_SIZE*100/$HE_MAXSPACE);?>%;"></td>
-			<td class="member_he_header_bar_empty" style="width:<?=(100-($HE_SIZE*100/$HE_MAXSPACE));?>%;"></td>
+			<td class="member_he_header_bar_full" style="width:<?php echo ($HE_SIZE*100/$HE_MAXSPACE);?>%;"></td>
+			<td class="member_he_header_bar_empty" style="width:<?php echo (100-($HE_SIZE*100/$HE_MAXSPACE));?>%;"></td>
 		</tr>
 		</table>
 		
@@ -116,9 +116,9 @@
 		</div>
 		<div class="member_he_header_bouttons_droit">
 			<input type="button" class="button" name="selall" onclick="checkAll();" value="Tout sélectionner" /><br />
-			<?if ($MP!=0) {?>
+			<?php if ($MP!=0) {?>
 				<input type="button" class="button" name="Export" onclick="document.location.href='?m=Mp_HeExport';" value="Exporter" />
-			<? } ?>
+			<?php } ?>
 		</div>
 		
 	</div>

@@ -1,12 +1,12 @@
-﻿<? 
+﻿<?php 
 if($MEDIA_RECEPTION){?>
 	<table class="tbl_center">
-	<tr><td class="title">En ce moment sur le canal <?=$MEDIA_ACCES->getChannelId();?> du média <?=$MEDIA_ACCES->getMediaTypeAffichable();?>.</td></tr>
+	<tr><td class="title">En ce moment sur le canal <?php echo $MEDIA_ACCES->getChannelId();?> du média <?php echo $MEDIA_ACCES->getMediaTypeAffichable();?>.</td></tr>
 	<tr><td class="value"><br/>
-		<?if(empty($MEDIA_MESSAGE)){?>
+		<?php if(empty($MEDIA_MESSAGE)){?>
 			<center><i>Aucune émission n'est diffusée en ce moment.</i></center><br/>
-		<?}else{?>
-		<? 
+		<?php }else{?>
+		<?php 
 		$emission = '';
 		$first = false;
 		foreach($MEDIA_MESSAGE as $msg){ 
@@ -14,34 +14,34 @@ if($MEDIA_RECEPTION){?>
 			{
 				if($first){?>
 					</table><br />
-				<?}	$first = true;
+				<?php }	$first = true;
 				$emission = $msg['titre']; ?>
 				<table class="tbl_center">
-				<tr><td class="title"><?=$emission;?></td></tr>
-			<?}?>
-			<tr><td class="name"><?=$msg['date'];?></td></tr>
-			<tr><td class="value"><?=$msg['message'];?></td></tr>
-		<?}?>
+				<tr><td class="title"><?php echo $emission;?></td></tr>
+			<?php }?>
+			<tr><td class="name"><?php echo $msg['date'];?></td></tr>
+			<tr><td class="value"><?php echo $msg['message'];?></td></tr>
+		<?php }?>
 		</table><br/>
-		<?}?>
+		<?php }?>
 	</td></tr>
 	</table>
-<?}
+<?php }
 else{?>
 	<form id="action_Media2" action="?popup=1&m=Action_Lieu_MediaAddMsg" method="post" onsubmit="return ajaxSubmitForm(this);">
 		<table class="tbl_center">
-			<tr><td class="title" colspan="2">Emettre sur le canal <?=$MEDIA_ACCES->getChannelId();?> du média <?=$MEDIA_ACCES->getMediaTypeAffichable();?>.</td></tr>
-				<?
+			<tr><td class="title" colspan="2">Emettre sur le canal <?php echo $MEDIA_ACCES->getChannelId();?> du média <?php echo $MEDIA_ACCES->getMediaTypeAffichable();?>.</td></tr>
+				<?php
 				$emission = '';
 				foreach($MEDIA_MESSAGE as $msg){ 
 					if($msg['titre'] != $emission){
 						$emission = $msg['titre']; ?>
 						<tr>
-							<td class="value"><input type="radio" value=<?=$msg['id'];?> name="title"></td>
-							<input type="hidden" name=<?=$msg['id'] . '_title';?> value="<?=$emission;?>">
-							<td class="value"><?=$emission;?></td>
+							<td class="value"><input type="radio" value=<?php echo $msg['id'];?> name="title"></td>
+							<input type="hidden" name=<?php echo $msg['id'] . '_title';?> value="<?php echo $emission;?>">
+							<td class="value"><?php echo $emission;?></td>
 						</tr>
-					<?}
+					<?php }
 				}?>
 				<tr>
 					<td class="value"><input type="radio" value="new" name="title"></td>
@@ -52,14 +52,14 @@ else{?>
 				</td></tr>
 				<tr><td class="value" colspan="2">
 					<center><input type="submit" class="button" name="save" value="Ajouter à l'émission" /></center>
-					<input type="hidden" name="media" value=<?=$MEDIA_ACCES->getId();?>>
+					<input type="hidden" name="media" value=<?php echo $MEDIA_ACCES->getId();?>>
 				</td></tr>
 		</table>
 	</form>
-<?}?>
+<?php }?>
 
 <script type="text/javascript">
 //<!--
-	$("perso_pa").innerHTML = <?=$PERSO->getPa();?>;
+	$("perso_pa").innerHTML = <?php echo $PERSO->getPa();?>;
 //-->
 </script>

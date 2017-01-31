@@ -2,34 +2,34 @@
 <a href="?mj=Dev_ErrLog"><< Retour à la liste.</a>
 <table class="tbl_center">
 	<tr>
-		<td class="title" colspan="2">Erreur <?=$ERROR['id'];?></td>
+		<td class="title" colspan="2">Erreur <?php echo $ERROR['id'];?></td>
 	</tr>
 	<tr>
 		<td class="name">id</td>
-		<td class="value"><?=$ERROR['id'];?></td>
+		<td class="value"><?php echo $ERROR['id'];?></td>
 	</tr>
 	<tr>
 		<td class="name">date</td>
-		<td class="value"><?=fctToGameTime($ERROR['date']);?></td>
+		<td class="value"><?php echo fctToGameTime($ERROR['date']);?></td>
 	</tr>
 	<tr>
 		<td class="name">ip</td>
-		<td class="value"><?=$ERROR['ip'];?></td>
+		<td class="value"><?php echo $ERROR['ip'];?></td>
 	</tr>
 	<tr>
 		<td class="name">vardump</td>
-		<td class="value"><?=$ERROR['vardump'];?></td>
+		<td class="value"><?php echo $ERROR['vardump'];?></td>
 	</tr>
 	<tr>
 		<td class="name">message</td>
-		<td class="value"><?=$ERROR['msg'];?></td>
+		<td class="value"><?php echo $ERROR['msg'];?></td>
 	</tr>
 	<tr>
 		<td class="name">fichier</td>
-		<td class="value"><?=$ERROR['file'];?></td>
+		<td class="value"><?php echo $ERROR['file'];?></td>
 	</tr>
 	<tr>
 		<td class="name">ligne</td>
-		<td class="value"><?=$ERROR['line'];?></td>
+		<td class="value"><?php echo $ERROR['line'];?></td>
 	</tr>
 </table>

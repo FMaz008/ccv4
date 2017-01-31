@@ -6,19 +6,19 @@
 			<td class="name">Type de média accessible</td>
 			<td class="name">Canal</td>
 		</tr>
-		<?
+		<?php
 		if(empty($MEDIA_ACCES)){?>
 			<tr><td class="value" colspan="3"><i>Aucun accès média dans ce lieu</i></td></tr>
-		<?}
+		<?php }
 		foreach($MEDIA_ACCES as $media){?>
 			<tr>
-				<td class="value"><?=$media->getNom();?></td>
-				<td class="value"><?=$media->getMediaTypeAffichable();?></td>
+				<td class="value"><?php echo $media->getNom();?></td>
+				<td class="value"><?php echo $media->getMediaTypeAffichable();?></td>
 				<td class="value">
-					<input type="text" name="<?=$media->getId();?>_channelId" id="<?=$media->getId();?>_channelId" class="text" maxlength="8" value="<?=$media->getChannelId();?>"/>
+					<input type="text" name="<?php echo $media->getId();?>_channelId" id="<?php echo $media->getId();?>_channelId" class="text" maxlength="8" value="<?php echo $media->getChannelId();?>"/>
 				</td>
 			</tr>
-		<?}?>
+		<?php }?>
 		<tr><td class="value" colspan="3">
 			<center><input type="submit" class="button" name="save" value="Enregistrer" /></center>
 		</td></tr>

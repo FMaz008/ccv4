@@ -14,33 +14,33 @@
 		<tr>
 			<td colspan="4">--Personne &agrave; soigner--</td>
 		</tr>
-		<?
+		<?php
 	}else{
 		foreach($PERSO_SOIGNABLE as $blesse){
 			?>
 			<tr>
-				<td class="value"><input type="radio" name="blesse" value="<?=$blesse['perso']->getId();?>" <?if($blesse['perso']->getCoeffSoinNecessaire() > 0){echo "disabled";}?>/></td>
+				<td class="value"><input type="radio" name="blesse" value="<?php echo $blesse['perso']->getId();?>" <?php if($blesse['perso']->getCoeffSoinNecessaire() > 0){echo "disabled";}?>/></td>
 				<td class="value">
-					<?if ($blesse['perso']->getSexe()=='m'){?>
-						<span id="perso_<?=$blesse['perso']->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
-					<?}else{?>
-						<span id="perso_<?=$blesse['perso']->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
-					<?}?>
-						<?=$blesse['perso']->getNom();?>
+					<?php if ($blesse['perso']->getSexe()=='m'){?>
+						<span id="perso_<?php echo $blesse['perso']->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+					<?php }else{?>
+						<span id="perso_<?php echo $blesse['perso']->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+					<?php }?>
+						<?php echo $blesse['perso']->getNom();?>
 					</span>
-					<div id="ib_perso_<?=$blesse['perso']->getId();?>" style="width:300px" class="infobulle">
+					<div id="ib_perso_<?php echo $blesse['perso']->getId();?>" style="width:300px" class="infobulle">
 						<div class="title">Infos</div>
-						<?if ($blesse['perso']->getAvatar()!='') {?>
-							<img class="imgbg" align="left" src="<?=$blesse['perso']->getAvatar();?>" />
-						<? } ?>
-						<?=$blesse['perso']->getDescription();?>
+						<?php if ($blesse['perso']->getAvatar()!='') {?>
+							<img class="imgbg" align="left" src="<?php echo $blesse['perso']->getAvatar();?>" />
+						<?php } ?>
+						<?php echo $blesse['perso']->getDescription();?>
 					</div>
 					<br />
 				</td>
-				<td class="value"><?=$blesse['etat'];?></td>
-				<td class="value"><?if($blesse['perso']->getSoin()){echo "OUI";}?></td>
+				<td class="value"><?php echo $blesse['etat'];?></td>
+				<td class="value"><?php if($blesse['perso']->getSoin()){echo "OUI";}?></td>
 			</tr>
-			<?
+			<?php
 		}
 	}
 	?>
@@ -50,15 +50,15 @@
 		<td class="name">Pa</td>
 		<td class="name">Efficacit&eacute; Max</td>
 	</tr>
-	<?foreach($TROUSSES as $trousse){
+	<?php foreach($TROUSSES as $trousse){
 		?>	
 		<tr>
-			<td class="value"><input type="radio" name="itemId" value="<?=$trousse->getInvId();?>"/></td>
-			<td class="value"><?=$trousse->getNom();?></td>
-			<td class="value"><input class="text" type="text" size="2" name="<?=$trousse->getInvId();?>" value="0"/></td>
-			<td class="value"><?=$trousse->getResistance();?>
+			<td class="value"><input type="radio" name="itemId" value="<?php echo $trousse->getInvId();?>"/></td>
+			<td class="value"><?php echo $trousse->getNom();?></td>
+			<td class="value"><input class="text" type="text" size="2" name="<?php echo $trousse->getInvId();?>" value="0"/></td>
+			<td class="value"><?php echo $trousse->getResistance();?>
 		</tr>
-		<?
+		<?php
 	}
 	?>	
 	<tr>

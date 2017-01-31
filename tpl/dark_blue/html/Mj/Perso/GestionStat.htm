@@ -16,21 +16,21 @@
 			<input type="submit" class="button" name="del" value="Supprimer" onclick="document.forms['form1'].action='?mj=Perso_GestionStatDel';return confirmdel();" />
 		</td>
 	</tr>	
-<?
+<?php
 foreach($STAT as $stat){ 
 	?>
 		<tr>
 			<td class="name">
-				<input type="radio" name="id" value="<?=$stat['id'];?>" />
+				<input type="radio" name="id" value="<?php echo $stat['id'];?>" />
 			</td>
 			<td class="value">
-				<?=$stat['nom'];?>
+				<?php echo $stat['nom'];?>
 			</td>
 			<td class="value">
-				<?=$stat['desc'];?>
+				<?php echo $stat['desc'];?>
 			</td>
 		</tr>
-	<?
+	<?php
 }
 ?>
 	<tr>

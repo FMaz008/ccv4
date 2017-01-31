@@ -8,17 +8,17 @@
 </script>
 
 <form id="action_redirect" method="post" action="?popup=1&m=Action_Lieu_BanqueCarte">
-	<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+	<input type="hidden" name="compte" value="<?php echo $COMPTE;?>" />
 </form>
 
 <br />
 <form id="action_bank" method="post" action="?popup=1&m=Action_Lieu_BanqueCarteAdd2" onsubmit="return ajaxSubmitForm(this);">
-<input type="hidden" name="compte" value="<?=$COMPTE;?>" />
+<input type="hidden" name="compte" value="<?php echo $COMPTE;?>" />
 
 <table class="center" style="width:600px;">
 	<tr>
 		<td class="title" colspan="3">
-			Création de l'acc&egrave;s par carte pour le compte: <?=$COMPTE;?>
+			Création de l'acc&egrave;s par carte pour le compte: <?php echo $COMPTE;?>
 		</td>
 	</tr>
 	<tr>

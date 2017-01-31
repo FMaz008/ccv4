@@ -1,7 +1,7 @@
 <script type="text/javascript">
 //<!--
-	$('perso_pa').innerHTML="<?=$PA;?>";
-	$('perso_pr').innerHTML="<?=$PR;?>";
+	$('perso_pa').innerHTML="<?php echo $PA;?>";
+	$('perso_pr').innerHTML="<?php echo $PR;?>";
 //-->
 </script>
 <br />
@@ -20,17 +20,17 @@
 			<td class="name">Qte</td>
 			<td class="name">PR</td>
 		</tr>
-		<? if (isset($INV_PERSO)){
+		<?php if (isset($INV_PERSO)){
 			foreach($INV_PERSO as $item){?>
 				<tr>
 					<td class="value">
-						<input type="text" class="text" name="<?=$item->getInvId();?>_qte" value="0" style="width:25px;" /> /<?=$item->getQte();?>
+						<input type="text" class="text" name="<?php echo $item->getInvId();?>_qte" value="0" style="width:25px;" /> /<?php echo $item->getQte();?>
 					</td>
-					<td class="value"><?=$item->getNom();?><?if($item->isEquip()){?> (&eacute;quip&eacute;(e))<?}?></td>
-					<td class="value"><?=$item->getQte();?></td>
-					<td class="value"><?=$item->getPr();?></td>
+					<td class="value"><?php echo $item->getNom();?><?php if($item->isEquip()){?> (&eacute;quip&eacute;(e))<?php }?></td>
+					<td class="value"><?php echo $item->getQte();?></td>
+					<td class="value"><?php echo $item->getPr();?></td>
 				</tr>
-			<? } 
+			<?php } 
 		}
 		else
 		{
@@ -46,31 +46,31 @@
 		</table>
 	</td>
 	<td class="value" style="text-align:left;vertical-align:top;">
-		<?
+		<?php
 		if (isset($LIST_PERSO)){
 			foreach($LIST_PERSO as $perso){ ?>
-				<input type="radio" name="toPersoId" value="<?=$perso->getId();?>" />
-				<?if ($perso->getSexe()=='m'){?>
-					<span id="perso_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
-				<?}else{?>
-					<span id="perso_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
-				<?}?>
-					<?=$perso->getNom();?>
+				<input type="radio" name="toPersoId" value="<?php echo $perso->getId();?>" />
+				<?php if ($perso->getSexe()=='m'){?>
+					<span id="perso_<?php echo $perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+				<?php }else{?>
+					<span id="perso_<?php echo $perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+				<?php }?>
+					<?php echo $perso->getNom();?>
 				</span>
-				<div id="ib_perso_<?=$perso->getId();?>" class="infobulle" style="width:300px;">
+				<div id="ib_perso_<?php echo $perso->getId();?>" class="infobulle" style="width:300px;">
 					<div class="title">Infos</div>
-					<?if ($perso->getAvatar()!='') {?>
-						<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
-					<? } ?>
-					<?=$perso->getDescription();?>
+					<?php if ($perso->getAvatar()!='') {?>
+						<img class="imgbg" align="left" src="<?php echo $perso->getAvatar();?>" />
+					<?php } ?>
+					<?php echo $perso->getDescription();?>
 				</div>
 				<br />
-		<?
+		<?php
 			}
 		}else{
 		?>
 			<i>-personne-</i>
-		<?
+		<?php
 		}
 		?>
 	</td>

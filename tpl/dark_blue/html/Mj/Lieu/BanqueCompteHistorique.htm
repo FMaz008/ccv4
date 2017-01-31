@@ -1,7 +1,7 @@
 <table class="center">
 	<tr>
 		<td class="title" colspan="6">
-			Relevé du compte: <?=$COMPTE;?>
+			Relevé du compte: <?php echo $COMPTE;?>
 		</td>
 	</tr>
 	<tr>
@@ -12,19 +12,19 @@
 		<td class="name">Dépôt</td>
 		<td class="name">Solde</td>
 	</tr>
-	<?
+	<?php
 	if(isset($HISTORIQUE)){
 		foreach($HISTORIQUE as $transaction){
 		?>
 			<tr>
-				<td class="value" style="width:150px;text-align:left;"><?=$transaction['date'];?></td>
-				<td class="value" style="width:100px;"><?=$transaction['code'];?></td>
-				<td class="value" style="width:150px;text-align:left;"><?=$transaction['vers'];?></td>
-				<td class="value" style="width:75px;text-align:right;"><?=$transaction['retrait'];?></td>
-				<td class="value" style="width:75px;text-align:right;"><?=$transaction['depot'];?></td>
-				<td class="value" style="width:150px;text-align:right;"><?=$transaction['solde'];?></td>
+				<td class="value" style="width:150px;text-align:left;"><?php echo $transaction['date'];?></td>
+				<td class="value" style="width:100px;"><?php echo $transaction['code'];?></td>
+				<td class="value" style="width:150px;text-align:left;"><?php echo $transaction['vers'];?></td>
+				<td class="value" style="width:75px;text-align:right;"><?php echo $transaction['retrait'];?></td>
+				<td class="value" style="width:75px;text-align:right;"><?php echo $transaction['depot'];?></td>
+				<td class="value" style="width:150px;text-align:right;"><?php echo $transaction['solde'];?></td>
 			</tr>
-		<?
+		<?php
 		}
 	}else{
 	?>
@@ -33,7 +33,7 @@
 				<i>-aucune transaction effectuée-</i>
 			</td>
 		</tr>
-	<?
+	<?php
 	}
 	?>
 </table>

@@ -1,9 +1,9 @@
-<? if((isset($CREATE_PERSO) && $CREATE_PERSO>0) || isset($MODS) || isset($WAIT)){ ?>
+<?php if((isset($CREATE_PERSO) && $CREATE_PERSO>0) || isset($MODS) || isset($WAIT)){ ?>
 	<div class="panel news_panel1">
 		<div class="title">Gestion des inscriptions</div>
-		<? if(isset($CREATE_PERSO) && $CREATE_PERSO>0){ ?>
+		<?php if(isset($CREATE_PERSO) && $CREATE_PERSO>0){ ?>
 			<div class="name clearboth">
-				Vous êtes autorisé<? echo ($SEXE=='f') ? 'e' : ''; ?> à créer <?=$CREATE_PERSO;?> personnage<? echo ($CREATE_PERSO>1) ? 's' : ''; ?> !
+				Vous êtes autorisé<?php echo ($SEXE=='f') ? 'e' : ''; ?> à créer <?php echo $CREATE_PERSO;?> personnage<?php echo ($CREATE_PERSO>1) ? 's' : ''; ?> !
 			</div>
 			<div class="value clearboth">
 				Souhaitez-vous créer un nouveau personnage ?<br />
@@ -12,46 +12,46 @@
 				</div>
 				<div class="clearboth"></div>
 			</div>
-		<? } ?>
+		<?php } ?>
 		
-		<? if(isset($WAIT)){ ?>
+		<?php if(isset($WAIT)){ ?>
 			<div class="name clearboth">
-				Personnage<? echo (count($WAIT)>1) ? 's' : ''; ?> est en attente de validation...
+				Personnage<?php echo (count($WAIT)>1) ? 's' : ''; ?> est en attente de validation...
 			</div>
-			<? foreach($WAIT as $perso){ ?>
+			<?php foreach($WAIT as $perso){ ?>
 				<div class="value clearboth">
-					<?=$perso['nom'];?> n'a pas encore été validé<? echo ($perso['sexe']=='f') ? 'e' : ''; ?>.
+					<?php echo $perso['nom'];?> n'a pas encore été validé<?php echo ($perso['sexe']=='f') ? 'e' : ''; ?>.
 					<br />
 					
 					<div class="news_choix clearboth">
 						<i>Patientez...</i>
-						[&nbsp;<a href='?m=ModPerso&id=<?=$perso['id'];?>'>Consulter/Modifier</a>&nbsp;]
+						[&nbsp;<a href='?m=ModPerso&id=<?php echo $perso['id'];?>'>Consulter/Modifier</a>&nbsp;]
 					</div>
 				</div>
 				<div class="clearboth"></div>
-			<? } 
+			<?php } 
 		} ?>
 		
-		<? if(isset($MODS)){ ?>
+		<?php if(isset($MODS)){ ?>
 			<div class="name clearboth">
-				Personnage<? echo (count($MODS)>1) ? 's' : ''; ?> <? echo (count($MODS)>1) ? 's' : ''; ?> en attente de modifications et re-soumission
+				Personnage<?php echo (count($MODS)>1) ? 's' : ''; ?> <?php echo (count($MODS)>1) ? 's' : ''; ?> en attente de modifications et re-soumission
 			</div>
-			<? foreach($MODS as $perso){ ?>
+			<?php foreach($MODS as $perso){ ?>
 				<div class="value clearboth">
-					Souhaitez-vous apporter les correctifs à votre personnage <?=$perso['nom'];?> ?<br />
+					Souhaitez-vous apporter les correctifs à votre personnage <?php echo $perso['nom'];?> ?<br />
 					<div class="news_choix">
 						[&nbsp;
-						<a href='?m=ModPerso&id=<?=$perso['id'];?>'>Oui, consulter</a>
+						<a href='?m=ModPerso&id=<?php echo $perso['id'];?>'>Oui, consulter</a>
 						&nbsp;/&nbsp;
-						<a href='?m=DelPerso&id=<?=$perso['id'];?>'>Non, le supprimer</a>
+						<a href='?m=DelPerso&id=<?php echo $perso['id'];?>'>Non, le supprimer</a>
 						&nbsp;]
 					</div>
 					<div class="clearboth"></div>
 				</div>
-			<? } 
+			<?php } 
 		} ?>
 	</div>
-<? } ?>
+<?php } ?>
 
 
 
@@ -60,14 +60,14 @@
 	<div class="title">
 		Voici les nouvelles HJ au sujet du jeu:
 	</div>
-	<? if(isset($NEWS)){
+	<?php if(isset($NEWS)){
 		foreach($NEWS as $news){ ?>
-			<div class="value clearboth"><?=$news;?></div>
-		<? }
+			<div class="value clearboth"><?php echo $news;?></div>
+		<?php }
 	}else{
 		?>
 		<div class="value clearboth"><i>Aucune nouvelle pour le moment</i></div>
-		<?
+		<?php
 	} ?>
 </div>
 

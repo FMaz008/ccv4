@@ -47,13 +47,13 @@ body {
 }
 
 body a, span.fakelink {
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 	text-decoration:none;
 	cursor:pointer;
 }
 
 body a:hover, span.fakelink:hover {
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 	text-decoration:underline;
 }
 
@@ -64,9 +64,9 @@ body a:hover, span.fakelink:hover {
 .infobulle{
 	position: absolute;
 	display:none;
-	background-color:<?=$bgColor1;?>;
+	background-color:<?php echo $bgColor1;?>;
 	padding:1px;
-	border:1px solid <?=$borderColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
 	z-index:999;
 }
 
@@ -240,7 +240,7 @@ div#site div#header div#infos div.valeur
 	float:right;
 	font-size:10px;
 	font-weight:bold;
-	color:<?=$valueColor;?>;
+	color:<?php echo $valueColor;?>;
 }
 div#site div#header div#infos div.sep
 {
@@ -251,7 +251,7 @@ div#site div#header div#infos div.sep
 div#site div#content div#menu div.bouton span
 {
 	padding-top:3px;
-	color:<?=$bgColor3;?>;
+	color:<?php echo $bgColor3;?>;
 	font-size:14px;
 	font-weight:bold;
 	font-family:arial;
@@ -269,8 +269,8 @@ div#site div#content div#menu div.bouton:hover span
 /** Positionnement, style et taille par défaut d'un tableau
 */
 div.tlb_center, table.tbl_center{
-	border:1px solid <?=$borderColor1;?>;
-	background-color: <?=$bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
 	font-size:10pt;
 	margin-right:auto;
 	margin-left:auto;
@@ -283,8 +283,8 @@ div.tlb_center, table.tbl_center{
 */
 div.title, td.title {
 	color:#FEFDFF;
-	border:1px solid <?=$borderColor3;?>;
-	background-color: <?=$bgColor3;?>;
+	border:1px solid <?php echo $borderColor3;?>;
+	background-color: <?php echo $bgColor3;?>;
 	font-size:10px;
 	font-weight:bold;
 	text-align:right;
@@ -306,8 +306,8 @@ div.title, td.title {
 /** Style d'une cellule qui identifie une valeur
 */
 div.name, td.name {
-	border:1px solid <?=$borderColor1;?>;
-	background-color: <?=$bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
 	font-size:12px;
 	font-weight:bold;
 	text-align:left;
@@ -322,7 +322,7 @@ div.value, td.value {
 	font-size:11px;
 	padding:2px;
 	margin:1px 0px 0px 1px;
-	background-color: <?=$bgColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
 }
 
 
@@ -340,8 +340,8 @@ div.send, td.send {
 */
 div.panel, div.infobulle {
 	/*position:relative;*/
-	border:1px solid <?=$borderColor1;?>;
-	background-color: <?=$bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
 	margin:0px auto 0px auto;
 	padding:2px;
 	padding-bottom:15px;
@@ -511,12 +511,12 @@ option { /* Elements de la select list */
 	text-decoration:none;
 	font-size:8pt;
 	font-family:courier new;
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 }
 .txtStyle_valeur, .txtStyle_valeur:hover {
 	text-decoration:none;
 	font-size: 11pt;
-	color: <?=$valueColor;?>;
+	color: <?php echo $valueColor;?>;
 }
 
 .txtStyle_heHj, .txtStyle_heHj:hover {
@@ -999,13 +999,13 @@ div.ongletOn, div.ongletOff
 	border:2px solid;
 	border-bottom:0px;
 	cursor:pointer;
-	border:1px solid <?=$borderColor3;?>;
+	border:1px solid <?php echo $borderColor3;?>;
 }
 div.ongletOn
 {
 	height:20px;
 	margin-top:0px;
-	background-color: <?=$borderColor3;?>;
+	background-color: <?php echo $borderColor3;?>;
 	
 	border-top-left-radius:15px;
 	border-top-right-radius:15px;
@@ -1024,7 +1024,7 @@ div.ongletOff
 {
 	height:15px;
 	margin-top:5px;
-	background-color: <?=$bgColor3;?>;
+	background-color: <?php echo $bgColor3;?>;
 	
 	border-top-left-radius:5px;
 	border-top-right-radius:5px;
@@ -1037,7 +1037,7 @@ div.ongletOff
 }
 div.ongletOff:hover
 {
-	background-color:<?=$bgColor2;?>;
+	background-color:<?php echo $bgColor2;?>;
 }
 div.ongletOff span
 {
@@ -1047,7 +1047,7 @@ div.ongletOff span
 
 div.member_contactMj_content{
 	clear:both;
-	border:2px solid <?=$borderColor3;?>;
+	border:2px solid <?php echo $borderColor3;?>;
 	width:700px;
 	height:500px;
 	margin: 0px auto 0px auto;
@@ -1117,8 +1117,8 @@ div.member_he_header_gauche {
 	width:140px;
 	height:100px;
 	padding:5px;
-	border:1px solid <?=$borderColor1;?>;
-	background-color: <?=$bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
 }
 div.member_he_header_gauche p{
 	font-size:10pt;
@@ -1156,7 +1156,7 @@ div.member_he_header_bouttons_droit{
 table.member_he_header_bar {
 	width:100%;
 	margin:10px 0px 10px 0px;
-	border: 1px solid <?=$borderColor1;?>;
+	border: 1px solid <?php echo $borderColor1;?>;
 	height:10px;
 }
 td.member_he_header_bar_full{
@@ -1176,8 +1176,8 @@ div.he_leftbar{
 	float:left;
 	width:150px;
 	
-	border:1px solid <?=$borderColor1;?>;
-	background-color: <?=$bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
 	font-size:12px;
 	font-weight:bold;
 	text-align:left;
@@ -1187,7 +1187,7 @@ div.he_rightbar{
 	margin-left:5px;
 	width:535px;
 
-	border-top:1px solid <?=$borderColor1;?>;
+	border-top:1px solid <?php echo $borderColor1;?>;
 	font-size:12px;
 	vertical-align: top;
 	text-align:justify;
@@ -1256,12 +1256,12 @@ a.infobulle:hover div.infobulle, span.infobulle:hover div.infobulle{
 	font-weight: bold;
 	
 	color: #FFDDAA;
-	border:1px solid <?=$borderColor1;?>;
-	background-color: <?=$bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
 }
 
 img.imgbg { /* INFO-BULLE, cadrage de l'image */
-	border:1px solid <?=$borderColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
 	padding:3px;
 	margin-right:5px;
 	text-align:left;
@@ -1297,8 +1297,8 @@ img.imgbg { /* INFO-BULLE, cadrage de l'image */
 
 
 div.inv_fiche { /*Anciennement #subcenter*/
-	border:1px solid <?=$borderColor1;?>;
-	background-color: <?=$bgColor1;?>;
+	border:1px solid <?php echo $borderColor1;?>;
+	background-color: <?php echo $bgColor1;?>;
 	font-size:10pt;
 	margin-right:auto;
 	margin-left:auto;
@@ -1365,13 +1365,13 @@ div.member_action_sac_right{
 
 div.member_action_sac_linkoff
 {
-	border-left:4px solid <?=$borderColor1;?>;
+	border-left:4px solid <?php echo $borderColor1;?>;
 	cursor:pointer;
 	padding-left:10px;
 	font-size:14px;
 }
 div.member_action_sac_linkon{
-	background-color:<?=$borderColor1;?>;
+	background-color:<?php echo $borderColor1;?>;
 	color:#000;
 	padding-left:10px;
 	font-weight:bold;
@@ -1379,7 +1379,7 @@ div.member_action_sac_linkon{
 }
 
 div.member_action_sac_itemContainer{
-	border:4px solid <?=$borderColor1;?>;
+	border:4px solid <?php echo $borderColor1;?>;
 	padding:10px;
 }
 

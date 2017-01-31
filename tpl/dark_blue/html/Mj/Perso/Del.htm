@@ -16,17 +16,17 @@
 	</tr>
 		
 	<tr>
-		<td class="value"><?=$perso['nom'];?></td>
-		<td class="value"><?=$perso['age'];?></td>
-		<td class="value"><?=$perso['lieu'];?></td>
-		<td class="value"><?=$perso['pv'];?></td>
-		<td class="value"><?=$perso['cash'];?></td>
+		<td class="value"><?php echo $perso['nom'];?></td>
+		<td class="value"><?php echo $perso['age'];?></td>
+		<td class="value"><?php echo $perso['lieu'];?></td>
+		<td class="value"><?php echo $perso['pv'];?></td>
+		<td class="value"><?php echo $perso['cash'];?></td>
 
 	</tr>
 </table>
 <center>
-<form action="?mj=Perso_Del&id=<?=$perso['id'];?>&action=suppr" method="post">
-Êtes vous vraiment sûr de vouloir supprimer le perso : <?=$perso['nom'];?> ?<br>
+<form action="?mj=Perso_Del&id=<?php echo $perso['id'];?>&action=suppr" method="post">
+Êtes vous vraiment sûr de vouloir supprimer le perso : <?php echo $perso['nom'];?> ?<br>
 <input type="submit" style="background-color:#990000;" value="OUI"/>
 <input type="button" style="background-color:#006600;" value="NON" onclick="location.href='?mj=index'; return false;" />
 </form>

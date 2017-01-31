@@ -1,6 +1,6 @@
 <script type="text/javascript">
-	$('perso_pa').innerHTML="<?=$PA;?>";
-	$('perso_cash').innerHTML="<?=$CASH;?>";
+	$('perso_pa').innerHTML="<?php echo $PA;?>";
+	$('perso_cash').innerHTML="<?php echo $CASH;?>";
 </script>
 <br />
 <form id="action_donnerCash" method="post" action="?popup=1&m=Action_Perso_Donnercash2" onsubmit="return ajaxSubmitForm(this);">
@@ -12,34 +12,34 @@
 <tr>
 	<td class="value">
 		Montant &agrave; donner:<br />
-		<input type="text" name="cash" class="text" value="0" /><?=GAME_DEVISE;?>
+		<input type="text" name="cash" class="text" value="0" /><?php echo GAME_DEVISE;?>
 	</td>
 	<td class="value" style="text-align:left;">
-		<?
+		<?php
 		if (isset($LIST_PERSO)){
 			foreach($LIST_PERSO as $perso){ ?>
-				<input type="radio" name="toPersoId" value="<?=$perso->getId();?>" />
-				<?if ($perso->getSexe()=='m'){?>
-					<span id="perso_<?=$perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
-				<?}else{?>
-					<span id="perso_<?=$perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
-				<?}?>
-					<?=$perso->getNom();?>
+				<input type="radio" name="toPersoId" value="<?php echo $perso->getId();?>" />
+				<?php if ($perso->getSexe()=='m'){?>
+					<span id="perso_<?php echo $perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+				<?php }else{?>
+					<span id="perso_<?php echo $perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+				<?php }?>
+					<?php echo $perso->getNom();?>
 				</span>
-				<div id="ib_perso_<?=$perso->getId();?>" class="infobulle" style="width:300px;">
+				<div id="ib_perso_<?php echo $perso->getId();?>" class="infobulle" style="width:300px;">
 					<div class="title">Infos</div>
-					<?if ($perso->getAvatar()!='') {?>
-						<img class="imgbg" align="left" src="<?=$perso->getAvatar();?>" />
-					<? } ?>
-					<?=$perso->getDescription();?>
+					<?php if ($perso->getAvatar()!='') {?>
+						<img class="imgbg" align="left" src="<?php echo $perso->getAvatar();?>" />
+					<?php } ?>
+					<?php echo $perso->getDescription();?>
 				</div>
 				<br />
-		<?
+		<?php
 			}
 		}else{
 		?>
 			<i>-personne-</i>
-		<?
+		<?php
 		}
 		?>
 	</td>
