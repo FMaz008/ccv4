@@ -125,8 +125,6 @@ countdown = function (Time_Left){
 	if(Time_Left == 0)
 	{
 		document.getElementById("countdown").innerHTML = "expirée";
-		if(SHOW_AJAX_LOGIN == 1)
-			showAjaxLogin();
 	}
 	else
 	{
@@ -142,41 +140,18 @@ countdown = function (Time_Left){
 
 
 
-ajaxLogin = function(objForm, sessionTime)
-{
-	var param = Form.serialize(objForm.readAttribute('id'));
-	var myAjax = new Ajax.Request(
-			objForm.readAttribute("action"),
-			{
-				method: objForm.readAttribute("method"), 
-				parameters: param,
-				onComplete: function(originalRequest)
-							{
-								var rval= originalRequest.responseText;
-								
-								if(rval == 0)
-								{
-									hideAjaxLogin();
-									countdown(sessionTime);
-								}
-								else
-								{
-									$('ajaxLogin_error').style.display = "block";
-								}
-							}
-			});
-	
-	return false; //Ne pas envoyer le formulaire
-}
 
-hideAjaxLogin = function()
+ajaxExtendSession = function()
 {
-	$('ajaxLogin_plzwait1').style.display = 'none';
-	$('ajaxLogin_plzwait2').style.display = 'none';
-}
-
-showAjaxLogin = function()
-{
-	$('ajaxLogin_plzwait1').style.display = 'block';
-	$('ajaxLogin_plzwait2').style.display = 'block';
+    //Load the login page (or any page), which will re-extend the session in PHP.
+    var myAjax = new Ajax.Request(
+        "?v=Login&popup=1",
+        {
+                method: "get", 
+                onComplete: function(originalRequest)
+                {
+                    //Nothing to be done, really.
+                }
+        });
+    setTimeout('ajaxExtendSession();', 600*1000); //Extra 10min
 }

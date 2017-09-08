@@ -1,2 +1,1 @@
-php_value session.gc_maxlifetime 3600
 Options -Indexes

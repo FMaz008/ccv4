@@ -227,23 +227,6 @@ div.forum {
 	
 }
 
-
-
-div.certification {
-	z-index:10;
-	left:0px;
-	top:0px;
-	width:135px;
-
-	padding:5px;
-	margin-left:10px;
-
-	text-align:center;
-	background-color: <?php echo $bgColor1;?>;
-	border:2px solid <?php echo $borderColor1;?>;
-	
-}
-
 div.main {
 	overflow:auto;
 	z-index:1;
@@ -350,12 +333,6 @@ div.panel {
 	padding:2px;
 }
 
-div#ajaxLogin_error
-{
-	display:none;
-	color:#FF0000;
-	font-weight:bold;
-}
 div.plzwait_ombre{
 	position:fixed;
 	z-index:997;
