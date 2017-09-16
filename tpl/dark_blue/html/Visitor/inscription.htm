@@ -140,14 +140,6 @@ function validate(){
 	}
 	
 	
-	//Validation contre les cons.
-	if($("unconfirm").checked){
-		$("inscr").reset();
-		alert("Il va falloir que vous appreniez à lire.\n\nReprennez la page d'en haut, et allez-y avec attention cette fois-ci (et jusqu'en bas).");
-		return false;
-	}
-	
-	
 	
 	//Requête AJAX pour valider le user et le email par rapport à la base de donnée (Si déjà utilisé)
 	showplzwait();
@@ -363,11 +355,7 @@ function operation_confirm(originalRequest){
 			<p><input type="checkbox" class="check" id="confirm2" name="confirm2" />&nbsp;(2)
 				Je confirme avoir lu et respecter en totalité et en tout temps les règles Hors-Jeu.
 			</p>
-			
-			<p><input type="checkbox" class="check" id="unconfirm" />&nbsp;(3)
-				J'affirme ne pas avoir lu avec grande attention et je désire effacer ce formulaire.
-				
-			<p><input type="checkbox" class="check" id="confirm3" name="confirm3" />&nbsp;(4)
+			<p><input type="checkbox" class="check" id="confirm3" name="confirm3" />&nbsp;(3)
 				Je suis conscient que ce jeu comporte des scènes de violence, des vulgarités, qu'il est laissé aux commandes des joueurs et donc, qu'aucune forme de censure ou de contrôle de contenu n'existe.
 			</p>
 		</div>
