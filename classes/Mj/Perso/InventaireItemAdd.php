@@ -40,14 +40,14 @@ class Mj_Perso_InventaireItemAdd
 						. ' `inv_shock_pa`, `inv_shock_pv`, `inv_boost_pa`,`inv_boost_pv`,'
 						. ' `inv_perc_stat_agi`, `inv_perc_stat_dex`, `inv_perc_stat_per`,'
 						. ' `inv_perc_stat_for`, `inv_perc_stat_int`, `inv_resistance`,'
-						. ' `inv_remiseleft`, `inv_pn`'
+						. ' `inv_remiseleft`, `inv_pn`, `inv_extradesc`, `inv_notemj`'
 					. ' )'
 					. ' VALUES'
 					. ' ('
 						. ' NULL, :dbId, :persoId, :equip, :qte, :munition, :duree,'
 						. ' :shockPa, :shockPv, :boostPa, :boostPv,'
 						. ' :statAgi, :statDex, :statPer, :statFor, :statInt,'
-						. ' :resistance, NULL, :pn'
+						. ' :resistance, NULL, :pn, "", ""'
 					. ' );';
 		$prepIns = $db->prepare($query);
 
@@ -94,7 +94,7 @@ class Mj_Perso_InventaireItemAdd
 			$prepIns->bindValue(':persoId',	$_GET['id'],		PDO::PARAM_INT);
 
 			if($arr['db_type'] == 'arme' || $arr['db_type'] == 'defense')
-				$prepIns->bindValue(':equip',	0,						PDO::PARAM_INT);
+				$prepIns->bindValue(':equip',	'0',						PDO::PARAM_STR);
 			else
 				$prepIns->bindValue(':equip',	NULL,					PDO::PARAM_NULL);
 
