@@ -2,11 +2,11 @@
 //<!--
 	addno = function(no) {
 		$("pass2").value+=no;
-		$("pass").value=$("pass2").value;
+		$("pass").val($("pass2").value);
 	}
 	reset = function(no) {
-		$("pass2").value='';
-		$("pass").value=$("pass2").value;
+		$("pass2").val('');
+		$("pass").val($("pass2").value);
 	}
 	check = function(no) {
 		ajaxSubmitForm($("action_casierDigi"));

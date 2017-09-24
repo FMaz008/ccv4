@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	goTo = function(url){
-		$('header_url').value = url;
-		ajaxSubmitForm($('action_navigateurHeader'));
+		$('#header_url').val(url);
+		ajaxSubmitForm($('#action_navigateurHeader'));
 	}
 	var tmp = "<?php echo $url_param;?>";
 	var url_param = (tmp == "") ? false : "<?php echo $url_param;?>";

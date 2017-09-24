@@ -1,15 +1,15 @@
 
 toggleActionPanel = function()
 {	//BUT: Affichier/Masquer le panneau d'action
-	var objContent = $('actionPanelContent');
-	var objPanel = $("actionPanel");
+	var objContent = $('#actionPanelContent');
+	var objPanel = $("#actionPanel");
 	
-	if (objContent.style.display == "block"){
-		objContent.style.display = "none";
-		objPanel.style.width = "700px";
+	if (objContent.css('display') == 'none'){
+            objPanel.css({ width : "810px" });
+            objContent.show();
 	}else{
-		objPanel.style.width = "810px";
-		objContent.style.display = "block";
+            objContent.hide();
+            objPanel.css({ width : "700px" });
 	}
 }
 

@@ -13,10 +13,10 @@
 		htmlContent += 				" value=\"\"";
 		htmlContent += 				" size=\"9\"";
 		htmlContent += 				" onkeypress=\"return renameCheckEnter(event,"+ persoId +", '" +persoId+ "newName');\" />";
-		$("updateZone_"+persoId).innerHTML = htmlContent;
-		$(persoId+ "newName").focus();
-		$(persoId+ "newName").value = persoName;
-		$(persoId+ "newName").observe('blur',  function(event){
+		$("#updateZone_"+persoId).html(htmlContent);
+		$("#"+persoId+ "newName").focus();
+		$("#"+persoId+ "newName").val(persoName);
+		$("#"+persoId+ "newName").observe('blur',  function(event){
 									renamePersoGo(persoId, persoId+"newName");
 								});
 	}
@@ -29,18 +29,19 @@
 	}
 	
 	renamePersoGo = function(persoId, newName){
-		var myAjax = new Ajax.Request(
-			'?m=He_Rename', 
-			{
-				method: 'post',
-				encoding: 'UTF-8',
-				parameters: 'persoId='+persoId+'&newName='+encodeURI($(newName).value),
-				onComplete: renamePersoGo_confirm,
-			});
+                $.ajax({
+                    url:'?m=He_Rename',
+                    method: 'post',
+                    data: 'persoId='+persoId+'&newName='+encodeURI($(newName).value), 
+                    dataType: "html",
+                    //encoding: 'UTF-8',
+                    success: function (data) {
+                        renamePersoGo_confirm(data);
+                    }
+                });
 	}
 	
-	renamePersoGo_confirm = function(originalRequest){
-		var rval= originalRequest.responseText;
+	renamePersoGo_confirm = function(rval){
 		if (rval=="OK")
 			actionLink("Action_Perso_Coupdoeil");
 	}

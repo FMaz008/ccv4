@@ -2,22 +2,22 @@
 //<!--
 <?php if(isset($NIP)){ ?>
 	goBack = function() {
-		$("action_redirect").action = "?popup=1&m=Action_Lieu_Guichet3";
+		$("action_redirect").attr("action","?popup=1&m=Action_Lieu_Guichet3");
 		ajaxSubmitForm($("action_redirect"));
 	}
 	goDetails = function(trsId) {
-		$('trsid').value = trsId;
-		$("action_redirect").action = "?popup=1&m=Action_Lieu_Guichet3historiquedetails";
+		$('#trsid').val(trsId);
+		$("action_redirect").attr("action","?popup=1&m=Action_Lieu_Guichet3historiquedetails");
 		ajaxSubmitForm($("action_redirect"));
 	}
 <?php }else{ ?>
 	goBack = function() {
-		$("action_redirect").action = "?popup=1&m=Action_Lieu_Banque";
+		$("action_redirect").attr("action","?popup=1&m=Action_Lieu_Banque");
 		ajaxSubmitForm($("action_redirect"));
 	}
 	goDetails = function(trsId) {
-		$('trsid').value = trsId;
-		$("action_redirect").action = "?popup=1&m=Action_Lieu_BanqueHistoriqueDetails";
+		$('#trsid').val(trsId);
+		$("action_redirect").attr("action","?popup=1&m=Action_Lieu_BanqueHistoriqueDetails");
 		ajaxSubmitForm($("action_redirect"));
 	}
 <?php } ?>

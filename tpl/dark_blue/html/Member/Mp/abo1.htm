@@ -4,19 +4,19 @@
 	
 	//Fonction AJAX générales
 	function fail(){
-		$('request_msg').style.display="block";
-		$('request_msgtxt').innerHTML="La requête à échouée, veuillez ré-essayer plus tard.";
+		$('#request_msg').css({ display: "block" });
+		$('#request_msgtxt').html("La requête à échouée, veuillez ré-essayer plus tard.");
 	}
 	
 	function showplzwait(){
-		$('plzwait1').style.display="block";
-		$('plzwait2').style.display="block";
-		$('request_msgtxt').innerHTML="Veuillez patienter...";
-		$('request_msg').style.display="none";
+		$('#plzwait1').css({ display: "block" });
+		$('#plzwait2').css({ display: "block" });
+		$('#request_msgtxt').html("Veuillez patienter...");
+		$('#request_msg').css({ display: "none" });
 	}
 	function hideplzwait(){
-		$('plzwait1').style.display="none";
-		$('plzwait2').style.display="none";
+		$('#plzwait1').css({ display: "none" });
+		$('#plzwait2').css({ display: "none" });
 	}
 
 
@@ -25,15 +25,15 @@
 
 	function fct_step1(who){
 		if(who=="me"){
-			$('panel_searchUser').style.display='none';
-			$('userId').value='<?php echo $ACCOUNT_ID;?>';
-			$('userName').value='<?php echo $ACCOUNT_USER;?>';
-			$('userMp').value='<?php echo $MP_LVL;?>';
+			$('#panel_searchUser').css({ display: 'none' });
+			$('#userId').val('<?php echo $ACCOUNT_ID;?>');
+			$('#userName').val('<?php echo $ACCOUNT_USER;?>');
+			$('#userMp').val('<?php echo $MP_LVL;?>');
 		}else{
-			$('panel_searchUser').style.display='inline';
-			$('userId').value='';
-			$('userName').value='';
-			$('userMp').value='';
+			$('#panel_searchUser').css({ display: 'inline' });
+			$('#userId').val('');
+			$('#userName').val('');
+			$('#userMp').val('');
 		}
 	}
 	
@@ -41,46 +41,46 @@
 	
 		//Requête AJAX pour valider si l'utilisateur existe
 		showplzwait();
-		var myAjax = new Ajax.Request(
-			'?popup=1&m=Mp_ConfirmUser',
-			{
-				method: 'post',
-				parameters: 'user='+$F('panel_userName'),
-				onComplete: operation_confirm,
-				onFailure: fail
-			});
+                $.ajax({
+                    url:'?popup=1&m=Mp_ConfirmUser',
+                    method: 'post',
+                    data: 'user='+$('#panel_userName').val(), 
+                    dataType: "html",
+                    success: function (data) {
+                        operation_confirm(data);
+                    }
+                });
 	}
 	
 	function fct_changerSearch(){
-		$('panel_searchUser').style.display='inline';
-		$('panel_foundUser').style.display='none';
-		$('userId').value='';
-		$('userName').value='';
+		$('#panel_searchUser').css({ display: 'inline' });
+		$('#panel_foundUser').css({ display: 'none' });
+		$('#userId').val('');
+		$('#userName').val('');
 	}
 	
-	function operation_confirm(originalRequest){
-		
-		var rval= originalRequest.responseText;
+	function operation_confirm(rval){
+	
 		var params=rval.split("|");
 		
 		if (params[0]=="OK"){
 			hideplzwait();
-			$('userId').value=decodeURIComponent(params[1]);
-			$('userName').value=decodeURIComponent(params[2]);
-			$('panel_searchUser').style.display='none';
-			$('panel_foundUser').style.display='inline';
-			$('panel_foundUserName').innerHTML = $F('userName');
+			$('#userId').val(decodeURIComponent(params[1]));
+			$('#userName').val(decodeURIComponent(params[2]));
+			$('#panel_searchUser').css({ display: 'none' });
+			$('#panel_foundUser').css({ display: 'inline' });
+			$('#panel_foundUserName').html($('#userName').val());
 		}else{
-			$('userId').value='';
-			$('userName').value='';
-			$('request_msg').style.display="block";
-			$('request_msgtxt').innerHTML=params[1];
+			$('#userId').val('');
+			$('#userName').val('');
+			$('#request_msg').css({ display: "block" });
+			$('#request_msgtxt').html(params[1]);
 		}
 	}
 	
 	
 	function validate(){
-		if($F('userId') == ''){
+		if($('#userId').val() == ''){
 			alert("Vous devez spécifier un utilisateur valide.");
 			return false;
 		}
@@ -149,7 +149,7 @@
 	<form onsubmit="return false;">
 		<strong>Identifier l'utilisateur à abonner.</strong>
 		<br />Nom d'utilisateur: <input type="text" class="text" id="panel_userName" value="" />
-		<input type="submit" class="button" name="valid_user" value="Valider" onclick="fct_searchUser($('panel_userName').value);" />
+		<input type="submit" class="button" name="valid_user" value="Valider" onclick="fct_searchUser($('#panel_userName').value);" />
 	</form>
 </div>
 <div id="panel_foundUser" style="display:none;">

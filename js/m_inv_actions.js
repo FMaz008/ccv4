@@ -1,20 +1,20 @@
-﻿var inventaire_actions_version = 10;
+﻿var inventaire_actions_version = 11;
 
 //Fonction générales
 fail = function(){
-	$('request_msg').style.display="block";
-	$('request_msgtxt').innerHTML="La requête à échouée, veuillez ré-essayer plus tard.";
+	$('#request_msg').show();
+	$('#request_msgtxt').html("La requête à échouée, veuillez ré-essayer plus tard.");
 }
 
 showplzwait = function(){
-	$('plzwait1').style.display="block";
-	$('plzwait2').style.display="block";
-	$('request_msgtxt').innerHTML="Veuillez patienter...";
-	$('request_msg').style.display="none";
+	$('#plzwait1').show();
+	$('#plzwait2').show();
+	$('#request_msgtxt').html("Veuillez patienter...");
+	$('#request_msg').hide();
 }
 hideplzwait = function(){
-	$('plzwait1').style.display="none";
-	$('plzwait2').style.display="none";
+	$('#plzwait1').hide();
+	$('#plzwait2').hide();
 }
 
 
@@ -27,29 +27,32 @@ conso = function(id){
 	
 	var dg = FindItem(id);
 	
-	var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Perso_InventaireConso', 
-			{
-				method: 'post', 
-				parameters: 'id='+dg.id, 
-				onComplete: conso_confirm,
-				onFailure: fail
-			});
+        $.ajax({
+            url:'?popup=1&m=Action_Perso_InventaireConso',
+            method: 'post',
+            data: 'id='+dg.id, 
+            dataType: "html",
+            success: function (data) {
+                conso_confirm(data);
+            },
+            error: function () {
+                fail();
+            }
+        });
 }
 
 //LIRE LIVRE
 lireLivre = function(id){
 
 	var dg = FindItem(id);
-	$('redir_id').value=dg.id;
-	$('redir_form').action="?popup=1&m=Action_Lieu_LireLivre";
-	ajaxSubmitForm($('redir_form'));
+	$('#redir_id').val(dg.id);
+	$('#redir_form').attr("action","?popup=1&m=Action_Lieu_LireLivre");
+	ajaxSubmitForm($('#redir_form'));
 	
 }
 
-conso_confirm = function(originalRequest){
+conso_confirm = function(rval){
 	
-	var rval= originalRequest.responseText;
 	var params=rval.split("|");
 	
 	if (params.length > 1 && params[1]=="OK"){
@@ -57,9 +60,9 @@ conso_confirm = function(originalRequest){
 		var dg		= FindItem(params[0]);
 		var fiche	= FindItemFiche(params[0]);
 		var conso	= FindDz('consommer');
-		$('perso_pr').innerHTML=params[3];
-		$('perso_pa').innerHTML=params[2];
-		$('perso_pn').innerHTML=params[4];
+		$('#perso_pr').html(params[3]);
+		$('#perso_pa').html(params[2]);
+		$('#perso_pn').html(params[4]);
 		
 		//Rétracter la fiche vers l'ancienne position de l'item
 		var pos1 = new centerItemIntoItem(dg, dg.baseDz);
@@ -81,11 +84,11 @@ conso_confirm = function(originalRequest){
 		
 		hideplzwait();
 	}else{
-		$('request_msg').style.display="block";
+		$('#request_msg').css({ display: "block" });
 		if(params.length==1){
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[0]);
+			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}
 }
@@ -99,26 +102,29 @@ equiper = function(id){
 	
 	var dg = FindItem(id);
 	
-	var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Perso_InventaireEquiper', 
-			{
-				method: 'post', 
-				parameters: 'id='+dg.id, 
-				onComplete: equiper_confirm,
-				onFailure: fail
-			});
+        $.ajax({
+            url:'?popup=1&m=Action_Perso_InventaireEquiper',
+            method: 'post',
+            data: 'id='+dg.id, 
+            dataType: "html",
+            success: function (data) {
+                equiper_confirm(data);
+            },
+            error: function () {
+                fail();
+            }
+        });
 }
-equiper_confirm = function(originalRequest){
+equiper_confirm = function(rval){
 	
-	var rval= originalRequest.responseText;
 	var params=rval.split("|");
 	
 	if (params.length > 1 && params[1]=="OK"){
 		var dg		= FindItem(params[0]);
 		var fiche	= FindItemFiche(params[0]);
 		
-		$('perso_pa').innerHTML=params[2];
-		$('perso_pr').innerHTML=params[3];
+		$('#perso_pa').html(params[2]);
+		$('#perso_pr').html(params[3]);
 		
 		//Rétracter la fiche vers l'ancienne position de l'item
 		var pos1 = new centerItemIntoItem(dg, dg.baseDz);
@@ -135,11 +141,11 @@ equiper_confirm = function(originalRequest){
 		
 		hideplzwait();
 	}else{
-		$('request_msg').style.display="block";
+		$('#request_msg').css({ display: "block" });
 		if(params.length==1){
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[0]);
+			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}
 }
@@ -152,25 +158,28 @@ ranger = function(id){
 	
 	var dg = FindItem(id);
 	
-	var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Perso_InventaireRanger', 
-			{
-				method: 'post', 
-				parameters: 'id='+dg.id, 
-				onComplete: ranger_confirm,
-				onFailure: fail
-			});
+        $.ajax({
+            url:'?popup=1&m=Action_Perso_InventaireRanger',
+            method: 'post',
+            data: 'id='+dg.id, 
+            dataType: "html",
+            success: function (data) {
+                ranger_confirm(data);
+            },
+            error: function () {
+                fail();
+            }
+        });
 }
-ranger_confirm = function(originalRequest){
+ranger_confirm = function(rval){
 	
-	var rval= originalRequest.responseText;
 	var params=rval.split("|");
 	
 	if (params.length > 1 && params[1]=="OK"){
 		var dg		= FindItem(params[0]);
 		var fiche	= FindItemFiche(params[0]);
-		$('perso_pa').innerHTML=params[2];
-		$('perso_pr').innerHTML=params[3];
+		$('#perso_pa').html(params[2]);
+		$('#perso_pr').html(params[3]);
 		
 		//Rétracter la fiche vers l'ancienne position de l'item
 		var pos1 = new centerItemIntoItem(dg, dg.baseDz);
@@ -187,11 +196,11 @@ ranger_confirm = function(originalRequest){
 		
 		hideplzwait();
 	}else{
-		$('request_msg').style.display="block";
+		$('#request_msg').css({ display: "block" });
 		if(params.length==1){
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[0]);
+			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}
 }
@@ -206,14 +215,18 @@ cacher = function(id){
 	
 	var dg = FindItem(id);
 	
-	var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Perso_InventaireCacher',
-			{
-				method: 'post',
-				parameters: 'id='+dg.id,
-				onComplete: jeter_confirm,
-				onFailure: fail
-				});
+        $.ajax({
+            url:'?popup=1&m=Action_Perso_InventaireCacher',
+            method: 'post',
+            data: 'id='+dg.id, 
+            dataType: "html",
+            success: function (data) {
+                jeter_confirm(data);
+            },
+            error: function () {
+                fail();
+            }
+        });
 }
 
 //JETER
@@ -225,39 +238,45 @@ jeter = function(id){
 	showplzwait();
 	
 	var dg = FindItem(id);
-	
-	var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Perso_InventaireJeter', 
-			{
-				method: 'post', 
-				parameters: 'id='+dg.id, 
-				onComplete: jeter_confirm,
-				onFailure: fail
-			});
+	$.ajax({
+            url:'?popup=1&m=Action_Perso_InventaireJeter',
+            method: 'post',
+            data: 'id='+dg.id, 
+            dataType: "html",
+            success: function (data) {
+                jeter_confirm(data);
+            },
+            error: function () {
+                fail();
+            }
+        });
 }
 submitJeterForm = function(url, itemid, qte){
 	showplzwait();
 	
-	var myAjax = new Ajax.Request(
-			url,
-			{
-				method: 'post', 
-				parameters: 'id='+itemid+'&askQte='+qte, 
-				onComplete: jeter_confirm,
-				onFailure: fail
-			});
+        $.ajax({
+            url:url,
+            method: 'post',
+            data: 'id='+itemid+'&askQte='+qte, 
+            dataType: "html",
+            success: function (data) {
+                jeter_confirm(data);
+            },
+            error: function () {
+                fail();
+            }
+        });
 }
-jeter_confirm = function(originalRequest){
+jeter_confirm = function(rval){
 	
-	var rval= originalRequest.responseText;
 	var params=rval.split("|");
 	if (params.length > 1 && params[1]=="OK"){
 		
 		var dg		= FindItem(params[0]);
 		var fiche	= FindItemFiche(params[0]);
 		var jeter	= FindDz('jeter');
-		$('perso_pa').innerHTML=params[2];
-		$('perso_pr').innerHTML=params[3];
+		$('#perso_pa').html(params[2]);
+		$('#perso_pr').html(params[3]);
 		
 		
 		//Rétracter la fiche vers l'ancienne position de l'item
@@ -277,11 +296,11 @@ jeter_confirm = function(originalRequest){
 		
 		hideplzwait();
 	}else{
-		$('request_msg').style.display="block";
+		$('#request_msg').css({ display: "block" });
 		if(params.length==1){
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[0]);
+			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}
 }
@@ -293,38 +312,42 @@ charger = function(id){
 	showplzwait();
 	
 	var dg = FindItem(id);
-	
-	var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Perso_InventaireCharger', 
-			{
-				method: 'post', 
-				parameters: 'id='+dg.id, 
-				onComplete: charger_confirm,
-				onFailure: fail
-			});
+	$.ajax({
+            url:'?popup=1&m=Action_Perso_InventaireCharger',
+            method: 'post',
+            data: 'id='+dg.id, 
+            dataType: "html",
+            success: function (data) {
+                charger_confirm(data);
+            },
+            error: function () {
+                fail();
+            }
+        });
 }
-charger_confirm = function(originalRequest){
+charger_confirm = function(rval){
 	
-	var rval= originalRequest.responseText;
 	var params=rval.split("|");
 	
-	$('request_msg').style.display="block";
-	$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+	$('#request_msg').css({ display: "block" });
+	$('#request_msgtxt').html(decodeURIComponent(params[1]));
 }
 submitMunForm = function(url, itemid, munid){
 	showplzwait();
-	
-	var myAjax = new Ajax.Request(
-			url,
-			{
-				method: 'post', 
-				parameters: 'id='+itemid+'&munid='+munid, 
-				onComplete: charger_confirmFin,
-				onFailure: fail
-			});
+	$.ajax({
+            url:url,
+            method: 'post',
+            data: 'id='+itemid+'&munid='+munid, 
+            dataType: "html",
+            success: function (data) {
+                charger_confirmFin(data);
+            },
+            error: function () {
+                fail();
+            }
+        });
 }
-charger_confirmFin = function(originalRequest){
-	var rval= originalRequest.responseText;
+charger_confirmFin = function(rval){
 	var params=rval.split("|");
 	
 	//0: Arme ID
@@ -335,17 +358,17 @@ charger_confirmFin = function(originalRequest){
 	//5: Mun ID
 	//6: Mun Qte
 	if (params.length > 1 && params[1]=="OK"){
-		$("qte_" + params[0]).innerHTML = params[4];
-		$("qte_" + params[5]).innerHTML = params[6];
-		$('perso_pa').innerHTML=params[2];
-		$('perso_pr').innerHTML=params[3];
+		$("qte_" + params[0]).html(params[4]);
+		$("qte_" + params[5]).html(params[6]);
+		$('#perso_pa').html(params[2]);
+		$('#perso_pr').html(params[3]);
 		hideplzwait();
 	}else{
-		$('request_msg').style.display="block";
+		$('#request_msg').css({ display: "block" });
 		if(params.length==1){
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[0]);
+			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}
 }

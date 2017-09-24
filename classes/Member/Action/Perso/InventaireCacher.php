@@ -41,7 +41,7 @@ class Member_Action_Perso_InventaireCacher
 				//Demander la quantité à cacher
 				$msg = '<div style="text-align:center;width:100%;">';
 				$msg .= 'Cacher: <input type="text" size="3" class="text" id="ask_qte" value="1" style="text-align:right;" /> / ' . $item->getQte() . '<br />';
-				$msg .= "<input type=\"button\" class=\"button\" onclick=\"submitJeterForm('?m=Action_Perso_InventaireCacher'," . $_POST['id'] . ", \$F('ask_qte'));\" value=\"Cacher\" />";
+				$msg .= "<input type=\"button\" class=\"button\" onclick=\"submitJeterForm('?m=Action_Perso_InventaireCacher'," . $_POST['id'] . ", \$('#ask_qte').val());\" value=\"Cacher\" />";
 				$msg .= '</div>';
 				die($_POST['id'] . '|' . $msg);
 				

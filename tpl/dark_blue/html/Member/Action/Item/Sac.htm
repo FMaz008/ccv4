@@ -3,15 +3,15 @@
 	var arrTabs = new Array();
 	showInv = function(id){
 		for(var i=0;i<arrTabs.length;i++){
-			$("tab_" + arrTabs[i]).style.display = arrTabs[i] == id ? "block" : "none" ;
-			$(""+arrTabs[i]).className = "member_action_sac_link" + (arrTabs[i] == id ? "on" : "off");
-			$("sacId").value = id;
+			$("tab_" + arrTabs[i]).css({ display: arrTabs[i] == id ? "block" : "none"  });
+			$(""+arrTabs[i]).attr("class", "member_action_sac_link" + (arrTabs[i] == id ? "on" : "off"));
+			$("sacId").val(id);
 		}
 	}
 	
 	//Mettre a jour les infos
-	$('perso_pr').innerHTML="<?php echo $PERSO_PR;?>";
-	$('perso_pa').innerHTML="<?php echo $PERSO_PA;?>";
+	$('#perso_pr').html("<?php echo $PERSO_PR;?>");
+	$('#perso_pa').html("<?php echo $PERSO_PA;?>");
 //-->
 </script>
 
@@ -132,8 +132,8 @@
 	</div>
 		
 		<div style="width:25px;padding-top:50px;margin-left:300px;">
-			<input type="submit" class="button" value="|>>" style="width:25px;" onclick="$('form_sac').action='?popup=1&m=Action_Item_SacSacVersPerso';" />
-			<input type="submit" class="button" value="<<|" style="width:25px;" onclick="$('form_sac').action='?popup=1&m=Action_Item_SacPersoVersSac';" />
+			<input type="submit" class="button" value="|>>" style="width:25px;" onclick="$('#form_sac').attr("action",'?popup=1&m=Action_Item_SacSacVersPerso');" />
+			<input type="submit" class="button" value="<<|" style="width:25px;" onclick="$('#form_sac').attr("action",'?popup=1&m=Action_Item_SacPersoVersSac');" />
 		</div>
 		<div style="clear:both;"></div>
 	</div>

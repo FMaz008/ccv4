@@ -3,9 +3,9 @@
 	function gosearch(type){
 		var type_search = type;
 		
-		$(type+"_results").innerHTML="Chargement en cours...";
-		$(type+"_results").style.display="inline";
-		$(type+"_button").style.display="inline";
+		$("#"+type+"_results").html("Chargement en cours...");
+		$("#"+type+"_results").show();
+		$("#"+type+"_button").show();
 				
 		switch(type){
 			case "pan_ajout":				type_search = "item";	break;
@@ -16,13 +16,15 @@
 			case "pan_transfert_item":		type_search = "item";	break;
 		}
 		
-		var myAjax = new Ajax.Updater(
-			type+'_results', 
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat=inventaire_'+type_search+'&search=' + $(type+'_search').value
-			});
+                $.ajax({
+                    url:'?mj=Search&popup=1',
+                    method: 'post',
+                    data: 'searchWhat=inventaire_'+type_search+'&search=' + $("#"+type+'_search').value, 
+                    dataType: "html",
+                    success: function (data) {
+                        $('#'+type+'_results').html(data);
+                    }
+                });
 	}
 	
 	function testerRadio(radio) {
@@ -88,19 +90,19 @@
 	
 	function showPanel(panelName){
 		//Masquer tous les panel
-		$('pan_ajout').style.display='none';
-		$('pan_transfert').style.display='none';
-		$('pan_transfert_lieu').style.display='none';
-		$('pan_transfert_boutique').style.display='none';
-		$('pan_transfert_perso').style.display='none';
-		$('pan_transfert_casier').style.display='none';
-		$('pan_transfert_item').style.display='none';
+		$('#pan_ajout').css({ display: 'none' });
+		$('#pan_transfert').css({ display: 'none' });
+		$('#pan_transfert_lieu').css({ display: 'none' });
+		$('#pan_transfert_boutique').css({ display: 'none' });
+		$('#pan_transfert_perso').css({ display: 'none' });
+		$('#pan_transfert_casier').css({ display: 'none' });
+		$('#pan_transfert_item').css({ display: 'none' });
 		
 		//Afficher le(s) panel(s) demandé(s)
 		if(panelName=='pan_transfert_lieu' || panelName=='pan_transfert_perso' || panelName=='pan_transfert_casier' || panelName=='pan_transfert_boutique' || panelName=='pan_transfert_item')
-			$('pan_transfert').style.display='inline';
+			$('#pan_transfert').show();
 			
-		$(panelName).style.display='inline';
+		$("#"+panelName).show();
 	}
 </script>
 

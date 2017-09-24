@@ -18,7 +18,7 @@
 						</tr>
 						<tr>
 							<td class="name" style="text-align:right;">Compte:</td>
-							<td class="value"><a href="#gestion_compte" onclick="$('user_search').value='<?php echo $inscr['user'];?>';gosearch('compte');"><?php echo $inscr['user'];?></a></td>
+							<td class="value"><a href="#gestion_compte" onclick="$('#user_search').val('<?php echo $inscr['user'];?>');gosearch('compte');"><?php echo $inscr['user'];?></a></td>
 							<td class="name" style="text-align:right;">E-mail</td>
 							<td class="value"><?php echo $inscr['email'];?></td>
 							<td class="name" onclick="this.childNodes[0].checked=true;" rowspan="2" style="text-align:center;"><input type="radio" name="inscr_<?php echo $inscr['id'];?>" value="" CHECKED /></td>
@@ -28,7 +28,7 @@
 						</tr>
 						<tr>
 							<td class="name" style="text-align:right;">Perso</td>
-							<td class="value"><a href="#gestion_perso" onclick="$('perso_search').value='<?php echo $inscr['nom'];?>';gosearch('perso');"><?php echo $inscr['nom'];?></a></td>
+							<td class="value"><a href="#gestion_perso" onclick="$('#perso_search').val('<?php echo $inscr['nom'];?>');gosearch('perso');"><?php echo $inscr['nom'];?></a></td>
 							<td class="name" style="text-align:right;">Age</td>
 							<td class="value"><?php echo $inscr['age'];?></td>
 							<td></td>

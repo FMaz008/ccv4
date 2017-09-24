@@ -1,4 +1,4 @@
-﻿var inventaire_version = 4;
+﻿var inventaire_version = 5;
 
 // GESTION DES OBJETS
 // Conception de Francois Mazerolle, 2006
@@ -7,9 +7,7 @@
 //
 // Conception by Francois Mazerolle, 2006
 // You can use and/or modify this script for non-lucrative purposes only.
-// If you need a commercial usage authorisation, please contact me at: admin@maz-concept.com 
-
-//BUG(S) À CORRIGER:
+// If you need a commercial usage authorisation, please contact me at: fmaz008@gmail.com
 
 //Note: DG = L'élément déplacable (dragable), DZ= Drop Zone, zone pour lacher un DG.
 
@@ -38,16 +36,13 @@ var zIndexItemON 	= 99;
 var pageMarginX		= 0; //Forcer l'ajout ou le retrait d'une marge en X aux items
 var pageMarginY		= 0; //Forcer l'ajout ou le retrait d'une marge en Y aux items
 
-//Lors de la récursion qui calcule la position de tout les éléments qui contiennent un élément, ne pas prendre en compte certains éléments (qui peuvent avoir des positionnements induisant les calculs en erreur)
-var idExcludedFromPositionCalculation = Array('actionPanel', 'siteMain', 'site', 'content', 'plzwait1', 'plzwait2');
-
 // class FicheItem{
 
 //Constructeur de la classe FicheItem
 FicheItem = function( id, titre, description, actions, pr, qte ){
 	//Variables
 	this.id				= id;
-	this.obj			= $("fiche_" + this.id);
+	this.obj			= $("#fiche_" + this.id);
 	this.titre			= decodeURIComponent(titre);
 	this.description	= decodeURIComponent(description);
 	this.actions		= actions;
@@ -73,18 +68,18 @@ FicheItem = function( id, titre, description, actions, pr, qte ){
 	
 	
 	//Affecter une taille correcte à la Fiche
-	this.obj.style.zIndex = zIndexFiche;
+	this.obj.css('z-index', zIndexFiche);
 	
 	//Insérer le contenu
-	$("fiche_" + this.id + "_actions").innerHTML = this.genAction();
-	$("fiche_" + this.id + "_specs").innerHTML = this.genSpec();
-	$("fiche_" + this.id + "_nom").innerHTML = this.titre;
-	$("fiche_" + this.id + "_description").innerHTML = this.description;
+	$("#fiche_" + this.id + "_actions").html(this.genAction());
+	$("#fiche_" + this.id + "_specs").html(this.genSpec());
+	$("#fiche_" + this.id + "_nom").html(this.titre);
+	$("#fiche_" + this.id + "_description").html(this.description);
 	
 	//Calculer la hauteur
 	this.autoSize(false);
-	$("table_" + this.id).style.width	= this.width  + "px";
-}
+	$("#table_" + this.id).css({ width	: this.width  + "px" });
+};
 
 
 //Générer les specs
@@ -94,7 +89,7 @@ function FicheItem_GenSpec(){
 	msg += "Qte: <span id=\"qte_" + this.id + "\">" + this.qte + "</span><br />";
 	
 	return msg;
-}
+};
 
 //Générer les actions
 function FicheItem_GenAction(){
@@ -106,7 +101,7 @@ function FicheItem_GenAction(){
 	}
 		
 	return msg;
-}
+};
 //Modifier une action
 function FicheItem_ModifyAction(oldTech, newTech, newTxt){
 	for(var i=0;i<this.actions.length;i++){
@@ -117,8 +112,8 @@ function FicheItem_ModifyAction(oldTech, newTech, newTxt){
 		}
 	}
 	
-	$("fiche_" + this.id + "_actions").innerHTML = this.genAction();
-}
+	$("#fiche_" + this.id + "_actions").html(this.genAction());
+};
 //Effacer une action
 /*
 function FicheItem_DeleteAction(oldTech){
@@ -128,7 +123,7 @@ function FicheItem_DeleteAction(oldTech){
 			return;
 		}
 	}
-	$("fiche_" + this.id + "_specs").innerHTML = this.genSpec();
+	$("#fiche_" + this.id + "_specs").html(this.genSpec());
 }
 */
 
@@ -181,13 +176,13 @@ function FicheItem_Afficher(){
 	
 	
 	//Démarrer l'animation
-	dg.obj.style.zIndex = zIndexItemON;
+	dg.obj.css('z-index', zIndexItemON);
 	this.setTaille(0, 0);
 	this.setPosition(ficheStartPosX, ficheStartPosY);
 	this.moveResize(this.id, ficheFinalPosX, ficheFinalPosY, ficheFinalWidth, ficheFinalHeight, true, 10, 20);
 	dg.moveTo(dg.id, dgFinalPosX, dgFinalPosY, true, 10, 20);
 	
-}
+};
 
 
 
@@ -207,7 +202,7 @@ function FicheItem_Masquer(){
 		dg.moveTo(dg.id, pos1.x, pos1.y, false, 10, 20);
 		
 	}
-}
+};
 
 
 function FicheItem_MoveResize(ficheId, toX, toY, toW, toH, showContent, interval, moveSteps, firstMove) {
@@ -217,7 +212,7 @@ function FicheItem_MoveResize(ficheId, toX, toY, toW, toH, showContent, interval
 	
 	if(firstMove==null){
 		animationEnCours++;
-		fiche.obj.style.display = "";
+		fiche.obj.show();
 	}
 	
 	
@@ -240,43 +235,41 @@ function FicheItem_MoveResize(ficheId, toX, toY, toW, toH, showContent, interval
 		fiche.setPosition(toX, toY);
 		fiche.setTaille(toW, toH);
 		if (!showContent)
-			fiche.obj.style.display = "none";
+			fiche.obj.hide();
 		animationEnCours--;
 		
 	}else{
 		arrTimer['fiche'+ficheId] = setTimeout("FicheItem_MoveResize("+ficheId+", "+toX+", "+toY+", "+toW+", "+toH+", "+showContent+", "+interval+", "+moveSteps+", false)", interval);
 	}
-}
+};
 
 
 function FicheItem_AutoSize(visible){
 	
-	this.obj.style.display = "";
+	this.obj.show();
 	this.width	= FicheWidth;
-	this.height = parseInt($("table_" + this.id).offsetHeight);
+	this.height = parseInt($("#table_" + this.id).outerHeight());
 	
 	this.setTaille(this.width, this.height);
 	
 	if(!visible)
-		this.obj.style.display = "none";
+		this.obj.hide();
 	
-}
+};
 
 function FicheItem_SetPosition(x, y){
 	this.x = x;
 	this.y = y;
 	
-	this.obj.style.left	= this.x + "px";
-	this.obj.style.top	= this.y + "px";
-}
+        this.obj.css({ left: this.x + "px", top : this.y  + "px" });
+};
 
 function FicheItem_SetTaille(width, height){
 	this.width	= width;
 	this.height	= height;
 	
-	this.obj.style.width				= this.width  + "px";
-	this.obj.style.height				= this.height + "px";
-}
+	this.obj.css({ height: this.height + "px", width : this.width  + "px" });
+};
 
 
 
@@ -308,11 +301,11 @@ Item = function( id, baseDz, equipType){
 		alert("Impossible de trouver le Dz de l'item " + this.id + ", soit le dz nommé: '" + baseDz + "'");
 		
 	this.baseDz		= dzobj;
-	this.obj		= $('dg_' + this.id);
-	this.x			= null; //setté par la fonction placer
-	this.y			= null; //setté par la fonction placer
-	this.width		= parseInt(this.obj.style.width);
-	this.height		= parseInt(this.obj.style.height);
+	this.obj		= $('#dg_' + this.id);
+	this.x			= 0; //setté par la fonction placer
+	this.y			= 0; //setté par la fonction placer
+	this.width		= parseInt(this.obj.width());
+	this.height		= parseInt(this.obj.height());
 	this.equipType		= equipType;
 	
 	
@@ -323,22 +316,22 @@ Item = function( id, baseDz, equipType){
 	//Placer l'item dans son Dz de base
 	var pos1 = new centerItemIntoItem(this, this.baseDz);
 	this.setPosition(pos1.x, pos1.y);
-	this.obj.style.zIndex = zIndexItemHS;
-	$("tableimg_" + this.id).style.height = this.height + "px";
+	
+	this.obj.css('z-index', zIndexItemHS);
+	$("#tableimg_" + this.id).css({ height: this.height + "px" });
 	
 	//Placer les évènements d'écoutes
-	this.obj.observe('click', AfficherFiche);
+        this.obj.on('click', this, AfficherFiche);
 	
 	this.obj.idOnly = this.id;
-}
+};
 
 function Item_SetPosition(x, y){
 	this.x = x;
 	this.y = y;
 	
-	this.obj.style.left	= this.x + "px";
-	this.obj.style.top	= this.y + "px";
-}
+        this.obj.css({ left: this.x + "px", top : this.y  + "px" });
+};
 
 function Item_MoveTo(dgId, toX, toY, stayOnTopAfter, interval, moveSteps, firstMove) { //Fonction qui "Glisse" un objet d'un endroit vers un autre Dz
 	
@@ -364,14 +357,14 @@ function Item_MoveTo(dgId, toX, toY, stayOnTopAfter, interval, moveSteps, firstM
 		dg.setPosition(toX, toY);
 		animationEnCours--;
 		if(stayOnTopAfter)
-			dg.obj.style.zIndex = zIndexItemON;
+			dg.obj.css('z-index', zIndexItemON);
 		else
-			dg.obj.style.zIndex = zIndexItemHS;
+			dg.obj.css('z-index', zIndexItemHS);
 		
 	}else{
 		arrTimer['dg'+dgId] = setTimeout("Item_MoveTo("+ dgId+", "+toX+", "+toY+", "+stayOnTopAfter+", "+interval+", "+moveSteps+", false)", interval);
 	}
-}
+};
 
 
 //}
@@ -394,63 +387,17 @@ Dz = function( id ){
 	
 	//Variables
 	this.id			= id;
-	this.obj			= $("dz_" + this.id);
+	this.obj			= $("#dz_" + this.id);
 	this.x				= 0;	//est calculé par getPos()
 	this.y				= 0;	//est calculé par getPos()
-	this.width			= parseInt(this.obj.style.width);
-	this.height			= parseInt(this.obj.style.height);
+	this.width			= parseInt(this.obj.width());
+	this.height			= parseInt(this.obj.height());
 	
 	//Méthodes
-	this.getPos			= Dz_GetPos;
-	
-	//Calculer la position de la Dz
-	this.getPos();
-	this.obj.style.zIndex = zIndexDz;
-}
-
-function Dz_GetPos(){
-	this.x = 0;
-	this.y = 0;
-	//var buffer = "";
-	parentObj = this.obj;
-	if (parentObj.offsetParent){
-		while (parentObj.offsetParent)
-		{
-			
-			//buffer += "id=" +parentObj.id + "; class=" + parentObj.className + "; x,y=> " + parentObj.offsetLeft + ","+parentObj.offsetTop+"\n";
-			if(!idExcluded(parentObj.id)){
-				this.x += parentObj.offsetLeft
-				this.y += parentObj.offsetTop
-			}
-			parentObj = parentObj.offsetParent;
-		}
-	}else if (parentObj.x){
-		//buffer += "id=" +parentObj.id + "; class=" + parentObj.className + "; x,y=> " + parentObj.x + ","+parentObj.y+"\n";
-		if(!idExcluded(parentObj.id)){
-			this.x += parentObj.x;
-			this.y += parentObj.y;
-		}
-	}
-
-	//Appliquer les correctifs de marge
-	this.x += pageMarginX;
-	this.y += pageMarginY;
-	
-	//if(this.id==211)
-	//	alert(buffer);
-}
-
-
-//}
-
-
-function idExcluded(id){
-	for(var i=0;i<idExcludedFromPositionCalculation.length;i++)
-		if(idExcludedFromPositionCalculation[i] == id)
-			return true;
-	return false;
-}
-
+	this.getPos			= this.obj.offset();
+        
+	this.obj.css('z-index', zIndexDz);
+};
 
 
 
@@ -468,21 +415,21 @@ FindDz = function( id ){
 		if(arrDz[i].id == id)
 			return arrDz[i];
 	return null;
-}
+};
 
 FindItem = function( id ){
 	for(var i=0;i<arrItems.length;i++)
 		if(arrItems[i].id == id)
 			return arrItems[i];
 	return null;
-}
+};
 
 FindItemFiche = function( id ){
 	for(var i=0;i<arrItemFiches.length;i++)
 		if(arrItemFiches[i].id == id)
 			return arrItemFiches[i];
 	return null;
-}
+};
 
 
 
@@ -493,19 +440,20 @@ centerItemIntoItem = function(item, container){
 		alert('Param#1 n\'item pas un object');
 	if (typeof(container)!='object')
 		alert('Param#2 n\'item pas un object');
-		
-	this.x = container.x;
-	this.y = container.y;
 	
-	if (item.width<container.width) //Si l'item peut-être contenu horizontalement
-		this.x += (container.width/2)-(item.width/2);
+        var containerPos = container.obj.offset();
+	this.x = containerPos.left;
+	this.y = containerPos.top;
+	
+	if (item.obj.width()<container.obj.width()) //Si l'item peut-être contenu horizontalement
+		this.x += (container.obj.width()/2)-(item.obj.width()/2);
 		
 		
-	if (item.height<container.height) //Si l'item peut-être contenu horizontalement
-		this.y += (container.height/2)-(item.height/2);
+	if (item.obj.height()<container.obj.height()) //Si l'item peut-être contenu horizontalement
+		this.y += (container.obj.height()/2)-(item.obj.height()/2);
 		
 		
-}
+};
 
 // }
 
@@ -517,26 +465,21 @@ centerItemIntoItem = function(item, container){
 
 
 
-// CALLED METHOD. Méthode apellé par des Event Handler (elle servent d'intermédiaire afin d'éviter des fuck de 'this'
+// CALLED METHOD. Méthode apellé par l'Event Handler
 AfficherFiche = function(e){
 	if (animationEnCours!=0){
 		alert("Veuillez patienter, " + animationEnCours + " animation(s) en cours...");
 		return;
 	}
-	
-	
-	//Déterminer l'ID de l'item
-	// "target" for Mozilla, Netscape, Firefox et al. ; "srcElement" for IE
-	var id = (e["srcElement"]) ? e["srcElement"]["idOnly"] : e["target"]["idOnly"];
-	
-	
+        
+	var id = e.data.id;
 	//var arr = this.id.split(new RegExp("[_]", "g"));
 	var fiche = FindItemFiche(id);
 	if (fiche.isAffiche)
 		fiche.masquer();
 	else
 		fiche.afficher();
-}
+};
 
 //Ré-aligner tous les éléments de la page avec leurs baseDz
 ReplaceElements = function(){
@@ -553,7 +496,7 @@ ReplaceElements = function(){
 	//Masquer toutes les fiches
 	for(var i=0;i<arrItemFiches.length;i++)
 		arrItemFiches[i].masquer();
-}
+};
 
 
 
@@ -583,8 +526,8 @@ debugAllArr = function(){
 	for(var i=0;i<arrItemFiches.length;i++)
 			msg += "[" + i + "]=>\n<br />" + debugObject(arrItemFiches[i]) + "\n<br />";
 	
-	$('debug').innerHTML = msg;
-}
+	$('#debug').html(msg);
+};
 
 
 debugObject = function(obj){
@@ -596,7 +539,7 @@ debugObject = function(obj){
 	for(var i=0;i<arrK.length;i++)
 		msg += arrK[i] + " = '" + arrV[i] + "'\n<br />";
 	return msg;
-}
+};
 
 
 

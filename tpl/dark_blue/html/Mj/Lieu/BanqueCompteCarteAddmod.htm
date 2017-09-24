@@ -3,7 +3,7 @@ function rand(min, max){
 	return Math.floor(Math.random()*(max-min))+1;
 }
 function BuildNoCompte(){
-	$('no_compte').innerHTML = $F('carte_banque') + "-" + $F('carte_compte');
+	$('#no_compte').html($('#carte_banque').val() + "-" + $('#carte_compte').val());
 }
 </script>
 

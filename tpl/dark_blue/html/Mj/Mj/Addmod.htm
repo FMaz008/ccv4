@@ -2,18 +2,20 @@
 	function Changer_Compte(){
 		var compte=prompt('À quel compte souhaitez-vous associer cet accès MJ ?','');
 		if(compte!=""){
-			var myAjax = new Ajax.Updater(
-				'div_compte', 
-				'?mj=Search&popup=1', 
-				{
-					method: 'post', 
-					parameters: 'searchWhat=p_modifier_compte&search='+compte
-				});
+                        $.ajax({
+                            url:'?mj=Search&popup=1',
+                            method: 'post',
+                            data: 'searchWhat=p_modifier_compte&search='+compte, 
+                            dataType: "html",
+                            success: function (data) {
+                                $('#div_compte').html(data);
+                            }
+                        });
 		}
 	}
 	
 	function Changer_Compte2(id, compte){
-		$('div_compte').innerHTML = compte+' (<a href="#" onclick="Changer_Compte();">Changer</a>)\n<input type="hidden" name="userId" value="'+id+'" />';
+		$('#div_compte').html(compte+' (<a href="#" onclick="Changer_Compte();">Changer</a>)\n<input type="hidden" name="userId" value="'+id+'" />');
 	}
 </script>
 

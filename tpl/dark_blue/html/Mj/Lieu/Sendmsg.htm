@@ -1,23 +1,22 @@
 <script type="text/javascript">
 //<!--
 	var arrLieux = Array();
-	var tmp_type;
 	gosearch = function (type)
 	{
-		tmp_type = type;
-		var myAjax = new Ajax.Request(
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat='+type+'&search='+$(type).search.value,
-				onComplete: gosearch_confirm
-			});
+                $.ajax({
+                    url:'?mj=Search&popup=1',
+                    method: 'post',
+                    data: 'searchWhat='+type+'&search='+$(type).search.value, 
+                    dataType: "html",
+                    success: function (data) {
+                        gosearch_confirm(data);
+                    }
+                });
 	}
 	
-	gosearch_confirm = function (originalRequest)
+	gosearch_confirm = function (rval)
 	{
-		var rval= originalRequest.responseText;
-		$("lieu_results").innerHTML = rval;
+		$("lieu_results").html(rval);
 	}
 	
 	
@@ -101,7 +100,7 @@
 				val = arrLieux[i];
 			else
 				val += "," + arrLieux[i];
-		$('arrLieux').value = val;
+		$('#arrLieux').val(val);
 	}
 	
 	

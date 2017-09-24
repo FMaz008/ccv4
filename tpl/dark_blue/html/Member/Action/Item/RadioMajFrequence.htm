@@ -11,7 +11,7 @@
 		</tr>	
 		<tr>
 			<td class="send" colspan="2">
-				<input type="button" class="button" onclick="saveFreq('frequence=' + escape($F('frequence')) + '&idradio=<?php echo $radio->getInvId(); ?>&post=1')" value="Enregistrer" />
+				<input type="button" class="button" onclick="saveFreq('frequence=' + escape($('#frequence').val()) + '&idradio=<?php echo $radio->getInvId(); ?>&post=1')" value="Enregistrer" />
 			</td>
 		</tr>
 	</table>

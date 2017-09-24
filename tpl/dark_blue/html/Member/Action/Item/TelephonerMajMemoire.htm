@@ -26,7 +26,7 @@
 				<input type="text" class="text" name="no_<?php echo $i;?>" id="no_<?php echo $i;?>" value="<?php echo $mem[1];?>" maxlength="8" size="8"/>
 			</td>
 			<td class="value">
-				<span class="fakelink" onclick="$('numero_destinataire').value=$F('no_<?php echo $i;?>');">Composer</span>
+				<span class="fakelink" onclick="$('#numero_destinataire').val($('#no_<?php echo $i;?>').val());">Composer</span>
 			</td>
 		</tr>
 		<?php
@@ -40,8 +40,8 @@
 																				$z=0;
 																				while($z < $telephone->getMemorySizeMax()) 
 																				{
-																					?>'nom_<?php echo $z;?>=' + encodeURIComponent($F('nom_<?php echo $z;?>')) +<?php
-																					?>'&no_<?php echo $z;?>=' + encodeURIComponent($F('no_<?php echo $z;?>')) + '&' +<?php
+																					?>'nom_<?php echo $z;?>=' + encodeURIComponent($('#nom_<?php echo $z;?>').val()) +<?php
+																					?>'&no_<?php echo $z;?>=' + encodeURIComponent($('#no_<?php echo $z;?>').val()) + '&' +<?php
 																					$z++;
 																				}?>'idtelephone=<?php echo $telephone->getInvId(); ?>&post=1')<?php
 																?>" value="Enregistrer" class="button" name="submit"/>

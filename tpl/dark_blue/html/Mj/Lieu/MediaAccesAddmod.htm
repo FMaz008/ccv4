@@ -3,17 +3,19 @@
 	function Changer_Lieu(){
 		var lieu=prompt('Dans quel lieu souhaitez-vous ajouter l\'accès média ? (Nom technique)','');
 		if(lieu!=""){
-			var myAjax = new Ajax.Updater(
-				'div_lieu', 
-				'?mj=Search&popup=1', 
-				{
-					method: 'post', 
-					parameters: 'searchWhat=p_modifier_lieu&search='+lieu
-				});
+                        $.ajax({
+                            url:'?mj=Search&popup=1',
+                            method: 'post',
+                            data: 'searchWhat=p_modifier_lieu&search='+lieu, 
+                            dataType: "html",
+                            success: function (data) {
+                                $('#div_lieu').html(data);
+                            }
+                        });
 		}
 	}
 	function Changer_Lieu2(lieu){
-		$('div_lieu').innerHTML = lieu+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="lieuId" value="'+lieu+'" />';
+		$('#div_lieu').html(lieu+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="lieuId" value="'+lieu+'" />');
 	}
 //-->
 </script>

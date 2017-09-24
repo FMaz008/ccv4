@@ -29,18 +29,19 @@ var tmp_dbid;
 locate = function(id)
 {
 	tmp_dbid = id;
-	var myAjax = new Ajax.Request(
-		'?mj=Search&popup=1', 
-		{
-			method: 'post', 
-			parameters: 'searchWhat=item_locate_by_dbId&db_id='+id,
-			onComplete: locate_completed
-		});
+        $.ajax({
+            url:'?mj=Search&popup=1',
+            method: 'post',
+            data: 'searchWhat=item_locate_by_dbId&db_id='+id, 
+            dataType: "html",
+            success: function (data) {
+                locate_completed(data);
+            }
+        });
 }
 
-locate_completed = function(originalRequest)
+locate_completed = function(rval)
 {
-	var rval= originalRequest.responseText;
-	$('locateTd_'+tmp_dbid).innerHTML = rval;
-	$('locateTr_'+tmp_dbid).style.display="table-row";
+	$('locateTd_'+tmp_dbid).html(rval);
+	$('locateTr_'+tmp_dbid).css({ display: "table-row" });
 }

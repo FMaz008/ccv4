@@ -2,7 +2,7 @@
 //<!--
 	validate = function(){
 		
-		if($F('page_titre')==""){
+		if($('#page_titre').val()==""){
 			alert('Vous devez entrer un titre.');
 			return false;
 		}
@@ -10,50 +10,44 @@
 		
 		//Requête AJAX pour Creer la page
 		showplzwait();
-		var myAjax = new Ajax.Request(
-				'?popup=1&m=Action_Item_SitePageadd', 
-				{
-					method: 'post', 
-					parameters: 'titre='+encodeURIComponent($F('page_titre'))+
-								'&content='+encodeURIComponent($F('page_content'))+
-								'&url=<?php echo $SITE->getUrl();?>'+
-								'&user='+$F('header_user')+
-								'&pass='+$F('header_pass')+
-								'&acces='+$('acces').checked+
-								'&showIndex='+$('showIndex').checked, 
-					onComplete: operation_confirm,
-					onFailure: fail
-				});
+                $.ajax({
+                    url: '?popup=1&m=Action_Item_SitePageadd',
+                    method: 'post',
+                    data: 'titre='+encodeURIComponent($('#page_titre').val())+
+                            '&content='+encodeURIComponent($('#page_content').val())+
+                            '&url=<?php echo $SITE->getUrl();?>'+
+                            '&user='+$('#header_user').val()+
+                            '&pass='+$('#header_pass').val()+
+                            '&acces='+$('#acces').prop("checked")+
+                            '&showIndex='+$('#showIndex').prop("checked"),
+                    dataType: "html",
+                    success: function (data) {
+                        operation_confirm(data);
+                    }
+                });
 		return false;
 	}
 
-	//Fonction générales
-	fail = function(){
-		$('request_msg').style.display="block";
-		$('request_msgtxt').innerHTML="La requête &agrave; échouée, veuillez ré-essayer plus tard.";
-	}
-
 	showplzwait = function(){
-		$('plzwait1').style.display="block";
-		$('plzwait2').style.display="block";
-		$('request_msgtxt').innerHTML="Veuillez patienter...";
-		$('request_msg').style.display="none";
+		$('#plzwait1').css({ display: "block" });
+		$('#plzwait2').css({ display: "block" });
+		$('#request_msgtxt').html("Veuillez patienter...");
+		$('#request_msg').css({ display: "none" });
 	}
 	hideplzwait = function(){
-		$('plzwait1').style.display="none";
-		$('plzwait2').style.display="none";
+		$('#plzwait1').css({ display: "none" });
+		$('#plzwait2').css({ display: "none" });
 	}
-	operation_confirm = function(originalRequest){
+	operation_confirm = function(rval){
 		
-		var rval= originalRequest.responseText;
 		var params=rval.split("|");
 		if (params[0]=="OK"){
 			hideplzwait();
-			$('perso_pa').innerHTML=params[1];
+			$('#perso_pa').html(params[1]);
 			goTo(params[2]);
 		}else{
-			$('request_msg').style.display="block";
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+			$('#request_msg').css({ display: "block" });
+			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}
 //-->

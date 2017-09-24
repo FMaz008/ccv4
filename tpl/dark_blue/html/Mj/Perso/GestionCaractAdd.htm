@@ -1,20 +1,21 @@
 <script type="text/javascript">
 var nbr_ajout=0;
 AjouterIncompatible = function(){
-	var myAjax = new Ajax.Request(
-		'?mj=Perso_GestionCaractIncompatible&popup=1', 
-		{
-			method: 'post', 
-			parameters: 'divid='+ (nbr_ajout+1),
-			onComplete: AjouterIncompatible_completed
-		});
+        $.ajax({
+            url:'?mj=Perso_GestionCaractIncompatible&popup=1',
+            method: 'post',
+            data: 'divid='+ (nbr_ajout+1), 
+            dataType: "html",
+            success: function (data) {
+                AjouterIncompatible_completed(data);
+            }
+        });
 }
 
-AjouterIncompatible_completed = function(originalRequest){
-	var rval= originalRequest.responseText;
-	$('add_incompatible_'+nbr_ajout).innerHTML = rval;
+AjouterIncompatible_completed = function(rval){
+	$('add_incompatible_'+nbr_ajout).html(rval);
 	nbr_ajout++; //Augmenter le total en cas de plusieurs ajouts
-	$('total_incompatible_add').value = nbr_ajout;
+	$('#total_incompatible_add').val(nbr_ajout);
 	
 }
 </script>

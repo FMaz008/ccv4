@@ -5,20 +5,21 @@ imgpreviewgo = function(){
 
 var nbr_action_ajout=0;
 AjouterAction = function(){
-	var myAjax = new Ajax.Request(
-		'?mj=Item_AddActionpage&popup=1', 
-		{
-			method: 'post', 
-			parameters: 'divid='+ (nbr_action_ajout+1) + '&db_id=<?php echo $ITEM['db_id'];?>',
-			onComplete: AjouterAction_completed
-		});
+        $.ajax({
+            url:'?mj=Item_AddActionpage&popup=1',
+            method: 'post',
+            data: 'divid='+ (nbr_action_ajout+1) + '&db_id=<?php echo $ITEM['db_id'];?>', 
+            dataType: "html",
+            success: function (data) {
+                AjouterAction_completed(data);
+            }
+        });
 }
 
-AjouterAction_completed = function(originalRequest){
-	var rval= originalRequest.responseText;
-	$('add_action_'+nbr_action_ajout).innerHTML = rval;
+AjouterAction_completed = function(rval){
+	$('add_action_'+nbr_action_ajout).html(rval);
 	nbr_action_ajout++; //Augmenter le total en cas de plusieurs ajouts
-	$('total_action_add').value = nbr_action_ajout;
+	$('#total_action_add').val(nbr_action_ajout);
 	
 }
 </script>

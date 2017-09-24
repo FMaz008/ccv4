@@ -49,8 +49,8 @@ if(count($PPA)>1) {
 		<div class="clearboth"></div>
 		
 		<div class="send">
-			<input type="submit" class="button" name="reply" value="Envoyer la réponse" onclick="$('form_action').value='reply';" />
-			<input type="submit" class="button" name="close" value="Fermer le ticket"  onclick="$('form_action').value='del';return confirm('Fermer le ticket?');" />
+			<input type="submit" class="button" name="reply" value="Envoyer la réponse" onclick="$('#form_action').val('reply');" />
+			<input type="submit" class="button" name="close" value="Fermer le ticket"  onclick="$('#form_action').val('del';return confirm('Fermer le ticket?'));" />
 		</div>
 	</div>
 <?php }else{ ?>

@@ -1,200 +1,190 @@
 <script type="text/javascript">
 checkradio = function(id) {
-	var laCase = $("r"+id);
-	if(laCase!=undefined && laCase.disabled==false)
+	var laCase = $("#r"+id);
+	if(laCase!=undefined && laCase.prop("disabled")==false)
 	{
 		laCase.checked=1;
 		return false;
 	}
 }
 
-showPannel = function(what)
-{
-	$('deplacement').style.display = "none";
-	$('frapperPorte').style.display = "none";
-	$('bdeplacement').className = "ongletOff";
-	$('bfrapperPorte').className = "ongletOff";
-	
-	$(what).style.display = "block";
-	$('b' + what).className="ongletOn";
-}
 </script>
 
-	<div class="member_contactMj_topMenu">
-		<div id="bdeplacement" class="ongletOn" onclick="showPannel('deplacement');"><span>Déplacement</span></div>
-		<div id="bfrapperPorte" class="ongletOff" onclick="showPannel('frapperPorte');" style="width:200px;"><span>Frapper à une porte</span></div>
-	</div>
-	<div class="clearboth"></div>
+	
 		
+<div id="tabs-deplacement">
+    <ul>
+        <li><a href="#tab-deplacement-1">Déplacement</a></li>
+        <li><a href="#tab-deplacement-2">Frapper à une porte</a></li>
+    </ul>
 
-	<div id="deplacement" class="Member_Action_Perso_Deplacement" style="display:none;">
-		<form id="action_deplacement" method="post" action="?popup=1&m=Action_Perso_Deplacement2" onsubmit="return ajaxSubmitForm(this);">
-			<table class="tbl_center">
-			<tr>
-				<td class="title" colspan="7">Lieux accessibles</td>
-			</tr>
-			<tr>
-				<td class="name">&nbsp;</td>
-				<td class="name">&nbsp;</td>
-				<td class="name" colspan="2">Lieu</td>
-				<td class="name" style="width:20%;">Protection</td>
-				<td class="name" style="width:10%;">PA</td>
-				<td class="name" style="width:10%;">Coût</td>
-			</tr>
-			<?php foreach ($LIEUX as $lieu) {?>
-				<tr>
-				<td class="value" style="width:5%;">
-					<?php
-					if($lieu->isAccessible())
-					{
-						?>
-						<input type="radio" name="moveto" value="<?php echo $lieu->getId();?>" id="r<?php echo $lieu->getId();?>" />
-						<?php
-					}
-					?>
-				</td>
-				<td class="value" style="width:5%;">
-					<?php if ($lieu->getIcon()!=null){?>
-						<img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/deplacements/<?php echo $lieu->getIcon();?>" />
-					<?php } ?>
-				</td>
-				
-				<td class="value" colspan="2">
-					<a onclick="checkradio('<?php echo $lieu->getId();?>');" style="text-decoration:none;">
-						<?php echo $lieu->getNom();?>
-					</a>
-				</td>
-				<td class="value"><?php echo $lieu->getProtectionTxt();?></td>
-				<td class="value"><?php echo $lieu->getPa();?></td>
-				<td class="value"><?php echo $lieu->getCout();?><?php echo $GAME_DEVISE;?></td>
-			</tr>		
-			<?php } ?>
-	
-	
-			<tr>
-				<td colspan="7" class="name">Options</td>
-			</tr>
-			<tr>
-				<td colspan="3" class="value" style="text-align:left;vertical-align:top;">
-					<div style="">
-						<strong>Tenir la porte &agrave; (+0 pa/chq)</strong><br />
-						<?php foreach ($PERSOS as $perso) {?>
-							<input type="checkbox" name="t_<?php echo $perso->getId();?>" />
-							<?php if ($perso->getSexe()=='m'){?>
-								<span id="perso_<?php echo $perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
-							<?php }else{?>
-								<span id="perso_<?php echo $perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
-							<?php }?>
-								<?php echo $perso->getNom();?>
-							</span>
-							<div class="infobulle" id="ib_perso_<?php echo $perso->getId();?>" style="width:300px;">
-								<div class="title">Infos</div>
-								<?php if ($perso->getAvatar()!='') {?>
-									<img class="imgbg" align="left" src="<?php echo $perso->getAvatar();?>" />
-								<?php } ?>
-								<?php echo $perso->getDescription();?>
-							</div>
-							<br />
-						<?php } ?>
-					</div>
-				
-					<div style="margin-top:15px;">
-						<strong>Forcer quelqu'un à entrer avec soi (+10 pa/chq)</strong><br />
-						<?php foreach ($PERSOS_DEPLACABLE as $perso) {?>
-							<input type="checkbox" name="f_<?php echo $perso->getId();?>" />
-							<?php if ($perso->getSexe()=='m'){?>
-								<span id="perso2_<?php echo $perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
-							<?php }else{?>
-								<span id="perso2_<?php echo $perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
-							<?php }?>
-								<?php echo $perso->getNom();?>
-							</span>
-							<div class="infobulle" id="ib_perso2_<?php echo $perso->getId();?>" style="width:300px;">
-								<div class="title">Infos</div>
-								<?php if ($perso->getAvatar()!='') {?>
-									<img class="imgbg" align="left" src="<?php echo $perso->getAvatar();?>" />
-								<?php } ?>
-								<?php echo $perso->getDescription();?>
-							</div>
-							<br />
-						<?php } ?>
-					</div>
-				</td>
-				<td colspan="4" class="value" style="text-align:left;vertical-align:top;">
-					<input type="radio" name="RAD_typeaction" value="deplacer" CHECKED />Se d&eacute;placer (et tenir la porte si n&eacute;cessaire)<br />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						... <input type="checkbox" name="CHK_furtif" /> Furtivement (+10 pa)<br />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						... <input type="checkbox" name="CHK_keepcurrentaction" /> Conserver l'action imm&eacute;diate<br />
-					<input type="radio" name="RAD_typeaction" value="tenirporte" />Uniquement tenir la porte (ne pas se d&eacute;placer)<br />
-				</td>
-			</tr>
-			<tr>
-				<td class="send" colspan="7">
-					<input type="submit" class="button" value="Se d&eacute;placer" />
-				</td>
-			</tr>
-			</table>
-		</form>
-	</div>
+    <div id="tab-deplacement-1">
+        <form id="action_deplacement" method="post" action="?popup=1&m=Action_Perso_Deplacement2" onsubmit="return ajaxSubmitForm(this);">
+                <table class="tbl_center">
+                <tr>
+                        <td class="title" colspan="7">Lieux accessibles</td>
+                </tr>
+                <tr>
+                        <td class="name">&nbsp;</td>
+                        <td class="name">&nbsp;</td>
+                        <td class="name" colspan="2">Lieu</td>
+                        <td class="name" style="width:20%;">Protection</td>
+                        <td class="name" style="width:10%;">PA</td>
+                        <td class="name" style="width:10%;">Coût</td>
+                </tr>
+                <?php foreach ($LIEUX as $lieu) {?>
+                        <tr>
+                        <td class="value" style="width:5%;">
+                                <?php
+                                if($lieu->isAccessible())
+                                {
+                                        ?>
+                                        <input type="radio" name="moveto" value="<?php echo $lieu->getId();?>" id="r<?php echo $lieu->getId();?>" />
+                                        <?php
+                                }
+                                ?>
+                        </td>
+                        <td class="value" style="width:5%;">
+                                <?php if ($lieu->getIcon()!=null){?>
+                                        <img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/deplacements/<?php echo $lieu->getIcon();?>" />
+                                <?php } ?>
+                        </td>
 
-	<div id="frapperPorte" class="Member_Action_Perso_Deplacement" style="display:none;">
-		<form id="action_frapper_porte" method="post" action="?popup=1&m=Action_Perso_FrapperPorte" onsubmit="return ajaxSubmitForm(this);">
-			<table class="tbl_center">
-			<tr>
-				<td class="title" colspan="7">Portes accessibles</td>
-			</tr>
-			<tr>
-				<td class="name">&nbsp;</td>
-				<td class="name">&nbsp;</td>
-				<td class="name" colspan="5">Lieu</td>
-			</tr>
-				<?php foreach ($LIEUX as $lieu) {
-					if($lieu->getDimension()!='TC' || $perso->getLieu()->getDimension()!='TC'){?>
-						<tr>
-							<td class="value" style="width:5%;">
-								<input type="radio" name="frapto" value="<?php echo $lieu->getId();?>" id="r<?php echo $lieu->getId();?>" <?php if(!$lieu->isAccessible()){ echo 'DISABLED '; } ?>/>
-							</td>
-							<td class="value" style="width:5%;">
-								<?php if ($lieu->getIcon()!=null){?>
-									<img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/deplacements/<?php echo $lieu->getIcon();?>" />
-								<?php } ?>
-							</td>
-				
-							<td class="value" colspan="2">
-								<a href="#" onclick="checkradio('<?php echo $lieu->getId();?>');" style="text-decoration:none;">
-									<?php echo $lieu->getNom();?>
-								</a>
-							</td>
-						</tr>		
-					<?php } 
-				} ?>
-			<tr>
-				<td class="name" colspan="7">
-					Message : 
-				</td>
-			</tr>
-			<tr>
-				<td class="value" colspan="7">
-					<textarea name="msg" style="width:98%;height:200px;"></textarea>
-				</td>
-			<tr>
-				<td class="name" colspan="7">
-					<center>Coût en PA : 0 pa.</center>
-				</td>
-			</tr>
-			<tr>
-				<td class="send" colspan="7">
-					<input type="submit" class="button" value="Frapper &agrave; la porte" />
-				</td>
-			</tr>
-			</table>
-		</form>
-				
-	</div>
-	
+                        <td class="value" colspan="2">
+                                <a onclick="checkradio('<?php echo $lieu->getId();?>');" style="text-decoration:none;">
+                                        <?php echo $lieu->getNom();?>
+                                </a>
+                        </td>
+                        <td class="value"><?php echo $lieu->getProtectionTxt();?></td>
+                        <td class="value"><?php echo $lieu->getPa();?></td>
+                        <td class="value"><?php echo $lieu->getCout();?><?php echo $GAME_DEVISE;?></td>
+                </tr>		
+                <?php } ?>
+
+
+                <tr>
+                        <td colspan="7" class="name">Options</td>
+                </tr>
+                <tr>
+                        <td colspan="3" class="value" style="text-align:left;vertical-align:top;">
+                                <div style="">
+                                        <strong>Tenir la porte &agrave; (+0 pa/chq)</strong><br />
+                                        <?php foreach ($PERSOS as $perso) {?>
+                                                <input type="checkbox" name="t_<?php echo $perso->getId();?>" />
+                                                <?php if ($perso->getSexe()=='m'){?>
+                                                        <span id="perso_<?php echo $perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+                                                <?php }else{?>
+                                                        <span id="perso_<?php echo $perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+                                                <?php }?>
+                                                        <?php echo $perso->getNom();?>
+                                                </span>
+                                                <div class="infobulle" id="ib_perso_<?php echo $perso->getId();?>" style="width:300px;">
+                                                        <div class="title">Infos</div>
+                                                        <?php if ($perso->getAvatar()!='') {?>
+                                                                <img class="imgbg" align="left" src="<?php echo $perso->getAvatar();?>" />
+                                                        <?php } ?>
+                                                        <?php echo $perso->getDescription();?>
+                                                </div>
+                                                <br />
+                                        <?php } ?>
+                                </div>
+
+                                <div style="margin-top:15px;">
+                                        <strong>Forcer quelqu'un à entrer avec soi (+10 pa/chq)</strong><br />
+                                        <?php foreach ($PERSOS_DEPLACABLE as $perso) {?>
+                                                <input type="checkbox" name="f_<?php echo $perso->getId();?>" />
+                                                <?php if ($perso->getSexe()=='m'){?>
+                                                        <span id="perso2_<?php echo $perso->getId();?>" class="txtStyle_homme" onmousemove="infobulle(this, event);">
+                                                <?php }else{?>
+                                                        <span id="perso2_<?php echo $perso->getId();?>" class="txtStyle_femme" onmousemove="infobulle(this, event);">
+                                                <?php }?>
+                                                        <?php echo $perso->getNom();?>
+                                                </span>
+                                                <div class="infobulle" id="ib_perso2_<?php echo $perso->getId();?>" style="width:300px;">
+                                                        <div class="title">Infos</div>
+                                                        <?php if ($perso->getAvatar()!='') {?>
+                                                                <img class="imgbg" align="left" src="<?php echo $perso->getAvatar();?>" />
+                                                        <?php } ?>
+                                                        <?php echo $perso->getDescription();?>
+                                                </div>
+                                                <br />
+                                        <?php } ?>
+                                </div>
+                        </td>
+                        <td colspan="4" class="value" style="text-align:left;vertical-align:top;">
+                                <input type="radio" name="RAD_typeaction" value="deplacer" CHECKED />Se d&eacute;placer (et tenir la porte si n&eacute;cessaire)<br />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        ... <input type="checkbox" name="CHK_furtif" /> Furtivement (+10 pa)<br />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        ... <input type="checkbox" name="CHK_keepcurrentaction" /> Conserver l'action imm&eacute;diate<br />
+                                <input type="radio" name="RAD_typeaction" value="tenirporte" />Uniquement tenir la porte (ne pas se d&eacute;placer)<br />
+                        </td>
+                </tr>
+                <tr>
+                        <td class="send" colspan="7">
+                                <input type="submit" class="button" value="Se d&eacute;placer" />
+                        </td>
+                </tr>
+                </table>
+        </form>
+    </div>
+
+    <div id="tab-deplacement-2">
+        <form id="action_frapper_porte" method="post" action="?popup=1&m=Action_Perso_FrapperPorte" onsubmit="return ajaxSubmitForm(this);">
+                <table class="tbl_center">
+                <tr>
+                        <td class="title" colspan="7">Portes accessibles</td>
+                </tr>
+                <tr>
+                        <td class="name">&nbsp;</td>
+                        <td class="name">&nbsp;</td>
+                        <td class="name" colspan="5">Lieu</td>
+                </tr>
+                        <?php foreach ($LIEUX as $lieu) {
+                                if($lieu->getDimension()!='TC' || $perso->getLieu()->getDimension()!='TC'){?>
+                                        <tr>
+                                                <td class="value" style="width:5%;">
+                                                        <input type="radio" name="frapto" value="<?php echo $lieu->getId();?>" id="r<?php echo $lieu->getId();?>" <?php if(!$lieu->isAccessible()){ echo 'DISABLED '; } ?>/>
+                                                </td>
+                                                <td class="value" style="width:5%;">
+                                                        <?php if ($lieu->getIcon()!=null){?>
+                                                                <img src="<?php echo $SKIN_VIRTUAL_PATH;?>../_common/deplacements/<?php echo $lieu->getIcon();?>" />
+                                                        <?php } ?>
+                                                </td>
+
+                                                <td class="value" colspan="2">
+                                                        <a href="#" onclick="checkradio('<?php echo $lieu->getId();?>');" style="text-decoration:none;">
+                                                                <?php echo $lieu->getNom();?>
+                                                        </a>
+                                                </td>
+                                        </tr>		
+                                <?php } 
+                        } ?>
+                <tr>
+                        <td class="name" colspan="7">
+                                Message : 
+                        </td>
+                </tr>
+                <tr>
+                        <td class="value" colspan="7">
+                                <textarea name="msg" style="width:98%;height:200px;"></textarea>
+                        </td>
+                <tr>
+                        <td class="name" colspan="7">
+                                <center>Coût en PA : 0 pa.</center>
+                        </td>
+                </tr>
+                <tr>
+                        <td class="send" colspan="7">
+                                <input type="submit" class="button" value="Frapper &agrave; la porte" />
+                        </td>
+                </tr>
+                </table>
+        </form>
+    </div>
+</div>
+
+
 <script type="text/javascript">
-//<!--
-	showPannel('deplacement');
-//-->
+    $('#tabs-deplacement').tabs({});
 </script>

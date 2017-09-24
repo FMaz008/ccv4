@@ -6,26 +6,27 @@ imgpreviewgo = function(){
 
 var nbr_action_ajout=0;
 AjouterAction = function(){
-	var myAjax = new Ajax.Request(
-		'?mj=Item_AddActionpage&popup=1', 
-		{
-			method: 'post', 
-			parameters: 'divid='+ (nbr_action_ajout+1) + '&db_id=<?php echo $ITEM['db_id'];?>',
-			onComplete: AjouterAction_completed
-		});
+        $.ajax({
+            url:'?mj=Item_AddActionpage&popup=1',
+            method: 'post',
+            data: 'divid='+ (nbr_action_ajout+1) + '&db_id=<?php echo $ITEM['db_id'];?>', 
+            dataType: "html",
+            success: function (data) {
+                AjouterAction_completed(data);
+            }
+        });
 }
 
-AjouterAction_completed = function(originalRequest){
-	var rval= originalRequest.responseText;
-	$('add_action_'+nbr_action_ajout).innerHTML = rval;
+AjouterAction_completed = function(rval){
+	$('add_action_'+nbr_action_ajout).html(rval);
 	nbr_action_ajout++; //Augmenter le total en cas de plusieurs ajouts
-	$('total_action_add').value = nbr_action_ajout;
+	$('#total_action_add').val(nbr_action_ajout);
 	
 }
 
 changeType = function(){
 	
-	switch($('db_soustype').value){
+	switch($('#db_soustype').value){
 		case 'arme_feu':
 			showHideTR('precision', true);
 			showHideTR('tir_par_tour', true);
@@ -76,38 +77,39 @@ showHideTR = function(trId, showHide){
 	
 	if (showHide == true)
 	{
-		$(trId).style.display = "table-row";
-		if(trId=='precision')		$('db_' + trId).value="<?php echo $ITEM['db_precision'];?>";
-		if(trId=='tir_par_tour')	$('db_' + trId).value="<?php echo $ITEM['db_tir_par_tour'];?>";
-		if(trId=='capacite')		$('db_' + trId).value="<?php echo $ITEM['db_capacite'];?>";
+		$("#"+trId).show();
+		if(trId=='precision')		$('#db_' + trId).val("<?php echo $ITEM['db_precision'];?>");
+		if(trId=='tir_par_tour')	$('#db_' + trId).val("<?php echo $ITEM['db_tir_par_tour'];?>");
+		if(trId=='capacite')		$('#db_' + trId).val("<?php echo $ITEM['db_capacite'];?>");
 	}
 	else
 	{
-		$(trId).style.display = "none";
+		$("#"+trId).hide();
 		
-		if(trId=='precision')		$('db_' + trId).value="";
-		if(trId=='tir_par_tour')	$('db_' + trId).value="";
-		if(trId=='capacite')		$('db_' + trId).value="";
+		if(trId=='precision')		$('#db_' + trId).val("");
+		if(trId=='tir_par_tour')	$('#db_' + trId).val("");
+		if(trId=='capacite')		$('#db_' + trId).val("");
 		
 	}
 }
 
 var nbr_munition_ajout=0;
 AjouterMunition = function(){
-	var myAjax = new Ajax.Request(
-		'?mj=Item_MunitionAddAjax&popup=1', 
-		{
-			method: 'post', 
-			parameters: 'divid='+ (nbr_munition_ajout+1) + '&db_id=<?php echo $ITEM['db_id'];?>',
-			onComplete: AjouterMunition_completed
-		});
+        $.ajax({
+            url:'?mj=Item_MunitionAddAjax&popup=1',
+            method: 'post',
+            data: 'divid='+ (nbr_munition_ajout+1) + '&db_id=<?php echo $ITEM['db_id'];?>', 
+            dataType: "html",
+            success: function (data) {
+                AjouterMunition_completed(data);
+            }
+        });
 }
 
-AjouterMunition_completed = function(originalRequest){
-	var rval= originalRequest.responseText;
-	$('add_munition_'+nbr_munition_ajout).innerHTML = rval;
+AjouterMunition_completed = function(rval){
+	$('#add_munition_'+nbr_munition_ajout).html(rval);
 	nbr_munition_ajout++; //Augmenter le total en cas de plusieurs ajouts
-	$('total_munition_add').value = nbr_munition_ajout;
+	$('#total_munition_add').val(nbr_munition_ajout);
 	
 }
 //-->

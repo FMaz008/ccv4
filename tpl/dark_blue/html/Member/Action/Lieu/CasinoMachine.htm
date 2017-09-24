@@ -2,27 +2,26 @@
 //<!--
 	go = function()
 	{
-		var myAjax = new Ajax.Request(
-			'?m=Action_Lieu_CasinoGame&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'game=machine',
-				onComplete: go_confirm
-			}
-		);
+                $.ajax({
+                    url:'?m=Action_Lieu_CasinoGame&popup=1',
+                    method: 'post',
+                    data: 'game=machine', 
+                    dataType: "html",
+                    success: function (data) {
+                        go_confirm(data);
+                    }
+                });
 	}
 	
-	go_confirm = function(originalRequest)
+	go_confirm = function(rval)
 	{
-		
-		var rval= originalRequest.responseText;
 		var params=rval.split("|");
-		$('result_a').innerHTML = params[1];
-		$('result_b').innerHTML = params[2];
-		$('result_c').innerHTML = params[3];
-		$('msg').innerHTML = params[4];
-		$('perso_cash').innerHTML=params[5];
-		$('perso_pa').innerHTML=params[6];
+		$('#result_a').html(params[1]);
+		$('#result_b').html(params[2]);
+		$('#result_c').html(params[3]);
+		$('#msg').html(params[4]);
+		$('#perso_cash').html(params[5]);
+		$('#perso_pa').html(params[6]);
 	}
 	
 //-->

@@ -74,7 +74,7 @@
 	
 				<td class="value"> Membre Plus :</td>
 				<td class="value"> 
-					<select size="1" id="mp" name="mp" onchange="$('mp_tr').style.display= ($F('mp')==0) ? 'none' : 'table-row';">
+					<select size="1" id="mp" name="mp" onchange="$('#mp_tr').css({ display: ($('#mp').val()==0) ? 'none' : 'table-row' });">
 					<option value="0" <?php if($ACC['mp']=='0'){echo "selected";}?>>Membre de BASE</option>
 					<option value="1" <?php if($ACC['mp']=='1'){echo "selected";}?>>Membre PLUS niveau 1</option>
 					<option value="2" <?php if($ACC['mp']=='2'){echo "selected";}?>>Membre PLUS niveau 2</option>

@@ -4,22 +4,23 @@ var nbr_ajout=0;
 var qte_ajout=0;
 AjouterLien = function(qte){
 	qte_ajout=qte; // Redondance ?
-	$('add_lien').style.display='block';
+	$('#add_lien').show();
 	
-	var myAjax = new Ajax.Request(
-		'?mj=Lieu_ModAddlien&popup=1', 
-		{
-			method: 'post', 
-			parameters: 'divid='+ (nbr_ajout+1) + '&lieu_tech=' + $F('nom_technique'),
-			onComplete: AjouterLien_completed
-		});
+        $.ajax({
+            url:'?mj=Lieu_ModAddlien&popup=1',
+            method: 'post',
+            data: 'divid='+ (nbr_ajout+1) + '&lieu_tech=' + $('#nom_technique').val(), 
+            dataType: "html",
+            success: function (data) {
+                AjouterLien_completed(data);
+            }
+        });
 }
 
-AjouterLien_completed = function(originalRequest){
-	var rval= originalRequest.responseText;
-	$('add_'+nbr_ajout).innerHTML = rval;
+AjouterLien_completed = function(data){
+	$('add_'+nbr_ajout).html(rval);
 	nbr_ajout++; //Augmenter le total en cas de plusieurs ajouts
-	$('total_add').value = nbr_ajout;
+	$('#total_add').val(nbr_ajout);
 	
 	qte_ajout--; //Décrémenter la quantité à ajouté de CET ajout
 	if (qte_ajout>0){
@@ -28,8 +29,8 @@ AjouterLien_completed = function(originalRequest){
 }
 
 ClearAjouterLien = function(){
-	$('add_lien').style.display='none';
-	$('add_0').innerHTML='';
+	$('#add_lien').hide();
+	$('#add_0').html("''");
 	nbr_ajout=0;
 }
 
@@ -38,20 +39,21 @@ ClearAjouterLien = function(){
 
 var nbr_action_ajout=0;
 AjouterAction = function(){
-	var myAjax = new Ajax.Request(
-		'?mj=Lieu_AddActionpage&popup=1', 
-		{
-			method: 'post', 
-			parameters: 'divid='+ (nbr_action_ajout+1) + '&lieu_tech=' + $F('nom_technique'),
-			onComplete: AjouterAction_completed
-		});
+        $.ajax({
+            url:'?mj=Lieu_AddActionpage&popup=1',
+            method: 'post',
+            data: 'divid='+ (nbr_action_ajout+1) + '&lieu_tech=' + $('#nom_technique').val(), 
+            dataType: "html",
+            success: function (data) {
+                AjouterAction_completed(data);
+            }
+        });
 }
 
-AjouterAction_completed = function(originalRequest){
-	var rval= originalRequest.responseText;
-	$('add_action_'+nbr_action_ajout).innerHTML = rval;
+AjouterAction_completed = function(rval){
+	$('add_action_'+nbr_action_ajout).html(rval);
 	nbr_action_ajout++; //Augmenter le total en cas de plusieurs ajouts
-	$('total_action_add').value = nbr_action_ajout;
+	$('#total_action_add').val(nbr_action_ajout);
 	
 }
 
@@ -59,18 +61,20 @@ Ajouter_Perso = function(){
 	var perso=prompt('Quel est le nom du personnage que vous souhaiter placer propriétaire de cette boutique ?','');
 	
 	if(perso!=null){
-		var myAjax = new Ajax.Updater(
-			'div_proprio2', 
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat=p_ajouter_perso&search='+perso
-			});
+                $.ajax({
+                    url:'?mj=Search&popup=1',
+                    method: 'post',
+                    data: 'searchWhat=p_ajouter_perso&search='+perso, 
+                    dataType: "html",
+                    success: function (data) {
+                        $('#div_proprio2').html(data);
+                    }
+                });
 	}
 }
 
 Ajouter_Perso2 = function(id, perso){
-	$('div_proprio2').innerHTML = perso + ' (<a href="#" onclick="Ajouter_Perso();">Modifier</a>)\n<input type="hidden" name="addGerant" value="' + id + '"/>';
+	$('#div_proprio2').html(perso + ' (<a href="#" onclick="Ajouter_Perso();">Modifier</a>)\n<input type="hidden" name="addGerant" value="' + id + '"/>');
 }
 
 confirmdel = function(msg){
@@ -301,7 +305,7 @@ if ($SUBMITNAME=='Mod'){
 						<input type="submit" class="button" name="lien_del" value="Supprimer la sélection" onclick="return confirmdel('Effacer le(s) lien(s) sélectionné(s) ?');" />
 						<input type="submit" class="button" name="lien_save" value="Enregistrer" />
 						Ajouter <input type="text" class="text" id="add_qte" value="1" size="2" /> lien(s)
-						<input type="button" class="button" name="preadd" onclick="AjouterLien($('add_qte').value);" value="Ok !" />
+						<input type="button" class="button" name="preadd" onclick="AjouterLien($('#add_qte').value);" value="Ok !" />
 					</td>
 				</tr>
 			</table>

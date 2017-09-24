@@ -4,37 +4,41 @@ Changer_Lieu = function()
 {
 	var lieu=prompt('Vers quel lieu souhaitez-vous déplacer le personnage ? (Nom technique)','');
 	if(lieu!=""){
-		var myAjax = new Ajax.Updater(
-			'div_lieu', 
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat=p_modifier_lieu&search='+lieu
-			});
+            $.ajax({
+                    url: '?mj=Search&popup=1',
+                    method: 'post',
+                    data: 'searchWhat=p_modifier_lieu&search='+lieu,
+                    dataType: "html",
+                    success: function (data) {
+                        $("#div_lieu").html(data);
+                    }
+                });
 	}
 }
 Changer_Lieu2 = function(lieu)
 {
-	$('div_lieu').innerHTML = lieu+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="lieu" value="'+lieu+'" />';
+	$('#div_lieu').html(lieu+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="lieu" value="'+lieu+'" />');
 }
 
 Changer_Compte = function()
 {
 	var compte=prompt('À quel compte souhaitez-vous associer ce personnage ?','');
 	if(compte!=""){
-		var myAjax = new Ajax.Updater(
-			'div_compte', 
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat=p_modifier_compte&search='+compte
-			});
+                $.ajax({
+                    url: '?mj=Search&popup=1',
+                    method: 'post',
+                    data: 'searchWhat=p_modifier_compte&search='+compte,
+                    dataType: "html",
+                    success: function (data) {
+                        $("#div_compte").html(data);
+                    }
+                });
 	}
 }
 
 Changer_Compte2 = function(id, compte)
 {
-	$('div_compte').innerHTML = compte+' (<a href="#" onclick="Changer_Compte();">Changer</a>)\n<input type="hidden" name="userId" value="'+id+'" />';
+	$('#div_compte').html(compte+' (<a href="#" onclick="Changer_Compte();">Changer</a>)\n<input type="hidden" name="userId" value="'+id+'" />');
 }
 
 
@@ -46,7 +50,7 @@ get_stat_total = function()
 	foreach($PERSO->getStat() as $statId)
 	{
 		?>
-		total += parseInt($('stat_<?php echo $PERSO->getStatCode($statId);?>').value);
+		total += parseInt($('#stat_<?php echo $PERSO->getStatCode($statId);?>').val());
 		<?php
 	}
 	?>
@@ -68,7 +72,7 @@ valider_stats = function()
 calculate_stat_total = function()
 {
 
-	$('stat_total').innerHTML = get_stat_total();
+	$('#stat_total').html(get_stat_total());
 }
 //-->
 </script>

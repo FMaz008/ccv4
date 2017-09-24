@@ -28,7 +28,7 @@ if(isset($COMP['id']) && !empty($COMP['id']))
 	<tr>
 		<td class="name">Description<br />(256 caractères max)</td>
 		<td class="value">
-			<textarea name="description" style="width:300px;" onkeyup="$('chrCount').innerHTML=this.value.length;"><?php echo $COMP['description'];?></textarea>
+			<textarea name="description" style="width:300px;" onkeyup="$('#chrCount').html("this.value.length");"><?php echo $COMP['description'];?></textarea>
 			<br />
 			<span id="chrCount">0</span> caractères
 		</td>

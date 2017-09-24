@@ -1,105 +1,70 @@
 <script type="text/javascript">
 //<!--
-	var tmp_type;
 	gosearch = function (type)
 	{
-		tmp_type = type;
-		var myAjax = new Ajax.Request(
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat='+type+'&search='+document.forms[type].search.value,
-				onComplete: gosearch_confirm
-			}
-		);
+                $.ajax({
+                    url: '?mj=Search&popup=1',
+                    method: 'post',
+                    data: 'searchWhat='+type+'&search='+document.forms[type].search.value,
+                    dataType: "html",
+                    success: function (data) {
+                        gosearch_confirm(type, data);
+                    }
+                });
 	}
 	
-	gosearch_confirm = function(originalRequest)
+	gosearch_confirm = function(type, rval)
 	{
-		
-		var rval= originalRequest.responseText;
 		var params=rval.split("|");
-		$(tmp_type+'_results').innerHTML = params[1];
+		$("#"+type+'_results').html(params[1]);
 		
 		if (params[0] != 'MULTI')
 		{
-			if (tmp_type == 'compte')
+			if (type == 'compte')
 				setLinkAccount(params[0]);
-			else if (tmp_type == 'perso')
+			else if (type == 'perso')
 				setLinkPerso(params[0]);
-			else if (tmp_type == 'lieu')
+			else if (type == 'lieu')
 				setLinkLieu(params[0]);
 		}
 	}
 	
 	setLinkPerso = function (id)
 	{
-		$('Perso_He').href				= "?mj=Perso_He&id=" + id;
-		$('Perso_Sendmsg').href			= "?mj=Perso_Sendmsg&id=" + id;
-		$('Perso_Connaissance').href	= "?mj=Perso_Connaissance&id=" + id;
-		$('Perso_Inventaire').href		= "?mj=Perso_Inventaire&id=" + id;
-		$('Perso_Modifier').href		= "?mj=Perso_Mod&id=" + id;
-		$('Perso_Supprimer').href		= "?mj=Perso_Del&id="+id;
-		$('Perso_Listppa').href			= "?mj=Perso_Listppa&id=" + id;
+		$('#Perso_He').attr("href", "?mj=Perso_He&id=" + id);
+		$('#Perso_Sendmsg').attr("href", "?mj=Perso_Sendmsg&id=" + id);
+		$('#Perso_Connaissance').attr("href", "?mj=Perso_Connaissance&id=" + id);
+		$('#Perso_Inventaire').attr("href", "?mj=Perso_Inventaire&id=" + id);
+		$('#Perso_Modifier').attr("href", "?mj=Perso_Mod&id=" + id);
+		$('#Perso_Supprimer').attr("href", "?mj=Perso_Del&id="+id);
+		$('#Perso_Listppa').attr("href", "?mj=Perso_Listppa&id=" + id);
 	}
 	
 	setLinkAccount = function (id)
 	{
-		$('Account_Modifier').href		= "?mj=Compte_Mod&id=" + id;
-		$('Account_Supprimer').href		= "?mj=Compte_Del&id="+id;
+		$('#Account_Modifier').attr("href", "?mj=Compte_Mod&id=" + id);
+		$('#Account_Supprimer').attr("href", "?mj=Compte_Del&id="+id);
 	}
 	
 	setLinkLieu = function (id)
 	{
-		$('Lieu_Ajouter').href			= "?mj=Lieu_Add&id=" + id;
-		$('Lieu_Modifier').href			= "?mj=Lieu_Mod&id=" + id;
-		$('Lieu_Supprimer').href		= "?mj=Lieu_Del&id="+id;
-		$('Lieu_Coupdoeil').href		= "?mj=Lieu_Coupdoeil&id=" + id;
-		$('Lieu_He').href				= "?mj=Lieu_He&id=" + id;
-		$('Lieu_Boutique').href			= "?mj=Lieu_Boutique&id=" + id;
-		$('Lieu_Inventaire').href		= "?mj=Lieu_Inventaire&id=" + id;
-		$('Lieu_Casiers').href			= "?mj=Lieu_Casiers&id=" + id;
-		$('Lieu_Biblio').href			= "?mj=Lieu_Biblio&id=" + id;
-		$('Lieu_Etude').href			= "?mj=Lieu_Etude&id=" + id;
-		$('Lieu_MediaAcces').href		= "?mj=Lieu_MediaAcces&id=" + id;
+		$('#Lieu_Ajouter').attr("href", "?mj=Lieu_Add&id=" + id);
+		$('#Lieu_Modifier').attr("href", "?mj=Lieu_Mod&id=" + id);
+		$('#Lieu_Supprimer').attr("href", "?mj=Lieu_Del&id="+id);
+		$('#Lieu_Coupdoeil').attr("href", "?mj=Lieu_Coupdoeil&id=" + id);
+		$('#Lieu_He').attr("href", "?mj=Lieu_He&id=" + id);
+		$('#Lieu_Boutique').attr("href", "?mj=Lieu_Boutique&id=" + id);
+		$('#Lieu_Inventaire').attr("href", "?mj=Lieu_Inventaire&id=" + id);
+		$('#Lieu_Casiers').attr("href", "?mj=Lieu_Casiers&id=" + id);
+		$('#Lieu_Biblio').attr("href", "?mj=Lieu_Biblio&id=" + id);
+		$('#Lieu_Etude').attr("href", "?mj=Lieu_Etude&id=" + id);
+		$('#Lieu_MediaAcces').attr("href", "?mj=Lieu_MediaAcces&id=" + id);
 	}
 	
 	
 	
-	var arrTabUrl	= Array("TabPPA",		"TabClosedPPA",			"TabInscr",		"TabDe",		"TabHe");
-	var arrTabId	= Array("PPAcontainer",	"CLOSEDPPAcontainer",	"INScontainer",	"DEcontainer",	"HEcontainer");
-	var currentTabId;
-	displayTab = function (tabId)
-	{
-		
-		if(tabId > arrTabUrl.length)
-			return false;
-		
-		arrTabId[tabId-1].innerHTML = "Chargement en cours ...";
-		
-		currentTabId = tabId;
-		var myAjax = new Ajax.Request(
-			'?mj=' + arrTabUrl[tabId-1], 
-			{
-				method: 'post', 
-				parameters: '',
-				onComplete: fillTab
-			}
-		);
+	
 
-		for(var i=1; i<=5; i++)
-		{
-			$(arrTabId[i-1]).style.display	= tabId == i ? 'block':'none';
-			$("tab"+i).className			= tabId == i ? 'ongletOn' : 'ongletOff';
-		}
-	}
-	fillTab = function(originalRequest)
-	{
-		var rval= originalRequest.responseText;
-		var elem = $(arrTabId[currentTabId-1]);
-		elem.innerHTML = rval;
-		actionLoadScripts(elem);
-	}
 	
 	substr = function(start, length, str)
 	{
@@ -129,34 +94,19 @@
 
 
 
-<div>
-	<div id="tab1" class="ongletOff" onclick="displayTab(1);">
-		<span>PPA</span> (<?php echo $COUNT_PPA_MJ;?> / <?php echo $COUNT_PPA;?>)
-	</div>
-	<div id="tab2" class="ongletOff" onclick="displayTab(2);">
-		<span>PPA Fermé</span>
-	</div>
-	<div id="tab3" class="ongletOff" onclick="displayTab(3);">
-		<span>Inscriptions</span> (<?php echo $COUNT_INSCR;?>)
-	</div>
-	<div id="tab4" class="ongletOff" onclick="displayTab(4);">
-		<span>Brasser un dé</span>
-	</div>
-	<div id="tab5" class="ongletOff" onclick="displayTab(5);">
-		<span>HE privé</span>
-	</div>
-	
-	<div class="clearboth"></div>
+<div id="tabs">
+    <ul>
+        <li><a href="?mj=TabPPA">PPA</a></li>
+        <li><a href="?mj=TabClosedPPA">PPA Fermé</a></li>
+        <li><a href="?mj=TabInscr">Inscriptions (<?php echo $COUNT_INSCR;?>)</a></li>
+        <li><a href="?mj=TabDe">Brasser un dé</a></li>
+        <li><a href="?mj=TabHe">HE privé</a></li>
+    </ul>
 </div>
 
-<div class="panel tabContainer">
-	<div id="PPAcontainer" style="display:none;"></div>
-	<div id="CLOSEDPPAcontainer" style="display:none;"></div>
-	<div id="INScontainer" style="display:none;"></div>
-	<div id="HEcontainer" style="display:none;"></div>
-	<div id="DEcontainer" style="display:none;"></div>
-</div>
-
+<script type="text/javascript">
+    $('#tabs').tabs({});
+</script>
 
 
 
@@ -319,11 +269,3 @@
 </div>
 
 
-
-
-
-<script type="text/javascript">
-//<!--
-displayTab(<?php echo $DEFAULT_TAB;?>);
-//-->
-</script>

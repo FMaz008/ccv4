@@ -1,26 +1,22 @@
 <script type="text/javascript">
 //<!--
 	submitForm = function (url) {
-		$('action_formInv').action = url;
-		ajaxSubmitForm($('action_formInv'));
+		$('#action_formInv').attr("action",url);
+		ajaxSubmitForm($('#action_formInv'));
 	}
 	
 
 	//Fonction générales
-	fail = function(){
-		$('request_msg').style.display="block";
-		$('request_msgtxt').innerHTML="La requête &agrave; &eacute;chou&eacute;e, veuillez r&eacute;-essayer plus tard.";
-	}
 
 	showplzwait = function(){
-		$('plzwait1').style.display="block";
-		$('plzwait2').style.display="block";
-		$('request_msgtxt').innerHTML="Veuillez patienter...";
-		$('request_msg').style.display="none";
+		$('#plzwait1').css({ display: "block" });
+		$('#plzwait2').css({ display: "block" });
+		$('#request_msgtxt').html("Veuillez patienter...");
+		$('#request_msg').css({ display: "none" });
 	}
 	hideplzwait = function(){
-		$('plzwait1').style.display="none";
-		$('plzwait2').style.display="none";
+		$('#plzwait1').css({ display: "none" });
+		$('#plzwait2').css({ display: "none" });
 	}
 
 
@@ -29,30 +25,30 @@
 	operation = function(oper_type){
 		showplzwait();
 		
-		var myAjax = new Ajax.Request(
-				'?popup=1&m=Action_Lieu_BoutiqueAdminCaisse', 
-				{
-					method: 'post', 
-					parameters: 'oper_type='+oper_type+'&montant='+$('montant').value, 
-					onComplete: operation_confirm,
-					onFailure: fail
-				});
+                $.ajax({
+                    url:'?popup=1&m=Action_Lieu_BoutiqueAdminCaisse',
+                    method: 'post',
+                    data: 'oper_type='+oper_type+'&montant='+$('#montant').value, 
+                    dataType: "html",
+                    success: function (data) {
+                        operation_confirm(data);
+                    }
+                });
 	}
 	
-	operation_confirm = function(originalRequest){
+	operation_confirm = function(rval){
 		
-		var rval= originalRequest.responseText;
 		var params=rval.split("|");
 		
 		if (params[0]=="OK"){
-			$('cash').innerHTML = params[1];
-			$('perso_cash').innerHTML=params[2];
-			$('perso_pa').innerHTML=params[3];
+			$('#cash').html(params[1]);
+			$('#perso_cash').html(params[2]);
+			$('#perso_pa').html(params[3]);
 			
 			hideplzwait();
 		}else{
-			$('request_msg').style.display="block";
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+			$('#request_msg').css({ display: "block" });
+			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}
 //-->

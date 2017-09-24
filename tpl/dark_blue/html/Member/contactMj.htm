@@ -2,33 +2,33 @@
 //<!--
 showPannel = function(what)
 {
-	$('list').style.display = "none";
-	$('nouv').style.display = "none";
-	$('blist').className = "ongletOff";
-	$('bnouv').className = "ongletOff";
+	$('#list').hide();
+	$('#nouv').hide();
+	$('#blist').attr("class", "ongletOff");
+	$('#bnouv').attr("class", "ongletOff");
 	
-	$(what).style.display = "block";
-	$('b' + what).className="ongletOn";
+	$("#"+what).show();
+	$('#b' + what).attr("class", "ongletOn");
 	
 	if(what=="nouv")
 		selectType();
 }
 selectType = function(){
-	if ($F("type")=="ppa"){
-		$("sujetTitre").innerHTML = "<u>Résumez</u> ce que vous voulez tenter :";
-		$("descTitre").innerHTML = "Faites maintenant preuve de RP :";
+	if ($("#type").val()=="ppa"){
+		$("#sujetTitre").html("<u>Résumez</u> ce que vous voulez tenter :");
+		$("#descTitre").html("Faites maintenant preuve de RP :");
 		
-	}else if($F("type")=="plainte"){
-		$("sujetTitre").innerHTML = "Brièvement, sur quoi porte votre plainte ?";
-		$("descTitre").innerHTML = "Décrivez avec soin et détails la situation :";
+	}else if($("#type").val()=="plainte"){
+		$("#sujetTitre").html("Brièvement, sur quoi porte votre plainte ?");
+		$("#descTitre").html("Décrivez avec soin et détails la situation :");
 		
-	}else if($F("type")=="quete"){
-		$("sujetTitre").innerHTML = "De quelle quête s'agit-il ?";
-		$("descTitre").innerHTML = "Faites maintenant preuve de RP :";
+	}else if($("#type").val()=="quete"){
+		$("#sujetTitre").html("De quelle quête s'agit-il ?");
+		$("#descTitre").html("Faites maintenant preuve de RP :");
 		
-	}else if($F("type")=="question"){
-		$("sujetTitre").innerHTML = "Avez-vous recherché sur le forum ? Si oui, résumez votre question:";
-		$("descTitre").innerHTML = "De façon claire et compréhensible, votre question :";
+	}else if($("#type").val()=="question"){
+		$("#sujetTitre").html("Avez-vous recherché sur le forum ? Si oui, résumez votre question:");
+		$("#descTitre").html("De façon claire et compréhensible, votre question :");
 		
 	}
 }

@@ -1,12 +1,12 @@
 <script type="text/javascript">
 	showHideTypeAttaque = function(show_what){
-		$('att_tours').style.display='none';
-		$('att_cible').style.display='none';
-		$('type_att_tours').checked = 'unchecked';
-		$('type_att_cible').checked = 'unchecked';
-		$(show_what).style.display='block';
-		$('type_'+show_what).checked = 'checked';
-		$(show_what+'_tours1').checked='checked';
+		$('#att_tours').hide();
+		$('#att_cible').hide();
+		$('#type_att_tours').prop("checked",false);
+		$('#type_att_cible').prop("checked",false);
+		$("#"+show_what).show();
+		$('#type_'+show_what).prop("checked",true);
+		$("#"+show_what+'_tours1').prop("checked",true);
 	}
 </script>
 <br />

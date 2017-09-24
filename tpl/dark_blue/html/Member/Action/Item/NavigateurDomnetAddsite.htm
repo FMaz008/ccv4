@@ -5,18 +5,18 @@
 		var re;
 		
 		re = new RegExp("^[A-Za-z0-9\\.-_]+$");
-		if (!$F('url').match(re)) {
+		if (!$('#url').val().match(re)) {
 			alert("L'URL comporte des caractères invalide.");
 			return false;
 		}
 		
-		if($F('user') == "" || $F('pass') == "") {
+		if($('#user').val() == "" || $('#pass').val() == "") {
 			alert("Vous devez compléter l'utilisateur et le mot de passe.");
 			return false;
 		}
 		
 		re = new RegExp("^([0-9]{4})-([0-9]{4}-[0-9]{4}-[0-9]{4})-([0-9]+)$");
-		if (!$F('carte').match(re)) {
+		if (!$('#carte').val().match(re)) {
 			alert("Le numéro de carte est invalide.");
 			return false;
 		}
@@ -26,51 +26,46 @@
 		
 		//Requête AJAX pour valider le # de carte + NIP
 		showplzwait();
-		
-		var myAjax = new Ajax.Request(
-				'?popup=1&m=Action_Item_Siteadd', 
-				{
-					method: 'post', 
-					parameters: 'no='+$F('carte')+
-								'&nip='+$F('nip')+
-								'&url='+$F('url')+
-								'&user='+$F('user')+
-								'&pass='+$F('pass')+
-								'&titre='+$F('titre'), 
-					onComplete: operation_confirm,
-					onFailure: fail
-				});
+		$.ajax({
+                    url: '?popup=1&m=Action_Item_Siteadd',
+                    method: 'post',
+                    data: 'no='+$('#carte').val()+
+                            '&nip='+$('#nip').val()+
+                            '&url='+$('#url').val()+
+                            '&user='+$('#user').val()+
+                            '&pass='+$('#pass').val()+
+                            '&titre='+$('#titre').val(), 
+                    dataType: "html",
+                    success: function (data) {
+                        operation_confirm(data);
+                    }
+                });
 		return false;
 	}
 
 	//Fonction generales
-	fail = function(){
-		$('request_msg').style.display="block";
-		$('request_msgtxt').innerHTML="La requête &agrave; &eacute;chou&eacute;e, veuillez r&eacute;-essayer plus tard.";
-	}
 
 	showplzwait = function(){
-		$('plzwait1').style.display="block";
-		$('plzwait2').style.display="block";
-		$('request_msgtxt').innerHTML="Veuillez patienter...";
-		$('request_msg').style.display="none";
+		$('#plzwait1').css({ display: "block" });
+		$('#plzwait2').css({ display: "block" });
+		$('#request_msgtxt').html("Veuillez patienter...");
+		$('#request_msg').css({ display: "none" });
 	}
 	hideplzwait = function(){
-		$('plzwait1').style.display="none";
-		$('plzwait2').style.display="none";
+		$('#plzwait1').css({ display: "none" });
+		$('#plzwait2').css({ display: "none" });
 	}
-	operation_confirm = function(originalRequest){
+	operation_confirm = function(rval){
 		
-		var rval= originalRequest.responseText;
 		var params=rval.split("|");
 		
 		if (params[0]=="OK"){
 			hideplzwait();
-			$('perso_pa').innerHTML=params[1];
+			$('#perso_pa').html(params[1]);
 			goTo(params[2]);
 		}else{
-			$('request_msg').style.display="block";
-			$('request_msgtxt').innerHTML=params[1];
+			$('#request_msg').css({ display: "block" });
+			$('#request_msgtxt').html(params[1]);
 		}
 	}
 //-->

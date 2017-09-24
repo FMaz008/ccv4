@@ -2,14 +2,14 @@
 //<!--
 	updateChr = function(tailleMax)
 	{
-		var size = $('txtData').textLength;
+		var size = $('#txtData').textLength;
 		var sizeMax = <?php echo $CARTE_MEM_MAX;?>;
 		if (size > sizeMax){
 			alert ('La taille actuelle ex&egrave;de le maximum permis.');
-			$('txtData').value = $('txtData').value.substring(0,sizeMax);
+			$('#txtData').val($('#txtData').val().substring(0,sizeMax));
 		}
-		$('chrLeft').innerHTML = sizeMax - size;
-		$('txtMem').innerHTML = size + " Octets";
+		$('#chrLeft').html(sizeMax - size);
+		$('#txtMem').html(size + " Octets");
 	}
 
 //-->

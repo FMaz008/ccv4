@@ -24,7 +24,7 @@
 						<?php echo $ppa['titre'];?>
 					</a>
 				</td>
-				<td class="value"><a href="#gestion_perso" onclick="$('perso_search').value='<?php echo addslashes($ppa['perso']);?>';gosearch('perso');"><?php echo $ppa['perso'];?></a></td>
+				<td class="value"><a href="#gestion_perso" onclick="$('#perso_search').val('<?php echo addslashes($ppa['perso']);?>');gosearch('perso');"><?php echo $ppa['perso'];?></a></td>
 				<td class="value">Fermé</td>
 			</tr>
 			<?php

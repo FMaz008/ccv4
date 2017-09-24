@@ -120,12 +120,11 @@ function BBCodes($in, $domnet=false, $br=true, $img=false)
  */
 function fctErrorMSG($msg, $redirectToPage=null, $postParam=null, $ajaxSubmit=true)
 {
-	
 	if (isset($redirectToPage))
 	{ 
 		//Retourner l'erreur + la source d'une page
 		$src = "<form id='ErrorForm' method='post' action='" . $redirectToPage . "'>";
-		$src .= "<input type='hidden' name='erreur' value='" . htmlentities(utf8_decode($msg), ENT_QUOTES) . "' />";
+		$src .= "<input type='hidden' name='erreur' value='" . htmlentities($msg) . "' />";
 		if (isset($postParam))
 		{
 			$params = array_keys($postParam);
@@ -133,12 +132,14 @@ function fctErrorMSG($msg, $redirectToPage=null, $postParam=null, $ajaxSubmit=tr
 				$src .= "<input type='hidden' name='" . utf8_decode($param) . "' value='" . htmlentities(utf8_decode(strval($postParam[$param])), ENT_QUOTES) . "' />";
 		}
 		$src .= "</form>";
-		$src .= "<script type='text/javascript'>";
-		if($ajaxSubmit)
-			$src .= "ajaxSubmitForm($('ErrorForm'));";
+                $src .= "<script type='text/javascript'>";
+		
+                if($ajaxSubmit)
+			$src .= "ajaxSubmitForm($('#ErrorForm'));";
 		else
-			$src .= "$('ErrorForm').submit();";
+			$src .= "$('#ErrorForm').submit();";
 		$src .= "</script>";
+                
 		return $src;
 	}
 	else

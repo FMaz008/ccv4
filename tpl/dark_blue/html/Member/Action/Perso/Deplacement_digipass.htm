@@ -1,11 +1,11 @@
 <script type="text/javascript">
 	addno = function(no) {
 		$("pass2").value+=no;
-		$("pass").value=$("pass2").value;
+		$("pass").val($("pass2").value);
 	}
 	reset = function() {
-		$("pass2").value='';
-		$("pass").value=$("pass2").value;
+		$("pass2").val('');
+		$("pass").val($("pass2").value);
 	}
 	check = function() {
 		ajaxSubmitForm($("action_deplacementDigi"));

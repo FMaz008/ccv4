@@ -51,8 +51,8 @@
 //<!--
 	showHide = function(val)
 	{
-		$("plzwait1").style.display=val;
-		$("plzwait2").style.display=val;
+		$("plzwait1").css({ display: val });
+		$("plzwait2").css({ display: val });
 	}
 	var ua = navigator.userAgent.toLowerCase();
 	if (ua.indexOf('msie') == -1)

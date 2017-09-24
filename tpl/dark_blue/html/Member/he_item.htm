@@ -14,11 +14,11 @@
 				<?php if ($perso['sexe']=='m'){ ?>
 					<a onclick="renamePerso('perso_',<?php echo $MSG->getId();?>,<?php echo $perso['id'];?>,'<?php echo addslashes($perso['nom']);?>');"
 						id="perso_<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_homme"
-						onmousemove="persoinfo(this, event);">
+						onmousemove="persoinfo($(this), event);">
 				<?php }elseif($perso['sexe']=='f'){ ?>
 					<a onclick="renamePerso('perso_',<?php echo $MSG->getId();?>,<?php echo $perso['id'];?>,'<?php echo addslashes($perso['nom']);?>');"
 						id="perso_<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_femme"
-						onmousemove="persoinfo(this, event);">
+						onmousemove="persoinfo($(this), event);">
 				<?php }elseif($perso['sexe']=='s'){ ?>
 					<a id="perso_<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_system">
 				<?php }else{ ?>
@@ -56,11 +56,11 @@
 				if ($perso['sexe']=='m'){?>
 					<a onclick="renamePerso('perso2_',<?php echo $MSG->getId();?>,<?php echo $perso['id'];?>,'<?php echo addslashes($perso['nom']);?>');"
 						id="perso2_<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_homme"
-						onmousemove="persoinfo(this, event);">
+						onmousemove="persoinfo($(this), event);">
 				<?php }elseif($perso['sexe']=='f'){?>
 					<a onclick="renamePerso('perso2_',<?php echo $MSG->getId();?>,<?php echo $perso['id'];?>,'<?php echo addslashes($perso['nom']);?>');"
 						id="perso2_<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_femme"
-						onmousemove="persoinfo(this, event);">
+						onmousemove="persoinfo($(this), event);">
 				<?php }elseif($perso['sexe']=='s'){?>
 					<a id="perso2_<?php echo $MSG->getId();?>_<?php echo $perso['id'];?>" class="txtStyle_system">
 				<?php }else{?>

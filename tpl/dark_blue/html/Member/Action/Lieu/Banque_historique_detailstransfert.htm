@@ -2,9 +2,9 @@
 //<!--
 	goBack = function() {
 		<?php if(isset($NIP)){ ?>
-			$("action_redirect").action = "?popup=1&m=Action_Lieu_Guichet3historique";
+			$("action_redirect").attr("action","?popup=1&m=Action_Lieu_Guichet3historique");
 		<?php }else{ ?>
-			$("action_redirect").action = "?popup=1&m=Action_Lieu_BanqueHistorique";
+			$("action_redirect").attr("action","?popup=1&m=Action_Lieu_BanqueHistorique");
 		<?php } ?>
 		ajaxSubmitForm($("action_redirect"));
 	}

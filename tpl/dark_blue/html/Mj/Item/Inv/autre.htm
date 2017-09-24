@@ -3,84 +3,88 @@
 Changer_Perso = function(){
 	var perso=prompt('À quel personnage voulez-vous associer cet item ?','');
 	if(perso!=""){
-		var myAjax = new Ajax.Updater(
-			'div_perso', 
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat=item_asso_perso&search='+perso
-			});
+            $.ajax({
+                url:'?mj=Search&popup=1',
+                method: 'post',
+                data: 'searchWhat=item_asso_perso&search='+perso, 
+                dataType: "html",
+                success: function (data) {
+                    $('#div_perso').html(data);
+                }
+            });
 	}
 }
 Changer_Perso2 = function(id, perso){
-	$('div_perso').innerHTML = perso+' (<a href="#" onclick="Changer_Perso();">Changer</a>)\n<input type="hidden" name="inv_persoid" value="'+id+'" />';
+	$('#div_perso').html(perso+' (<a href="#" onclick="Changer_Perso();">Changer</a>)\n<input type="hidden" name="inv_persoid" value="'+id+'" />');
 }
 
 Changer_Lieu = function(){
 	var lieu=prompt('À quel lieu voulez-vous associer cet item ? (Nom technique)','');
 	if(lieu!=""){
-		var myAjax = new Ajax.Updater(
-			'div_lieu', 
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat=item_asso_lieu&search='+lieu
-			});
+            $.ajax({
+                url:'?mj=Search&popup=1',
+                method: 'post',
+                data: 'searchWhat=item_asso_lieu&search='+lieu, 
+                dataType: "html",
+                success: function (data) {
+                    $('#div_lieu').html(data);
+                }
+            });
 	}
 }
 Changer_Lieu2 = function(tech, nom){
-	$('div_lieu').innerHTML = nom+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="inv_lieutech" value="'+tech+'" />';
+	$('#div_lieu').html(nom+' (<a href="#" onclick="Changer_Lieu();">Changer</a>)\n<input type="hidden" name="inv_lieutech" value="'+tech+'" />');
 }
 
 Changer_Boutique = function(){
 	var boutique=prompt('À quelle boutique voulez-vous associer cet item ? (Nom technique du lieu)','');
 	if(boutique!=""){
-		var myAjax = new Ajax.Updater(
-			'div_boutique', 
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat=item_asso_boutique&search='+boutique
-			});
+            $.ajax({
+                url:'?mj=Search&popup=1',
+                method: 'post',
+                data: 'searchWhat=item_asso_boutique&search='+boutique, 
+                dataType: "html",
+                success: function (data) {
+                    $('#div_boutique').html(data);
+                }
+            });
 	}
 }
 Changer_Boutique2 = function(tech, nom){
-	$('div_boutique').innerHTML = nom+' (<a href="#" onclick="Changer_Boutique();">Changer</a>)\n<input type="hidden" name="inv_boutiquelieutech" value="'+tech+'" />';
+	$('#div_boutique').html(nom+' (<a href="#" onclick="Changer_Boutique();">Changer</a>)\n<input type="hidden" name="inv_boutiquelieutech" value="'+tech+'" />');
 }
 
 showHideTypeAsso = function(show_what){
-	$('tr_perso').style.display = 'none';
-	$('tr_lieu').style.display = 'none';
-	$('tr_boutique').style.display = 'none';
-	$('tr_casier').style.display = 'none';
-	$('tr_item').style.display = 'none';
+	$('#tr_perso').hide();
+	$('#tr_lieu').hide();
+	$('#tr_boutique').hide();
+	$('#tr_casier').hide();
+	$('#tr_item').hide();
 	
-	$('tr_'+show_what).style.display = 'table-row';
-	$('att_' + show_what).checked=true;
+	$('tr_'+show_what).show();
+	$('att_' + show_what).prop("checked",true);
 }
 
 
-
-
 validateForm = function(){
-	if ($('att_perso').checked)
-		if( !is_defined($('form1').inv_persoid) || $('form1').inv_persoid.value == '')
+	if ($('#att_perso').checked)
+		if( !is_defined($('#form1').inv_persoid) || $('#form1').inv_persoid.value == '')
 			return notvalid("Vous devez choisir un personnage.");
 			
-	if ($('att_lieu').checked)
-		if( !is_defined($('form1').inv_lieutech) || $('form1').inv_lieutech.value == '')
+	if ($('#att_lieu').checked)
+		if( !is_defined($('#form1').inv_lieutech) || $('#form1').inv_lieutech.value == '')
 			return notvalid("Vous devez choisir un lieu.");
 			
-	if ($('att_boutique').checked)
-		if( !is_defined($('form1').inv_boutiquelieutech) || $('form1').inv_boutiquelieutech.value == '')
+	if ($('#att_boutique').checked)
+		if( !is_defined($('#form1').inv_boutiquelieutech) || $('#form1').inv_boutiquelieutech.value == '')
 			return notvalid("Vous devez choisir une boutique.");
 			
-	if ($('att_casier').checked)
-		if( !is_defined($('form1').inv_casierid) || $('form1').inv_casierid.value == '')
+	if ($('#att_casier').checked)
+		if( !is_defined($('#form1').inv_casierid) || $('#form1').inv_casierid.value == '')
 			return notvalid("Vous devez choisir un casier.");
 			
-	if ($('att_item').checked)
-		if( !is_defined($('form1').inv_itemid) || $('form1').inv_itemid.value == '')
+	if ($('#att_item').checked)
+		if( !is_defined($('#form1').inv_itemid) || $('#form1').inv_itemid.value == '')
 			return notvalid("Vous devez choisir un item.");
 	
 	

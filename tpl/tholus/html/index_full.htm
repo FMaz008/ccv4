@@ -4,10 +4,6 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=<?php echo $SITE_CHARSET;?>" />
 		<title><?php echo $SITE_NAME;?><?php echo $SITE_VERSION;?></title>
-		<meta name="description" content="Jeu de rôle cyberpunk et post-apocalyptique par navigateur au tour par tour basé essentiellement sur du rôle-playing au format texte." />
-		<meta name="keyword" lang="fr" content="tholus, jeu de role, apocalyse, cyber, punk,rpg, mmorpg, post-apo" />
-		<meta name="keyword" lang="en" content="tholus, role playing game, apocalyse, cyber, punk, rpg, mmorpg" />
-		<meta name="google-site-verification" content="3SAsBqHXeOkYLXXLjNQ41ykRkIuq2cneZEqsYktjzqw" />
 		
 		<script type="text/javascript">
 			window.defaultStatus="<?php echo $SITE_NAME;?> <?php echo $SITE_VERSION;?>";
@@ -20,10 +16,11 @@
 			<?php
 		}
 		?>
-		<script type="text/javascript" src="./js/prototype.js"></script>
-		<script type="text/javascript" src="./js/ajaxSubmitPost.js"></script>
-		<script type="text/javascript" src="./js/browser_selector.js"></script>
+		<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+		<link href="./js/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+                <script src="./js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="./js/infobulle.js"></script>
+                <script type="text/javascript" src="./js/ajaxSubmitPost.js"></script>
                 <script type="text/javascript">
                     setTimeout('ajaxExtendSession();', 600*1000); //Extra 10min//Do an ajax query in 10 minutes to extend the session
                 </script>

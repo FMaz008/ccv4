@@ -13,11 +13,12 @@ infobulle = function(obj, evt, posX, posY)
 	if(posX == undefined) posX =5;
 	if(posY == undefined) posY =5;
 	
-	var it = $('ib_' + obj.id);
+        
+	var it = $('#ib_' + obj.attr("id"));
 
 	if(it == undefined)
 	{
-		alert("L'infobulle ib_" + obj.id + " ne peut être trouvée, veuillez rapporter le bug sur le forum.");
+		alert("L'infobulle #ib_" + obj.id + " ne peut être trouvée, veuillez rapporter le bug sur le forum.");
 		return false;
 	}
 	
@@ -25,14 +26,15 @@ infobulle = function(obj, evt, posX, posY)
 		posX = obj.offsetWidth - it.offsetWidth;
 	if (posX < 0 )
 		posX = 0; 
-	it.style.top = (Event.pointerY(evt) + posY) + 'px';
-	it.style.left= (Event.pointerX(evt) + posX) + 'px';
+        
+	it.css({ top : (evt.pageY + posY) + 'px' });
+	it.css({ left : (evt.pageX + posX) + 'px' });
 
-	it.style.display = 'block';
-	obj.style.cursor = "pointer";
-	obj.observe('mouseout',  function(event){
-									it.style.display = "none";
-								});
+	it.css({ display : 'block' });
+	obj.css({ cursor : "pointer"});
+	obj.mouseout(function(event) {
+           it.css({ display : 'none' });
+	});
 }
 
 hovermenu = function(obj, evt, paddingX, paddingY)
@@ -65,28 +67,27 @@ persoinfo = function(obj, evt, posX, posY)
 {
 	//Afficher la bulle
 	infobulle(obj, evt, posX, posY);
-	$('ibmsg_' + obj.id).innerHTML = "Chargement en cours...";
+	$('#ibmsg_' + obj.id).html("Chargement en cours...");
 
 	if(heBulleTxt[obj.id] == undefined)
 	{
 		//Charger
-		var myAjax = new Ajax.Request(
-				'?popup=1&m=PersoBulle', 
-				{
-					method: 'post', 
-					parameters: 'id='+obj.id, 
-					onComplete: function(originalRequest){
-									var rval= originalRequest.responseText;
-									heBulleTxt[obj.id] = rval;
-									$('ibmsg_' + obj.id).innerHTML = heBulleTxt[obj.id];
-								},
-					onFailure: function(){
-									$('ibmsg_' + obj.id).innerHTML = "Erreur lors du chargement";
-								}
-				});
+                $.ajax({
+                    url:'?popup=1&m=PersoBulle',
+                    method: 'post',
+                    data: 'id='+obj.id, 
+                    dataType: "html",
+                    success: function (data) {
+                        heBulleTxt[obj.id] = data;
+                        $('#ibmsg_' + obj.id).html(heBulleTxt[obj.id]);
+                    },
+                    error: function (data) {
+                        $('#ibmsg_' + obj.id).html("Erreur lors du chargement");
+                    }
+                });
 	}
 	else
 	{
-		$('ibmsg_' + obj.id).innerHTML = heBulleTxt[obj.id];
+		$('#ibmsg_' + obj.id).html(heBulleTxt[obj.id]);
 	}
 }

@@ -5,20 +5,21 @@ Cette fonction sert à faire un lien standard qui s'ouvre uniquement dans le pan
 actionLink = function(url)
 {
 	//BUT: Charger une page d'action dans le panneau d'action
-	var objContent = $('actionPanelContent');
+	var objContent = $('#actionPanelContent');
 	
-	objContent.innerHTML='Chargement en cours...';
-	var myAjax = new Ajax.Request(
-			'?popup=1&m=' + url,
-			{
-				method: 'get',
-				parameters: '',
-				onComplete: ajaxSubmitForm_confirm,
-				onFailure: ajaxSubmitForm_fail
-			});
+	objContent.html('Chargement en cours...');
+        $.ajax({
+            url:'?popup=1&m=' + url,
+            method: 'get',
+            data: '', 
+            dataType: "html",
+            success: function (data) {
+                $('#actionPanelContent').html(data);
+            }
+        });
 	
 	//Masquer le menu, peu-importe son statut
-	objContent.style.display = "none"; //La visibilité va etre inversée par showhideaction()
+	objContent.hide(); //La visibilité va etre inversée par showhideaction()
 	toggleActionPanel();
 }
 
@@ -32,79 +33,22 @@ Ajouter simplement le onsubmit suivant:
 ajaxSubmitForm = function (objForm)
 {
 	
-	var objContent = $('actionPanelContent');
-	var param = Form.serialize(objForm.readAttribute('id'));
+	$('#actionPanelContent').html('Chargement en cours...');
 	
-	if(objContent!=null)
-		objContent.innerHTML='Chargement en cours...';
-	
-	var myAjax = new Ajax.Request(
-			objForm.readAttribute("action"),
-			{
-				method: objForm.readAttribute("method"), 
-				parameters: param,
-				onComplete: ajaxSubmitForm_confirm,
-				onFailure: ajaxSubmitForm_fail
-			});
+        $.ajax({
+            url:$(objForm).attr("action"),
+            method: $(objForm).attr("method"),
+            data: $(objForm).serialize(), 
+            dataType: "html",
+            success: function (data) {
+                $('#actionPanelContent').html(data);
+            }
+        });
 	
 	return false; //Ne pas envoyer le formulaire
 
 }
 
-
-ajaxSubmitForm_confirm = function(originalRequest)
-{
-	
-	var rval= originalRequest.responseText;
-	
-	var objContent = $('actionPanelContent');
-	if(objContent!=null)
-	{
-		objContent.innerHTML = rval;
-		actionLoadScripts(objContent);
-	}
-	else
-	{
-		document.body.innerHTML = rval;
-		actionLoadScripts(document.body);
-	}
-}
-
-actionLoadScripts = function(obj)
-{
-	//Src.: http://www.developpez.net/forums/showpost.php?p=1185289&postcount=18
-	var AllScripts=obj.getElementsByTagName("script")
-	//alert(AllScripts.length + " zone de script a charger");
-	for (var i=0; i<AllScripts.length; i++)
-	{
-		var s=AllScripts[i];
-		if (s.src && s.src!="")
-		{
-			eval(getFileContent(s.src)) //Ramasser les sources externes
-		}
-		else
-		{
-			eval(s.innerHTML);
-		}
-	}
-}
-
-getFileContent = function(url) {
-	var Xhr=GetXmlHttpRequest();
-	Xhr.open("GET",url,false);
-	Xhr.send(null);
-	return Xhr.responseText;
-}
-
-
-ajaxSubmitForm_fail = function()
-{
-	var objContent = $('actionPanelContent');
-	if(objContent!=null)
-		objContent.innerHTML="La requ&ecirc;te &agrave; &eacute;chou&acute;e, veuillez r&eacute;-essayer plus tard.";
-	else
-		alert("La requ&ecirc;te &agrave; &eacute;chou&acute;e, veuillez r&eacute;-essayer plus tard.");
-}
 
 
 
@@ -124,14 +68,14 @@ CD_ZP = function(objVal)
 countdown = function (Time_Left){
 	if(Time_Left == 0)
 	{
-		document.getElementById("countdown").innerHTML = "expirée";
+		$("#countdown").html("expirée");
 	}
 	else
 	{
 		var minutes = Math.floor(Time_Left / 60);
 		var seconds = Time_Left - (minutes * 60);
 	
-		document.getElementById("countdown").innerHTML = CD_ZP(minutes) + ':' + CD_ZP(seconds);
+		$("#countdown").html(CD_ZP(minutes) + ':' + CD_ZP(seconds));
 		setTimeout('countdown(' + (Time_Left-1) + ');', 1000);
 	}
 }
@@ -144,14 +88,15 @@ countdown = function (Time_Left){
 ajaxExtendSession = function()
 {
     //Load the login page (or any page), which will re-extend the session in PHP.
-    var myAjax = new Ajax.Request(
-        "?v=Login&popup=1",
-        {
-                method: "get", 
-                onComplete: function(originalRequest)
-                {
-                    //Nothing to be done, really.
-                }
-        });
+    
+    $.ajax({
+        url:"?v=Login&popup=1",
+        method: 'get',
+        data: '', 
+        dataType: "html",
+        success: function (data) {
+            //Nothing to be done, really.
+        }
+    });
     setTimeout('ajaxExtendSession();', 600*1000); //Extra 10min
 }

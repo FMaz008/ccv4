@@ -1,62 +1,68 @@
 <script type="text/javascript">
 //<!--
 	memoire = function(id){
-	
-		var myAjax = new Ajax.Updater( 
-		'memoire', 
-		'?popup=1&m=Action_Item_TelephonerMajMemoire', 
-		{ 
-		method: 'post', 
-		parameters: 'telephone=' + id
-		}); 
+                $.ajax({
+                    url:'?popup=1&m=Action_Item_TelephonerMajMemoire',
+                    method: 'post',
+                    data: 'telephone=' + id, 
+                    dataType: "html",
+                    success: function (data) {
+                        $('#memoire').html(data);
+                    }
+                });
 		showhidediv('block');
 	}
 	
 	compte = function(id){
-	
-		var myAjax = new Ajax.Updater(
-		'memoire', 
-		'?popup=1&m=Action_Item_TelephonerMajCompte',
-		{
-			method: 'post',
-			parameters: 'telephone=' + id
-		});
+                
+                $.ajax({
+                    url:'?popup=1&m=Action_Item_TelephonerMajCompte',
+                    method: 'post',
+                    data: 'telephone=' + id, 
+                    dataType: "html",
+                    success: function (data) {
+                        $('#memoire').html(data);
+                    }
+                });
 		showhidediv('block');
 	}
 	
 	SaveChange = function(pars)
 	{
-		var myAjax = new Ajax.Request(
-		'?popup=1&m=Action_Item_TelephonerMajMemoire2', 
-		{
-			method: 'post', 
-			parameters: pars,
-			onComplete: Save_confirm
-		});
+                $.ajax({
+                    url:'?popup=1&m=Action_Item_TelephonerMajMemoire2',
+                    method: 'post',
+                    data: pars, 
+                    dataType: "html",
+                    success: function (data) {
+                        Save_confirm(data);
+                    }
+                });
 	}
 	
 	SaveChange2 = function(pars)
 	{
-		var myAjax = new Ajax.Request(
-		'?popup=1&m=Action_Item_TelephonerMajCompte2', 
-		{
-			method: 'post', 
-			parameters: pars,
-			onComplete: Save_confirm
-		});
+                $.ajax({
+                    url:'?popup=1&m=Action_Item_TelephonerMajCompte2',
+                    method: 'post',
+                    data: pars, 
+                    dataType: "html",
+                    success: function (data) {
+                        Save_confirm(data);
+                    }
+                });
 	}
 	
-	Save_confirm = function(originalRequest)
+	Save_confirm = function(rval)
 	{
-		var rval= originalRequest.responseText;
 		if(rval=="OK")
 		{
 			showhidediv('none');
 		}
 		else
 		{
-			$('erreurMsg').innerHTML = rval;
-			$('erreurBox').style.display='block';
+			$('#erreurMsg').html(rval);
+			$('#erreurBox').css({ display: 'block' });
 		}
 	}
 	
@@ -64,18 +70,18 @@
 	//Sur la selection d'un telephone, activer ou non les options d'anonymat
 	set_anonyme = function(valeur){
 		if (valeur!="0"){
-			$('ano_oui').disabled=false;
+			$('#ano_oui').prop("disabled",false);
 		}else{
-			$('ano_oui').checked='unchecked';
-			$('ano_non').checked='checked';
-			$('ano_oui').disabled=true;
+			$('#ano_oui').prop("checked",false);
+			$('#ano_non').prop("checked",true);
+			$('#ano_oui').prop("disabled",true);
 		}
 	}
 	
 	showhidediv = function(display){
-		$('memoire').style.display=display;
+		$('#memoire').css({ display: display });
 		if (display=="none"){
-			$('memoire').innerHTML='';
+			$('#memoire').html("''");
 		}
 	}
 //-->

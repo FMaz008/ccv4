@@ -7,47 +7,43 @@
 		
 		//Requête AJAX pour Cr&eacute;er la page
 		showplzwait();
-		var myAjax = new Ajax.Request(
-				'?popup=1&m=Action_Item_SitePagedel', 
-				{
-					method: 'post', 
-					parameters: 'url=<?php echo $site->getUrl();?>/<?php echo $page->getId();?>'+
-								'&user='+$F('header_user')+
-								'&pass='+$F('header_pass'),
-					onComplete: operation_confirmdel,
-					onFailure: fail
-				});
+                $.ajax({
+                    url: '?popup=1&m=Action_Item_SitePagedel',
+                    method: 'post',
+                    data: 'url=<?php echo $site->getUrl();?>/<?php echo $page->getId();?>'+
+                            '&user='+$('#header_user').val()+
+                            '&pass='+$('#header_pass').val(), 
+                    dataType: "html",
+                    success: function (data) {
+                        operation_confirm(data);
+                    }
+                });
 		return false;
 	}
 
-	//Fonction g&eacute;n&eacute;rales
-	fail = function(){
-		$('request_msg').style.display="block";
-		$('request_msgtxt').innerHTML="La requête &agrave; &eacute;chou&eacute;e, veuillez r&eacute;-essayer plus tard.";
-	}
+	//Fonction générales
 
 	showplzwait = function(){
-		$('plzwait1').style.display="block";
-		$('plzwait2').style.display="block";
-		$('request_msgtxt').innerHTML="Veuillez patienter...";
-		$('request_msg').style.display="none";
+		$('#plzwait1').css({ display: "block" });
+		$('#plzwait2').css({ display: "block" });
+		$('#request_msgtxt').html("Veuillez patienter...");
+		$('#request_msg').css({ display: "none" });
 	}
 	hideplzwait = function(){
-		$('plzwait1').style.display="none";
-		$('plzwait2').style.display="none";
+		$('#plzwait1').css({ display: "none" });
+		$('#plzwait2').css({ display: "none" });
 	}
-	operation_confirmdel = function(originalRequest){
+	operation_confirmdel = function(rval){
 		
-		var rval= originalRequest.responseText;
 		var params=rval.split("|");
 		
 		if (params[0]=="OK"){
 			hideplzwait();
-			$('perso_pa').innerHTML=params[1];
+			$('#perso_pa').html(params[1]);
 			goTo("<?php echo $site->getUrl();?>");
 		}else{
-			$('request_msg').style.display="block";
-			$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+			$('#request_msg').css({ display: "block" });
+			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}
 //-->

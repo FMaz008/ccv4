@@ -28,53 +28,53 @@ isset = function(variable){
 validate = function(){
 	
 	//Validation du NOM
-	if ($F('nom')==""){
+	if ($('#nom').val()==""){
 		alert("Le nom du personnage est vide.");
-		$('nom').focus();
+		$('#nom').focus();
 		return false;
 	}
 	
-	if ($F('nom').length < 4) {
+	if ($('#nom').val().length < 4) {
 		alert("Le nom du personnage est trop court.");
-		$('nom').focus();
+		$('#nom').focus();
 		return false;
 	}
 	
 	re = new RegExp("^[-\' çéèôêîA-Za-z]+$");
-	if (!$F('nom').match(re)) {
+	if (!$('#nom').val().match(re)) {
 		alert("Le nom du personnage comporte des caractères invalides.");
-		$('nom').focus();
+		$('#nom').focus();
 		return false;
 	}
 	
 	
 	//Validation de l'AGE
-	if ($F('age')==""){
+	if ($('#age').val()==""){
 		alert("L'âge du personnage est vide.");
-		$('age').focus();
+		$('#age').focus();
 		return false;
 	}
 	
 	re = new RegExp("^[0-9]{1,2}$");
-	if (!$F('age').match(re)) {
+	if (!$('#age').val().match(re)) {
 		alert("L'âge du personnage comporte des caractères invalides.");
-		$('age').focus();
+		$('#age').focus();
 		return false;
 	}
 	
 	
 	
 	//Validation de POIDS
-	if ($F('poids')==""){
+	if ($('#poids').val()==""){
 		alert("Le poids du personnage est vide.");
-		$('poids').focus();
+		$('#poids').focus();
 		return false;
 	}
 	
 	re = new RegExp("^[0-9]{1,3}$");
-	if (!$F('poids').match(re)) {
+	if (!$('#poids').val().match(re)) {
 		alert("Le poids du personnage comporte des caractères invalides.");
-		$('poids').focus();
+		$('#poids').focus();
 		return false;
 	}
 	
@@ -83,31 +83,31 @@ validate = function(){
 	
 	
 	//Validation des YEUX
-	if ($F('yeux')==""){
+	if ($('#yeux').val()==""){
 		alert("La description des yeux du personnage est vide.");
-		$('yeux').focus();
+		$('#yeux').focus();
 		return false;
 	}
 	
 	
 	//Validation des CHEVEUX
-	if ($F('cheveux')==""){
+	if ($('#cheveux').val()==""){
 		alert("La description des cheveux du personnage est vide.");
-		$('cheveux').focus();
+		$('#cheveux').focus();
 		return false;
 	}
 
 	//Validation de la DESCRIPTION
-	if ($F('description')==""){
+	if ($('#description').val()==""){
 		alert("La description du personnage est vide.");
-		$('description').focus();
+		$('#description').focus();
 		return false;
 	}
 
 	//Validation du BACKGROUND
-	if ($F('background')==""){
+	if ($('#background').val()==""){
 		alert("L'historique (background) du personnage est vide.");
-		$('background').focus();
+		$('#background').focus();
 		return false;
 	}
 	
@@ -138,10 +138,10 @@ validate = function(){
 	
 	//Valider qu'il y a une valeur dans les caracts sélectionnés
 	for (var i=0;i<arrSelect.length; i++){
-		if(isset($(arrSelect[i])) && $(arrSelect[i]).checked){
-			if($F('caractDesc_' + arrSelect[i]) == ""){
+		if(isset(arrSelect[i]) && $("#"+arrSelect[i]).prop("checked")){
+			if($('#caractDesc_' + arrSelect[i]).val() == ""){
 				alert("Vous devez entrer une brève description pour chacune de vos caractéristiques.");
-				$('caractDesc_' + arrSelect[i]).focus();
+				$('#caractDesc_' + arrSelect[i]).focus();
 				return false;
 			}
 		}
@@ -149,14 +149,22 @@ validate = function(){
 	
 	//Requête AJAX pour valider le nom par rapport à la base de donnée (Si déjà utilisé)
 	showplzwait();
-	var myAjax = new Ajax.Request(
-		'?popup=1&m=<?php echo $CHECK_URL;?>', 
-		{
-			method: 'post', 
-			parameters: 'nom='+$F('nom'), 
-			onComplete: operation_confirm,
-			onFailure: fail
-		});
+        
+
+        $.ajax({
+            url: '?popup=1&m=<?php echo $CHECK_URL;?>',
+            method: 'post',
+            data: 'nom='+$('#nom').val(),
+            complete: function(jqXHR, textStatus) {
+                
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                fail();
+            }
+        })
+        .done(function( msg ) {
+            operation_confirm(msg);
+        });
 	
 	
 	return false;
@@ -173,17 +181,17 @@ recalculate_stat = function()
 		<?php
 	}
 	?>
-	$('stat_total').innerHTML = total;
+	$('#stat_total').html(total);
 	
-	$('stat_total').style.color= (total==0) ? "green" : "red";
+	$('#stat_total').css({ color: (total==0) ? "green" : "red" });
 	return total;
 	
 }
 
 stat_value = function(radioName){
 	for(var i=0; i<7;i++)
-		if($(radioName + '' + i).checked)
-			return $(radioName + '' + i).value;
+		if($("#"+radioName + '' + i).prop("checked"))
+			return $("#"+radioName + '' + i).val();
 }
 
 recalculate_comp = function()
@@ -197,15 +205,15 @@ recalculate_comp = function()
 		<?php
 	}
 	?>
-	$('comp_total').innerHTML = total;
+	$('#comp_total').html(total);
 	
-	$('comp_total').style.color= (total==<?php echo INSCRIPTION_NBR_COMP;?>) ? "green" : "red";
+	$('#comp_total').css({ color: (total==<?php echo INSCRIPTION_NBR_COMP;?>) ? "green" : "red"});
 	return total;
 }
 comp_value = function(radioName){
 	for(var i=0; i<=<?php echo INSCRIPTION_MAX_COMP;?>;i++)
-		if($(radioName + '' + i).checked)
-			return $(radioName + '' + i).value;
+		if($("#"+radioName + '' + i).prop("checked"))
+			return $("#"+radioName + '' + i).val();
 }
 
 
@@ -219,41 +227,41 @@ comp_value = function(radioName){
 select_caract = function(){
 	//Mettre normale toutes les sélections avant d'en désactiver
 	for (var i=0;i<arrSelect.length; i++){
-		if(isset($(arrSelect[i]))){
-			$(arrSelect[i]).disabled=false;
-			$('td_'+arrSelect[i]).className="value";
-			$('a_'+arrSelect[i]).style.color="";
-			$('tr_'+arrSelect[i]).style.display="none";
+		if(isset(arrSelect[i])){
+			$("#"+arrSelect[i]).prop("disabled",false);
+			$('#td_'+arrSelect[i]).attr("class", "value");
+			$('#a_'+arrSelect[i]).css({ color: ""});
+			$('#tr_'+arrSelect[i]).css({ display: "none" });
 		}
 	}
 	
 	
 	<?php if($GAME_IS_CYBERCITY){ ?>
 		//Effectuer les choix imposés par les valeurs
-		if(parseInt($F('age')) <= 15){
+		if(parseInt($('#age').val()) <= 15){
 			activate_signe('4');
 		}else{
 			desactivate_signe('4');
 		}
 		
-		if(parseInt($F('age')) >= 60){
+		if(parseInt($('#age').val()) >= 60){
 			activate_signe('5');
 		}else{
 			desactivate_signe('5');
 		}
 		
-		if(parseInt($F('poids')) < 100){
+		if(parseInt($('#poids').val()) < 100){
 			desactivate_signe('12');
 		}
 		
 		
-		if(parseInt($F('taillem')) == 2 && parseInt($F('taillecm')) > 50){
+		if(parseInt($('#taillem').val()) == 2 && parseInt($('#taillecm').val()) > 50){
 			activate_signe('2');
 		}else{
 			desactivate_signe('2');
 		}
 		
-		if(parseInt($F('taillem')) == 1 && parseInt($F('taillecm')) < 50){
+		if(parseInt($('#taillem').val()) == 1 && parseInt($('#taillecm').val()) < 50){
 			activate_signe('3');
 		}else{
 			desactivate_signe('3');
@@ -261,7 +269,7 @@ select_caract = function(){
 		
 		
 		//Combo obligatoire
-		if($('6').checked && $('2').checked){
+		if($('#6').checked && $('2').checked){
 			activate_signe('12');
 		}
 	<?php } ?>
@@ -281,14 +289,14 @@ select_caract = function(){
 	//Marquer les sélections
 	var total=0;
 	for (var i=0;i<arrSelect.length; i++){
-		if($(arrSelect[i]).checked){
+		if($("#"+arrSelect[i]).prop("checked")){
 			activate_signe(arrSelect[i]);
 			total++;
 		}
 	}
 	
-	$('select_total').innerHTML = total;
-	$('select_total').style.color= (total>=5) ? "green" : "red";
+	$('#select_total').html(total);
+	$('#select_total').css({ color: (total>=5) ? "green" : "red" });
 	
 	
 	return (total>=5);
@@ -296,12 +304,12 @@ select_caract = function(){
 }
 
 selectOpose = function(a, b){
-	if(isset($(a)) && $(a).checked){
+	if(isset($("#"+a)) && $("#"+a).checked){
 		activate_signe(a);
 		desactivate_signe(b);
 	}
 	
-	if(isset($(b)) && $(b).checked){
+	if(isset($("#"+b)) && $("#"+b).checked){
 		activate_signe(b);
 		desactivate_signe(a);
 	}
@@ -309,19 +317,16 @@ selectOpose = function(a, b){
 
 //Rendre la sélection impossible
 desactivate_signe = function(id){
-	$(id).disabled=true;
-	$(id).checked=false;
-	$('a_'+id).style.color="#333333";
-	$('tr_'+id).style.display="none";
+	$("#"+id).prop("disabled",true);
+	$("#"+id).prop("checked",false);
+	$('#a_'+id).css({ color: "#333333"});
+	$('#tr_'+id).hide();
 }
 
 activate_signe = function(id){
-	$(id).checked=true;
-	$('td_'+id).className="name";
-	return Try.these(
-      function() { $('tr_'+id).style.display="table-row"; }, //Pour tout les navigateurs conformes au W3C
-	  function() { $('tr_'+id).style.display="inline"; } //IE semble trop attardé pour supporter table-row.
-	);
+	$("#"+id).prop("checked",true);
+	$('#td_'+id).attr("class", "name");
+        $('#tr_'+id).show();
 }
 
 
@@ -330,41 +335,40 @@ activate_signe = function(id){
 
 //Fonction AJAX générales
 fail = function(){
-	$('request_msg').style.display="block";
-	$('request_msgtxt').innerHTML="La requête à échouée, veuillez ré-essayer plus tard.";
+	$('#request_msg').css({ display: "block" });
+	$('#request_msgtxt').html("La requête à échouée, veuillez ré-essayer plus tard.");
 }
 
 showplzwait = function(){
 	location.href="#";
-	$('plzwait1').style.display="block";
-	$('plzwait2').style.display="block";
-	$('request_msgtxt').innerHTML="Veuillez patienter...";
-	$('request_msg').style.display="none";
+	$('#plzwait1').css({ display: "block" });
+	$('#plzwait2').css({ display: "block" });
+	$('#request_msgtxt').html("Veuillez patienter...");
+	$('#request_msg').css({ display: "none" });
 }
 hideplzwait = function(){
 	location.href="#form";
-	$('plzwait1').style.display="none";
-	$('plzwait2').style.display="none";
+	$('#plzwait1').css({ display: "none" });
+	$('#plzwait2').css({ display: "none" });
 }
-operation_confirm = function(originalRequest){
+operation_confirm = function(rval){
 	
-	var rval= originalRequest.responseText;
 	var params=rval.split("|");
 	
 	if (params[0]=="OK"){
 		hideplzwait();
-		$('formulaire').submit();
+		$('#formulaire').submit();
 	}else{
-		$('request_msg').style.display="block";
-		$('request_msgtxt').innerHTML=decodeURIComponent(params[1]);
+		$('#request_msg').css({ display: "block" });
+		$('#request_msgtxt').html(decodeURIComponent(params[1]));
 	}
 }
 function heItemAutoHeight(itemNo){
-	var droite = $('droite'+itemNo) ;
-	var gauche = $('gauche'+itemNo) ;
+	var droite = $('#droite'+itemNo) ;
+	var gauche = $('#gauche'+itemNo) ;
 	var mh = Math.max(gauche.offsetHeight, droite.offsetHeight);
-	droite.style.height=mh+"px";
-	gauche.style.height=mh+"px";
+	droite.css({ height : mh+"px" });
+	gauche.css({ height : mh+"px" });
 }
 //-->
 </script>
@@ -677,7 +681,7 @@ $arrMaitrise = array('cu','pe','co','bi','lm');
 			?>
 			<tr>
 				<td class="name">
-					<span id="stat_<?php echo $stat['id'];?>" onmousemove="infobulle(this, event);">
+					<span id="stat_<?php echo $stat['id'];?>" onmousemove="infobulle($(this), event);">
 						<?php echo $stat['nom'];?>
 					</span>
 					<div id="ib_stat_<?php echo $stat['id'];?>" class="infobulle" style="width:300px;">
@@ -768,7 +772,7 @@ $arrMaitrise = array('cu','pe','co','bi','lm');
 						<tr>
 							<td class="name"><input type="checkbox" name="arrCaract[]" id="<?php echo $caract['id'];?>" value="<?php echo $caract['id'];?>" onclick="select_caract();" <?php if(isset($PERSO) && isset($PERSO_CARACT[$caract['id']])){ echo 'CHECKED'; } ?> /></td>
 							<td id="td_<?php echo $caract['id'];?>" class="value" colspan="1">
-								<span id="a_<?php echo $caract['id'];?>" onmousemove="infobulle(this, event);">
+								<span id="a_<?php echo $caract['id'];?>" onmousemove="infobulle($(this), event);">
 									<?php echo $caract['nom'];?>
 								</span>
 								<div id="ib_a_<?php echo $caract['id'];?>" class="infobulle" style="width:300px;">
@@ -858,7 +862,7 @@ $arrMaitrise = array('cu','pe','co','bi','lm');
 				?>
 				<tr>
 					<td class="name">
-						<span id="comp_<?php echo $comp['id'];?>" onmousemove="infobulle(this, event);">
+						<span id="comp_<?php echo $comp['id'];?>" onmousemove="infobulle($(this), event);">
 							<?php echo $comp['nom'];?>
 						</span>
 					</td>
@@ -926,8 +930,8 @@ $arrMaitrise = array('cu','pe','co','bi','lm');
 	
 	<div class="send">
 		<input type="hidden" id="SaveType" name="SaveType" value="" />
-		<input type="button" class="button" name="save" onclick="$('SaveType').value='save';validate();" value="Enregistrer le brouillon" style="width:250px;" />
-		<input type="button" class="button" name="go" onclick="$('SaveType').value='go';validate();" value="Soumettre le personnage à la validation" style="width:250px;" />
+		<input type="button" class="button" name="save" onclick="$('#SaveType').val('save');validate();" value="Enregistrer le brouillon" style="width:250px);" />
+		<input type="button" class="button" name="go" onclick="$('#SaveType').val('go');validate();" value="Soumettre le personnage à la validation" style="width:250px);" />
 	</div>
 	
 

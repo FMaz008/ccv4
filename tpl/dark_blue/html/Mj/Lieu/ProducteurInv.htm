@@ -80,18 +80,20 @@ function checkEnter(e)
 
 gosearch = function()
 {
-	$("results").innerHTML="Chargement en cours...";
-	$("results").style.display="inline";
-	$("button").style.display="inline";
+	$("results").html("Chargement en cours...");
+	$("results").css({ display: "inline" });
+	$("button").css({ display: "inline" });
 			
 	
-	var myAjax = new Ajax.Updater(
-			'results', 
-			'?mj=Search&popup=1', 
-			{
-				method: 'post', 
-				parameters: 'searchWhat=inventaire_item&search=' + $('search').value
-			});
+        $.ajax({
+            url:'?mj=Search&popup=1',
+            method: 'post',
+            data: 'searchWhat=inventaire_item&search=' + $('#search').value, 
+            dataType: "html",
+            success: function (data) {
+                $('#results').html(data);
+            }
+        });
 }
 
 

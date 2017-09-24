@@ -17,7 +17,7 @@
 		
 		<tr><td colspan="2" class="center">(Laisser 'Nip' vide si inchang&eacute;)</td></tr>
 		<tr><td colspan="2" class="center">
-				<input type="button"  OnClick="SaveChange2('compte=' + escape($F('compte')) + '&nip=' + escape($F('nip')) + '&telephone=<?php echo $idTel; ?>&post=1')" value="Enregistrer" class="button" />
+				<input type="button"  OnClick="SaveChange2('compte=' + escape($('#compte').val()) + '&nip=' + escape($('#nip').val()) + '&telephone=<?php echo $idTel; ?>&post=1')" value="Enregistrer" class="button" />
 				<input type="button" class="button" onclick="showhidediv('none');" value="Annuler" />
 			</td>
 		</tr>

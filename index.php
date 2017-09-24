@@ -256,6 +256,7 @@ class Main
 			//Si accès valide ( mail confirmé ), afficher le contenu du menu membre
 			if($this->session->getVar('logged')===true)
 			{
+                                $this->tpl->set('LOGGED', true);
 				$menuarr = array();
 				$arrPersos = $this->session->getVar('persoList');
 				if (!empty($arrPersos))
@@ -270,6 +271,7 @@ class Main
 					$this->tpl->set('MENU_PERSO', $menuarr);
 					unset($menuarr);
 				}
+                                
 				if ($this->account->getMjId() !== null)
 					$this->tpl->set('MENU_MJ', true);
 				

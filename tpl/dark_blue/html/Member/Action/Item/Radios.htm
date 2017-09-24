@@ -2,50 +2,50 @@
 //<!--
 	chgFreq = function(id){
 		showplzwait(); //m_inv_actions.js
-		var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Item_RadioMajFrequence', 
-			{
-				method: 'post', 
-				parameters: 'idradio='+id, 
-				onComplete: chgFreq_confirm,
-				onFailure: fail
-			});
+                $.ajax({
+                    url: '?popup=1&m=Action_Item_RadioMajFrequence',
+                    method: 'post',
+                    data: 'idradio='+id, 
+                    dataType: "html",
+                    success: function (data) {
+                        chgFreq_confirm(data);
+                    }
+                });
 	}
-	chgFreq_confirm = function(originalRequest){
+	chgFreq_confirm = function(rval){
 		
-		var rval= originalRequest.responseText;
-		$('request_msg').style.display="block";
-		$('request_msgtxt').innerHTML=rval;
+		$('#request_msg').css({ display: "block" });
+		$('#request_msgtxt').html(rval);
 	}
 	
 	saveFreq = function(pars){
-		var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Item_RadioMajFrequence2', 
-			{
-				method: 'post', 
-				parameters: pars, 
-				onComplete: saveFreq_confirm,
-				onFailure: fail
-			});
+                $.ajax({
+                    url: '?popup=1&m=Action_Item_RadioMajFrequence2',
+                    method: 'post',
+                    data: pars, 
+                    dataType: "html",
+                    success: function (data) {
+                        saveFreq_confirm(data);
+                    }
+                });
 	}
-	saveFreq_confirm = function(originalRequest){
+	saveFreq_confirm = function(rval){
 		
-		var rval= originalRequest.responseText;
 		var params=rval.split("|");
 		
 		if (params.length > 1){
 			if(params[1]==0){
-				$("freq_" + params[0]).innerHTML = "<font color=\"red\">aucune</font>";
-				$("ecoute_" + params[0]).innerHTML = "- écoute seulement";
-				$("radio_" + params[0]).disabled=true;
+				$("freq_" + params[0]).html("<font color=\"red\">aucune</font>");
+				$("ecoute_" + params[0]).html("- écoute seulement");
+				$("radio_" + params[0]).prop("disabled",true);
 			}else{
-				$("freq_" + params[0]).innerHTML = params[1];
-				$("ecoute_" + params[0]).innerHTML = "";
-				$("radio_" + params[0]).disabled=false;
+				$("freq_" + params[0]).html(params[1]);
+				$("ecoute_" + params[0]).html("");
+				$("radio_" + params[0]).prop("disabled",false);
 			}
 			hideplzwait(); //m_inv_actions.js
 		}else{
-			$('request_msgtxt').innerHTML=rval;
+			$('#request_msgtxt').html(rval);
 		}
 	}
 
@@ -54,33 +54,34 @@
 	
 	chgClef = function(id){
 		showplzwait(); //m_inv_actions.js
-		var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Item_RadioMajClef', 
-			{
-				method: 'post', 
-				parameters: 'idradio='+id, 
-				onComplete: chgClef_confirm,
-				onFailure: fail
-			});
+                $.ajax({
+                    url: '?popup=1&m=Action_Item_RadioMajClef',
+                    method: 'post',
+                    data: 'idradio='+id, 
+                    dataType: "html",
+                    success: function (data) {
+                        chgClef_confirm(data);
+                    }
+                });
 	}
 	chgClef_confirm = function(originalRequest){
 		
-		var rval= originalRequest.responseText;
-		$('request_msg').style.display="block";
-		$('request_msgtxt').innerHTML=rval;
+		$('#request_msg').css({ display: "block" });
+		$('#request_msgtxt').html(rval);
 	}
 	
 	saveClef = function(pars){
-		var myAjax = new Ajax.Request(
-			'?popup=1&m=Action_Item_RadioMajClef2', 
-			{
-				method: 'post', 
-				parameters: pars, 
-				onComplete: saveClef_confirm,
-				onFailure: fail
-			});
+                $.ajax({
+                    url: '?popup=1&m=Action_Item_RadioMajClef2',
+                    method: 'post',
+                    data: pars, 
+                    dataType: "html",
+                    success: function (data) {
+                        saveClef_confirm(data);
+                    }
+                });
 	}
-	saveClef_confirm = function(originalRequest){
+	saveClef_confirm = function(rval){
 		
 		var rval= originalRequest.responseText;
 		var params=rval.split("|");
@@ -88,7 +89,7 @@
 		if (params.length > 1){
 			hideplzwait(); //m_inv_actions.js
 		}else{
-			$('request_msgtxt').innerHTML=rval;
+			$('#request_msgtxt').html(rval);
 		}
 	}
 //-->

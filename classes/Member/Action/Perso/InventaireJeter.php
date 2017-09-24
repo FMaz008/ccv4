@@ -41,7 +41,7 @@ class Member_Action_Perso_InventaireJeter
 				//Demander la quantité à jeter
 				$msg = '<div style="text-align:center;width:100%;">';
 				$msg .= 'Jeter: <input type="text" size="3" class="text" id="ask_qte" value="1" style="text-align:right;" /> / ' . $item->getQte() . '<br />';
-				$msg .= "<input type=\"button\" class=\"button\" onclick=\"submitJeterForm('?m=Action_Perso_InventaireJeter'," . $_POST['id'] . ", \$F('ask_qte'));\" value=\"Jeter\" />";
+				$msg .= "<input type=\"button\" class=\"button\" onclick=\"submitJeterForm('?m=Action_Perso_InventaireJeter'," . $_POST['id'] . ", \$('#ask_qte').val());\" value=\"Jeter\" />";
 				$msg .= '</div>';
 				die($_POST['id'] . '|' . $msg);
 				
