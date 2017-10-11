@@ -2,24 +2,18 @@
 //<!--
 	$('#perso_pa').html("<?php echo $PA;?>");
 	$('#perso_cash').html("<?php echo $CASH;?>");
-	/**
-	 * SRC: http://www.rexchung.com/2007/02/22/getting-radio-buttons-value-with-prototypejs/
-	 */
-	$RF = function(rName) {
-	    var tmp = Form.getInputs('action_mairieVisaVertExam','radio',rName).find(function(radio) { return radio.checked; })
-		if(tmp==undefined)	
-			return null;
-		return tmp.value;
-	}
 	
 	valider = function(){
 		var bad = false;
-		
+		var val;
 		<?php
 		foreach($SECTIONS as $section){
 			foreach($section['questions'] as $question){
 				?>
-				if($RF('Q<?php echo $question['id'];?>')==null)	bad=true;
+                                val=$('input[name=Q<?php echo $question['id'];?>:checked]', '#action_mairieVisaVertExam').val();        
+				if(val==null){
+                                    bad=true;
+                                }
 				<?php
 			}
 		}
