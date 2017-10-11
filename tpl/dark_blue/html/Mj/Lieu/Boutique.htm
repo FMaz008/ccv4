@@ -19,7 +19,7 @@
                 $.ajax({
                     url:'?mj=Search&popup=1',
                     method: 'post',
-                    data: 'searchWhat=inventaire_'+type_search+'&search=' + $("#"+type+'_search').value, 
+                    data: 'searchWhat=inventaire_'+type_search+'&search=' + $("#"+type+'_search').val(), 
                     dataType: "html",
                     success: function (data) {
                         $('#'+type+'_results').html(data);

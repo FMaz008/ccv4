@@ -28,7 +28,7 @@
                 $.ajax({
                     url:'?popup=1&m=Action_Lieu_BoutiqueAdminCaisse',
                     method: 'post',
-                    data: 'oper_type='+oper_type+'&montant='+$('#montant').value, 
+                    data: 'oper_type='+oper_type+'&montant='+$('#montant').val(), 
                     dataType: "html",
                     success: function (data) {
                         operation_confirm(data);

@@ -149,7 +149,7 @@
 	<form onsubmit="return false;">
 		<strong>Identifier l'utilisateur à abonner.</strong>
 		<br />Nom d'utilisateur: <input type="text" class="text" id="panel_userName" value="" />
-		<input type="submit" class="button" name="valid_user" value="Valider" onclick="fct_searchUser($('#panel_userName').value);" />
+		<input type="submit" class="button" name="valid_user" value="Valider" onclick="fct_searchUser($('#panel_userName').val());" />
 	</form>
 </div>
 <div id="panel_foundUser" style="display:none;">

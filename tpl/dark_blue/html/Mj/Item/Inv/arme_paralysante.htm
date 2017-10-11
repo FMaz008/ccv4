@@ -69,45 +69,45 @@ showHideTypeAsso = function(show_what){
 
 validateForm = function(){
 	if ($('#att_perso').prop("checked"))
-		if( !is_defined($('#form1').inv_persoid) || $('#form1').inv_persoid.value == '')
-			return notvalid("Vous devez choisir un personnage.");
+		if( !$('input[name=inv_persoid]', '#form1').val() )
+			return notvalid('Vous devez choisir un personnage.');
 			
 	if ($('#att_lieu').prop("checked"))
-		if( !is_defined($('#form1').inv_lieutech) || $('#form1').inv_lieutech.value == '')
-			return notvalid("Vous devez choisir un lieu.");
+		if( !$('input[name=inv_lieutech]', '#form1').val() )
+			return notvalid('Vous devez choisir un lieu.');
 			
 	if ($('#att_boutique').prop("checked"))
-		if( !is_defined($('#form1').inv_boutiquelieutech) || $('#form1').inv_boutiquelieutech.value == '')
-			return notvalid("Vous devez choisir une boutique.");
-			
+		if( !$('input[name=inv_boutiquelieutech]', '#form1').val() )
+			return notvalid('Vous devez choisir une boutique.');
+		
 	if ($('#att_casier').prop("checked"))
-		if( !is_defined($('#form1').inv_casierid) || $('#form1').inv_casierid.value == '')
+		if( !$('input[name=inv_casierid]', '#form1').val() )
 			return notvalid("Vous devez choisir un casier.");
 			
 	if ($('#att_item').prop("checked"))
-		if( !is_defined($('#form1').inv_itemid) || $('#form1').inv_itemid.value == '')
+		if( !$('input[name=inv_itemid]', '#form1').val() )
 			return notvalid("Vous devez choisir un item.");
 	
 	
 	var myReg;
-	myReg = new RegExp("^[0-9]+$");
-	if(!$('#form1').inv_resistance.value.match(myReg))
+                
+        myReg = new RegExp("^[0-9]+$");
+        var resistance = $('input[name=inv_resistance]', '#form1').val();
+	if(!resistance.match(myReg))
 		return notvalid("La résistance doit être un chiffre");
-	if($('#form1').inv_resistance.value><?php echo $ITEM['db_resistance'];?>)
+	if(resistance > <?php echo $ITEM['db_resistance'];?>)
 		return notvalid("La résistance ne doit pas excéder son maximum");
 	
 	
-	myReg = new RegExp("^[0-9]+$");
-	if(!$('#form1').inv_munition.value.match(myReg))
+        myReg = new RegExp("^[0-9]+$");
+        var munition = $('input[name=inv_munition]', '#form1').val();
+	if(!munition.match(myReg))
 		return notvalid("Les munitions doivent être un chiffre");
-	if($('#form1').inv_munition.value><?php echo $ITEM['db_capacite'];?>)
+	if(munition > <?php echo $ITEM['db_capacite'];?>)
 		return notvalid("Les munitions ne doit pas excéder la capacité maximale de l'arme");
 	
 	
 	return true;
-}
-is_defined = function( v ){
-    return typeof(v) != 'undefined';
 }
 notvalid = function(msg){
 	alert (msg);

@@ -26,7 +26,7 @@
                 $.ajax({
                     url:'?popup=1&m=Action_Lieu_Guichet3Retrait',
                     method: 'post',
-                    data: 'montant='+$('#montant').value+'&carteid=<?php echo $_POST['carteid'];?>&nip=<?php echo $_POST['nip'];?>', 
+                    data: 'montant='+$('#montant').val()+'&carteid=<?php echo $_POST['carteid'];?>&nip=<?php echo $_POST['nip'];?>', 
                     dataType: "html",
                     success: function (data) {
                         operation_confirm(data);

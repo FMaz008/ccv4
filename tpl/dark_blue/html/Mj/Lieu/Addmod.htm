@@ -305,7 +305,7 @@ if ($SUBMITNAME=='Mod'){
 						<input type="submit" class="button" name="lien_del" value="Supprimer la sélection" onclick="return confirmdel('Effacer le(s) lien(s) sélectionné(s) ?');" />
 						<input type="submit" class="button" name="lien_save" value="Enregistrer" />
 						Ajouter <input type="text" class="text" id="add_qte" value="1" size="2" /> lien(s)
-						<input type="button" class="button" name="preadd" onclick="AjouterLien($('#add_qte').value);" value="Ok !" />
+						<input type="button" class="button" name="preadd" onclick="AjouterLien($('#add_qte').val());" value="Ok !" />
 					</td>
 				</tr>
 			</table>

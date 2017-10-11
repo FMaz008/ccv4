@@ -68,33 +68,32 @@ showHideTypeAsso = function(show_what){
 
 validateForm = function(){
 	if ($('#att_perso').prop("checked"))
-		if( !is_defined($('#form1').inv_persoid) || $('#form1').inv_persoid.value == '')
-			return notvalid("Vous devez choisir un personnage.");
+		if( !$('input[name=inv_persoid]', '#form1').val() )
+			return notvalid('Vous devez choisir un personnage.');
 			
 	if ($('#att_lieu').prop("checked"))
-		if( !is_defined($('#form1').inv_lieutech) || $('#form1').inv_lieutech.value == '')
-			return notvalid("Vous devez choisir un lieu.");
+		if( !$('input[name=inv_lieutech]', '#form1').val() )
+			return notvalid('Vous devez choisir un lieu.');
 			
 	if ($('#att_boutique').prop("checked"))
-		if( !is_defined($('#form1').inv_boutiquelieutech) || $('#form1').inv_boutiquelieutech.value == '')
-			return notvalid("Vous devez choisir une boutique.");
-			
+		if( !$('input[name=inv_boutiquelieutech]', '#form1').val() )
+			return notvalid('Vous devez choisir une boutique.');
+		
 	if ($('#att_casier').prop("checked"))
-		if( !is_defined($('#form1').inv_casierid) || $('#form1').inv_casierid.value == '')
+		if( !$('input[name=inv_casierid]', '#form1').val() )
 			return notvalid("Vous devez choisir un casier.");
 			
 	if ($('#att_item').prop("checked"))
-		if( !is_defined($('#form1').inv_itemid) || $('#form1').inv_itemid.value == '')
+		if( !$('input[name=inv_itemid]', '#form1').val() )
 			return notvalid("Vous devez choisir un item.");
 	
-	var myReg = new RegExp("^[0-9]{3}-[0-9]{4}$");
-	if(!$('#form1').inv_notel.value.match(myReg))
+	var myReg;
+        myReg= new RegExp("^[0-9]{3}-[0-9]{4}$");
+        var notel = $('input[name=inv_notel]', '#form1').val();
+	if(!notel.match(myReg))
 		return notvalid("Le numéro de téléphone doit être au format 123-1234");
 	
 	return true;
-}
-is_defined = function( v ){
-    return typeof(v) != 'undefined';
 }
 notvalid = function(msg){
 	alert (msg);
