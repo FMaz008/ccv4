@@ -26,13 +26,13 @@ class Mj_Item_ArmeAdd
 		$arr['db_valeur'] = '100';
 		$arr['db_img'] = 'none.gif';
 		$arr['db_pr'] = '3';
-		$arr['db_force'] = '';
+		$arr['db_force'] = '1';
 		$arr['db_portee'] = '';
-		$arr['db_tir_par_tour'] = '';
-		$arr['db_fiabilite'] = '';
-		$arr['db_precision'] = '';
+		$arr['db_tir_par_tour'] = '1';
+		$arr['db_fiabilite'] = '70';
+		$arr['db_precision'] = '70';
 		$arr['db_resistance'] = '10';
-		$arr['db_capacite'] = '';
+		$arr['db_capacite'] = '10';
 		$arr['db_notemj'] = '';
 						
 		
@@ -70,12 +70,6 @@ class Mj_Item_ArmeAdd
 		if (empty($_POST['db_valeur']))			$_POST['db_valeur'] = 0;
 		if (empty($_POST['db_pr']))				$_POST['db_pr'] = 0;
 		if (empty($_POST['db_resistance'])){ $_POST['db_resistance'] = 0; }
-		
-		if (empty($_POST['db_tir_par_tour']))	$_POST['db_tir_par_tour'] = 'NULL';
-		if (empty($_POST['db_fiabilite']))		$_POST['db_fiabilite'] = 'NULL';
-		if (empty($_POST['db_precision']))		$_POST['db_precision'] = 'NULL';
-		if (empty($_POST['db_capacite']))		$_POST['db_capacite'] = 'NULL';
-		if (empty($_POST['db_portee']))			$_POST['db_portee'] = 'NULL';
 		
 		$query = 'INSERT INTO `' . DB_PREFIX . 'item_db`'
 					. '('
@@ -121,12 +115,39 @@ class Mj_Item_ArmeAdd
 		$prep->bindValue(':db_pr', $_POST['db_pr'], PDO::PARAM_INT);
 		$prep->bindValue(':db_force', $_POST['db_force'], PDO::PARAM_INT);
 		$prep->bindValue(':db_resistance', $_POST['db_resistance'], PDO::PARAM_INT);
-		$prep->bindValue(':db_portee', $_POST['db_portee'], PDO::PARAM_STR);
-		$prep->bindValue(':db_tir_par_tour', $_POST['db_tir_par_tour'], PDO::PARAM_INT);
-		$prep->bindValue(':db_fiabilite', $_POST['db_fiabilite'], PDO::PARAM_INT);
-		$prep->bindValue(':db_precision', $_POST['db_precision'], PDO::PARAM_INT);
-		$prep->bindValue(':db_capacite', $_POST['db_capacite'], PDO::PARAM_INT);
 		$prep->bindValue(':db_notemj', $_POST['db_notemj'], PDO::PARAM_STR);
+                
+                if (empty($_POST['db_tir_par_tour'])){
+                    $prep->bindValue(':db_tir_par_tour', NULL, PDO::PARAM_NULL);
+                }else{
+                    $prep->bindValue(':db_tir_par_tour', $_POST['db_tir_par_tour'], PDO::PARAM_INT);
+                }
+                
+		if (empty($_POST['db_fiabilite'])){
+                    $prep->bindValue(':db_fiabilite', NULL, PDO::PARAM_NULL);
+                } else {
+                    $prep->bindValue(':db_fiabilite', $_POST['db_fiabilite'], PDO::PARAM_INT);
+                }
+                
+		if (empty($_POST['db_precision'])){
+                    $prep->bindValue(':db_precision', NULL, PDO::PARAM_NULL);
+                }else{
+                    $prep->bindValue(':db_precision', $_POST['db_precision'], PDO::PARAM_INT);
+                }
+                
+		if (empty($_POST['db_capacite'])){
+                    $prep->bindValue(':db_capacite', NULL, PDO::PARAM_NULL);
+                }else{
+                    $prep->bindValue(':db_capacite', $_POST['db_capacite'], PDO::PARAM_INT);
+                }
+                
+                if (empty($_POST['db_portee'])){
+                    $prep->bindValue(':db_portee', NULL, PDO::PARAM_NULL);
+                }else{
+                    $prep->bindValue(':db_portee', $_POST['db_portee'], PDO::PARAM_STR);
+                }
+                
+		
 		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;

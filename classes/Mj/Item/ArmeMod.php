@@ -118,11 +118,6 @@ class Mj_Item_ArmeMod
 		if (empty($_POST['db_pr']))				$_POST['db_pr'] = 0;
 		if (empty($_POST['db_resistance'])){ $_POST['db_resistance'] = 0; }
 		
-		if (empty($_POST['db_tir_par_tour']))	$_POST['db_tir_par_tour'] = 'NULL';
-		if (empty($_POST['db_fiabilite']))		$_POST['db_fiabilite'] = 'NULL';
-		if (empty($_POST['db_precision']))		$_POST['db_precision'] = 'NULL';
-		if (empty($_POST['db_capacite']))		$_POST['db_capacite'] = 'NULL';
-		if (empty($_POST['db_portee']))			$_POST['db_portee'] = 'NULL';
 		
 		$query = 'UPDATE `' . DB_PREFIX . 'item_db`'
 					. ' SET'
@@ -150,13 +145,39 @@ class Mj_Item_ArmeMod
 		$prep->bindValue(':db_pr', $_POST['db_pr'], PDO::PARAM_INT);
 		$prep->bindValue(':db_force', $_POST['db_force'], PDO::PARAM_INT);
 		$prep->bindValue(':db_resistance', $_POST['db_resistance'], PDO::PARAM_INT);
-		$prep->bindValue(':db_portee', $_POST['db_portee'], PDO::PARAM_STR);
-		$prep->bindValue(':db_tir_par_tour', $_POST['db_tir_par_tour'], PDO::PARAM_INT);
-		$prep->bindValue(':db_fiabilite', $_POST['db_fiabilite'], PDO::PARAM_INT);
-		$prep->bindValue(':db_precision', $_POST['db_precision'], PDO::PARAM_INT);
-		$prep->bindValue(':db_capacite', $_POST['db_capacite'], PDO::PARAM_INT);
 		$prep->bindValue(':db_notemj', $_POST['db_notemj'], PDO::PARAM_STR);
 		$prep->bindValue(':db_id', $_POST['db_id'], PDO::PARAM_INT);
+                
+                if (empty($_POST['db_tir_par_tour'])){
+                    $prep->bindValue(':db_tir_par_tour', NULL, PDO::PARAM_NULL);
+                }else{
+                    $prep->bindValue(':db_tir_par_tour', $_POST['db_tir_par_tour'], PDO::PARAM_INT);
+                }
+                
+		if (empty($_POST['db_fiabilite'])){
+                    $prep->bindValue(':db_fiabilite', NULL, PDO::PARAM_NULL);
+                } else {
+                    $prep->bindValue(':db_fiabilite', $_POST['db_fiabilite'], PDO::PARAM_INT);
+                }
+                
+		if (empty($_POST['db_precision'])){
+                    $prep->bindValue(':db_precision', NULL, PDO::PARAM_NULL);
+                }else{
+                    $prep->bindValue(':db_precision', $_POST['db_precision'], PDO::PARAM_INT);
+                }
+                
+		if (empty($_POST['db_capacite'])){
+                    $prep->bindValue(':db_capacite', NULL, PDO::PARAM_NULL);
+                }else{
+                    $prep->bindValue(':db_capacite', $_POST['db_capacite'], PDO::PARAM_INT);
+                }
+                
+                if (empty($_POST['db_portee'])){
+                    $prep->bindValue(':db_portee', NULL, PDO::PARAM_NULL);
+                }else{
+                    $prep->bindValue(':db_portee', $_POST['db_portee'], PDO::PARAM_STR);
+                }
+                
 		$prep->executePlus($db, __FILE__,__LINE__);
 		$prep->closeCursor();
 		$prep = NULL;
