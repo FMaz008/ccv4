@@ -3,7 +3,7 @@
 function heItemAutoHeight(itemNo){
 	var droite = $('#droite'+itemNo) ;
 	var gauche = $('#gauche'+itemNo) ;
-	var mh = Math.max(gauche.offsetHeight, droite.offsetHeight);
+	var mh = Math.max(gauche.outerHeight(), droite.outerHeight());
 	droite.style.height=mh+"px";
 	gauche.style.height=mh+"px";
 }
