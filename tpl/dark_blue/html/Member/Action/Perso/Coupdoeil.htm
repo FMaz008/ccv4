@@ -32,7 +32,7 @@
                 $.ajax({
                     url:'?m=He_Rename',
                     method: 'post',
-                    data: 'persoId='+persoId+'&newName='+encodeURI($(newName).value), 
+                    data: 'persoId='+persoId+'&newName='+encodeURI($("#"+newName).val()), 
                     dataType: "html",
                     //encoding: 'UTF-8',
                     success: function (data) {
@@ -126,7 +126,7 @@ if (empty($PERSOS)){?>
 					<?php
 					if($perso['perso']->getSexe() == 'm'){
 						?>
-						<a onclick="renamePerso(<?php echo $perso['perso']->getId();?>,'<?phpaddslashes($perso['perso']->getNom());?>');" class="txtStyle_homme">
+						<a onclick="renamePerso(<?php echo $perso['perso']->getId();?>,'<?php echo addslashes($perso['perso']->getNom());?>');" class="txtStyle_homme">
 						<?php
 					}elseif($perso['perso']->getSexe() == 'f'){
 						?>

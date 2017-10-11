@@ -35,7 +35,7 @@
                 $.ajax({
                     url:'?m=He_Rename',
                     method: 'post',
-                    data: 'persoId='+persoId+'&newName='+encodeURIComponent($(newName).value), 
+                    data: 'persoId='+persoId+'&newName='+encodeURIComponent($("#"+newName).val()), 
                     dataType: "html",
                     success: function (data) {
                         renamePersoGo_confirm(data);
