@@ -29,14 +29,14 @@
 	}
 
 	showplzwait = function(){
-		$('#plzwait1').css({ display: "block" });
-		$('#plzwait2').css({ display: "block" });
+		$('#plzwait1').show();
+		$('#plzwait2').show();
 		$('#request_msgtxt').html("Veuillez patienter...");
-		$('#request_msg').css({ display: "none" });
+		$('#request_msg').hide();
 	}
 	hideplzwait = function(){
-		$('#plzwait1').css({ display: "none" });
-		$('#plzwait2').css({ display: "none" });
+		$('#plzwait1').hide();
+		$('#plzwait2').hide();
 	}
 	operation_confirm = function(rval){
 		
@@ -46,7 +46,7 @@
 			$('#perso_pa').html(params[1]);
 			goTo(params[2]);
 		}else{
-			$('#request_msg').css({ display: "block" });
+			$('#request_msg').show();
 			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}

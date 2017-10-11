@@ -2,8 +2,8 @@
 //<!--
 
 	function heItemAutoHeight(itemNo){
-		var droite = $('droite'+itemNo) ;
-		var gauche = $('gauche'+itemNo) ;
+		var droite = $('#droite'+itemNo) ;
+		var gauche = $('#gauche'+itemNo) ;
 		var mh = Math.max(gauche.offsetHeight, droite.offsetHeight);
 		droite.style.height=mh+"px";
 		gauche.style.height=mh+"px";

@@ -84,7 +84,7 @@ conso_confirm = function(rval){
 		
 		hideplzwait();
 	}else{
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		if(params.length==1){
 			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{
@@ -141,7 +141,7 @@ equiper_confirm = function(rval){
 		
 		hideplzwait();
 	}else{
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		if(params.length==1){
 			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{
@@ -196,7 +196,7 @@ ranger_confirm = function(rval){
 		
 		hideplzwait();
 	}else{
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		if(params.length==1){
 			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{
@@ -296,7 +296,7 @@ jeter_confirm = function(rval){
 		
 		hideplzwait();
 	}else{
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		if(params.length==1){
 			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{
@@ -329,7 +329,7 @@ charger_confirm = function(rval){
 	
 	var params=rval.split("|");
 	
-	$('#request_msg').css({ display: "block" });
+	$('#request_msg').show();
 	$('#request_msgtxt').html(decodeURIComponent(params[1]));
 }
 submitMunForm = function(url, itemid, munid){
@@ -358,13 +358,13 @@ charger_confirmFin = function(rval){
 	//5: Mun ID
 	//6: Mun Qte
 	if (params.length > 1 && params[1]=="OK"){
-		$("qte_" + params[0]).html(params[4]);
-		$("qte_" + params[5]).html(params[6]);
+		$("#qte_" + params[0]).html(params[4]);
+		$("#qte_" + params[5]).html(params[6]);
 		$('#perso_pa').html(params[2]);
 		$('#perso_pr').html(params[3]);
 		hideplzwait();
 	}else{
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		if(params.length==1){
 			$('#request_msgtxt').html(decodeURIComponent(params[0]));
 		}else{

@@ -6,7 +6,7 @@
                 $.ajax({
                     url:'?mj=Search&popup=1',
                     method: 'post',
-                    data: 'searchWhat='+type+'&search='+$(type).search.value, 
+                    data: 'searchWhat=Lieu_Sendmsg&search='+$("#lieu_search").val(), 
                     dataType: "html",
                     success: function (data) {
                         gosearch_confirm(data);
@@ -16,7 +16,7 @@
 	
 	gosearch_confirm = function (rval)
 	{
-		$("lieu_results").html(rval);
+		$("#lieu_results").html(rval);
 	}
 	
 	
@@ -36,28 +36,14 @@
 		{
 			arrLieux.push(id);
 			
-			//Créer le div
-			var elem=document.createElement('div');
-			with (elem)
-			{
-				style.display = "block";
-				innerHTML = nom + " ";
-			}
-			elem.id = "lieux_" + id;
-			
-			//Créer le lien de suppression
-			var span=document.createElement('span');
-			with (span)
-			{
-				className="fakelink";
-				style.fontSize="10px";
-				innerHTML = "(Supprimer)";
-			}
-			span.onclick = Function("remLieu("+id+")");
-			
-			//Joindre les deux éléments
-			elem.appendChild(span);
-			$("listLieux").appendChild(elem);
+			$("#listLieux").append(
+                            "<div id='lieux_" + id + "'>"
+                                + nom + " "
+                                + "<span class='fakelink' style='font-size:10px;' onclick='remLieu("+id+");return false;'>"
+                                    + "(Supprimer)"
+                                + "</span>\n"
+                            + "</div>"
+                        );
 			
 			//Mettre a jour le champs dans le formulaire
 			setUrlLieux();
@@ -75,7 +61,7 @@
 			arrLieux.splice(i,1);
 			
 			//Supprimée l'entrée visible
-			$("listLieux").removeChild($("lieux_" + id));
+			$("#lieux_" + id).remove();
 			
 			//Mettre a jour le champs dans le formulaire
 			setUrlLieux();
@@ -118,7 +104,7 @@
 	<tr>
 		<td class="value" style="vertical-align:top;">
 			<form method="post" id="Lieu_Sendmsg" onsubmit="gosearch(this.id);return false;">
-				N. tech.: <input type="text" class="text" name="search" style="width:100px;" />
+				N. tech.: <input type="text" class="text" id="lieu_search" name="search" style="width:100px;" />
 						<input type="submit" class="button" name="go" value="Go" style="width:25px;" />
 	
 				<div id="lieu_results" style="height:30em;overflow:auto;"></div>

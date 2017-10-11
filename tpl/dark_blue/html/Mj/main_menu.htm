@@ -254,16 +254,14 @@
 			<?php } ?>
 		</fieldset>
 		
+<?php if($PAGE_DEV){ ?>
 		<fieldset class="mj_left">
-			<?php if($PAGE_DEV){ ?>
-			<legend>Développement</legend>
-		
-			<form name="Dev">
-				<br />- <a href="?mj=Dev_ErrLog">Log des erreurs</a>
-			</form>
-			<?php } ?>
+                    <legend>Développement</legend>
+                    <form name="Dev">
+                            <br />- <a href="?mj=Dev_ErrLog">Log des erreurs</a>
+                    </form>
 		</fieldset>
-		
+<?php } ?>
 		<div class="clearboth"></div>
 
 </div>

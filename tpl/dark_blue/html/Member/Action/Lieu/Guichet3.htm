@@ -2,19 +2,19 @@
 //<!--
 	//Fonction generales
 	fail = function(){
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		$('#request_msgtxt').html("La requête &agrave; &eacute;chou&eacute;e, veuillez r&eacute;-essayer plus tard.");
 	}
 
 	showplzwait = function(){
-		$('#plzwait1').css({ display: "block" });
-		$('#plzwait2').css({ display: "block" });
+		$('#plzwait1').show();
+		$('#plzwait2').show();
 		$('#request_msgtxt').html("Veuillez patienter...");
-		$('#request_msg').css({ display: "none" });
+		$('#request_msg').hide();
 	}
 	hideplzwait = function(){
-		$('#plzwait1').css({ display: "none" });
-		$('#plzwait2').css({ display: "none" });
+		$('#plzwait1').hide();
+		$('#plzwait2').hide();
 	}
 
 
@@ -46,7 +46,7 @@
 			
 			hideplzwait();
 		}else{
-			$('#request_msg').css({ display: "block" });
+			$('#request_msg').show();
 			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}

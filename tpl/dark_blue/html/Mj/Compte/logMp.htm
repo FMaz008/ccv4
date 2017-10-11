@@ -1,7 +1,6 @@
 <script type="text/javascript">
 function toggleView(rowId){
-	var rowDisplay = $('details_'+rowId).style.display;
-	$('details_'+rowId).css({ display: (rowDisplay == "none") ? "table-row" : "none" });
+	$('details_'+rowId).toggle();
 }
 </script>
 <table class="center">

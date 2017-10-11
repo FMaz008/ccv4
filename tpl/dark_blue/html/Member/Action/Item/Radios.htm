@@ -14,7 +14,7 @@
 	}
 	chgFreq_confirm = function(rval){
 		
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		$('#request_msgtxt').html(rval);
 	}
 	
@@ -35,13 +35,13 @@
 		
 		if (params.length > 1){
 			if(params[1]==0){
-				$("freq_" + params[0]).html("<font color=\"red\">aucune</font>");
-				$("ecoute_" + params[0]).html("- écoute seulement");
-				$("radio_" + params[0]).prop("disabled",true);
+				$("#freq_" + params[0]).html("<font color=\"red\">aucune</font>");
+				$("#ecoute_" + params[0]).html("- écoute seulement");
+				$("#radio_" + params[0]).prop("disabled",true);
 			}else{
-				$("freq_" + params[0]).html(params[1]);
-				$("ecoute_" + params[0]).html("");
-				$("radio_" + params[0]).prop("disabled",false);
+				$("#freq_" + params[0]).html(params[1]);
+				$("#ecoute_" + params[0]).html("");
+				$("#radio_" + params[0]).prop("disabled",false);
 			}
 			hideplzwait(); //m_inv_actions.js
 		}else{
@@ -66,7 +66,7 @@
 	}
 	chgClef_confirm = function(originalRequest){
 		
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		$('#request_msgtxt').html(rval);
 	}
 	

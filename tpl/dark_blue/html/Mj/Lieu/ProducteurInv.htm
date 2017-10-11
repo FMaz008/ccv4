@@ -80,9 +80,9 @@ function checkEnter(e)
 
 gosearch = function()
 {
-	$("results").html("Chargement en cours...");
-	$("results").css({ display: "inline" });
-	$("button").css({ display: "inline" });
+	$("#results").html("Chargement en cours...");
+	$("#results").show();
+	$("#button").show();
 			
 	
         $.ajax({

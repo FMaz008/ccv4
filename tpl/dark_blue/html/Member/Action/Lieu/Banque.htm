@@ -6,14 +6,14 @@
 	//Fonction generales
 
 	showplzwait = function(){
-		$('#plzwait1').css({ display: "block" });
-		$('#plzwait2').css({ display: "block" });
+		$('#plzwait1').show();
+		$('#plzwait2').show();
 		$('#request_msgtxt').html("Veuillez patienter...");
-		$('#request_msg').css({ display: "none" });
+		$('#request_msg').hide();
 	}
 	hideplzwait = function(){
-		$('#plzwait1').css({ display: "none" });
-		$('#plzwait2').css({ display: "none" });
+		$('#plzwait1').hide();
+		$('#plzwait2').hide();
 	}
 
 
@@ -24,7 +24,7 @@
 		$.ajax({
                     url:'?popup=1&m=Action_Lieu_BanqueRetrait',
                     method: 'post',
-                    data: 'id='+id+'&montant='+$('o_montant'+id).value, 
+                    data: 'id='+id+'&montant='+$('#o_montant'+id).val(), 
                     dataType: "html",
                     success: function (data) {
                         operation_confirm(data);
@@ -39,7 +39,7 @@
                 $.ajax({
                     url:'?popup=1&m=Action_Lieu_BanqueDepot',
                     method: 'post',
-                    data: 'id='+id+'&montant='+$('o_montant'+id).value, 
+                    data: 'id='+id+'&montant='+$('#o_montant'+id).val(), 
                     dataType: "html",
                     success: function (data) {
                         operation_confirm(data);
@@ -54,7 +54,7 @@
                 $.ajax({
                     url:'?popup=1&m=Action_Lieu_BanqueTransfert',
                     method: 'post',
-                    data: 'id='+id+'&montant='+$('t_montant'+id).value+'&compte='+$('t_compte'+id).value, 
+                    data: 'id='+id+'&montant='+$('#t_montant'+id).val()+'&compte='+$('#t_compte'+id).val(), 
                     dataType: "html",
                     success: function (data) {
                         operation_confirm(data);
@@ -68,19 +68,19 @@
 		var params=rval.split("|");
 		
 		if (params[1]=="OK"){
-			$('cash'+params[0]).html(params[2]);
+			$('#cash'+params[0]).html(params[2]);
 			$('#perso_cash').html(params[3]);
 			$('#perso_pa').html(params[4]);
 			
 			hideplzwait();
 		}else{
-			$('#request_msg').css({ display: "block" });
+			$('#request_msg').show();
 			$('#request_msgtxt').html(params[1]);
 		}
 	}
 	
 	goTo = function(cptid, url) {
-		var theForm = $('action_redirect'+cptid);
+		var theForm = $('#action_redirect'+cptid);
 		
 		theForm.action = url;
 		ajaxSubmitForm(theForm);

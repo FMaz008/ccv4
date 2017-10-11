@@ -42,7 +42,7 @@ hovermenu = function(obj, evt, paddingX, paddingY)
 	if(paddingX == undefined) paddingX =0;
 	if(paddingY == undefined) paddingY =0;
 	
-	var it = $('hm_' + obj.id);
+	var it = $('#hm_' + obj.id);
 
 	if(it == undefined)
 	{

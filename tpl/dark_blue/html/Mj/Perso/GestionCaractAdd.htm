@@ -13,7 +13,7 @@ AjouterIncompatible = function(){
 }
 
 AjouterIncompatible_completed = function(rval){
-	$('add_incompatible_'+nbr_ajout).html(rval);
+	$('#add_incompatible_'+nbr_ajout).html(rval);
 	nbr_ajout++; //Augmenter le total en cas de plusieurs ajouts
 	$('#total_incompatible_add').val(nbr_ajout);
 	

@@ -20,11 +20,11 @@ validerCheck = function()
 	void(el=d.getElementsByName('to[]'));
 	for(i=0;i<el.length;i++)
 		if(el[i].checked)
-			return ajaxSubmitForm($("parler"));
+			return ajaxSubmitForm($("#parler"));
 	
 	var msg = "Vous n'avez coché aucun destinataire à votre message. Celui-ci sera ajouté à votre HE en tant que note accessible à vous seul.\nVoulez-vous continuer ?";
 	if (confirm (msg))
-		return ajaxSubmitForm($("parler"));
+		return ajaxSubmitForm($("#parler"));
 	else
 		return false;
 }

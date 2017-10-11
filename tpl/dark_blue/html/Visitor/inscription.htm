@@ -126,15 +126,15 @@ function validate(){
 	
 	
 	//Validation des CONFIRMATIONS
-	if(!$("confirm1").checked){
+	if(!$("#confirm1").checked){
 		alert("Vous devez accepter la condition #1.");
 		return false;
 	}
-	if(!$("confirm2").checked){
+	if(!$("#confirm2").checked){
 		alert("Vous devez accepter la condition #2.");
 		return false;
 	}
-	if(!$("confirm3").checked){
+	if(!$("#confirm3").checked){
 		alert("Vous devez accepter la condition #4.");
 		return false;
 	}
@@ -163,15 +163,15 @@ function validate(){
 
 function showplzwait(){
 	location.href="#";
-	$('#plzwait1').css({ display: "block" });
-	$('#plzwait2').css({ display: "block" });
+	$('#plzwait1').show();
+	$('#plzwait2').show();
 	$('#request_msgtxt').html("Veuillez patienter...");
-	$('#request_msg').css({ display: "none" });
+	$('#request_msg').hide();
 }
 function hideplzwait(){
 	location.href="#form";
-	$('#plzwait1').css({ display: "none" });
-	$('#plzwait2').css({ display: "none" });
+	$('#plzwait1').hide();
+	$('#plzwait2').hide();
 }
 function operation_confirm(rval){
 	
@@ -181,7 +181,7 @@ function operation_confirm(rval){
 		hideplzwait();
 		$('#inscr').submit();
 	}else{
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		$('#request_msgtxt').html(decodeURIComponent(params[1]));
 	}
 }

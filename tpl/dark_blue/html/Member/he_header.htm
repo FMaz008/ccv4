@@ -6,7 +6,7 @@
 			alert('Vous ne pouvez renommer votre propre personnage');
 			return false;
 		}
-		$('#ib_'+prefix+msgId+'_'+persoId).css({ display: "none" });
+		$('#ib_'+prefix+msgId+'_'+persoId).hide();
 		
 		var htmlContent = "<input	type=\"text\"";
 		htmlContent += 				" class=\"text\"";

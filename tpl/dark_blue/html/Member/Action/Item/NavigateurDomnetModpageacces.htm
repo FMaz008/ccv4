@@ -9,7 +9,7 @@ TESTESTES<script type="text/javascript">
                     method: 'post',
                     data: '&userid='+id+
                             '&no='+<?php echo $PAGE->getId();?>+
-                            '&adddel=' + $('ax_'+id).checked+
+                            '&adddel=' + $('#ax_'+id).prop("checked")+
                             '&user='+$('#header_user').val()+
                             '&pass='+$('#header_pass').val(), 
                     dataType: "html",
@@ -23,14 +23,14 @@ TESTESTES<script type="text/javascript">
 	//Fonction generales
 
 	showplzwait = function(){
-		$('#plzwait1').css({ display: "block" });
-		$('#plzwait2').css({ display: "block" });
+		$('#plzwait1').show();
+		$('#plzwait2').show();
 		$('#request_msgtxt').html("Veuillez patienter...");
-		$('#request_msg').css({ display: "none" });
+		$('#request_msg').hide();
 	}
 	hideplzwait = function(){
-		$('#plzwait1').css({ display: "none" });
-		$('#plzwait2').css({ display: "none" });
+		$('#plzwait1').hide();
+		$('#plzwait2').hide();
 	}
 	operation_confirm = function(rval){
 		
@@ -38,7 +38,7 @@ TESTESTES<script type="text/javascript">
 		if (params[0]=="OK"){
 			hideplzwait();
 		}else{
-			$('#request_msg').css({ display: "block" });
+			$('#request_msg').show();
 			$('#request_msgtxt').html(decodeURIComponent(params[1]));
 		}
 	}

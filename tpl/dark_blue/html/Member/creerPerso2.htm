@@ -231,7 +231,7 @@ select_caract = function(){
 			$("#"+arrSelect[i]).prop("disabled",false);
 			$('#td_'+arrSelect[i]).attr("class", "value");
 			$('#a_'+arrSelect[i]).css({ color: ""});
-			$('#tr_'+arrSelect[i]).css({ display: "none" });
+			$('#tr_'+arrSelect[i]).hide();
 		}
 	}
 	
@@ -335,21 +335,21 @@ activate_signe = function(id){
 
 //Fonction AJAX générales
 fail = function(){
-	$('#request_msg').css({ display: "block" });
+	$('#request_msg').show();
 	$('#request_msgtxt').html("La requête à échouée, veuillez ré-essayer plus tard.");
 }
 
 showplzwait = function(){
 	location.href="#";
-	$('#plzwait1').css({ display: "block" });
-	$('#plzwait2').css({ display: "block" });
+	$('#plzwait1').show();
+	$('#plzwait2').show();
 	$('#request_msgtxt').html("Veuillez patienter...");
-	$('#request_msg').css({ display: "none" });
+	$('#request_msg').hide();
 }
 hideplzwait = function(){
 	location.href="#form";
-	$('#plzwait1').css({ display: "none" });
-	$('#plzwait2').css({ display: "none" });
+	$('#plzwait1').hide();
+	$('#plzwait2').hide();
 }
 operation_confirm = function(rval){
 	
@@ -359,7 +359,7 @@ operation_confirm = function(rval){
 		hideplzwait();
 		$('#formulaire').submit();
 	}else{
-		$('#request_msg').css({ display: "block" });
+		$('#request_msg').show();
 		$('#request_msgtxt').html(decodeURIComponent(params[1]));
 	}
 }

@@ -18,7 +18,7 @@ AjouterAction = function(){
 }
 
 AjouterAction_completed = function(rval){
-	$('add_action_'+nbr_action_ajout).html(rval);
+	$('#add_action_'+nbr_action_ajout).html(rval);
 	nbr_action_ajout++; //Augmenter le total en cas de plusieurs ajouts
 	$('#total_action_add').val(nbr_action_ajout);
 	

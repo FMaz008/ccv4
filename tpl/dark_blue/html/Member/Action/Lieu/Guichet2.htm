@@ -1,14 +1,14 @@
 <script>
 	addno = function(no) {
-		$("pass2").value+=no;
-		$("pass").val($("pass2").value);
+		$("#pass2").val($("#pass2").val()+no);
+		$("#pass").val($("#pass2").val());
 	}
 	reset = function(no) {
-		$("pass2").val('');
-		$("pass").val($("pass2").value);
+		$("#pass2").val('');
+		$("#pass").val($("#pass2").val());
 	}
 	check = function(no) {
-		$("action_guichet2").onsubmit();
+		$("#action_guichet2").onsubmit();
 	}
 </script>
 

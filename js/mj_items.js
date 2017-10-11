@@ -42,6 +42,6 @@ locate = function(id)
 
 locate_completed = function(rval)
 {
-	$('locateTd_'+tmp_dbid).html(rval);
-	$('locateTr_'+tmp_dbid).css({ display: "table-row" });
+	$('#locateTd_'+tmp_dbid).html(rval);
+	$('#locateTr_'+tmp_dbid).show();
 }

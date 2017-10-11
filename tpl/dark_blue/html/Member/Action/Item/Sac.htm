@@ -3,9 +3,9 @@
 	var arrTabs = new Array();
 	showInv = function(id){
 		for(var i=0;i<arrTabs.length;i++){
-			$("tab_" + arrTabs[i]).css({ display: arrTabs[i] == id ? "block" : "none"  });
-			$(""+arrTabs[i]).attr("class", "member_action_sac_link" + (arrTabs[i] == id ? "on" : "off"));
-			$("sacId").val(id);
+			$("#tab_" + arrTabs[i]).css({ display: arrTabs[i] == id ? "block" : "none"  });
+			$("#"+arrTabs[i]).attr("class", "member_action_sac_link" + (arrTabs[i] == id ? "on" : "off"));
+			$("#sacId").val(id);
 		}
 	}
 	
@@ -139,7 +139,8 @@
 	</div>
 </div>
 
-</form>
+</form>
+
 <?php
 if(isset($SHOW_SAC_ID)){
 	?>

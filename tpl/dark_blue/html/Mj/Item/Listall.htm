@@ -14,8 +14,8 @@ function locate(id){
 }
 
 function locate_completed(rval){
-	$('locateTd_'+tmp_dbid).html(rval);
-	$('locateTr_'+tmp_dbid).css({ display: "table-row" });
+	$('#locateTd_'+tmp_dbid).html(rval);
+	$('#locateTr_'+tmp_dbid).show();
 }
 </script>
 <br />
@@ -41,7 +41,7 @@ function locate_completed(rval){
 				<td class="value"><?php echo $item['db_type'];?> - <?php echo $item['db_soustype'];?></td>
 				<td class="value"><?php echo $item['db_nom'];?></td>
 				<td class="value"><?php echo $item['db_valeur'];?></td>
-				<td class="value"><a href="#" onclick="locate(<?php echo $item['db_id'];?>);"><?php echo $item['qte_circu'];?></a></td>
+				<td class="value"><a href="#" onclick="locate(<?php echo $item['db_id'];?>);return false;"><?php echo $item['qte_circu'];?></a></td>
 			</tr>
 			<tr id="locateTr_<?php echo $item['db_id'];?>" style="display:none;"><td id="locateTd_<?php echo $item['db_id'];?>" class="value" colspan="8"></td></tr>
 		<?php

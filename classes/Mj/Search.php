@@ -52,7 +52,7 @@ class Mj_Search
 					foreach($arrAll as &$arr)
 					{
 						?>
-						<a href="#" onclick="lieuSelect('<?php echo $arr["id"];?>', '<?php echo $arr["nom_technique"];?>', '<?php echo addslashes($arr["nom_affiche"]);?>')"><?php echo $arr["nom_technique"];?></a> (<?php echo $arr['nbr_perso'];?>)<br />
+						<a href="#" onclick="lieuSelect('<?php echo $arr["id"];?>', '<?php echo $arr["nom_technique"];?>', '<?php echo addslashes($arr["nom_affiche"]);?>');return false;"><?php echo $arr["nom_technique"];?></a> (<?php echo $arr['nbr_perso'];?>)<br />
 						<?php
 					}
 				}

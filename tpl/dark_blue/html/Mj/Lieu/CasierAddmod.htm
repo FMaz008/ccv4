@@ -20,9 +20,9 @@
 	
 	function protection(obj){
 		if($F(obj) == "0"){
-			$('#pass').css({ display: "none" });
+			$('#pass').hide();
 		}else{
-			$('#pass').css({ display: "table-row" });
+			$('#pass').show();
 			if ($F(obj) == 'pass')
 				$('#pass_txt').html("Code d'accès");
 			else
