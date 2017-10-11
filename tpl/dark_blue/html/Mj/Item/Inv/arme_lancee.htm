@@ -68,23 +68,23 @@ showHideTypeAsso = function(show_what){
 
 
 validateForm = function(){
-	if ($('#att_perso').checked)
+	if ($('#att_perso').prop("checked"))
 		if( !is_defined($('#form1').inv_persoid) || $('#form1').inv_persoid.value == '')
 			return notvalid("Vous devez choisir un personnage.");
 			
-	if ($('#att_lieu').checked)
+	if ($('#att_lieu').prop("checked"))
 		if( !is_defined($('#form1').inv_lieutech) || $('#form1').inv_lieutech.value == '')
 			return notvalid("Vous devez choisir un lieu.");
 			
-	if ($('#att_boutique').checked)
+	if ($('#att_boutique').prop("checked"))
 		if( !is_defined($('#form1').inv_boutiquelieutech) || $('#form1').inv_boutiquelieutech.value == '')
 			return notvalid("Vous devez choisir une boutique.");
 			
-	if ($('#att_casier').checked)
+	if ($('#att_casier').prop("checked"))
 		if( !is_defined($('#form1').inv_casierid) || $('#form1').inv_casierid.value == '')
 			return notvalid("Vous devez choisir un casier.");
 			
-	if ($('#att_item').checked)
+	if ($('#att_item').prop("checked"))
 		if( !is_defined($('#form1').inv_itemid) || $('#form1').inv_itemid.value == '')
 			return notvalid("Vous devez choisir un item.");
 	

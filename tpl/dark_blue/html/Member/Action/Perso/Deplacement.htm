@@ -1,9 +1,9 @@
 <script type="text/javascript">
 checkradio = function(id) {
 	var laCase = $("#r"+id);
-	if(laCase!=undefined && laCase.prop("disabled")==false)
+	if(laCase!=undefined && !laCase.prop("disabled"))
 	{
-		laCase.checked=1;
+		laCase.prop("checked", true);
 		return false;
 	}
 }

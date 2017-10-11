@@ -269,7 +269,7 @@ select_caract = function(){
 		
 		
 		//Combo obligatoire
-		if($('#6').checked && $('2').checked){
+		if($('#6').prop("checked") && $('#2').prop("checked")){
 			activate_signe('12');
 		}
 	<?php } ?>
@@ -304,12 +304,12 @@ select_caract = function(){
 }
 
 selectOpose = function(a, b){
-	if(isset($("#"+a)) && $("#"+a).checked){
+	if(isset($("#"+a)) && $("#"+a).prop("checked")){
 		activate_signe(a);
 		desactivate_signe(b);
 	}
 	
-	if(isset($("#"+b)) && $("#"+b).checked){
+	if(isset($("#"+b)) && $("#"+b).prop("checked")){
 		activate_signe(b);
 		desactivate_signe(a);
 	}
